@@ -7,6 +7,14 @@
   ],
   "headers": [
     {
+      "source": "/intranet/(start|precon|codes|safety|operations|people|finance|growth|buildshare|closeout|quality|wbs)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/intranet",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
