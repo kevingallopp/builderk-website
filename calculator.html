@@ -122,7 +122,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .equity-box .equity-amount{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:700;color:var(--green);margin-top:6px}
 .mortgage-box{margin-top:16px;padding:20px;background:rgba(247,127,0,0.06);border:1px solid rgba(247,127,0,0.2);border-radius:12px;text-align:left}
 .mortgage-box h4{font-family:'Outfit',sans-serif;color:var(--orange);font-size:0.9rem;font-weight:700;margin-bottom:12px}
-.mortgage-down-label{font-size:0.82rem;color:#888}
+.mortgage-down-label{font-size:0.82rem;color:#aaa}
 .mortgage-lot-q{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .down-options{display:flex;gap:6px}
 .down-btn,.down-pct-btn{padding:5px 14px;border:1px solid var(--dark-border);border-radius:6px;background:transparent;color:#888;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s}
@@ -130,14 +130,25 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .down-btn.active,.down-pct-btn.active{border-color:var(--orange);background:var(--orange-glow);color:var(--orange)}
 .lot-value-section{margin-bottom:14px}
 .lot-value-section label{display:block;margin-bottom:6px}
+.mortgage-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mortgage-field{min-width:0}
+.cash-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.cash-heading label{margin-bottom:0}
 .lot-input-wrap{display:flex;align-items:center;background:var(--dark);border:1px solid var(--dark-border);border-radius:8px;overflow:hidden;transition:border-color 0.2s}
 .lot-input-wrap:focus-within{border-color:var(--orange)}
 .lot-dollar{padding:0 0 0 12px;color:#666;font-weight:600;font-size:0.95rem}
 .lot-input{background:transparent;border:none;outline:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.95rem;padding:10px 12px;width:100%}
 .lot-input::placeholder{color:#444}
 .lot-hint{font-size:0.73rem;color:var(--green);margin-top:5px}
+.mortgage-fields .lot-hint{grid-column:1/-1}
+.cash-hint{font-size:0.72rem;color:#888;line-height:1.4;margin-top:5px}
+.financing-summary{display:grid;gap:7px;margin:14px 0;padding:12px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.06);border-radius:8px}
+.financing-summary-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:0.76rem;color:#999}
+.financing-summary-row strong{font-family:'Outfit',sans-serif;color:#fff;font-size:0.82rem}
+.financing-summary-row.total{padding-top:7px;border-top:1px solid rgba(255,255,255,0.08);color:#bbb}
+.financing-summary-row.total strong{color:var(--orange)}
 .mortgage-amount{font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:800;color:var(--orange);margin-bottom:4px}
-.mortgage-note{font-size:0.75rem;color:#666;line-height:1.4}
+.mortgage-note{font-size:0.75rem;color:#999;line-height:1.4}
 .mortgage-construction-note{font-size:0.75rem;color:#888;line-height:1.4;margin-top:8px;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:6px}
 .mortgage-disclaimer{font-size:0.7rem;color:#555;line-height:1.4;margin-top:8px;padding-top:8px;border-top:1px solid var(--dark-border)}
 .rate-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 14px}
@@ -234,6 +245,10 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
   .slider-value .num{font-size:1.6rem}
   body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
   .calc-sticky-cta.is-visible{display:flex!important}
+}
+@media(max-width:520px){
+  .mortgage-fields{grid-template-columns:1fr}
+  .cash-heading{align-items:flex-start;flex-direction:column}
 }
 .calc-sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid rgba(247,127,0,0.3)}
 .calc-sticky-cta a{flex:1;text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.95rem;padding:14px;border-radius:10px;text-decoration:none;transition:all 0.2s}
@@ -493,26 +508,50 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  </div>
  </div>
  <div id="lot-value-section" class="lot-value-section">
- <label class="mortgage-down-label" for="lot-value-input">Estimated lot value (optional):</label>
+ <div class="mortgage-fields">
+ <div class="mortgage-field">
+ <label class="mortgage-down-label" for="lot-value-input">Estimated lot value</label>
  <div class="lot-input-wrap">
- <span class="lot-dollar">$</span>
- <input type="text" id="lot-value-input" class="lot-input" placeholder="e.g. 80,000" oninput="updateCalc()">
+ <span class="lot-dollar" aria-hidden="true">$</span>
+ <input type="text" id="lot-value-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="80,000" aria-describedby="lot-equity-hint" oninput="updateCalc()" onblur="formatMoneyInput(this)">
  </div>
- <p class="lot-hint">Lot equity may reduce cash required, subject to lender appraisal and program rules.</p>
  </div>
- <div id="no-lot-section" class="lot-value-section" style="display:none;">
- <span class="mortgage-down-label">Down payment:</span>
- <div class="down-options" style="margin-top:8px;">
- <button type="button" class="down-pct-btn active" aria-pressed="true" onclick="setDown(10)">10%</button>
+ <div class="mortgage-field">
+ <label class="mortgage-down-label" for="lot-balance-input">Amount still owed on lot</label>
+ <div class="lot-input-wrap">
+ <span class="lot-dollar" aria-hidden="true">$</span>
+ <input type="text" id="lot-balance-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="0" aria-describedby="lot-equity-hint" oninput="updateCalc()" onblur="formatMoneyInput(this)">
+ </div>
+ </div>
+ <p class="lot-hint" id="lot-equity-hint">We use the difference as estimated lot equity. Your lender will confirm it after appraisal.</p>
+ </div>
+ </div>
+ <div class="lot-value-section">
+ <div class="cash-heading">
+ <label class="mortgage-down-label" for="cash-down-input">Cash down payment</label>
+ <div class="down-options" aria-label="Cash down payment shortcuts">
+ <button type="button" class="down-pct-btn" aria-pressed="false" onclick="setDown(10)">10%</button>
  <button type="button" class="down-pct-btn" aria-pressed="false" onclick="setDown(20)">20%</button>
  </div>
+ </div>
+ <div class="lot-input-wrap">
+ <span class="lot-dollar" aria-hidden="true">$</span>
+ <input type="text" id="cash-down-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="Enter cash amount" aria-describedby="cash-down-hint" oninput="setCashAmount()" onblur="formatMoneyInput(this)">
+ </div>
+ <p class="cash-hint" id="cash-down-hint">Enter a dollar amount, or use 10% or 20% as a quick starting point.</p>
+ </div>
+ <div class="financing-summary" aria-live="polite">
+ <div class="financing-summary-row" id="lot-equity-row"><span>Estimated lot equity</span><strong id="lot-equity-amount">$0</strong></div>
+ <div class="financing-summary-row"><span>Cash down payment</span><strong id="cash-down-amount">$0</strong></div>
+ <div class="financing-summary-row"><span>Combined cash and equity</span><strong id="total-contribution-amount">$0</strong></div>
+ <div class="financing-summary-row total"><span>Estimated loan amount</span><strong id="loan-amount">$427,800</strong></div>
  </div>
  <div class="rate-row">
  <label class="mortgage-down-label" for="interest-rate">Example interest rate</label>
  <input class="rate-input" type="number" id="interest-rate" min="1" max="20" step="0.01" value="6.55" aria-describedby="rate-source" oninput="updateCalc()">
  </div>
  <div class="mortgage-amount" id="mortgage-amount">$2,718/mo</div>
- <p class="mortgage-note" id="mortgage-note">30 year term at 6.55%, principal &amp; interest only</p>
+ <p class="mortgage-note" id="mortgage-note">Based on the planning midpoint and your cash down payment. Lot equity may help meet lender requirements.</p>
  <p class="rate-source" id="rate-source">Default example rate: <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">Freddie Mac PMMS</a>, July 16, 2026. Edit the rate to model another scenario.</p>
  <p class="mortgage-construction-note">During construction, many programs charge interest only on funds already disbursed. Timing and payment structure vary by lender and loan terms.</p>
  <p class="mortgage-disclaimer">*Estimate for illustrative purposes only. Does not include property taxes, homeowners insurance, or HOA fees. Contact a lender for exact rates and qualification.</p>
@@ -690,9 +729,11 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 <script>
 // ===== CALCULATOR =====
 var pricing=window.BuilderKPricing;
-var state={sqft:2000,finish:'standard',complexity:'typical',beds:3,baths:2,garage:2,coveredExteriorSqft:150,extras:{},ownsLot:true,lotValue:0,downPct:10};
+var state={sqft:2000,finish:'standard',complexity:'typical',beds:3,baths:2,garage:2,coveredExteriorSqft:150,extras:{},ownsLot:true,lotValue:0,lotBalance:0,cashDown:0,downMode:'amount',downPct:0};
 function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
 function fmtRange(low,high){return Math.round(low)===Math.round(high)?fmt(low):fmt(low)+' to '+fmt(high);}
+function moneyValue(id){var el=document.getElementById(id);return parseInt((el.value||'').replace(/[^0-9]/g,''))||0;}
+function formatMoneyInput(el){var value=parseInt((el.value||'').replace(/[^0-9]/g,''))||0;el.value=value?value.toLocaleString('en-US'):'';}
 function updateCalc(){
   state.sqft=parseInt(document.getElementById('sqft-slider').value);
   state.beds=parseInt(document.getElementById('beds-slider').value);
@@ -706,15 +747,25 @@ function updateCalc(){
   var totalLow=estimate.totalLow;var totalHigh=estimate.totalHigh;var totalMid=(totalLow+totalHigh)/2;
   document.getElementById('result-total').textContent=fmt(totalMid);
   document.getElementById('result-range').textContent=fmtRange(totalLow,totalHigh);
-  var downAmt=0;
-  if(state.ownsLot){var lotInput=document.getElementById('lot-value-input').value.replace(/[^0-9]/g,'');state.lotValue=parseInt(lotInput)||0;downAmt=state.lotValue;}
-  else{downAmt=totalMid*(state.downPct/100);}
-  var loanAmt=Math.max(totalMid-downAmt,0);
+  state.lotValue=moneyValue('lot-value-input');state.lotBalance=moneyValue('lot-balance-input');
+  var lotEquity=state.ownsLot?Math.max(state.lotValue-state.lotBalance,0):0;
+  if(state.downMode==='percent'){
+    state.cashDown=totalMid*(state.downPct/100);
+    document.getElementById('cash-down-input').value=Math.round(state.cashDown).toLocaleString('en-US');
+  }else{state.cashDown=moneyValue('cash-down-input');}
+  var combinedPosition=state.cashDown+lotEquity;
+  var financingNeed=totalMid+(state.ownsLot?state.lotBalance:0);
+  var loanAmt=Math.max(financingNeed-state.cashDown,0);
   var annualRate=parseFloat(document.getElementById('interest-rate').value)||pricing.mortgageExample.rate;
   var r=(annualRate/100)/12;var n=pricing.mortgageExample.termYears*12;
   var monthly=loanAmt>0?loanAmt*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1):0;
+  document.getElementById('lot-equity-amount').textContent=fmt(lotEquity);
+  document.getElementById('cash-down-amount').textContent=fmt(state.cashDown);
+  document.getElementById('total-contribution-amount').textContent=fmt(combinedPosition);
+  document.getElementById('loan-amount').textContent=fmt(loanAmt);
   document.getElementById('mortgage-amount').textContent=fmt(monthly)+'/mo';
-  document.getElementById('mortgage-note').textContent=pricing.mortgageExample.termYears+' year term at '+annualRate.toFixed(2)+'%. Principal and interest only.';
+  var paymentBasis=state.ownsLot?'Based on the planning midpoint, any lot balance, and your cash down payment. Lot equity may help meet lender requirements but does not directly reduce construction costs.':'Based on the planning midpoint after your cash down payment. Land purchase is not included.';
+  document.getElementById('mortgage-note').textContent=paymentBasis+' '+pricing.mortgageExample.termYears+' year principal and interest at '+annualRate.toFixed(2)+'%.';
   updateSliderFill('sqft-slider',1200,5000);updateSliderFill('beds-slider',2,6);updateSliderFill('baths-slider',1,5);updateSliderFill('covered-slider',0,600);
 }
 function updateSliderFill(id,min,max){var s=document.getElementById(id);var pct=((s.value-min)/(max-min))*100;s.style.background='linear-gradient(to right,var(--orange) '+pct+'%,#1E1E1E '+pct+'%)';}
@@ -723,7 +774,8 @@ function setFinish(level){state.finish=level;setPressed(document.querySelectorAl
 function setComplexity(level){state.complexity=level;setPressed(document.querySelectorAll('.finish-card[data-complexity]'),function(c){return c.dataset.complexity===level;});updateCalc();}
 function setGarage(size){state.garage=size;setPressed(document.querySelectorAll('.finish-card[data-garage]'),function(c){return parseInt(c.dataset.garage)===size;});updateCalc();}
 function toggleExtra(el){var key=el.dataset.extra;state.extras[key]=!state.extras[key];el.classList.toggle('active',state.extras[key]);el.setAttribute('aria-pressed',state.extras[key]?'true':'false');updateCalc();}
-function setDown(pct){state.downPct=pct;setPressed(document.querySelectorAll('.down-pct-btn'),function(b){return parseInt(b.textContent)===pct;});updateCalc();}
+function setDown(pct){state.downPct=pct;state.downMode='percent';setPressed(document.querySelectorAll('.down-pct-btn'),function(b){return parseInt(b.textContent)===pct;});updateCalc();}
+function setCashAmount(){state.downMode='amount';setPressed(document.querySelectorAll('.down-pct-btn'),function(){return false;});updateCalc();}
 function sendEstimate(){
   var emailEl=document.getElementById('est-email');var btn=document.getElementById('est-send');var msg=document.getElementById('est-msg');
   var email=(emailEl.value||'').trim();
@@ -752,7 +804,7 @@ function setLotOwner(owns){
   state.ownsLot=owns;
   setPressed(document.querySelectorAll('.mortgage-lot-q .down-btn'),function(b){return (b.textContent.trim()==='Yes')===owns;});
   document.getElementById('lot-value-section').style.display=owns?'block':'none';
-  document.getElementById('no-lot-section').style.display=owns?'none':'block';
+  document.getElementById('lot-equity-row').style.display=owns?'flex':'none';
   updateCalc();
 }
 
