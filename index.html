@@ -1245,12 +1245,6 @@ body {
     color: #0A0A0A;
   }
 }
-.form-more{border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:0 16px;background:rgba(255,255,255,0.03)}
-.form-more summary{cursor:pointer;padding:14px 0;color:#ddd;font-size:0.9rem;font-weight:600;text-align:left}
-.form-more[open]{padding-bottom:16px}
-.form-more[open] summary{margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.form-more .cta-form-field+.cta-form-field{margin-top:16px}
-
 /* === FULL-SCREEN MOBILE MENU FIX === */
 @media (max-width: 1280px) {
   body:has(.nav-links.open),
@@ -1772,24 +1766,21 @@ body {
  </select>
  </div>
  </div>
- <details class="form-more">
- <summary>Add timeline and project notes (optional)</summary>
  <div class="cta-form-field">
- <label for="form-timeline">Timeline</label>
- <select id="form-timeline" name="timeline">
+ <label for="form-timeline">Timeline <span style="color:var(--orange);">*</span></label>
+ <select id="form-timeline" name="timeline" required>
  <option value="" disabled selected>How soon are you looking to build?</option>
  <option value="ASAP">As soon as possible</option>
- <option value="1 to 3 months">Within 1 to 3 months</option>
- <option value="3 to 6 months">Within 3 to 6 months</option>
- <option value="6 to 12 months">Within 6 to 12 months</option>
+ <option value="1-3 months">Within 1 to 3 months</option>
+ <option value="3-6 months">Within 3 to 6 months</option>
+ <option value="6-12 months">Within 6 to 12 months</option>
  <option value="Just exploring">Just exploring options</option>
  </select>
  </div>
  <div class="cta-form-field">
- <label for="form-message">Anything else? (Optional)</label>
+ <label for="form-message">Project notes (optional)</label>
  <textarea id="form-message" placeholder="Tell us about your dream home..." name="message"></textarea>
  </div>
- </details>
  <input type="hidden" name="source_page" id="hf-source" value="">
  <input type="hidden" name="city_interest" id="hf-city" value="">
  <input type="hidden" name="plan_interest" id="hf-plan" value="">
