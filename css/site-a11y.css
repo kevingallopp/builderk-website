@@ -1,0 +1,48 @@
+/* Shared interaction and contrast corrections for BuilderK's public marketing pages. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid #ffb057 !important;
+  outline-offset: 3px !important;
+}
+
+.nav-cta,
+.btn-primary,
+.hero-cta,
+.cta-btn,
+.result-cta,
+.mcta-estimate,
+.sticky-primary,
+.filter-tab.active,
+.compare-table th,
+.flow-num {
+  color: #0a0a0a !important;
+}
+
+#est-send,
+.extra-item.active .extra-check,
+.price-tier.popular::before,
+.process-cta:hover {
+  color: #0a0a0a !important;
+}
+
+.form-note,
+.result-note,
+.mortgage-note,
+.mortgage-disclaimer,
+.calc-group-sub,
+.result-label,
+.result-breakdown h4,
+.tier-unit,
+.pricing-section > p,
+.footer-bottom {
+  color: #a8a8a8 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
