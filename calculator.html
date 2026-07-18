@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home Building Cost Calculator | BuilderK Florida</title>
-<meta name="description" content="Build a simple planning range for a custom home in Florida using your home size, build level, layout, garage, and selected upgrades.">
+<meta name="description" content="Build a simple planning range for a custom home in Florida using your living area, garage, covered outdoor space, build level, layout, and selected upgrades.">
 <meta name="keywords" content="home building cost calculator florida, how much to build a house florida, construction cost estimator, custom home pricing florida, cost per square foot florida">
 <link rel="canonical" href="https://www.builderk.com/calculator">
 <meta property="og:title" content="Home Building Cost Calculator | BuilderK Florida">
@@ -353,7 +353,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 <section class="calc-hero">
  <div class="calc-badge reveal">Free Planning Calculator</div>
  <h1 class="reveal stagger-1">How Much Does It Cost to<br><span>Build a Home in Florida?</span></h1>
- <p class="reveal stagger-2">Build a transparent planning range from your home size, build level, layout complexity, garage, and upgrades. This is an early budgeting tool, not a quote.</p>
+ <p class="reveal stagger-2">Build a planning range from your living area, garage, covered outdoor space, build level, layout, and upgrades. This is an early budgeting tool, not a quote.</p>
 </section>
 
 <div class="calc-container">
@@ -425,12 +425,23 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 
  <div class="calc-group reveal stagger-3">
  <div class="calc-group-label"><div class="icon"><i data-lucide="car-front" aria-hidden="true"></i></div> Garage</div>
- <p class="calc-group-sub">Choose the garage size you want included in the planning range.</p>
+ <p class="calc-group-sub">Choose the garage size you want included. Garage area is calculated separately from living area.</p>
  <div class="finish-options">
  <button type="button" class="finish-card" data-garage="0" aria-pressed="false" onclick="setGarage(0)"><div class="label">None</div><div class="price">No garage</div></button>
- <button type="button" class="finish-card active" data-garage="2" aria-pressed="true" onclick="setGarage(2)"><div class="label">Two Car</div><div class="price">Most popular</div></button>
- <button type="button" class="finish-card" data-garage="3" aria-pressed="false" onclick="setGarage(3)"><div class="label">Three Car</div><div class="price">Extra space</div></button>
+ <button type="button" class="finish-card active" data-garage="2" aria-pressed="true" onclick="setGarage(2)"><div class="label">Two Car</div><div class="price">About 440 sq ft</div></button>
+ <button type="button" class="finish-card" data-garage="3" aria-pressed="false" onclick="setGarage(3)"><div class="label">Three Car</div><div class="price">About 640 sq ft</div></button>
  </div>
+ </div>
+
+ <div class="calc-group reveal stagger-3">
+ <div class="calc-group-label"><div class="icon"><i data-lucide="sun" aria-hidden="true"></i></div> Covered Outdoor Space</div>
+ <p class="calc-group-sub">Add the approximate covered lanai or rear patio area. This is calculated separately from living area and paver finishes.</p>
+ <div class="slider-value">
+ <span class="num" id="covered-display">150</span>
+ <span class="unit">sq ft</span>
+ </div>
+ <input type="range" id="covered-slider" min="0" max="600" value="150" step="50" aria-label="Covered outdoor area in square feet" oninput="updateCalc()">
+ <div class="slider-labels"><span>None</span><span>300</span><span>600</span></div>
  </div>
 
  <div class="calc-group reveal">
@@ -443,7 +454,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  </button>
  <button type="button" class="extra-item" data-extra="pavers" aria-pressed="false" onclick="toggleExtra(this)">
  <div class="extra-check" aria-hidden="true">+</div>
- <div class="extra-info"><div class="extra-name"><i data-lucide="grid-3x3" aria-hidden="true"></i> Paver Driveway / Patio</div><div class="extra-cost">Optional upgrade</div></div>
+ <div class="extra-info"><div class="extra-name"><i data-lucide="grid-3x3" aria-hidden="true"></i> Paver Finish</div><div class="extra-cost">For driveway or patio areas</div></div>
  </button>
  <button type="button" class="extra-item" data-extra="metalRoof" aria-pressed="false" onclick="toggleExtra(this)">
  <div class="extra-check" aria-hidden="true">+</div>
@@ -456,8 +467,8 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  <div class="calc-result reveal stagger-2">
  <div class="result-card">
  <div class="result-label">Planning Midpoint</div>
- <div class="result-price" id="result-total">$359,800</div>
- <div class="result-range" id="result-range">$359,800 to $419,800</div>
+ <div class="result-price" id="result-total">$427,800</div>
+ <div class="result-range" id="result-range">$406,800 to $448,800</div>
  <a href="/contact" class="result-cta">Talk to a Builder</a>
  <div id="estimate-capture" style="margin-top:4px;margin-bottom:12px;padding:16px;background:rgba(255,255,255,0.03);border:1px solid var(--dark-border);border-radius:12px;text-align:left;">
  <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;margin-bottom:8px;">Want a builder to review this estimate?</div>
@@ -500,7 +511,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  <label class="mortgage-down-label" for="interest-rate">Example interest rate</label>
  <input class="rate-input" type="number" id="interest-rate" min="1" max="20" step="0.01" value="6.55" aria-describedby="rate-source" oninput="updateCalc()">
  </div>
- <div class="mortgage-amount" id="mortgage-amount">$2,182/mo</div>
+ <div class="mortgage-amount" id="mortgage-amount">$2,718/mo</div>
  <p class="mortgage-note" id="mortgage-note">30 year term at 6.55%, principal &amp; interest only</p>
  <p class="rate-source" id="rate-source">Default example rate: <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">Freddie Mac PMMS</a>, July 16, 2026. Edit the rate to model another scenario.</p>
  <p class="mortgage-construction-note">During construction, many programs charge interest only on funds already disbursed. Timing and payment structure vary by lender and loan terms.</p>
@@ -679,17 +690,19 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 <script>
 // ===== CALCULATOR =====
 var pricing=window.BuilderKPricing;
-var state={sqft:2000,finish:'standard',complexity:'typical',beds:3,baths:2,garage:2,extras:{},ownsLot:true,lotValue:0,downPct:10};
+var state={sqft:2000,finish:'standard',complexity:'typical',beds:3,baths:2,garage:2,coveredExteriorSqft:150,extras:{},ownsLot:true,lotValue:0,downPct:10};
 function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
 function fmtRange(low,high){return Math.round(low)===Math.round(high)?fmt(low):fmt(low)+' to '+fmt(high);}
 function updateCalc(){
   state.sqft=parseInt(document.getElementById('sqft-slider').value);
   state.beds=parseInt(document.getElementById('beds-slider').value);
   state.baths=parseInt(document.getElementById('baths-slider').value);
+  state.coveredExteriorSqft=parseInt(document.getElementById('covered-slider').value);
   document.getElementById('sqft-display').textContent=state.sqft.toLocaleString('en-US');
   document.getElementById('beds-display').textContent=state.beds;
   document.getElementById('baths-display').textContent=state.baths;
-  var estimate=pricing.calculate({sqft:state.sqft,tier:state.finish,complexity:state.complexity,garage:state.garage,extras:state.extras});
+  document.getElementById('covered-display').textContent=state.coveredExteriorSqft.toLocaleString('en-US');
+  var estimate=pricing.calculate({sqft:state.sqft,tier:state.finish,complexity:state.complexity,garage:state.garage,coveredExteriorSqft:state.coveredExteriorSqft,extras:state.extras});
   var totalLow=estimate.totalLow;var totalHigh=estimate.totalHigh;var totalMid=(totalLow+totalHigh)/2;
   document.getElementById('result-total').textContent=fmt(totalMid);
   document.getElementById('result-range').textContent=fmtRange(totalLow,totalHigh);
@@ -702,7 +715,7 @@ function updateCalc(){
   var monthly=loanAmt>0?loanAmt*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1):0;
   document.getElementById('mortgage-amount').textContent=fmt(monthly)+'/mo';
   document.getElementById('mortgage-note').textContent=pricing.mortgageExample.termYears+' year term at '+annualRate.toFixed(2)+'%. Principal and interest only.';
-  updateSliderFill('sqft-slider',1200,5000);updateSliderFill('beds-slider',2,6);updateSliderFill('baths-slider',1,5);
+  updateSliderFill('sqft-slider',1200,5000);updateSliderFill('beds-slider',2,6);updateSliderFill('baths-slider',1,5);updateSliderFill('covered-slider',0,600);
 }
 function updateSliderFill(id,min,max){var s=document.getElementById(id);var pct=((s.value-min)/(max-min))*100;s.style.background='linear-gradient(to right,var(--orange) '+pct+'%,#1E1E1E '+pct+'%)';}
 function setPressed(elements,match){elements.forEach(function(el){var active=match(el);el.classList.toggle('active',active);el.setAttribute('aria-pressed',active?'true':'false');});}
@@ -722,7 +735,8 @@ function sendEstimate(){
     estimate_range:document.getElementById('result-range').textContent,
     monthly_payment:document.getElementById('mortgage-amount').textContent,
     calc_sqft:state.sqft,calc_tier:state.finish,calc_beds:state.beds,calc_baths:state.baths,
-    calc_garage:state.garage+'-car',calc_complexity:state.complexity,calc_extras:extras.join(', ')||'none',
+    calc_garage:state.garage+'-car',calc_garage_sqft:pricing.garages[state.garage].sqft,calc_covered_exterior_sqft:state.coveredExteriorSqft,
+    calc_complexity:state.complexity,calc_extras:extras.join(', ')||'none',
     example_interest_rate:document.getElementById('interest-rate').value,
     lot_ownership:state.ownsLot?'Yes, I own a lot':'No, still looking',
     source_page:'/calculator'};
@@ -750,7 +764,6 @@ window.addEventListener('DOMContentLoaded',function(){
   if(requestedSqft){document.getElementById('sqft-slider').value=Math.max(1200,Math.min(5000,Math.round(requestedSqft/100)*100));}
   document.querySelectorAll('[data-pricing-tier]').forEach(function(el){var tier=pricing.tiers[el.dataset.pricingTier];if(tier)el.textContent='$'+tier.low+' to $'+tier.high+(el.dataset.pricingTier==='luxury'?'+':'');});
   document.querySelectorAll('[data-pricing-updated]').forEach(function(el){el.textContent=pricing.lastUpdated;});
-  document.getElementById('pricing-updated').textContent=pricing.lastUpdated;
   updateCalc();
   var sticky=document.querySelector('.calc-sticky-cta');var calc=document.querySelector('.calc-container');var footer=document.querySelector('.footer');
   if(sticky&&calc&&typeof IntersectionObserver!=='undefined'){
