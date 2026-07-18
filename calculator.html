@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home Building Cost Calculator | BuilderK Florida</title>
-<meta name="description" content="Build a simple planning range for a custom home in Florida using your home size, build level, layout, garage, and selected upgrades.">
+<meta name="description" content="Build a simple planning range for a custom home in Florida using your living area, garage, covered outdoor space, build level, layout, and selected upgrades.">
 <meta name="keywords" content="home building cost calculator florida, how much to build a house florida, construction cost estimator, custom home pricing florida, cost per square foot florida">
 <link rel="canonical" href="https://www.builderk.com/calculator">
 <meta property="og:title" content="Home Building Cost Calculator | BuilderK Florida">
@@ -122,7 +122,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .equity-box .equity-amount{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:700;color:var(--green);margin-top:6px}
 .mortgage-box{margin-top:16px;padding:20px;background:rgba(247,127,0,0.06);border:1px solid rgba(247,127,0,0.2);border-radius:12px;text-align:left}
 .mortgage-box h4{font-family:'Outfit',sans-serif;color:var(--orange);font-size:0.9rem;font-weight:700;margin-bottom:12px}
-.mortgage-down-label{font-size:0.82rem;color:#888}
+.mortgage-down-label{font-size:0.82rem;color:#aaa}
 .mortgage-lot-q{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .down-options{display:flex;gap:6px}
 .down-btn,.down-pct-btn{padding:5px 14px;border:1px solid var(--dark-border);border-radius:6px;background:transparent;color:#888;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s}
@@ -130,14 +130,25 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .down-btn.active,.down-pct-btn.active{border-color:var(--orange);background:var(--orange-glow);color:var(--orange)}
 .lot-value-section{margin-bottom:14px}
 .lot-value-section label{display:block;margin-bottom:6px}
+.mortgage-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mortgage-field{min-width:0}
+.cash-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.cash-heading label{margin-bottom:0}
 .lot-input-wrap{display:flex;align-items:center;background:var(--dark);border:1px solid var(--dark-border);border-radius:8px;overflow:hidden;transition:border-color 0.2s}
 .lot-input-wrap:focus-within{border-color:var(--orange)}
 .lot-dollar{padding:0 0 0 12px;color:#666;font-weight:600;font-size:0.95rem}
 .lot-input{background:transparent;border:none;outline:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.95rem;padding:10px 12px;width:100%}
 .lot-input::placeholder{color:#444}
 .lot-hint{font-size:0.73rem;color:var(--green);margin-top:5px}
+.mortgage-fields .lot-hint{grid-column:1/-1}
+.cash-hint{font-size:0.72rem;color:#888;line-height:1.4;margin-top:5px}
+.financing-summary{display:grid;gap:7px;margin:14px 0;padding:12px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.06);border-radius:8px}
+.financing-summary-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:0.76rem;color:#999}
+.financing-summary-row strong{font-family:'Outfit',sans-serif;color:#fff;font-size:0.82rem}
+.financing-summary-row.total{padding-top:7px;border-top:1px solid rgba(255,255,255,0.08);color:#bbb}
+.financing-summary-row.total strong{color:var(--orange)}
 .mortgage-amount{font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:800;color:var(--orange);margin-bottom:4px}
-.mortgage-note{font-size:0.75rem;color:#666;line-height:1.4}
+.mortgage-note{font-size:0.75rem;color:#999;line-height:1.4}
 .mortgage-construction-note{font-size:0.75rem;color:#888;line-height:1.4;margin-top:8px;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:6px}
 .mortgage-disclaimer{font-size:0.7rem;color:#555;line-height:1.4;margin-top:8px;padding-top:8px;border-top:1px solid var(--dark-border)}
 .rate-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 14px}
@@ -158,27 +169,6 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .custom-banner-icon{font-size:1.8rem;flex-shrink:0;width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:var(--orange-glow);border-radius:12px;color:var(--orange);font-weight:700}
 .custom-banner-text h3{font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:6px}
 .custom-banner-text p{font-size:0.9rem;color:#999;line-height:1.6}
-
-/* PRICING TABLE */
-.pricing-section{padding:80px 48px;position:relative;overflow:hidden;background:linear-gradient(180deg, #0A0A0A 0%, #0F0F0F 30%, #0F0F0F 70%, #0A0A0A 100%)}
-.pricing-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(247,127,0,0.04) 0%,transparent 70%);pointer-events:none;z-index:0}
-.pricing-section h2{font-size:2.2rem;font-weight:700;text-align:center;margin-bottom:12px;position:relative;z-index:1}
-.pricing-section h2 span{color:var(--orange)}
-.pricing-section>p{text-align:center;color:#666;font-size:1rem;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto;position:relative;z-index:1}
-.price-tier{background:linear-gradient(180deg, #222222 0%, #1A1A1A 100%);border:1px solid #333;border-radius:16px;padding:32px 28px;transition:all 0.3s}
-.price-tier:hover{border-color:#444;transform:translateY(-4px)}
-.price-tier.popular{background:linear-gradient(180deg, #2A1E10 0%, #1E1610 100%);border-color:var(--orange);position:relative}
-.price-tier.popular::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:1.5px;padding:4px 14px;border-radius:50px}
-.tier-header{text-align:center;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.tier-name{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:4px}
-.tier-price{font-family:'Outfit',sans-serif;font-size:2rem;font-weight:800;color:var(--orange);margin-bottom:2px}
-.tier-unit{font-size:0.8rem;color:#555}
-.tier-section-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--orange);margin-bottom:10px;margin-top:20px}
-.tier-section-label:first-child{margin-top:0}
-.tier-features{list-style:none;display:flex;flex-direction:column;gap:8px}
-.tier-features li{font-size:0.84rem;color:#aaa;padding-left:20px;position:relative;line-height:1.4}
-.tier-features li::before{content:'';position:absolute;left:0;top:5px;width:8px;height:8px;border-radius:50%;background:var(--orange)}
 
 /* INCLUDED SECTION */
 .included-section{padding:60px 48px;max-width:1100px;margin:0 auto;background:linear-gradient(180deg, transparent, rgba(247,127,0,0.02), transparent)}
@@ -225,7 +215,6 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
   .calc-group{padding:24px 20px}
   .finish-options{grid-template-columns:repeat(3,1fr);gap:8px}
   .finish-card{padding:10px 6px}.finish-card .tier-icon{font-size:1.1rem}.finish-card .label{font-size:0.72rem}.finish-card .price{font-size:0.6rem}
-  .pricing-section{padding:60px 20px}.pricing-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
   .visual-banner{padding:0 20px 40px}.visual-banner-inner{padding:40px 24px}.visual-banner-inner h2{font-size:1.5rem}
   .custom-banner{padding:0 20px 40px}.custom-banner-inner{flex-direction:column;text-align:center;padding:24px 20px}
   .included-section{padding:40px 20px}
@@ -235,6 +224,10 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
   body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
   .calc-sticky-cta.is-visible{display:flex!important}
 }
+@media(max-width:520px){
+  .mortgage-fields{grid-template-columns:1fr}
+  .cash-heading{align-items:flex-start;flex-direction:column}
+}
 .calc-sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid rgba(247,127,0,0.3)}
 .calc-sticky-cta a{flex:1;text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.95rem;padding:14px;border-radius:10px;text-decoration:none;transition:all 0.2s}
 .calc-sticky-cta .sticky-primary{background:var(--orange);color:#fff}
@@ -242,8 +235,8 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 @media(max-width:900px){
   html,body{max-width:100%;overflow-x:hidden}
   .navbar,.calc-sticky-cta{left:0!important;right:0!important;width:100%!important;max-width:100%!important}
-  .calc-container,.pricing-section{overflow:hidden}
-  .calc-container::before,.pricing-section::before{display:none}
+  .calc-container{overflow:hidden}
+  .calc-container::before{display:none}
 }
 .nav-links.open{display:flex!important;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:999;justify-content: flex-start;align-items:center;gap:24px;padding:80px 24px}
 .nav-links.open li{list-style:none}
@@ -353,7 +346,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 <section class="calc-hero">
  <div class="calc-badge reveal">Free Planning Calculator</div>
  <h1 class="reveal stagger-1">How Much Does It Cost to<br><span>Build a Home in Florida?</span></h1>
- <p class="reveal stagger-2">Build a transparent planning range from your home size, build level, layout complexity, garage, and upgrades. This is an early budgeting tool, not a quote.</p>
+ <p class="reveal stagger-2">Build a planning range from your living area, garage, covered outdoor space, build level, layout, and upgrades. This is an early budgeting tool, not a quote.</p>
 </section>
 
 <div class="calc-container">
@@ -425,12 +418,23 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 
  <div class="calc-group reveal stagger-3">
  <div class="calc-group-label"><div class="icon"><i data-lucide="car-front" aria-hidden="true"></i></div> Garage</div>
- <p class="calc-group-sub">Choose the garage size you want included in the planning range.</p>
+ <p class="calc-group-sub">Choose the garage size you want included. Garage area is calculated separately from living area.</p>
  <div class="finish-options">
  <button type="button" class="finish-card" data-garage="0" aria-pressed="false" onclick="setGarage(0)"><div class="label">None</div><div class="price">No garage</div></button>
- <button type="button" class="finish-card active" data-garage="2" aria-pressed="true" onclick="setGarage(2)"><div class="label">Two Car</div><div class="price">Most popular</div></button>
- <button type="button" class="finish-card" data-garage="3" aria-pressed="false" onclick="setGarage(3)"><div class="label">Three Car</div><div class="price">Extra space</div></button>
+ <button type="button" class="finish-card active" data-garage="2" aria-pressed="true" onclick="setGarage(2)"><div class="label">Two Car</div><div class="price">About 440 sq ft</div></button>
+ <button type="button" class="finish-card" data-garage="3" aria-pressed="false" onclick="setGarage(3)"><div class="label">Three Car</div><div class="price">About 640 sq ft</div></button>
  </div>
+ </div>
+
+ <div class="calc-group reveal stagger-3">
+ <div class="calc-group-label"><div class="icon"><i data-lucide="sun" aria-hidden="true"></i></div> Covered Outdoor Space</div>
+ <p class="calc-group-sub">Add the approximate covered lanai or rear patio area. This is calculated separately from living area and paver finishes.</p>
+ <div class="slider-value">
+ <span class="num" id="covered-display">150</span>
+ <span class="unit">sq ft</span>
+ </div>
+ <input type="range" id="covered-slider" min="0" max="600" value="150" step="50" aria-label="Covered outdoor area in square feet" oninput="updateCalc()">
+ <div class="slider-labels"><span>None</span><span>300</span><span>600</span></div>
  </div>
 
  <div class="calc-group reveal">
@@ -443,7 +447,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  </button>
  <button type="button" class="extra-item" data-extra="pavers" aria-pressed="false" onclick="toggleExtra(this)">
  <div class="extra-check" aria-hidden="true">+</div>
- <div class="extra-info"><div class="extra-name"><i data-lucide="grid-3x3" aria-hidden="true"></i> Paver Driveway / Patio</div><div class="extra-cost">Optional upgrade</div></div>
+ <div class="extra-info"><div class="extra-name"><i data-lucide="grid-3x3" aria-hidden="true"></i> Paver Finish</div><div class="extra-cost">For driveway or patio areas</div></div>
  </button>
  <button type="button" class="extra-item" data-extra="metalRoof" aria-pressed="false" onclick="toggleExtra(this)">
  <div class="extra-check" aria-hidden="true">+</div>
@@ -456,8 +460,8 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  <div class="calc-result reveal stagger-2">
  <div class="result-card">
  <div class="result-label">Planning Midpoint</div>
- <div class="result-price" id="result-total">$359,800</div>
- <div class="result-range" id="result-range">$359,800 to $419,800</div>
+ <div class="result-price" id="result-total">$427,800</div>
+ <div class="result-range" id="result-range">$406,800 to $448,800</div>
  <a href="/contact" class="result-cta">Talk to a Builder</a>
  <div id="estimate-capture" style="margin-top:4px;margin-bottom:12px;padding:16px;background:rgba(255,255,255,0.03);border:1px solid var(--dark-border);border-radius:12px;text-align:left;">
  <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;margin-bottom:8px;">Want a builder to review this estimate?</div>
@@ -482,26 +486,50 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  </div>
  </div>
  <div id="lot-value-section" class="lot-value-section">
- <label class="mortgage-down-label" for="lot-value-input">Estimated lot value (optional):</label>
+ <div class="mortgage-fields">
+ <div class="mortgage-field">
+ <label class="mortgage-down-label" for="lot-value-input">Estimated lot value</label>
  <div class="lot-input-wrap">
- <span class="lot-dollar">$</span>
- <input type="text" id="lot-value-input" class="lot-input" placeholder="e.g. 80,000" oninput="updateCalc()">
+ <span class="lot-dollar" aria-hidden="true">$</span>
+ <input type="text" id="lot-value-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="80,000" aria-describedby="lot-equity-hint" oninput="updateCalc()" onblur="formatMoneyInput(this)">
  </div>
- <p class="lot-hint">Lot equity may reduce cash required, subject to lender appraisal and program rules.</p>
  </div>
- <div id="no-lot-section" class="lot-value-section" style="display:none;">
- <span class="mortgage-down-label">Down payment:</span>
- <div class="down-options" style="margin-top:8px;">
- <button type="button" class="down-pct-btn active" aria-pressed="true" onclick="setDown(10)">10%</button>
+ <div class="mortgage-field">
+ <label class="mortgage-down-label" for="lot-balance-input">Amount still owed on lot</label>
+ <div class="lot-input-wrap">
+ <span class="lot-dollar" aria-hidden="true">$</span>
+ <input type="text" id="lot-balance-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="0" aria-describedby="lot-equity-hint" oninput="updateCalc()" onblur="formatMoneyInput(this)">
+ </div>
+ </div>
+ <p class="lot-hint" id="lot-equity-hint">We use the difference as estimated lot equity. Your lender will confirm it after appraisal.</p>
+ </div>
+ </div>
+ <div class="lot-value-section">
+ <div class="cash-heading">
+ <label class="mortgage-down-label" for="cash-down-input">Cash down payment</label>
+ <div class="down-options" aria-label="Cash down payment shortcuts">
+ <button type="button" class="down-pct-btn" aria-pressed="false" onclick="setDown(10)">10%</button>
  <button type="button" class="down-pct-btn" aria-pressed="false" onclick="setDown(20)">20%</button>
  </div>
+ </div>
+ <div class="lot-input-wrap">
+ <span class="lot-dollar" aria-hidden="true">$</span>
+ <input type="text" id="cash-down-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="Enter cash amount" aria-describedby="cash-down-hint" oninput="setCashAmount()" onblur="formatMoneyInput(this)">
+ </div>
+ <p class="cash-hint" id="cash-down-hint">Enter a dollar amount, or use 10% or 20% as a quick starting point.</p>
+ </div>
+ <div class="financing-summary" aria-live="polite">
+ <div class="financing-summary-row" id="lot-equity-row"><span>Estimated lot equity</span><strong id="lot-equity-amount">$0</strong></div>
+ <div class="financing-summary-row"><span>Cash down payment</span><strong id="cash-down-amount">$0</strong></div>
+ <div class="financing-summary-row"><span>Combined cash and equity</span><strong id="total-contribution-amount">$0</strong></div>
+ <div class="financing-summary-row total"><span>Estimated loan amount</span><strong id="loan-amount">$427,800</strong></div>
  </div>
  <div class="rate-row">
  <label class="mortgage-down-label" for="interest-rate">Example interest rate</label>
  <input class="rate-input" type="number" id="interest-rate" min="1" max="20" step="0.01" value="6.55" aria-describedby="rate-source" oninput="updateCalc()">
  </div>
- <div class="mortgage-amount" id="mortgage-amount">$2,182/mo</div>
- <p class="mortgage-note" id="mortgage-note">30 year term at 6.55%, principal &amp; interest only</p>
+ <div class="mortgage-amount" id="mortgage-amount">$2,718/mo</div>
+ <p class="mortgage-note" id="mortgage-note">Based on the planning midpoint and your cash down payment. Lot equity may help meet lender requirements.</p>
  <p class="rate-source" id="rate-source">Default example rate: <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">Freddie Mac PMMS</a>, July 16, 2026. Edit the rate to model another scenario.</p>
  <p class="mortgage-construction-note">During construction, many programs charge interest only on funds already disbursed. Timing and payment structure vary by lender and loan terms.</p>
  <p class="mortgage-disclaimer">*Estimate for illustrative purposes only. Does not include property taxes, homeowners insurance, or HOA fees. Contact a lender for exact rates and qualification.</p>
@@ -528,99 +556,6 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  </div>
  </div>
 </div>
-
-<!-- Pricing Tiers -->
-<section class="pricing-section">
- <h2 class="reveal">What's Included at <span>Each Build Level</span></h2>
- <p class="reveal stagger-1">These examples show how the three build levels differ. Your written proposal will confirm the systems, allowances, finishes, and exclusions for your lot and plan.</p>
- <div class="pricing-grid">
- <div class="price-tier popular reveal stagger-1">
- <div class="tier-header">
- <div class="tier-name">Standard</div>
- <div class="tier-unit">Practical essentials</div>
- </div>
- <div class="tier-section-label">Structure &amp; Roof</div>
- <ul class="tier-features">
- <li>CMU block construction</li>
- <li>9 ft ceilings</li>
- <li>Architectural shingle roof (30 year warranty)</li>
- </ul>
- <div class="tier-section-label">Windows &amp; Exterior</div>
- <ul class="tier-features">
- <li>Standard windows + hurricane shutters</li>
- <li>Standard aluminum window frames</li>
- <li>Stucco exterior finish</li>
- <li>Concrete driveway</li>
- <li>Landscaping scoped separately</li>
- </ul>
- <div class="tier-section-label">Interiors</div>
- <ul class="tier-features">
- <li>Custom cabinet selections</li>
- <li>Custom countertop selections</li>
- <li>Custom flooring selections</li>
- <li>Custom fixtures &amp; hardware</li>
- <li>Custom layout &amp; floor plan</li>
- </ul>
- </div>
- <div class="price-tier reveal stagger-2">
- <div class="tier-header">
- <div class="tier-name">Midrange</div>
- <div class="tier-unit">Elevated selections</div>
- </div>
- <div class="tier-section-label">Structure &amp; Roof</div>
- <ul class="tier-features">
- <li>CMU block construction</li>
- <li>Mixed ceiling heights (9 ft + 11 ft in living areas)</li>
- <li>Flat roof or standing seam metal roof</li>
- </ul>
- <div class="tier-section-label">Windows &amp; Exterior</div>
- <ul class="tier-features">
- <li>Impact window package available; insurance discounts vary by carrier</li>
- <li>Black or bronze window frames</li>
- <li>Modern stucco with clean lines &amp; accent details</li>
- <li>Stone veneer or wood accents available</li>
- <li>Paver driveway available as an upgrade</li>
- <li>Enhanced landscaping scoped separately</li>
- </ul>
- <div class="tier-section-label">Interiors</div>
- <ul class="tier-features">
- <li>Custom cabinet selections</li>
- <li>Custom countertop selections</li>
- <li>Custom flooring selections</li>
- <li>Custom fixtures &amp; hardware</li>
- <li>Custom layout &amp; floor plan</li>
- </ul>
- </div>
- <div class="price-tier reveal stagger-3">
- <div class="tier-header">
- <div class="tier-name">Luxury</div>
- <div class="tier-unit">Fully tailored</div>
- </div>
- <div class="tier-section-label">Structure &amp; Roof</div>
- <ul class="tier-features">
- <li>Reinforced CMU block (wind zone 3+ engineered)</li>
- <li>12 ft ceilings standard throughout</li>
- <li>Standing seam metal or barrel tile roof</li>
- </ul>
- <div class="tier-section-label">Windows &amp; Exterior</div>
- <ul class="tier-features">
- <li>Full height impact glass with low emissivity coating</li>
- <li>Custom window sizes &amp; configurations</li>
- <li>Stone veneer, wood accents &amp; architectural details</li>
- <li>Decorative pavers available as an upgrade</li>
- <li>Landscape and lighting package scoped separately</li>
- </ul>
- <div class="tier-section-label">Interiors</div>
- <ul class="tier-features">
- <li>Custom cabinet selections</li>
- <li>Custom countertop selections</li>
- <li>Custom flooring selections</li>
- <li>Custom fixtures &amp; hardware</li>
- <li>Custom layout &amp; floor plan</li>
- </ul>
- </div>
- </div>
-</section>
 
 <!-- Included -->
 <section class="included-section">
@@ -679,30 +614,44 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 <script>
 // ===== CALCULATOR =====
 var pricing=window.BuilderKPricing;
-var state={sqft:2000,finish:'standard',complexity:'typical',beds:3,baths:2,garage:2,extras:{},ownsLot:true,lotValue:0,downPct:10};
+var state={sqft:2000,finish:'standard',complexity:'typical',beds:3,baths:2,garage:2,coveredExteriorSqft:150,extras:{},ownsLot:true,lotValue:0,lotBalance:0,cashDown:0,downMode:'amount',downPct:0};
 function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
 function fmtRange(low,high){return Math.round(low)===Math.round(high)?fmt(low):fmt(low)+' to '+fmt(high);}
+function moneyValue(id){var el=document.getElementById(id);return parseInt((el.value||'').replace(/[^0-9]/g,''))||0;}
+function formatMoneyInput(el){var value=parseInt((el.value||'').replace(/[^0-9]/g,''))||0;el.value=value?value.toLocaleString('en-US'):'';}
 function updateCalc(){
   state.sqft=parseInt(document.getElementById('sqft-slider').value);
   state.beds=parseInt(document.getElementById('beds-slider').value);
   state.baths=parseInt(document.getElementById('baths-slider').value);
+  state.coveredExteriorSqft=parseInt(document.getElementById('covered-slider').value);
   document.getElementById('sqft-display').textContent=state.sqft.toLocaleString('en-US');
   document.getElementById('beds-display').textContent=state.beds;
   document.getElementById('baths-display').textContent=state.baths;
-  var estimate=pricing.calculate({sqft:state.sqft,tier:state.finish,complexity:state.complexity,garage:state.garage,extras:state.extras});
+  document.getElementById('covered-display').textContent=state.coveredExteriorSqft.toLocaleString('en-US');
+  var estimate=pricing.calculate({sqft:state.sqft,tier:state.finish,complexity:state.complexity,garage:state.garage,coveredExteriorSqft:state.coveredExteriorSqft,extras:state.extras});
   var totalLow=estimate.totalLow;var totalHigh=estimate.totalHigh;var totalMid=(totalLow+totalHigh)/2;
   document.getElementById('result-total').textContent=fmt(totalMid);
   document.getElementById('result-range').textContent=fmtRange(totalLow,totalHigh);
-  var downAmt=0;
-  if(state.ownsLot){var lotInput=document.getElementById('lot-value-input').value.replace(/[^0-9]/g,'');state.lotValue=parseInt(lotInput)||0;downAmt=state.lotValue;}
-  else{downAmt=totalMid*(state.downPct/100);}
-  var loanAmt=Math.max(totalMid-downAmt,0);
+  state.lotValue=moneyValue('lot-value-input');state.lotBalance=moneyValue('lot-balance-input');
+  var lotEquity=state.ownsLot?Math.max(state.lotValue-state.lotBalance,0):0;
+  if(state.downMode==='percent'){
+    state.cashDown=totalMid*(state.downPct/100);
+    document.getElementById('cash-down-input').value=Math.round(state.cashDown).toLocaleString('en-US');
+  }else{state.cashDown=moneyValue('cash-down-input');}
+  var combinedPosition=state.cashDown+lotEquity;
+  var financingNeed=totalMid+(state.ownsLot?state.lotBalance:0);
+  var loanAmt=Math.max(financingNeed-state.cashDown,0);
   var annualRate=parseFloat(document.getElementById('interest-rate').value)||pricing.mortgageExample.rate;
   var r=(annualRate/100)/12;var n=pricing.mortgageExample.termYears*12;
   var monthly=loanAmt>0?loanAmt*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1):0;
+  document.getElementById('lot-equity-amount').textContent=fmt(lotEquity);
+  document.getElementById('cash-down-amount').textContent=fmt(state.cashDown);
+  document.getElementById('total-contribution-amount').textContent=fmt(combinedPosition);
+  document.getElementById('loan-amount').textContent=fmt(loanAmt);
   document.getElementById('mortgage-amount').textContent=fmt(monthly)+'/mo';
-  document.getElementById('mortgage-note').textContent=pricing.mortgageExample.termYears+' year term at '+annualRate.toFixed(2)+'%. Principal and interest only.';
-  updateSliderFill('sqft-slider',1200,5000);updateSliderFill('beds-slider',2,6);updateSliderFill('baths-slider',1,5);
+  var paymentBasis=state.ownsLot?'Based on the planning midpoint, any lot balance, and your cash down payment. Lot equity may help meet lender requirements but does not directly reduce construction costs.':'Based on the planning midpoint after your cash down payment. Land purchase is not included.';
+  document.getElementById('mortgage-note').textContent=paymentBasis+' '+pricing.mortgageExample.termYears+' year principal and interest at '+annualRate.toFixed(2)+'%.';
+  updateSliderFill('sqft-slider',1200,5000);updateSliderFill('beds-slider',2,6);updateSliderFill('baths-slider',1,5);updateSliderFill('covered-slider',0,600);
 }
 function updateSliderFill(id,min,max){var s=document.getElementById(id);var pct=((s.value-min)/(max-min))*100;s.style.background='linear-gradient(to right,var(--orange) '+pct+'%,#1E1E1E '+pct+'%)';}
 function setPressed(elements,match){elements.forEach(function(el){var active=match(el);el.classList.toggle('active',active);el.setAttribute('aria-pressed',active?'true':'false');});}
@@ -710,7 +659,8 @@ function setFinish(level){state.finish=level;setPressed(document.querySelectorAl
 function setComplexity(level){state.complexity=level;setPressed(document.querySelectorAll('.finish-card[data-complexity]'),function(c){return c.dataset.complexity===level;});updateCalc();}
 function setGarage(size){state.garage=size;setPressed(document.querySelectorAll('.finish-card[data-garage]'),function(c){return parseInt(c.dataset.garage)===size;});updateCalc();}
 function toggleExtra(el){var key=el.dataset.extra;state.extras[key]=!state.extras[key];el.classList.toggle('active',state.extras[key]);el.setAttribute('aria-pressed',state.extras[key]?'true':'false');updateCalc();}
-function setDown(pct){state.downPct=pct;setPressed(document.querySelectorAll('.down-pct-btn'),function(b){return parseInt(b.textContent)===pct;});updateCalc();}
+function setDown(pct){state.downPct=pct;state.downMode='percent';setPressed(document.querySelectorAll('.down-pct-btn'),function(b){return parseInt(b.textContent)===pct;});updateCalc();}
+function setCashAmount(){state.downMode='amount';setPressed(document.querySelectorAll('.down-pct-btn'),function(){return false;});updateCalc();}
 function sendEstimate(){
   var emailEl=document.getElementById('est-email');var btn=document.getElementById('est-send');var msg=document.getElementById('est-msg');
   var email=(emailEl.value||'').trim();
@@ -722,7 +672,8 @@ function sendEstimate(){
     estimate_range:document.getElementById('result-range').textContent,
     monthly_payment:document.getElementById('mortgage-amount').textContent,
     calc_sqft:state.sqft,calc_tier:state.finish,calc_beds:state.beds,calc_baths:state.baths,
-    calc_garage:state.garage+'-car',calc_complexity:state.complexity,calc_extras:extras.join(', ')||'none',
+    calc_garage:state.garage+'-car',calc_garage_sqft:pricing.garages[state.garage].sqft,calc_covered_exterior_sqft:state.coveredExteriorSqft,
+    calc_complexity:state.complexity,calc_extras:extras.join(', ')||'none',
     example_interest_rate:document.getElementById('interest-rate').value,
     lot_ownership:state.ownsLot?'Yes, I own a lot':'No, still looking',
     source_page:'/calculator'};
@@ -738,7 +689,7 @@ function setLotOwner(owns){
   state.ownsLot=owns;
   setPressed(document.querySelectorAll('.mortgage-lot-q .down-btn'),function(b){return (b.textContent.trim()==='Yes')===owns;});
   document.getElementById('lot-value-section').style.display=owns?'block':'none';
-  document.getElementById('no-lot-section').style.display=owns?'none':'block';
+  document.getElementById('lot-equity-row').style.display=owns?'flex':'none';
   updateCalc();
 }
 
@@ -750,7 +701,6 @@ window.addEventListener('DOMContentLoaded',function(){
   if(requestedSqft){document.getElementById('sqft-slider').value=Math.max(1200,Math.min(5000,Math.round(requestedSqft/100)*100));}
   document.querySelectorAll('[data-pricing-tier]').forEach(function(el){var tier=pricing.tiers[el.dataset.pricingTier];if(tier)el.textContent='$'+tier.low+' to $'+tier.high+(el.dataset.pricingTier==='luxury'?'+':'');});
   document.querySelectorAll('[data-pricing-updated]').forEach(function(el){el.textContent=pricing.lastUpdated;});
-  document.getElementById('pricing-updated').textContent=pricing.lastUpdated;
   updateCalc();
   var sticky=document.querySelector('.calc-sticky-cta');var calc=document.querySelector('.calc-container');var footer=document.querySelector('.footer');
   if(sticky&&calc&&typeof IntersectionObserver!=='undefined'){

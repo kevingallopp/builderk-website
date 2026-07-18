@@ -9,15 +9,16 @@
       midrange: { name: 'Midrange', low: 180, high: 220, label: '$180 to $220 / sq ft' },
       luxury: { name: 'Luxury', low: 220, high: 280, label: '$220 to $280+ / sq ft' }
     },
-    coveredExteriorAllowance: {
-      label: 'Covered exterior allowance (150 sq ft)',
-      low: 18000,
-      high: 18000
+    coveredExterior: {
+      name: 'Covered outdoor space',
+      ratePerSqft: 120,
+      defaultSqft: 150
     },
+    garageRatePerSqft: 120,
     garages: {
-      0: { name: 'No garage', low: 0, high: 0 },
-      2: { name: 'two car garage allowance', low: 41800, high: 41800 },
-      3: { name: 'three car garage allowance', low: 60800, high: 60800 }
+      0: { name: 'No garage', sqft: 0 },
+      2: { name: 'Two car garage', sqft: 440 },
+      3: { name: 'Three car garage', sqft: 640 }
     },
     complexity: {
       simple: { name: 'Simple', percent: 0 },
@@ -44,12 +45,16 @@
     var garage = pricing.garages[options.garage] || pricing.garages[0];
     var complexity = pricing.complexity[options.complexity] || pricing.complexity.typical;
     var selectedExtras = options.extras || {};
+    var garageSqft = options.garageSqft == null ? garage.sqft : Math.max(Number(options.garageSqft) || 0, 0);
+    var coveredExteriorSqft = options.coveredExteriorSqft == null
+      ? pricing.coveredExterior.defaultSqft
+      : Math.max(Number(options.coveredExteriorSqft) || 0, 0);
     var livingLow = sqft * tier.low;
     var livingHigh = sqft * tier.high;
-    var subtotalLow = livingLow + pricing.coveredExteriorAllowance.low + garage.low;
-    var subtotalHigh = livingHigh + pricing.coveredExteriorAllowance.high + garage.high;
-    var complexityLow = subtotalLow * complexity.percent;
-    var complexityHigh = subtotalHigh * complexity.percent;
+    var garageCost = garageSqft * pricing.garageRatePerSqft;
+    var coveredExteriorCost = coveredExteriorSqft * pricing.coveredExterior.ratePerSqft;
+    var complexityLow = livingLow * complexity.percent;
+    var complexityHigh = livingHigh * complexity.percent;
     var extrasLow = 0;
     var extrasHigh = 0;
 
@@ -64,14 +69,18 @@
       tier: tier,
       livingLow: livingLow,
       livingHigh: livingHigh,
-      garageLow: garage.low,
-      garageHigh: garage.high,
+      garageSqft: garageSqft,
+      garageLow: garageCost,
+      garageHigh: garageCost,
+      coveredExteriorSqft: coveredExteriorSqft,
+      coveredExteriorLow: coveredExteriorCost,
+      coveredExteriorHigh: coveredExteriorCost,
       complexityLow: complexityLow,
       complexityHigh: complexityHigh,
       extrasLow: extrasLow,
       extrasHigh: extrasHigh,
-      totalLow: subtotalLow + complexityLow + extrasLow,
-      totalHigh: subtotalHigh + complexityHigh + extrasHigh
+      totalLow: livingLow + garageCost + coveredExteriorCost + complexityLow + extrasLow,
+      totalHigh: livingHigh + garageCost + coveredExteriorCost + complexityHigh + extrasHigh
     };
   };
 
