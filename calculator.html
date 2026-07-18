@@ -170,27 +170,6 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .custom-banner-text h3{font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:6px}
 .custom-banner-text p{font-size:0.9rem;color:#999;line-height:1.6}
 
-/* PRICING TABLE */
-.pricing-section{padding:80px 48px;position:relative;overflow:hidden;background:linear-gradient(180deg, #0A0A0A 0%, #0F0F0F 30%, #0F0F0F 70%, #0A0A0A 100%)}
-.pricing-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(247,127,0,0.04) 0%,transparent 70%);pointer-events:none;z-index:0}
-.pricing-section h2{font-size:2.2rem;font-weight:700;text-align:center;margin-bottom:12px;position:relative;z-index:1}
-.pricing-section h2 span{color:var(--orange)}
-.pricing-section>p{text-align:center;color:#666;font-size:1rem;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto;position:relative;z-index:1}
-.price-tier{background:linear-gradient(180deg, #222222 0%, #1A1A1A 100%);border:1px solid #333;border-radius:16px;padding:32px 28px;transition:all 0.3s}
-.price-tier:hover{border-color:#444;transform:translateY(-4px)}
-.price-tier.popular{background:linear-gradient(180deg, #2A1E10 0%, #1E1610 100%);border-color:var(--orange);position:relative}
-.price-tier.popular::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:1.5px;padding:4px 14px;border-radius:50px}
-.tier-header{text-align:center;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.tier-name{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:4px}
-.tier-price{font-family:'Outfit',sans-serif;font-size:2rem;font-weight:800;color:var(--orange);margin-bottom:2px}
-.tier-unit{font-size:0.8rem;color:#555}
-.tier-section-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--orange);margin-bottom:10px;margin-top:20px}
-.tier-section-label:first-child{margin-top:0}
-.tier-features{list-style:none;display:flex;flex-direction:column;gap:8px}
-.tier-features li{font-size:0.84rem;color:#aaa;padding-left:20px;position:relative;line-height:1.4}
-.tier-features li::before{content:'';position:absolute;left:0;top:5px;width:8px;height:8px;border-radius:50%;background:var(--orange)}
-
 /* INCLUDED SECTION */
 .included-section{padding:60px 48px;max-width:1100px;margin:0 auto;background:linear-gradient(180deg, transparent, rgba(247,127,0,0.02), transparent)}
 .included-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
@@ -236,7 +215,6 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
   .calc-group{padding:24px 20px}
   .finish-options{grid-template-columns:repeat(3,1fr);gap:8px}
   .finish-card{padding:10px 6px}.finish-card .tier-icon{font-size:1.1rem}.finish-card .label{font-size:0.72rem}.finish-card .price{font-size:0.6rem}
-  .pricing-section{padding:60px 20px}.pricing-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
   .visual-banner{padding:0 20px 40px}.visual-banner-inner{padding:40px 24px}.visual-banner-inner h2{font-size:1.5rem}
   .custom-banner{padding:0 20px 40px}.custom-banner-inner{flex-direction:column;text-align:center;padding:24px 20px}
   .included-section{padding:40px 20px}
@@ -257,8 +235,8 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 @media(max-width:900px){
   html,body{max-width:100%;overflow-x:hidden}
   .navbar,.calc-sticky-cta{left:0!important;right:0!important;width:100%!important;max-width:100%!important}
-  .calc-container,.pricing-section{overflow:hidden}
-  .calc-container::before,.pricing-section::before{display:none}
+  .calc-container{overflow:hidden}
+  .calc-container::before{display:none}
 }
 .nav-links.open{display:flex!important;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:999;justify-content: flex-start;align-items:center;gap:24px;padding:80px 24px}
 .nav-links.open li{list-style:none}
@@ -578,99 +556,6 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  </div>
  </div>
 </div>
-
-<!-- Pricing Tiers -->
-<section class="pricing-section">
- <h2 class="reveal">What's Included at <span>Each Build Level</span></h2>
- <p class="reveal stagger-1">These examples show how the three build levels differ. Your written proposal will confirm the systems, allowances, finishes, and exclusions for your lot and plan.</p>
- <div class="pricing-grid">
- <div class="price-tier popular reveal stagger-1">
- <div class="tier-header">
- <div class="tier-name">Standard</div>
- <div class="tier-unit">Practical essentials</div>
- </div>
- <div class="tier-section-label">Structure &amp; Roof</div>
- <ul class="tier-features">
- <li>CMU block construction</li>
- <li>9 ft ceilings</li>
- <li>Architectural shingle roof (30 year warranty)</li>
- </ul>
- <div class="tier-section-label">Windows &amp; Exterior</div>
- <ul class="tier-features">
- <li>Standard windows + hurricane shutters</li>
- <li>Standard aluminum window frames</li>
- <li>Stucco exterior finish</li>
- <li>Concrete driveway</li>
- <li>Landscaping scoped separately</li>
- </ul>
- <div class="tier-section-label">Interiors</div>
- <ul class="tier-features">
- <li>Custom cabinet selections</li>
- <li>Custom countertop selections</li>
- <li>Custom flooring selections</li>
- <li>Custom fixtures &amp; hardware</li>
- <li>Custom layout &amp; floor plan</li>
- </ul>
- </div>
- <div class="price-tier reveal stagger-2">
- <div class="tier-header">
- <div class="tier-name">Midrange</div>
- <div class="tier-unit">Elevated selections</div>
- </div>
- <div class="tier-section-label">Structure &amp; Roof</div>
- <ul class="tier-features">
- <li>CMU block construction</li>
- <li>Mixed ceiling heights (9 ft + 11 ft in living areas)</li>
- <li>Flat roof or standing seam metal roof</li>
- </ul>
- <div class="tier-section-label">Windows &amp; Exterior</div>
- <ul class="tier-features">
- <li>Impact window package available; insurance discounts vary by carrier</li>
- <li>Black or bronze window frames</li>
- <li>Modern stucco with clean lines &amp; accent details</li>
- <li>Stone veneer or wood accents available</li>
- <li>Paver driveway available as an upgrade</li>
- <li>Enhanced landscaping scoped separately</li>
- </ul>
- <div class="tier-section-label">Interiors</div>
- <ul class="tier-features">
- <li>Custom cabinet selections</li>
- <li>Custom countertop selections</li>
- <li>Custom flooring selections</li>
- <li>Custom fixtures &amp; hardware</li>
- <li>Custom layout &amp; floor plan</li>
- </ul>
- </div>
- <div class="price-tier reveal stagger-3">
- <div class="tier-header">
- <div class="tier-name">Luxury</div>
- <div class="tier-unit">Fully tailored</div>
- </div>
- <div class="tier-section-label">Structure &amp; Roof</div>
- <ul class="tier-features">
- <li>Reinforced CMU block (wind zone 3+ engineered)</li>
- <li>12 ft ceilings standard throughout</li>
- <li>Standing seam metal or barrel tile roof</li>
- </ul>
- <div class="tier-section-label">Windows &amp; Exterior</div>
- <ul class="tier-features">
- <li>Full height impact glass with low emissivity coating</li>
- <li>Custom window sizes &amp; configurations</li>
- <li>Stone veneer, wood accents &amp; architectural details</li>
- <li>Decorative pavers available as an upgrade</li>
- <li>Landscape and lighting package scoped separately</li>
- </ul>
- <div class="tier-section-label">Interiors</div>
- <ul class="tier-features">
- <li>Custom cabinet selections</li>
- <li>Custom countertop selections</li>
- <li>Custom flooring selections</li>
- <li>Custom fixtures &amp; hardware</li>
- <li>Custom layout &amp; floor plan</li>
- </ul>
- </div>
- </div>
-</section>
 
 <!-- Included -->
 <section class="included-section">
