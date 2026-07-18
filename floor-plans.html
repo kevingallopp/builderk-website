@@ -16,14 +16,14 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Floor Plans — BuilderK Custom Home Builder Florida</title>
-<meta name="description" content="Browse BuilderK's collection of custom home floor plans for Florida. 1-story and 2-story designs from 1,450 to 3,300 sq ft. Customize any plan to fit your lot.">
+<title>Floor Plans, BuilderK Custom Home Builder Florida</title>
+<meta name="description" content="Browse BuilderK's five currently published Florida floor plan drawings, from 1,250 to 2,385 sq ft, with transparent planning ranges and customization options.">
 <meta name="keywords" content="florida home floor plans, custom home plans, 1 story home plans florida, 2 story home plans, custom home builder florida, build on your lot">
 <link rel="canonical" href="https://www.builderk.com/floor-plans">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Floor Plans — BuilderK Custom Homes">
-<meta property="og:description" content="Browse our collection of pre-designed floor plans from 1,450 to 3,300 sq ft or customize one to fit your lot.">
+<meta property="og:title" content="Floor Plans, BuilderK Custom Homes">
+<meta property="og:description" content="Browse five currently published floor plan drawings from 1,250 to 2,385 sq ft, or develop a custom plan for your lot.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.builderk.com/floor-plans">
 
@@ -62,7 +62,7 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
 .nav-hamburger span { width: 26px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
 
 /* ===== HERO ===== */
-.page-hero { padding: 160px 48px 80px; background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%); text-align: center; }
+.page-hero { padding: 140px 48px 56px; background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%); text-align: center; }
 .page-hero h1 { font-size: 3.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -1px; }
 .page-hero h1 span { color: var(--orange); }
 .page-hero p { color: #aaa; font-size: 1.2rem; max-width: 700px; margin: 0 auto 32px; line-height: 1.6; }
@@ -70,9 +70,10 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
 .filter-tab { padding: 10px 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #ccc; border-radius: 999px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
 .filter-tab:hover { color: #fff; border-color: var(--orange); }
 .filter-tab.active { background: var(--orange); color: #fff; border-color: var(--orange); }
+.plan-count { margin-top: 18px; color: #aaa; font-size: 0.88rem; }
 
 /* ===== PLANS GRID ===== */
-.plans-section { padding: 80px 48px; }
+.plans-section { padding: 28px 48px 80px; }
 .plans-inner { max-width: 1400px; margin: 0 auto; }
 .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .plan-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; color: inherit; display: block; }
@@ -88,6 +89,8 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
 .plan-card-story { font-size: 0.78rem; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.5px; }
 .plan-card-price { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--dark); }
 .plan-card-price small { font-size: 0.7rem; font-weight: 500; color: var(--gray-600); }
+.plan-card-price { margin-bottom: 14px; }
+.catalog-note { max-width: 1120px; margin: 0 auto 18px; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 12px; background: #fff; color: var(--gray-600); line-height: 1.4; font-size: 0.8rem; }
 
 /* Custom card variant */
 .plan-card-custom { background: linear-gradient(135deg, #1a1a1a 0%, var(--dark) 100%); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px 24px; min-height: 380px; }
@@ -138,7 +141,7 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
   .page-hero { padding: 120px 20px 60px; overflow: hidden; }
   .page-hero h1 { font-size: 2rem; line-height: 1.08; max-width: 330px; margin-left: auto; margin-right: auto; }
   .page-hero p { font-size: 1rem; }
-  .plans-section { padding: 48px 20px; }
+  .plans-section { padding: 32px 20px 48px; }
   .plans-grid { grid-template-columns: 1fr; gap: 20px; }
   .cta-section { padding: 60px 24px; }
   .cta-section h2 { font-size: 2rem; }
@@ -236,205 +239,225 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
   }
 }
 </style>
+<link rel="stylesheet" href="/css/site-a11y.css">
+<script src="/scripts/pricing-config.js"></script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="navbar" id="navbar">
-  <a href="/" class="nav-logo">
-    <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="/#process">How It Works</a></li>
-    <li><a href="/floor-plans" style="color:var(--orange);">Floor Plans</a></li>
-    <li><a href="/construction">Construction</a></li>
-    <li><a href="/financing">Financing</a></li>
-    <li><a href="/calculator">Calculator</a></li>
-    <li><a href="/contact" class="nav-cta">Talk to a Builder</a></li>
-  </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
-    <span></span><span></span><span></span>
-  </button>
+ <a href="/" class="nav-logo">
+ <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
+ </a>
+<ul class="nav-links" id="nav-links">
+ <li><a href="/process">How It Works</a></li>
+ <li><a href="/floor-plans" style="color:var(--orange);">Floor Plans</a></li>
+ <li><a href="/construction">Construction</a></li>
+ <li><a href="/financing">Financing</a></li>
+ <li><a href="/calculator">Calculator</a></li>
+ <li><a href="/contact" class="nav-cta">Talk to a Builder</a></li>
+ </ul>
+ <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
+ <span></span><span></span><span></span>
+ </button>
 </nav>
 
 <!-- HERO -->
 <section class="page-hero">
-  <h1 class="reveal stagger-1">Find Your <span>Perfect Plan</span></h1>
-  <p class="reveal stagger-2">Browse our collection of pre-designed floor plans for Florida lots. Customize any layout to fit your land, lifestyle, and budget. Or start from scratch — we design from the ground up.</p>
-  <div class="filter-tabs reveal stagger-3">
-    <button class="filter-tab active" data-filter="all">All Plans</button>
-    <button class="filter-tab" data-filter="1-story">1 Story</button>
-    <button class="filter-tab" data-filter="2-story">2 Story</button>
-    <button class="filter-tab" data-filter="small">Under 1,800 sq ft</button>
-    <button class="filter-tab" data-filter="large">Over 2,000 sq ft</button>
-  </div>
+ <h1 class="reveal stagger-1">Find Your <span>Perfect Plan</span></h1>
+ <p class="reveal stagger-2">Browse the five plan drawings currently published in our catalog. Every plan still requires fit for the lot, code, engineering, scope, and pricing review before it becomes a buildable proposal.</p>
+ <div class="filter-tabs reveal stagger-3" role="group" aria-label="Filter floor plans">
+ <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All Plans</button>
+ <button type="button" class="filter-tab" data-filter="1-story" aria-pressed="false">1 Story</button>
+ <button type="button" class="filter-tab" data-filter="2-story" aria-pressed="false">2 Story</button>
+ <button type="button" class="filter-tab" data-filter="3-bed" aria-pressed="false">3 Bedrooms</button>
+ <button type="button" class="filter-tab" data-filter="4-plus-bed" aria-pressed="false">4+ Bedrooms</button>
+ <button type="button" class="filter-tab" data-filter="small" aria-pressed="false">Under 1,800 sq ft</button>
+ <button type="button" class="filter-tab" data-filter="large" aria-pressed="false">Over 2,000 sq ft</button>
+ </div>
+ <p class="plan-count" id="plan-count" aria-live="polite">5 plans shown</p>
 </section>
 
 <!-- PLANS GRID -->
 <section class="plans-section">
-  <div class="plans-inner">
-    <div class="plans-grid">
+ <div class="plans-inner">
+ <p class="catalog-note">Planning ranges below use the shared Central Florida Standard tier assumptions: living area, a 150 sq ft covered exterior allowance, a two car garage allowance, and typical design complexity. They exclude the items listed in the <a href="/calculator" style="color:var(--orange);font-weight:600;">calculator</a>. Rates last updated <span data-pricing-updated>July 18, 2026</span>.</p>
+ <div class="plans-grid">
 
-      <!-- 1700 SQ FT -->
-      <a href="/floor-plan-1700-sq-ft" class="plan-card reveal stagger-1" data-story="1-story" data-size="small">
-        <div class="plan-card-img"><img src="/images/plan-1700.png" alt="1,700 sq ft single-story 3 bed 2 bath floor plan — BuilderK" loading="lazy"></div>
-        <div class="plan-card-body">
-          <div class="plan-card-title">1,700 Sq Ft Plan</div>
-          <div class="plan-card-specs">
-            <span>3 Bed</span><span>2 Bath</span><span>1,700 sq ft</span><span>2-Car</span>
-          </div>
-          <div class="plan-card-footer">
-            <span class="plan-card-cta">View Plan →</span>
-            <span class="plan-card-story">Single Story</span>
-          </div>
-        </div>
-      </a>
+ <!-- 1700 SQ FT -->
+ <a href="/floor-plan-1700-sq-ft" class="plan-card reveal stagger-1" data-story="1-story" data-size="small" data-beds="3" data-sqft="1700">
+ <div class="plan-card-img"><img src="/images/plan-1700.png" alt="1,700 sq ft single story 3 bed 2 bath floor plan, BuilderK" loading="lazy"></div>
+ <div class="plan-card-body">
+ <div class="plan-card-title">1,700 Sq Ft Plan</div>
+ <div class="plan-card-specs">
+ <span>3 Bed</span><span>2 Bath</span><span>1,700 sq ft</span><span>Two Car</span>
+ </div>
+ <div class="plan-card-price" data-plan-range>Standard planning range</div>
+ <div class="plan-card-footer">
+ <span class="plan-card-cta">View Plan →</span>
+ <span class="plan-card-story">Single Story</span>
+ </div>
+ </div>
+ </a>
 
-      <!-- 1977 SQ FT -->
-      <a href="/floor-plan-1977-sq-ft" class="plan-card reveal stagger-2" data-story="2-story" data-size="medium">
-        <div class="plan-card-img"><img src="/images/plan-1977.png" alt="1,977 sq ft two-story 4 bed 2.5 bath floor plan — BuilderK" loading="lazy"></div>
-        <div class="plan-card-body">
-          <div class="plan-card-title">1,977 Sq Ft Plan</div>
-          <div class="plan-card-specs">
-            <span>4 Bed</span><span>2.5 Bath</span><span>1,977 sq ft</span><span>2-Car</span>
-          </div>
-          <div class="plan-card-footer">
-            <span class="plan-card-cta">View Plan →</span>
-            <span class="plan-card-story">Two Story</span>
-          </div>
-        </div>
-      </a>
+ <!-- 1977 SQ FT -->
+ <a href="/floor-plan-1977-sq-ft" class="plan-card reveal stagger-2" data-story="2-story" data-size="medium" data-beds="4" data-sqft="1977">
+ <div class="plan-card-img"><img src="/images/plan-1977.png" alt="1,977 sq ft two story 4 bed 2.5 bath floor plan, BuilderK" loading="lazy"></div>
+ <div class="plan-card-body">
+ <div class="plan-card-title">1,977 Sq Ft Plan</div>
+ <div class="plan-card-specs">
+ <span>4 Bed</span><span>2.5 Bath</span><span>1,977 sq ft</span><span>Two Car</span>
+ </div>
+ <div class="plan-card-price" data-plan-range>Standard planning range</div>
+ <div class="plan-card-footer">
+ <span class="plan-card-cta">View Plan →</span>
+ <span class="plan-card-story">Two Story</span>
+ </div>
+ </div>
+ </a>
 
-      <!-- 2377 SQ FT -->
-      <a href="/floor-plan-2377-sq-ft" class="plan-card reveal stagger-3" data-story="2-story" data-size="large">
-        <div class="plan-card-img"><img src="/images/plan-2377.png" alt="2,377 sq ft two-story 5 bed 3 bath floor plan — BuilderK" loading="lazy"></div>
-        <div class="plan-card-body">
-          <div class="plan-card-title">2,377 Sq Ft Plan</div>
-          <div class="plan-card-specs">
-            <span>5 Bed</span><span>3 Bath</span><span>2,377 sq ft</span><span>2-Car</span>
-          </div>
-          <div class="plan-card-footer">
-            <span class="plan-card-cta">View Plan →</span>
-            <span class="plan-card-story">Two Story</span>
-          </div>
-        </div>
-      </a>
+ <!-- 2377 SQ FT -->
+ <a href="/floor-plan-2377-sq-ft" class="plan-card reveal stagger-3" data-story="2-story" data-size="large" data-beds="5" data-sqft="2377">
+ <div class="plan-card-img"><img src="/images/plan-2377.png" alt="2,377 sq ft two story 5 bed 3 bath floor plan, BuilderK" loading="lazy"></div>
+ <div class="plan-card-body">
+ <div class="plan-card-title">2,377 Sq Ft Plan</div>
+ <div class="plan-card-specs">
+ <span>5 Bed</span><span>3 Bath</span><span>2,377 sq ft</span><span>Two Car</span>
+ </div>
+ <div class="plan-card-price" data-plan-range>Standard planning range</div>
+ <div class="plan-card-footer">
+ <span class="plan-card-cta">View Plan →</span>
+ <span class="plan-card-story">Two Story</span>
+ </div>
+ </div>
+ </a>
 
-      <!-- 1250 SQ FT -->
-      <a href="/floor-plan-1250-sq-ft" class="plan-card reveal stagger-4" data-story="1-story" data-size="small">
-        <div class="plan-card-img"><img src="/images/plan-1250.jpg?v=2" alt="1,250 sq ft single story 3 bed 2 bath floor plan — BuilderK" loading="lazy"></div>
-        <div class="plan-card-body">
-          <div class="plan-card-title">1,250 Sq Ft Plan</div>
-          <div class="plan-card-specs">
-            <span>3 Bed</span><span>2 Bath</span><span>1,250 sq ft</span><span>2-Car</span>
-          </div>
-          <div class="plan-card-footer">
-            <span class="plan-card-cta">View Plan →</span>
-            <span class="plan-card-story">Single Story</span>
-          </div>
-        </div>
-      </a>
+ <!-- 1250 SQ FT -->
+ <a href="/floor-plan-1250-sq-ft" class="plan-card reveal stagger-4" data-story="1-story" data-size="small" data-beds="3" data-sqft="1250">
+ <div class="plan-card-img"><img src="/images/plan-1250.jpg?v=2" alt="1,250 sq ft single story 3 bed 2 bath floor plan, BuilderK" loading="lazy"></div>
+ <div class="plan-card-body">
+ <div class="plan-card-title">1,250 Sq Ft Plan</div>
+ <div class="plan-card-specs">
+ <span>3 Bed</span><span>2 Bath</span><span>1,250 sq ft</span><span>Two Car</span>
+ </div>
+ <div class="plan-card-price" data-plan-range>Standard planning range</div>
+ <div class="plan-card-footer">
+ <span class="plan-card-cta">View Plan →</span>
+ <span class="plan-card-story">Single Story</span>
+ </div>
+ </div>
+ </a>
 
-      <!-- 2385 SQ FT -->
-      <a href="/floor-plan-2385-sq-ft" class="plan-card reveal stagger-5" data-story="1-story" data-size="large">
-        <div class="plan-card-img"><img src="/images/plan-2385.jpg?v=2" alt="2,385 sq ft single story 3 bed 3 bath floor plan — BuilderK" loading="lazy"></div>
-        <div class="plan-card-body">
-          <div class="plan-card-title">2,385 Sq Ft Plan</div>
-          <div class="plan-card-specs">
-            <span>3 Bed</span><span>3 Bath</span><span>2,385 sq ft</span><span>2-Car</span>
-          </div>
-          <div class="plan-card-footer">
-            <span class="plan-card-cta">View Plan →</span>
-            <span class="plan-card-story">Single Story</span>
-          </div>
-        </div>
-      </a>
+ <!-- 2385 SQ FT -->
+ <a href="/floor-plan-2385-sq-ft" class="plan-card reveal stagger-5" data-story="1-story" data-size="large" data-beds="3" data-sqft="2385">
+ <div class="plan-card-img"><img src="/images/plan-2385.jpg?v=2" alt="2,385 sq ft single story 3 bed 3 bath floor plan, BuilderK" loading="lazy"></div>
+ <div class="plan-card-body">
+ <div class="plan-card-title">2,385 Sq Ft Plan</div>
+ <div class="plan-card-specs">
+ <span>3 Bed</span><span>3 Bath</span><span>2,385 sq ft</span><span>Two Car</span>
+ </div>
+ <div class="plan-card-price" data-plan-range>Standard planning range</div>
+ <div class="plan-card-footer">
+ <span class="plan-card-cta">View Plan →</span>
+ <span class="plan-card-story">Single Story</span>
+ </div>
+ </div>
+ </a>
 
-      <!-- GENERATED PLAN CARDS START -->
-      <!-- Unlisted 2026-06-10: schematic SVG diagrams pulled until real plan drawings are ready. Pages still exist (noindex). -->
-      <!-- GENERATED PLAN CARDS END -->
+ <!-- GENERATED PLAN CARDS START -->
+ <!-- Unlisted 2026-06-10: schematic SVG diagrams pulled until real plan drawings are ready. Pages still exist (noindex). -->
+ <!-- GENERATED PLAN CARDS END -->
 
-      <!-- CUSTOM CTA CARD 1 -->
-      <a href="/contact" class="plan-card plan-card-custom reveal stagger-4">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <h3>Don't See Your Perfect Plan?</h3>
-        <p>We design custom plans from scratch — tailored to your lot, lifestyle, and budget.</p>
-        <span class="cta-arrow">Start a Custom Design →</span>
-      </a>
+ <!-- CUSTOM CTA CARD 1 -->
+ <a href="/contact" class="plan-card plan-card-custom reveal stagger-4">
+ <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+ <h3>Don't See Your Perfect Plan?</h3>
+ <p>We design custom plans from scratch, tailored to your lot, lifestyle, and budget.</p>
+ <span class="cta-arrow">Start a Custom Design →</span>
+ </a>
 
-      <!-- CUSTOM CTA CARD 2 -->
-      <a href="/calculator" class="plan-card plan-card-custom reveal stagger-5">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
-        <h3>Price Any Plan In 60 Seconds</h3>
-        <p>Use our pricing calculator to estimate the total cost for any plan on your lot.</p>
-        <span class="cta-arrow">Run the Numbers →</span>
-      </a>
+ <!-- CUSTOM CTA CARD 2 -->
+ <a href="/calculator" class="plan-card plan-card-custom reveal stagger-5">
+ <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+ <h3>Build a Planning Range</h3>
+ <p>Use the pricing calculator to model build level, complexity, garage, upgrades, and major exclusions.</p>
+ <span class="cta-arrow">Run the Numbers →</span>
+ </a>
 
-      <!-- CUSTOM CTA CARD 3 -->
-      <a href="/contact" class="plan-card plan-card-custom reveal stagger-6">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <h3>Bring Your Own Plan</h3>
-        <p>Already have plans from another architect? We can build them. Send them over for a free review.</p>
-        <span class="cta-arrow">Send Your Plan →</span>
-      </a>
+ <!-- CUSTOM CTA CARD 3 -->
+ <a href="/contact" class="plan-card plan-card-custom reveal stagger-6">
+ <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+ <h3>Bring Your Own Plan</h3>
+ <p>Already have plans from another architect? We can build them. Send them to us and we will review them with you.</p>
+ <span class="cta-arrow">Send Your Plan →</span>
+ </a>
 
-    </div>
-  </div>
+ </div>
+ </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section">
-  <h2 class="reveal">Ready to <span>Build Your Home?</span></h2>
-  <p class="reveal stagger-1">You bring the lot. We handle financing, design, permitting, and construction — all under one roof. One team, one contract, no hassle.</p>
-  <a href="/calculator" class="btn-primary reveal stagger-2">Estimate My Build<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+ <h2 class="reveal">Ready to <span>Build Your Home?</span></h2>
+ <p class="reveal stagger-1">Bring your lot or the one you're considering. We coordinate design, lender documentation, permitting, and construction through one build process.</p>
+ <a href="/calculator" class="btn-primary reveal stagger-2">Estimate My Build<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo">
-          <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
-        </a>
-        <p>Custom home builders in Florida. You bring the lot — we build your dream home from the ground up.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/#process">How It Works</a>
-        <a href="/floor-plans">Floor Plans</a>
-        <a href="/facades">Facades & Styles</a>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <a href="/">Custom Homes</a>
-        <a href="/financing">Financing</a>
-        <a href="/calculator">Pricing Calculator</a>
-        <a href="/interiors">Interior Selections</a>
-        <a href="/construction">Construction</a>
-        <a href="/interior-gallery">Interior Gallery</a>
-        <a href="/referral-program/">Referral Program</a>
-        <a href="/blog">Blog</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="tel:2392304868">(239) 230-4868</a>
-        <a href="mailto:info@builderk.com">info@builderk.com</a>
-        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
-      <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
-    </div>
-  </div>
+ <div class="footer-inner">
+ <div class="footer-top">
+ <div class="footer-brand">
+ <a href="/" class="nav-logo">
+ <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
+ </a>
+ <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+ </div>
+ <div class="footer-col">
+ <h4>Company</h4>
+ <a href="/">Home</a>
+ <a href="/about">About Us</a>
+ <a href="/process">How It Works</a>
+ <a href="/floor-plans">Floor Plans</a>
+ <a href="/facades">Facades & Styles</a>
+ </div>
+ <div class="footer-col">
+ <h4>Services</h4>
+ <a href="/">Custom Homes</a>
+ <a href="/financing">Financing</a>
+ <a href="/calculator">Pricing Calculator</a>
+ <a href="/interiors">Interior Selections</a>
+ <a href="/construction">Construction</a>
+ <a href="/interior-gallery">Interior Gallery</a>
+ <a href="/referral-program/">Referral Program</a>
+ <a href="/blog">Blog</a>
+ </div>
+ <div class="footer-col">
+ <h4>Contact</h4>
+ <a href="tel:2392304868">(239) 230 4868</a>
+ <a href="mailto:info@builderk.com">info@builderk.com</a>
+ <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+ </div>
+ </div>
+ <div class="footer-bottom">
+ <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+ <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
+ </div>
+ </div>
 </footer>
 
 <script>
 window.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.page-hero .reveal').forEach(function(el) { el.classList.add('visible'); });
+  if (window.BuilderKPricing) {
+    var fmt=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+    document.querySelectorAll('[data-plan-range]').forEach(function(el){
+      var card=el.closest('.plan-card');var sqft=parseInt(card.dataset.sqft);
+      var range=window.BuilderKPricing.calculate({sqft:sqft,tier:'standard',complexity:'typical',garage:2,extras:{}});
+      el.innerHTML='<small>Standard planning range</small><br>'+fmt(range.totalLow)+' to '+fmt(range.totalHigh);
+    });
+    document.querySelectorAll('[data-pricing-updated]').forEach(function(el){el.textContent=window.BuilderKPricing.lastUpdated;});
+  }
 });
 if (typeof IntersectionObserver !== 'undefined') {
   var observer = new IntersectionObserver(function(entries) {
@@ -452,8 +475,9 @@ if (navbar) {
 // ===== FILTER LOGIC =====
 document.querySelectorAll('.filter-tab').forEach(function(tab) {
   tab.addEventListener('click', function() {
-    document.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-pressed','false'); });
     tab.classList.add('active');
+    tab.setAttribute('aria-pressed','true');
     var filter = tab.getAttribute('data-filter');
     document.querySelectorAll('.plan-card').forEach(function(card) {
       // skip custom CTA cards from filtering
@@ -465,10 +489,14 @@ document.querySelectorAll('.filter-tab').forEach(function(tab) {
       if (filter === 'all') matches = true;
       else if (filter === '1-story') matches = card.getAttribute('data-story') === '1-story';
       else if (filter === '2-story') matches = card.getAttribute('data-story') === '2-story';
+      else if (filter === '3-bed') matches = parseInt(card.getAttribute('data-beds')) === 3;
+      else if (filter === '4-plus-bed') matches = parseInt(card.getAttribute('data-beds')) >= 4;
       else if (filter === 'small') matches = card.getAttribute('data-size') === 'small';
       else if (filter === 'large') matches = card.getAttribute('data-size') === 'large';
       card.style.display = matches ? '' : 'none';
     });
+    var visible=document.querySelectorAll('.plan-card:not(.plan-card-custom):not([style*="display: none"])').length;
+    document.getElementById('plan-count').textContent=visible+(visible===1?' plan shown':' plans shown');
   });
 });
 // ===== MOBILE MENU =====

@@ -16,14 +16,14 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Construction Process — BuilderK Custom Home Builder Florida</title>
+<title>Our Construction Process, BuilderK Custom Home Builder Florida</title>
 <meta name="description" content="See BuilderK's construction process from foundation to finish. Real job site photos showing every phase of custom home building in Florida.">
 <meta name="keywords" content="custom home construction florida, home building process, foundation to finish, concrete block construction, steel framing florida, custom home builder construction photos">
 <link rel="canonical" href="https://www.builderk.com/construction">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Our Construction Process — BuilderK Custom Homes">
-<meta property="og:description" content="See every phase of custom home building — from foundation pour to final finishes. Real job site photos from BuilderK.">
+<meta property="og:title" content="Our Construction Process, BuilderK Custom Homes">
+<meta property="og:description" content="See every phase of custom home building, from foundation pour to final finishes. Real job site photos from BuilderK.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.builderk.com/construction">
 
@@ -118,6 +118,7 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
 }
 .filter-tab:hover { border-color: var(--orange); color: var(--orange); }
 .filter-tab.active { background: var(--orange); color: #fff; border-color: var(--orange); }
+.gallery-count { margin-top: 18px; color: #aaa; font-size: 0.85rem; }
 
 /* ===== GALLERY ===== */
 .gallery-section {
@@ -145,6 +146,8 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
   transform: translateY(-6px);
   box-shadow: 0 16px 40px rgba(0,0,0,0.14);
 }
+.gallery-item:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.gallery-item:focus-visible .gallery-item-overlay { opacity: 1; }
 .gallery-item img {
   width: 100%;
   aspect-ratio: 16/11;
@@ -485,766 +488,768 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
   }
 }
 </style>
+<link rel="stylesheet" href="/css/site-a11y.css">
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="navbar" id="navbar">
-  <a href="/" class="nav-logo">
-    <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="/#process">How It Works</a></li>
-    <li><a href="/floor-plans">Floor Plans</a></li>
-    <li><a href="/construction" style="color:var(--orange);">Construction</a></li>
-    <li><a href="/financing">Financing</a></li>
-    <li><a href="/calculator">Calculator</a></li>
-    <li><a href="/contact" class="nav-cta">Talk to a Builder</a></li>
-  </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
-    <span></span><span></span><span></span>
-  </button>
+ <a href="/" class="nav-logo">
+ <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
+ </a>
+<ul class="nav-links" id="nav-links">
+ <li><a href="/process">How It Works</a></li>
+ <li><a href="/floor-plans">Floor Plans</a></li>
+ <li><a href="/construction" style="color:var(--orange);">Construction</a></li>
+ <li><a href="/financing">Financing</a></li>
+ <li><a href="/calculator">Calculator</a></li>
+ <li><a href="/contact" class="nav-cta">Talk to a Builder</a></li>
+ </ul>
+ <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
+ <span></span><span></span><span></span>
+ </button>
 </nav>
 
 <!-- HERO -->
 <section class="page-hero">
-  <h1 class="reveal stagger-1">Built from the <span>Ground Up</span></h1>
-  <p class="reveal stagger-2">Every BuilderK home starts with a vision &mdash; and ends with a key turn. Here's what happens in between.</p>
-  <div class="filter-tabs reveal stagger-3">
-    <button class="filter-tab active" data-filter="all">All</button>
-    <button class="filter-tab" data-filter="foundation">Foundation</button>
-    <button class="filter-tab" data-filter="framing">Framing</button>
-    <button class="filter-tab" data-filter="exterior">Exterior</button>
-    <button class="filter-tab" data-filter="interior">Interior</button>
-    <button class="filter-tab" data-filter="finishes">Finishes</button>
-  </div>
+ <h1 class="reveal stagger-1">Built from the <span>Ground Up</span></h1>
+ <p class="reveal stagger-2">Every BuilderK home starts with an idea and follows a clear path through design, permitting, and construction.</p>
+ <div class="filter-tabs reveal stagger-3" role="group" aria-label="Filter construction gallery by phase">
+ <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All</button>
+ <button type="button" class="filter-tab" data-filter="foundation" aria-pressed="false">Foundation</button>
+ <button type="button" class="filter-tab" data-filter="framing" aria-pressed="false">Framing</button>
+ <button type="button" class="filter-tab" data-filter="exterior" aria-pressed="false">Exterior</button>
+ <button type="button" class="filter-tab" data-filter="interior" aria-pressed="false">Interior</button>
+ <button type="button" class="filter-tab" data-filter="finishes" aria-pressed="false">Finishes</button>
+ </div>
+ <p class="gallery-count" id="gallery-count" aria-live="polite"></p>
 </section>
 
 <!-- INTRO -->
 <section class="intro-strip reveal">
-  <h2>From Permit to Punch List</h2>
-  <p>Every custom home we build goes through a meticulous construction process. These are real photos from our Florida job sites &mdash; foundation pours, steel framing, block walls, and everything in between.</p>
+ <h2>From Permit to Punch List</h2>
+ <p>Every custom home we build goes through a meticulous construction process. These are real photos from our Florida job sites, foundation pours, steel framing, block walls, and everything in between.</p>
 </section>
 
 <!-- GALLERY -->
 <section class="gallery-section">
-  <div class="gallery-grid">
-    <!-- ===== NEW JOBSITE MEDIA + VIDEO (interleaved 2026-06-10) ===== -->
-    <div class="gallery-item reveal" data-category="foundation" data-title="Foundation & Site Work">
-      <img src="images/projects/jobsite/3489.jpg" alt="BuilderK custom home foundation and site work in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Foundation & Site Work</h3><span class="gallery-tag">Foundation</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="foundation" data-title="On the Job Site">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3497.jpg"><source src="/videos/construction/constr-3497.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>On the Job Site</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="foundation" data-title="Foundation & Site Work">
-      <img src="images/projects/jobsite/s01.jpg" alt="BuilderK custom home foundation and site work in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Foundation & Site Work</h3><span class="gallery-tag">Foundation</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="foundation" data-title="On the Job Site">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3506.jpg"><source src="/videos/construction/constr-3506.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>On the Job Site</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="foundation" data-title="Foundation & Site Work">
-      <img src="images/projects/jobsite/s06.jpg" alt="BuilderK custom home foundation and site work in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Foundation & Site Work</h3><span class="gallery-tag">Foundation</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="foundation" data-title="On the Job Site">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3508.jpg"><source src="/videos/construction/constr-3508.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>On the Job Site</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="foundation" data-title="Foundation & Site Work">
-      <img src="images/projects/jobsite/s12.jpg" alt="BuilderK custom home foundation and site work in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Foundation & Site Work</h3><span class="gallery-tag">Foundation</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="foundation" data-title="On the Job Site">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3657.jpg"><source src="/videos/construction/constr-3657.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>On the Job Site</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
-      <img src="images/projects/jobsite/s02.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
-      <img src="images/projects/jobsite/s03.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="framing" data-title="Framing in Progress">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3627.jpg"><source src="/videos/construction/constr-3627.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>Framing in Progress</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
-      <img src="images/projects/jobsite/s04.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
-      <img src="images/projects/jobsite/s05.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="framing" data-title="Framing in Progress">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3628.jpg"><source src="/videos/construction/constr-3628.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>Framing in Progress</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
-      <img src="images/projects/jobsite/s08.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
-      <img src="images/projects/jobsite/s10.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="framing" data-title="Framing in Progress">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3658.jpg"><source src="/videos/construction/constr-3658.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>Framing in Progress</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
-      <img src="images/projects/jobsite/s13.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
-      <img src="images/projects/jobsite/s16.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="framing" data-title="Framing in Progress">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3660.jpg"><source src="/videos/construction/constr-3660.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>Framing in Progress</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
-      <img src="images/projects/jobsite/8538.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
-      <img src="images/projects/jobsite/s07.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
-      <img src="images/projects/jobsite/s09.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
-      <img src="images/projects/jobsite/s14.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
-      <img src="images/projects/jobsite/s17.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
-      <img src="images/projects/jobsite/s19.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
-      <img src="images/projects/jobsite/s20.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3586.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3587.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3588.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3589.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3590.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3591.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3592.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3593.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3594.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3595.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3596.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3597.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="interior" data-title="Inside a BuilderK Build">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3607.jpg"><source src="/videos/construction/constr-3607.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>Inside a BuilderK Build</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3599.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3600.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3606.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3608.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3609.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3610.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3611.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3612.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3613.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3614.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3618.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/3619.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item gv reveal" data-category="interior" data-title="Inside a BuilderK Build">
-      <span class="gv-badge">&#9654; VIDEO</span>
-      <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-e54.jpg"><source src="/videos/construction/constr-e54.mp4" type="video/mp4"></video>
-      <div class="gallery-item-overlay"><h3>Inside a BuilderK Build</h3><span class="gallery-tag">Tap for sound</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
-      <img src="images/projects/jobsite/s11.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/3598.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/3601.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/3602.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/3603.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/3604.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/3605.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/3615.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/3616.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/3617.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/8600.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/s15.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
-    <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
-      <img src="images/projects/jobsite/s18.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
-      <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
-    </div>
+ <div class="gallery-grid">
+ <!-- ===== NEW JOBSITE MEDIA + VIDEO (interleaved 2026-06-10) ===== -->
+ <div class="gallery-item reveal" data-category="foundation" data-title="Foundation & Site Work">
+ <img src="images/projects/jobsite/3489.jpg" alt="BuilderK custom home foundation and site work in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Foundation & Site Work</h3><span class="gallery-tag">Foundation</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="foundation" data-title="On the Job Site">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3497.jpg"><source src="/videos/construction/constr-3497.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>On the Job Site</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="foundation" data-title="Foundation & Site Work">
+ <img src="images/projects/jobsite/s01.jpg" alt="BuilderK custom home foundation and site work in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Foundation & Site Work</h3><span class="gallery-tag">Foundation</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="foundation" data-title="On the Job Site">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3506.jpg"><source src="/videos/construction/constr-3506.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>On the Job Site</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="foundation" data-title="Foundation & Site Work">
+ <img src="images/projects/jobsite/s06.jpg" alt="BuilderK custom home foundation and site work in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Foundation & Site Work</h3><span class="gallery-tag">Foundation</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="foundation" data-title="On the Job Site">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3508.jpg"><source src="/videos/construction/constr-3508.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>On the Job Site</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="foundation" data-title="Foundation & Site Work">
+ <img src="images/projects/jobsite/s12.jpg" alt="BuilderK custom home foundation and site work in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Foundation & Site Work</h3><span class="gallery-tag">Foundation</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="foundation" data-title="On the Job Site">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3657.jpg"><source src="/videos/construction/constr-3657.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>On the Job Site</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
+ <img src="images/projects/jobsite/s02.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
+ <img src="images/projects/jobsite/s03.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="framing" data-title="Framing in Progress">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3627.jpg"><source src="/videos/construction/constr-3627.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>Framing in Progress</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
+ <img src="images/projects/jobsite/s04.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
+ <img src="images/projects/jobsite/s05.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="framing" data-title="Framing in Progress">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3628.jpg"><source src="/videos/construction/constr-3628.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>Framing in Progress</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
+ <img src="images/projects/jobsite/s08.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
+ <img src="images/projects/jobsite/s10.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="framing" data-title="Framing in Progress">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3658.jpg"><source src="/videos/construction/constr-3658.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>Framing in Progress</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
+ <img src="images/projects/jobsite/s13.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="framing" data-title="Framing & Structure">
+ <img src="images/projects/jobsite/s16.jpg" alt="BuilderK custom home framing and structure in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Framing & Structure</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="framing" data-title="Framing in Progress">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3660.jpg"><source src="/videos/construction/constr-3660.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>Framing in Progress</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
+ <img src="images/projects/jobsite/8538.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
+ <img src="images/projects/jobsite/s07.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
+ <img src="images/projects/jobsite/s09.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
+ <img src="images/projects/jobsite/s14.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
+ <img src="images/projects/jobsite/s17.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
+ <img src="images/projects/jobsite/s19.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="exterior" data-title="Exterior Construction">
+ <img src="images/projects/jobsite/s20.jpg" alt="BuilderK custom home exterior under construction in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Exterior Construction</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3586.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3587.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3588.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3589.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3590.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3591.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3592.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3593.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3594.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3595.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3596.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3597.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="interior" data-title="Inside a BuilderK Build">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3607.jpg"><source src="/videos/construction/constr-3607.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>Inside a BuilderK Build</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3599.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3600.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3606.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3608.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3609.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3610.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3611.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3612.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3613.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3614.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3618.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/3619.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item gv reveal" data-category="interior" data-title="Inside a BuilderK Build">
+ <span class="gv-badge">&#9654; VIDEO</span>
+ <video class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-e54.jpg"><source src="/videos/construction/constr-e54.mp4" type="video/mp4"></video>
+ <div class="gallery-item-overlay"><h3>Inside a BuilderK Build</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="interior" data-title="Finished BuilderK Home">
+ <img src="images/projects/jobsite/s11.jpg" alt="Finished interior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finished BuilderK Home</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/3598.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/3601.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/3602.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/3603.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/3604.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/3605.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/3615.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/3616.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/3617.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/8600.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/s15.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item reveal" data-category="finishes" data-title="Finishes & Selections">
+ <img src="images/projects/jobsite/s18.jpg" alt="Finished bathroom and selections in a BuilderK custom home" loading="lazy">
+ <div class="gallery-item-overlay"><h3>Finishes & Selections</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
 
-    <!-- ===== FOUNDATION ===== -->
+ <!-- ===== FOUNDATION ===== -->
 
-    <div class="gallery-item featured reveal stagger-1" data-category="foundation" data-title="Concrete Foundation Pour">
-      <img src="images/projects/foundation-concrete-pour.jpg" alt="Concrete foundation pour on a custom home job site in Florida" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Concrete Foundation Pour</h3>
-        <span class="gallery-tag">Foundation</span>
-      </div>
-    </div>
+ <div class="gallery-item featured reveal stagger-1" data-category="foundation" data-title="Concrete Foundation Pour">
+ <img src="images/projects/foundation-concrete-pour.jpg" alt="Concrete foundation pour on a custom home job site in Florida" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Concrete Foundation Pour</h3>
+ <span class="gallery-tag">Foundation</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="foundation" data-title="Crew Leveling the Slab">
-      <img src="images/projects/foundation-pour-crew.jpg" alt="Construction crew leveling a concrete slab for a custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Crew Leveling the Slab</h3>
-        <span class="gallery-tag">Foundation</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="foundation" data-title="Crew Leveling the Slab">
+ <img src="images/projects/foundation-pour-crew.jpg" alt="Construction crew leveling a concrete slab for a custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Crew Leveling the Slab</h3>
+ <span class="gallery-tag">Foundation</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="foundation" data-title="Rebar Layout Before Pour">
-      <img src="images/projects/slab-rebar-layout.jpg" alt="Rebar grid layout on prepared slab before concrete pour" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Rebar Layout Before Pour</h3>
-        <span class="gallery-tag">Foundation</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="foundation" data-title="Rebar Layout Before Pour">
+ <img src="images/projects/slab-rebar-layout.jpg" alt="Rebar grid layout on prepared slab before concrete pour" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Rebar Layout Before Pour</h3>
+ <span class="gallery-tag">Foundation</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="foundation" data-title="Finished Concrete Slab">
-      <img src="images/projects/concrete-slab-finished.jpg" alt="Finished concrete slab ready for framing on a Florida custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Finished Concrete Slab</h3>
-        <span class="gallery-tag">Foundation</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="foundation" data-title="Finished Concrete Slab">
+ <img src="images/projects/concrete-slab-finished.jpg" alt="Finished concrete slab ready for framing on a Florida custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Finished Concrete Slab</h3>
+ <span class="gallery-tag">Foundation</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="foundation" data-title="Footer Forms Set">
-      <img src="images/projects/concrete-footer-forms.jpg" alt="Concrete footer forms set and ready for pour" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Footer Forms Set</h3>
-        <span class="gallery-tag">Foundation</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="foundation" data-title="Footer Forms Set">
+ <img src="images/projects/concrete-footer-forms.jpg" alt="Concrete footer forms set and ready for pour" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Footer Forms Set</h3>
+ <span class="gallery-tag">Foundation</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="foundation" data-title="Site Preparation">
-      <img src="images/projects/site-prep-excavation.jpg" alt="Job site preparation and excavation for custom home foundation" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Site Preparation</h3>
-        <span class="gallery-tag">Foundation</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="foundation" data-title="Site Preparation">
+ <img src="images/projects/site-prep-excavation.jpg" alt="Job site preparation and excavation for custom home foundation" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Site Preparation</h3>
+ <span class="gallery-tag">Foundation</span>
+ </div>
+ </div>
 
-    <!-- ===== FRAMING ===== -->
+ <!-- ===== FRAMING ===== -->
 
-    <div class="gallery-item featured reveal stagger-1" data-category="framing" data-title="Steel Frame Lifted by Crane">
-      <img src="images/projects/steel-framing-crane.jpg" alt="Steel frame being lifted into place by crane on a custom home build" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Steel Frame Lifted by Crane</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item featured reveal stagger-1" data-category="framing" data-title="Steel Frame Lifted by Crane">
+ <img src="images/projects/steel-framing-crane.jpg" alt="Steel frame being lifted into place by crane on a custom home build" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Steel Frame Lifted by Crane</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Steel Trusses On Site">
-      <img src="images/projects/steel-trusses-delivery.jpg" alt="Steel trusses delivered and staged on the job site" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Steel Trusses On Site</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Steel Trusses On Site">
+ <img src="images/projects/steel-trusses-delivery.jpg" alt="Steel trusses delivered and staged on the job site" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Steel Trusses On Site</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="framing" data-title="Crew Assembling Steel Frame">
-      <img src="images/projects/crew-steel-framing.jpg" alt="Construction crew assembling steel framing for custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Crew Assembling Steel Frame</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="framing" data-title="Crew Assembling Steel Frame">
+ <img src="images/projects/crew-steel-framing.jpg" alt="Construction crew assembling steel framing for custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Crew Assembling Steel Frame</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="framing" data-title="Steel Framing with Drywall Staged">
-      <img src="images/projects/steel-framing-drywall-staging.jpg" alt="Steel framing with drywall sheets staged for installation" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Steel Framing with Drywall Staged</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="framing" data-title="Steel Framing with Drywall Staged">
+ <img src="images/projects/steel-framing-drywall-staging.jpg" alt="Steel framing with drywall sheets staged for installation" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Steel Framing with Drywall Staged</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Interior Steel Framework">
-      <img src="images/projects/steel-framing-interior-wide.jpg" alt="Wide view of interior steel framework in custom home under construction" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Interior Steel Framework</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Interior Steel Framework">
+ <img src="images/projects/steel-framing-interior-wide.jpg" alt="Wide view of interior steel framework in custom home under construction" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Interior Steel Framework</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="framing" data-title="CMU Block Walls Going Up">
-      <img src="images/projects/cmu-block-walls-rising.jpg" alt="CMU concrete block walls being laid for custom home construction" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>CMU Block Walls Going Up</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="framing" data-title="CMU Block Walls Going Up">
+ <img src="images/projects/cmu-block-walls-rising.jpg" alt="CMU concrete block walls being laid for custom home construction" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>CMU Block Walls Going Up</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="framing" data-title="Window Openings Formed">
-      <img src="images/projects/cmu-window-openings.jpg" alt="Window openings formed in CMU block walls" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Window Openings Formed</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="framing" data-title="Window Openings Formed">
+ <img src="images/projects/cmu-window-openings.jpg" alt="Window openings formed in CMU block walls" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Window Openings Formed</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Block Walls Taking Shape">
-      <img src="images/projects/cmu-walls-progress.jpg" alt="CMU block walls taking shape on custom home build" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Block Walls Taking Shape</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Block Walls Taking Shape">
+ <img src="images/projects/cmu-walls-progress.jpg" alt="CMU block walls taking shape on custom home build" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Block Walls Taking Shape</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="framing" data-title="Scaffolding on Block Walls">
-      <img src="images/projects/cmu-walls-scaffolding.jpg" alt="Scaffolding set up around CMU block walls during construction" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Scaffolding on Block Walls</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="framing" data-title="Scaffolding on Block Walls">
+ <img src="images/projects/cmu-walls-scaffolding.jpg" alt="Scaffolding set up around CMU block walls during construction" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Scaffolding on Block Walls</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="framing" data-title="Roof Trusses Installed">
-      <img src="images/projects/roof-trusses-installed.jpg" alt="Roof trusses installed on custom home under construction" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Roof Trusses Installed</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="framing" data-title="Roof Trusses Installed">
+ <img src="images/projects/roof-trusses-installed.jpg" alt="Roof trusses installed on custom home under construction" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Roof Trusses Installed</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Staircase Framing">
-      <img src="images/projects/staircase-framing.jpg" alt="Staircase framing inside a custom home under construction" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Staircase Framing</h3>
-        <span class="gallery-tag">Framing</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Staircase Framing">
+ <img src="images/projects/staircase-framing.jpg" alt="Staircase framing inside a custom home under construction" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Staircase Framing</h3>
+ <span class="gallery-tag">Framing</span>
+ </div>
+ </div>
 
-    <!-- ===== EXTERIOR ===== -->
+ <!-- ===== EXTERIOR ===== -->
 
-    <div class="gallery-item featured reveal stagger-1" data-category="exterior" data-title="Completed Modern Exterior">
-      <img src="images/projects/completed-modern-exterior.jpg" alt="Completed modern exterior of a BuilderK custom home in Florida" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Completed Modern Exterior</h3>
-        <span class="gallery-tag">Exterior</span>
-      </div>
-    </div>
+ <div class="gallery-item featured reveal stagger-1" data-category="exterior" data-title="Completed Modern Exterior">
+ <img src="images/projects/completed-modern-exterior.jpg" alt="Completed modern exterior of a BuilderK custom home in Florida" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Completed Modern Exterior</h3>
+ <span class="gallery-tag">Exterior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="exterior" data-title="Modern Two-Story with Stone Accent">
-      <img src="images/projects/exterior-modern-complete.jpg" alt="Modern two-story custom home with stone accent exterior" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Modern Two-Story with Stone Accent</h3>
-        <span class="gallery-tag">Exterior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="exterior" data-title="Modern Two Story with Stone Accent">
+ <img src="images/projects/exterior-modern-complete.jpg" alt="Modern two story custom home with stone accent exterior" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Modern Two Story with Stone Accent</h3>
+ <span class="gallery-tag">Exterior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="exterior" data-title="Stone and Stucco Detail">
-      <img src="images/projects/exterior-stone-detail.jpg" alt="Stone and stucco exterior detail on a custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Stone and Stucco Detail</h3>
-        <span class="gallery-tag">Exterior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="exterior" data-title="Stone and Stucco Detail">
+ <img src="images/projects/exterior-stone-detail.jpg" alt="Stone and stucco exterior detail on a custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Stone and Stucco Detail</h3>
+ <span class="gallery-tag">Exterior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="exterior" data-title="Two-Story Concrete Build">
-      <img src="images/projects/two-story-concrete-build.jpg" alt="Two-story concrete block home under construction" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Two-Story Concrete Build</h3>
-        <span class="gallery-tag">Exterior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="exterior" data-title="Two Story Concrete Build">
+ <img src="images/projects/two-story-concrete-build.jpg" alt="Two story concrete block home under construction" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Two Story Concrete Build</h3>
+ <span class="gallery-tag">Exterior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="exterior" data-title="Windows Installed on Concrete Build">
-      <img src="images/projects/two-story-windows-installed.jpg" alt="Impact windows installed on two-story concrete block home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Windows Installed on Concrete Build</h3>
-        <span class="gallery-tag">Exterior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="exterior" data-title="Windows Installed on Concrete Build">
+ <img src="images/projects/two-story-windows-installed.jpg" alt="Impact windows installed on two story concrete block home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Windows Installed on Concrete Build</h3>
+ <span class="gallery-tag">Exterior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="exterior" data-title="Exterior Taking Shape">
-      <img src="images/projects/concrete-exterior-progress.jpg" alt="Custom home exterior taking shape during construction" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Exterior Taking Shape</h3>
-        <span class="gallery-tag">Exterior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="exterior" data-title="Exterior Taking Shape">
+ <img src="images/projects/concrete-exterior-progress.jpg" alt="Custom home exterior taking shape during construction" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Exterior Taking Shape</h3>
+ <span class="gallery-tag">Exterior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="exterior" data-title="Luxury Custom Home — Completed">
-      <img src="images/projects/luxury-home-exterior.png" alt="Completed luxury custom home exterior by BuilderK" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Luxury Custom Home &mdash; Completed</h3>
-        <span class="gallery-tag">Exterior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="exterior" data-title="Luxury Custom Home, Completed">
+ <img src="images/projects/luxury-home-exterior.png" alt="Completed luxury custom home exterior by BuilderK" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Luxury Custom Home, Completed</h3>
+ <span class="gallery-tag">Exterior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="exterior" data-title="Aerial View of Job Site">
-      <img src="images/projects/aerial-site-view.png" alt="Aerial drone view of BuilderK custom home job site" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Aerial View of Job Site</h3>
-        <span class="gallery-tag">Exterior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="exterior" data-title="Aerial View of Job Site">
+ <img src="images/projects/aerial-site-view.png" alt="Aerial drone view of BuilderK custom home job site" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Aerial View of Job Site</h3>
+ <span class="gallery-tag">Exterior</span>
+ </div>
+ </div>
 
-    <!-- ===== INTERIOR ===== -->
+ <!-- ===== INTERIOR ===== -->
 
-    <div class="gallery-item featured reveal stagger-1" data-category="interior" data-title="Interior Rough-In: HVAC & Electrical">
-      <img src="images/projects/interior-steel-hvac.jpg" alt="Interior rough-in phase showing HVAC and electrical in steel framing" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Interior Rough-In: HVAC &amp; Electrical</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item featured reveal stagger-1" data-category="interior" data-title="Interior Rough Installation: HVAC & Electrical">
+ <img src="images/projects/interior-steel-hvac.jpg" alt="Interior rough installation phase showing HVAC and electrical in steel framing" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Interior Rough Installation: HVAC &amp; Electrical</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="interior" data-title="Insulation Going In">
-      <img src="images/projects/interior-steel-insulation.jpg" alt="Insulation being installed in steel-framed interior walls" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Insulation Going In</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="interior" data-title="Insulation Going In">
+ <img src="images/projects/interior-steel-insulation.jpg" alt="Insulation being installed in steel framed interior walls" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Insulation Going In</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="interior" data-title="Rough Plumbing Installed">
-      <img src="images/projects/interior-rough-plumbing.jpg" alt="Rough plumbing installed during construction of custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Rough Plumbing Installed</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="interior" data-title="Rough Plumbing Installed">
+ <img src="images/projects/interior-rough-plumbing.jpg" alt="Rough plumbing installed during construction of custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Rough Plumbing Installed</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="interior" data-title="Interior Ready for Drywall">
-      <img src="images/projects/interior-framing-drywall-prep.jpg" alt="Interior framing complete and ready for drywall installation" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Interior Ready for Drywall</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="interior" data-title="Interior Ready for Drywall">
+ <img src="images/projects/interior-framing-drywall-prep.jpg" alt="Interior framing complete and ready for drywall installation" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Interior Ready for Drywall</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="interior" data-title="Drywall Hung">
-      <img src="images/projects/drywall-stage.jpg" alt="Drywall hung on interior walls of custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Drywall Hung</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="interior" data-title="Drywall Hung">
+ <img src="images/projects/drywall-stage.jpg" alt="Drywall hung on interior walls of custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Drywall Hung</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="interior" data-title="Drywall Mudding & Taping">
-      <img src="images/projects/drywall-finishing.jpg" alt="Drywall mudding and taping in progress" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Drywall Mudding &amp; Taping</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="interior" data-title="Drywall Mudding & Taping">
+ <img src="images/projects/drywall-finishing.jpg" alt="Drywall mudding and taping in progress" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Drywall Mudding &amp; Taping</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="interior" data-title="Primer Coat Applied">
-      <img src="images/projects/interior-paint-primer.jpg" alt="Primer coat applied to interior walls before final paint" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Primer Coat Applied</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="interior" data-title="Primer Coat Applied">
+ <img src="images/projects/interior-paint-primer.jpg" alt="Primer coat applied to interior walls before final paint" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Primer Coat Applied</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="interior" data-title="Painting the Stairwell">
-      <img src="images/projects/painter-stairwell.jpg" alt="Painter working on a stairwell in a custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Painting the Stairwell</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="interior" data-title="Painting the Stairwell">
+ <img src="images/projects/painter-stairwell.jpg" alt="Painter working on a stairwell in a custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Painting the Stairwell</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="interior" data-title="HVAC System Installed">
-      <img src="images/projects/hvac-system-installed.jpg" alt="HVAC system installed in custom home during construction" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>HVAC System Installed</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="interior" data-title="HVAC System Installed">
+ <img src="images/projects/hvac-system-installed.jpg" alt="HVAC system installed in custom home during construction" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>HVAC System Installed</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="interior" data-title="Double-Height Entry">
-      <img src="images/projects/double-height-entry.jpg" alt="Double-height entry foyer during construction" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Double-Height Entry</h3>
-        <span class="gallery-tag">Interior</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="interior" data-title="Tall Entry">
+ <img src="images/projects/double-height-entry.jpg" alt="Tall entry foyer during construction" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Tall Entry</h3>
+ <span class="gallery-tag">Interior</span>
+ </div>
+ </div>
 
-    <!-- ===== FINISHES ===== -->
+ <!-- ===== FINISHES ===== -->
 
-    <div class="gallery-item featured reveal stagger-1" data-category="finishes" data-title="Luxury Vinyl Plank Flooring">
-      <img src="images/projects/finished-flooring-tile.jpg" alt="Luxury vinyl plank flooring installed in custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Luxury Vinyl Plank Flooring</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item featured reveal stagger-1" data-category="finishes" data-title="Luxury Vinyl Plank Flooring">
+ <img src="images/projects/finished-flooring-tile.jpg" alt="Luxury vinyl plank flooring installed in custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Luxury Vinyl Plank Flooring</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Impact Windows Installed">
-      <img src="images/projects/finished-impact-windows.jpg" alt="Impact windows installed in completed custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Impact Windows Installed</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Impact Windows Installed">
+ <img src="images/projects/finished-impact-windows.jpg" alt="Impact windows installed in completed custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Impact Windows Installed</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="finishes" data-title="Glass Railing Detail">
-      <img src="images/projects/finished-glass-railing.jpg" alt="Glass railing detail on staircase in custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Glass Railing Detail</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="finishes" data-title="Glass Railing Detail">
+ <img src="images/projects/finished-glass-railing.jpg" alt="Glass railing detail on staircase in custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Glass Railing Detail</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="finishes" data-title="Interior Door & Trim">
-      <img src="images/projects/finished-bedroom-door.jpg" alt="Interior door and trim installed in custom home bedroom" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Interior Door &amp; Trim</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="finishes" data-title="Interior Door & Trim">
+ <img src="images/projects/finished-bedroom-door.jpg" alt="Interior door and trim installed in custom home bedroom" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Interior Door &amp; Trim</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Double-Height Glass Feature Wall">
-      <img src="images/projects/finished-double-height-glass.jpg" alt="Double-height glass feature wall in luxury custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Double-Height Glass Feature Wall</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Tall Glass Feature Wall">
+ <img src="images/projects/finished-double-height-glass.jpg" alt="Tall glass feature wall in luxury custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Tall Glass Feature Wall</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="finishes" data-title="Frameless Glass Shower">
-      <img src="images/projects/glass-shower-enclosure.jpg" alt="Frameless glass shower enclosure in custom home bathroom" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Frameless Glass Shower</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="finishes" data-title="Frameless Glass Shower">
+ <img src="images/projects/glass-shower-enclosure.jpg" alt="Frameless glass shower enclosure in custom home bathroom" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Frameless Glass Shower</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="finishes" data-title="Bathroom Tile Complete">
-      <img src="images/projects/bathroom-tile-complete.jpg" alt="Completed bathroom tile work in custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Bathroom Tile Complete</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="finishes" data-title="Bathroom Tile Complete">
+ <img src="images/projects/bathroom-tile-complete.jpg" alt="Completed bathroom tile work in custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Bathroom Tile Complete</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Kitchen Cabinets Going In">
-      <img src="images/projects/kitchen-cabinets-install.jpg" alt="Kitchen cabinets being installed in custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Kitchen Cabinets Going In</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Kitchen Cabinets Going In">
+ <img src="images/projects/kitchen-cabinets-install.jpg" alt="Kitchen cabinets being installed in custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Kitchen Cabinets Going In</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-3" data-category="finishes" data-title="Modern Glass Staircase">
-      <img src="images/projects/modern-staircase-glass.jpg" alt="Modern glass staircase in completed custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Modern Glass Staircase</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-3" data-category="finishes" data-title="Modern Glass Staircase">
+ <img src="images/projects/modern-staircase-glass.jpg" alt="Modern glass staircase in completed custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Modern Glass Staircase</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-1" data-category="finishes" data-title="Second Floor Glass Railing & Skylight">
-      <img src="images/projects/second-floor-glass-railing.jpg" alt="Second floor glass railing and skylight in custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Second Floor Glass Railing &amp; Skylight</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-1" data-category="finishes" data-title="Second Floor Glass Railing & Skylight">
+ <img src="images/projects/second-floor-glass-railing.jpg" alt="Second floor glass railing and skylight in custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Second Floor Glass Railing &amp; Skylight</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-    <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Tile Flooring Installation">
-      <img src="images/projects/tile-flooring-install.jpg" alt="Tile flooring being installed in custom home" loading="lazy">
-      <div class="gallery-item-overlay">
-        <h3>Tile Flooring Installation</h3>
-        <span class="gallery-tag">Finishes</span>
-      </div>
-    </div>
+ <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Tile Flooring Installation">
+ <img src="images/projects/tile-flooring-install.jpg" alt="Tile flooring being installed in custom home" loading="lazy">
+ <div class="gallery-item-overlay">
+ <h3>Tile Flooring Installation</h3>
+ <span class="gallery-tag">Finishes</span>
+ </div>
+ </div>
 
-  </div>
+ </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section">
-  <h2 class="reveal">See Enough? <span>Let's Build Yours.</span></h2>
-  <p class="reveal stagger-1">From foundation to finishes, we handle every phase of your custom home build. Start with a free estimate.</p>
-  <a href="/calculator" class="btn-primary reveal stagger-2">Get Your Estimate <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+ <h2 class="reveal">See Enough? <span>Let's Build Yours.</span></h2>
+ <p class="reveal stagger-1">From foundation to finishes, we manage every phase of your custom home build. Start with a transparent planning range.</p>
+ <a href="/calculator" class="btn-primary reveal stagger-2">Get Your Estimate <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo">
-          <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
-        </a>
-        <p>Custom home builders in Florida. You bring the lot — we build your dream home from the ground up.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/#process">How It Works</a>
-        <a href="/facades">Facades & Styles</a>
-        <a href="/floor-plans">Floor Plans</a>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <a href="/">Custom Homes</a>
-        <a href="/financing">Financing</a>
-        <a href="/#services">Construction Management</a>
-        <a href="/blog">Blog</a>
-        <a href="/calculator">Pricing Calculator</a>
-        <a href="/interiors">Interior Selections</a>
-        <a href="/construction">Construction Gallery</a>
-        <a href="/interior-gallery">Interior Gallery</a>
-        <a href="/referral-program/">Referral Program</a>
-        <a href="/privacy">Privacy Policy</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="tel:2392304868">(239) 230-4868</a>
-        <a href="mailto:info@builderk.com">info@builderk.com</a>
-        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
-      <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
-    </div>
-  </div>
+ <div class="footer-inner">
+ <div class="footer-top">
+ <div class="footer-brand">
+ <a href="/" class="nav-logo">
+ <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
+ </a>
+ <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+ </div>
+ <div class="footer-col">
+ <h4>Company</h4>
+ <a href="/">Home</a>
+ <a href="/about">About Us</a>
+ <a href="/process">How It Works</a>
+ <a href="/facades">Facades & Styles</a>
+ <a href="/floor-plans">Floor Plans</a>
+ </div>
+ <div class="footer-col">
+ <h4>Services</h4>
+ <a href="/">Custom Homes</a>
+ <a href="/financing">Financing</a>
+ <a href="/#services">Construction Management</a>
+ <a href="/blog">Blog</a>
+ <a href="/calculator">Pricing Calculator</a>
+ <a href="/interiors">Interior Selections</a>
+ <a href="/construction">Construction Gallery</a>
+ <a href="/interior-gallery">Interior Gallery</a>
+ <a href="/referral-program/">Referral Program</a>
+ <a href="/privacy">Privacy Policy</a>
+ </div>
+ <div class="footer-col">
+ <h4>Contact</h4>
+ <a href="tel:2392304868">(239) 230 4868</a>
+ <a href="mailto:info@builderk.com">info@builderk.com</a>
+ <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+ </div>
+ </div>
+ <div class="footer-bottom">
+ <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+ <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
+ </div>
+ </div>
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightbox-close">&times;</button>
-  <button class="lightbox-nav prev" id="lightbox-prev">&#8249;</button>
-  <button class="lightbox-nav next" id="lightbox-next">&#8250;</button>
-  <img src="" alt="" id="lightbox-img">
-  <div class="lightbox-caption" id="lightbox-caption"></div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
+ <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+ <button type="button" class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+ <button type="button" class="lightbox-nav next" id="lightbox-next" aria-label="Next image">&#8250;</button>
+ <img src="" alt="" id="lightbox-img">
+ <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
 
 <script>
@@ -1282,11 +1287,19 @@ if (navbar) {
 // ===== FILTER TABS =====
 var filterTabs = document.querySelectorAll('.filter-tab');
 var galleryItems = document.querySelectorAll('.gallery-item');
+var galleryCount = document.getElementById('gallery-count');
+
+function updateGalleryCount() {
+  if (!galleryCount) return;
+  var visible = document.querySelectorAll('.gallery-item:not(.hidden)').length;
+  galleryCount.textContent = visible + (visible === 1 ? ' item shown' : ' items shown');
+}
 
 filterTabs.forEach(function(tab) {
   tab.addEventListener('click', function() {
-    filterTabs.forEach(function(t) { t.classList.remove('active'); });
+    filterTabs.forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-pressed','false'); });
     tab.classList.add('active');
+    tab.setAttribute('aria-pressed','true');
     var filter = tab.getAttribute('data-filter');
 
     galleryItems.forEach(function(item) {
@@ -1296,8 +1309,10 @@ filterTabs.forEach(function(tab) {
         item.classList.add('hidden');
       }
     });
+    updateGalleryCount();
   });
 });
+updateGalleryCount();
 
 // ===== LIGHTBOX =====
 var lightbox = document.getElementById('lightbox');
@@ -1307,28 +1322,40 @@ var lightboxClose = document.getElementById('lightbox-close');
 var lightboxPrev = document.getElementById('lightbox-prev');
 var lightboxNext = document.getElementById('lightbox-next');
 var currentIndex = 0;
+var lastGalleryTrigger = null;
 
 function getVisibleItems() {
   return Array.from(document.querySelectorAll('.gallery-item:not(.hidden)')).filter(function(it){ return it.querySelector('img'); });
 }
 
 galleryItems.forEach(function(item) {
+  if (item.querySelector('img')) {
+    item.setAttribute('role','button');
+    item.setAttribute('tabindex','0');
+    item.setAttribute('aria-label','Open image: '+(item.getAttribute('data-title')||'construction photo'));
+  }
   item.addEventListener('click', function() {
     var img = item.querySelector('img');
     if (!img) return;
+    lastGalleryTrigger=item;
     var visible = getVisibleItems();
     currentIndex = visible.indexOf(item);
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt;
     lightboxCaption.textContent = item.getAttribute('data-title') || '';
     lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
+    lightboxClose.focus();
   });
+  item.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&item.querySelector('img')){e.preventDefault();item.click();}});
 });
 
 function closeLightbox() {
   lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
+  if(lastGalleryTrigger)lastGalleryTrigger.focus();
 }
 
 lightboxClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
@@ -1412,9 +1439,15 @@ document.addEventListener('DOMContentLoaded', function(){
     }, { rootMargin: "200px 0px", threshold: 0.2 });
     vids.forEach(function(v){ io.observe(v); });
   } else { vids.forEach(function(v){ v.play().catch(function(){}); }); }
-  vids.forEach(function(v){ v.addEventListener("click", function(ev){ ev.stopPropagation();
-    if (v.muted) { vids.forEach(function(o){ if(o!==v) o.muted=true; }); v.muted=false; } else { v.muted=true; }
-  }); });
+  vids.forEach(function(v){
+    v.setAttribute('tabindex','0');v.setAttribute('role','button');v.setAttribute('aria-label','Toggle sound for construction video');v.setAttribute('aria-pressed','false');
+    var toggleSound=function(ev){ev.stopPropagation();
+      if(v.muted){vids.forEach(function(o){if(o!==v){o.muted=true;o.setAttribute('aria-pressed','false');}});v.muted=false;}else{v.muted=true;}
+      v.setAttribute('aria-pressed',v.muted?'false':'true');
+    };
+    v.addEventListener('click',toggleSound);
+    v.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();toggleSound(ev);}});
+  });
 })();
 </script>
 </body>

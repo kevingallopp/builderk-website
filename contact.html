@@ -15,7 +15,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Talk to a Builder | Contact BuilderK - Custom Homes Florida</title>
+<title>Talk to a Builder | Contact BuilderK for a Custom Home in Florida</title>
 <meta name="description" content="Tell us about your lot and the home you want to build. A BuilderK team member responds within 1 business day. Licensed Florida GC, CGC #1537163.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.builderk.com/contact">
@@ -68,6 +68,9 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
 .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px 24px;background:var(--orange);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:1.05rem;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none}
 .btn-primary:hover{background:var(--orange-hover)}
 .form-note{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:14px;line-height:1.5}
+.project-details{border:1px solid var(--dark-border);border-radius:12px;padding:0 16px;margin:4px 0 18px;background:rgba(255,255,255,0.02)}
+.project-details summary{cursor:pointer;padding:14px 0;color:#ddd;font-size:0.9rem;font-weight:600}
+.project-details[open]{padding-bottom:4px}.project-details[open] summary{margin-bottom:16px;border-bottom:1px solid var(--dark-border)}
 
 .side-card{background:var(--dark-card);border:1px solid var(--dark-border);border-radius:20px;padding:28px;margin-bottom:20px}
 .side-card h3{font-size:1rem;font-weight:700;color:var(--orange);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
@@ -96,157 +99,160 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
   .footer{padding:40px 20px 24px}.footer-top{flex-direction:column;gap:32px}
 }
 </style>
+<link rel="stylesheet" href="/css/site-a11y.css">
 </head>
 <body>
 
 <nav class="navbar" id="navbar">
-  <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="/#process">How It Works</a></li>
-    <li><a href="/floor-plans">Floor Plans</a></li>
-    <li><a href="/construction">Construction</a></li>
-    <li><a href="/financing">Financing</a></li>
-    <li><a href="/calculator">Calculator</a></li>
-    <li><a href="/contact" class="nav-cta">Talk to a Builder</a></li>
-  </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
+ <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
+ <ul class="nav-links" id="nav-links">
+ <li><a href="/process">How It Works</a></li>
+ <li><a href="/floor-plans">Floor Plans</a></li>
+ <li><a href="/construction">Construction</a></li>
+ <li><a href="/financing">Financing</a></li>
+ <li><a href="/calculator">Calculator</a></li>
+ <li><a href="/contact" class="nav-cta">Talk to a Builder</a></li>
+ </ul>
+ <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
 </nav>
 
 <section class="page-hero">
-  <h1>Let's Talk About <span>Your Build</span></h1>
-  <p>Tell us about your lot and the home you have in mind. A BuilderK team member responds within 1 business day.</p>
+ <h1>Let's Talk About <span>Your Build</span></h1>
+ <p>Tell us about your lot and the home you have in mind. A BuilderK team member responds within 1 business day.</p>
 </section>
 
 <div class="contact-wrap">
-  <div class="form-card">
-    <form action="https://formspree.io/f/mreybpyl" method="POST" id="contact-form">
-      <div class="form-row">
-        <div class="form-field">
-          <label for="cf-name">Full name <span style="color:var(--orange);">*</span></label>
-          <input type="text" id="cf-name" name="name" required placeholder="Your name">
-        </div>
-        <div class="form-field">
-          <label for="cf-phone">Phone <span style="color:var(--orange);">*</span></label>
-          <input type="tel" id="cf-phone" name="phone" required placeholder="(555) 555-5555">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label for="cf-email">Email <span style="color:var(--orange);">*</span></label>
-          <input type="email" id="cf-email" name="email" required placeholder="you@email.com">
-        </div>
-        <div class="form-field">
-          <label for="cf-zip">Lot ZIP code (if you have one)</label>
-          <input type="text" id="cf-zip" name="zip_code" placeholder="e.g. 32839">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label for="cf-lot">Do you own a lot?</label>
-          <select id="cf-lot" name="lot_ownership">
-            <option value="" disabled selected>Select one</option>
-            <option>Yes, I own a lot</option>
-            <option>No, still looking</option>
-            <option>Under contract on a lot</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label for="cf-size">Home size</label>
-          <select id="cf-size" name="home_size">
-            <option value="" disabled selected>Select one</option>
-            <option>Under 1,500 sq ft</option>
-            <option>1,500 - 2,000 sq ft</option>
-            <option>2,000 - 3,000 sq ft</option>
-            <option>3,000+ sq ft</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label for="cf-budget">Estimated budget <span style="color:var(--orange);">*</span></label>
-          <select id="cf-budget" name="budget" required>
-            <option value="" disabled selected>Select one</option>
-            <option>$200K - $400K</option>
-            <option>$400K - $700K</option>
-            <option>$700K - $1M</option>
-            <option>$1M+</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label for="cf-timeline">When do you want to start?</label>
-          <select id="cf-timeline" name="timeline">
-            <option value="" disabled selected>Select one</option>
-            <option>ASAP</option>
-            <option>1-3 months</option>
-            <option>3-6 months</option>
-            <option>6-12 months</option>
-            <option>Just exploring</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-field">
-        <label for="cf-message">Anything else? (Optional)</label>
-        <textarea id="cf-message" name="message" placeholder="Tell us about your dream home..."></textarea>
-      </div>
-      <input type="hidden" name="source_page" id="hf-source" value="">
-      <input type="hidden" name="city_interest" id="hf-city" value="">
-      <input type="hidden" name="plan_interest" id="hf-plan" value="">
-      <input type="hidden" name="utm_source" id="hf-utm-source" value="">
-      <input type="hidden" name="utm_medium" id="hf-utm-medium" value="">
-      <input type="hidden" name="utm_campaign" id="hf-utm-campaign" value="">
-      <button type="submit" class="btn-primary" id="cf-submit">Send My Project Details</button>
-      <p class="form-note">Licensed Florida GC, CGC #1537163. We respond within 1 business day. Your info goes to the BuilderK team; we won't sell or share it. Form submissions are processed by Formspree on our behalf.</p>
-    </form>
-  </div>
+ <div class="form-card">
+ <form action="https://formspree.io/f/mreybpyl" method="POST" id="contact-form">
+ <div class="form-row">
+ <div class="form-field">
+ <label for="cf-name">Full name <span style="color:var(--orange);">*</span></label>
+ <input type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Your name">
+ </div>
+ <div class="form-field">
+ <label for="cf-phone">Phone <span style="color:var(--orange);">*</span></label>
+ <input type="tel" id="cf-phone" name="phone" required autocomplete="tel" placeholder="(555) 555 5555">
+ </div>
+ </div>
+ <div class="form-field">
+ <label for="cf-email">Email <span style="color:var(--orange);">*</span></label>
+ <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="you@email.com">
+ </div>
+ <div class="form-row">
+ <div class="form-field">
+ <label for="cf-lot">Do you own a lot? <span style="color:var(--orange);">*</span></label>
+ <select id="cf-lot" name="lot_ownership" required>
+ <option value="" disabled selected>Select one</option>
+ <option>Yes, I own a lot</option>
+ <option>No, still looking</option>
+ <option>Under contract on a lot</option>
+ </select>
+ </div>
+ <div class="form-field">
+ <label for="cf-budget">Estimated budget <span style="color:var(--orange);">*</span></label>
+ <select id="cf-budget" name="budget" required>
+ <option value="" disabled selected>Select one</option>
+ <option>$200K to $400K</option>
+ <option>$400K to $700K</option>
+ <option>$700K to $1M</option>
+ <option>$1M+</option>
+ </select>
+ </div>
+ </div>
+ <details class="project-details">
+ <summary>Add home size, ZIP code, timeline, and notes (optional)</summary>
+ <div class="form-row">
+ <div class="form-field">
+ <label for="cf-zip">Lot ZIP code (if you have one)</label>
+ <input type="text" id="cf-zip" name="zip_code" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" placeholder="e.g. 32839">
+ </div>
+ <div class="form-field">
+ <label for="cf-size">Home size</label>
+ <select id="cf-size" name="home_size">
+ <option value="" disabled selected>Select one</option>
+ <option>Under 1,500 sq ft</option>
+ <option>1,500 to 2,000 sq ft</option>
+ <option>2,000 to 3,000 sq ft</option>
+ <option>3,000+ sq ft</option>
+ </select>
+ </div>
+ </div>
+ <div class="form-field">
+ <label for="cf-timeline">When do you want to start?</label>
+ <select id="cf-timeline" name="timeline">
+ <option value="" disabled selected>Select one</option>
+ <option>ASAP</option>
+ <option>1 to 3 months</option>
+ <option>3 to 6 months</option>
+ <option>6 to 12 months</option>
+ <option>Just exploring</option>
+ </select>
+ </div>
+ <div class="form-field">
+ <label for="cf-message">Anything else? (Optional)</label>
+ <textarea id="cf-message" name="message" placeholder="Tell us about your dream home..."></textarea>
+ </div>
+ </details>
+ <input type="hidden" name="source_page" id="hf-source" value="">
+ <input type="hidden" name="city_interest" id="hf-city" value="">
+ <input type="hidden" name="plan_interest" id="hf-plan" value="">
+ <input type="hidden" name="utm_source" id="hf-utm-source" value="">
+ <input type="hidden" name="utm_medium" id="hf-utm-medium" value="">
+ <input type="hidden" name="utm_campaign" id="hf-utm-campaign" value="">
+ <button type="submit" class="btn-primary" id="cf-submit">Send My Project Details</button>
+ <p class="form-note">Licensed Florida GC, CGC #1537163. We respond within 1 business day. Your info goes to the BuilderK team; we won't sell or share it. Form submissions are processed by Formspree on our behalf.</p>
+ </form>
+ </div>
 
-  <div>
-    <div class="side-card">
-      <h3>What happens next</h3>
-      <ol>
-        <li>A BuilderK team member reaches out within 1 business day</li>
-        <li>We schedule a 15-minute discovery call about your lot and goals</li>
-        <li>You get a realistic budget range and a clear next step</li>
-      </ol>
-    </div>
-    <div class="side-card">
-      <h3>Prefer to talk now?</h3>
-      <div class="contact-line"><span>Call</span><a href="tel:2392304868">(239) 230-4868</a></div>
-      <div class="contact-line"><span>Email</span><a href="mailto:info@builderk.com">info@builderk.com</a></div>
-      <div class="contact-line"><span>Office</span><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a></div>
-    </div>
-    <div class="side-card">
-      <h3>Not ready yet?</h3>
-      <p>Get a number first with our <a href="/calculator">build cost calculator</a>, browse <a href="/floor-plans">floor plans</a>, or see <a href="/construction">real jobsite photos</a>.</p>
-    </div>
-  </div>
+ <div>
+ <div class="side-card">
+ <h3>What happens next</h3>
+ <ol>
+ <li>A BuilderK team member reaches out within 1 business day</li>
+ <li>We schedule a 15 minute discovery call about your lot and goals</li>
+ <li>After we confirm the lot, size, and budget basics, we outline a preliminary planning range</li>
+ <li>A formal proposal follows plan, scope, and site review</li>
+ </ol>
+ </div>
+ <div class="side-card">
+ <h3>Prefer to talk now?</h3>
+ <div class="contact-line"><span>Call</span><a href="tel:2392304868">(239) 230 4868</a></div>
+ <div class="contact-line"><span>Email</span><a href="mailto:info@builderk.com">info@builderk.com</a></div>
+ <div class="contact-line"><span>Office</span><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a></div>
+ </div>
+ <div class="side-card">
+ <h3>Not ready yet?</h3>
+ <p>Get a number first with our <a href="/calculator">build cost calculator</a>, browse <a href="/floor-plans">floor plans</a>, or see <a href="/construction">real jobsite photos</a>.</p>
+ </div>
+ </div>
 </div>
 
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
-        <p>Custom home builders in Florida. You bring the lot — we build your dream home from the ground up.</p>
-        <p style="margin-top:8px;font-size:0.8rem;color:#666;">Licensed Florida GC, CGC #1537163</p>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="/about">About Us</a><a href="/#process">How It Works</a><a href="/construction">Construction Gallery</a><a href="/interior-gallery">Interior Gallery</a><a href="/floor-plans">Floor Plans</a><a href="/blog">Blog</a><a href="/referral-program/">Referral Program</a>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <a href="/">Custom Homes</a><a href="/financing">Financing</a><a href="/calculator">Pricing Calculator</a><a href="/interiors">Interior Selections</a><a href="/facades">Facades &amp; Styles</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="tel:2392304868">(239) 230-4868</a><a href="mailto:info@builderk.com">info@builderk.com</a><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
-      <span><a href="/privacy" style="color:#888;text-decoration:none;">Privacy Policy</a> &middot; <a href="/terms" style="color:#888;text-decoration:none;">Terms &amp; Conditions</a></span>
-    </div>
-  </div>
+ <div class="footer-inner">
+ <div class="footer-top">
+ <div class="footer-brand">
+ <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
+ <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+ <p style="margin-top:8px;font-size:0.8rem;color:#666;">Licensed Florida GC, CGC #1537163</p>
+ </div>
+ <div class="footer-col">
+ <h4>Company</h4>
+ <a href="/about">About Us</a><a href="/process">How It Works</a><a href="/construction">Construction Gallery</a><a href="/interior-gallery">Interior Gallery</a><a href="/floor-plans">Floor Plans</a><a href="/blog">Blog</a><a href="/referral-program/">Referral Program</a>
+ </div>
+ <div class="footer-col">
+ <h4>Services</h4>
+ <a href="/">Custom Homes</a><a href="/financing">Financing</a><a href="/calculator">Pricing Calculator</a><a href="/interiors">Interior Selections</a><a href="/facades">Facades &amp; Styles</a>
+ </div>
+ <div class="footer-col">
+ <h4>Contact</h4>
+ <a href="tel:2392304868">(239) 230 4868</a><a href="mailto:info@builderk.com">info@builderk.com</a><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+ </div>
+ </div>
+ <div class="footer-bottom">
+ <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+ <span><a href="/privacy" style="color:#888;text-decoration:none;">Privacy Policy</a> &middot; <a href="/terms" style="color:#888;text-decoration:none;">Terms &amp; Conditions</a></span>
+ </div>
+ </div>
 </footer>
 
 <script>
