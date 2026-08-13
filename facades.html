@@ -17,13 +17,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Facades & Styles, BuilderK Custom Home Builder Florida</title>
-<meta name="description" content="Explore BuilderK's home facade styles: Modern, Coastal, Contemporary, and Traditional. Choose your dream home design and build on your lot in Florida.">
-<meta name="keywords" content="home facade styles florida, modern home designs, coastal homes florida, contemporary house plans, traditional florida homes, custom home builder">
+<meta name="description" content="Explore BuilderK's home facade styles: Modern, Coastal, Contemporary, Traditional, and Luxury. Choose your dream home design and build on your lot in Florida.">
+<meta name="keywords" content="home facade styles florida, luxury custom homes florida, modern home designs, coastal homes florida, contemporary house plans, traditional florida homes, custom home builder">
 <link rel="canonical" href="https://www.builderk.com/facades">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Facades & Styles, BuilderK Custom Homes">
-<meta property="og:description" content="Choose your home style. Modern, Coastal, Contemporary, or Traditional, we build all types on your lot in Florida.">
+<meta property="og:description" content="Choose your home style. Modern, Coastal, Contemporary, Traditional, or Luxury, we build all types on your lot in Florida.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.builderk.com/facades">
 
@@ -150,6 +150,31 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
   color: var(--gray-600);
   max-width: 700px;
   line-height: 1.6;
+}
+
+/* Luxury collection */
+.style-section.luxury-section {
+  background:
+    radial-gradient(circle at 85% 15%, rgba(247, 127, 0, 0.14), transparent 34%),
+    linear-gradient(145deg, #0a0a0a 0%, #18130f 100%);
+}
+.luxury-section .style-label { color: var(--orange-hover); }
+.luxury-section .style-header h2 { color: #fff; }
+.luxury-section .style-header p { color: #bbb4ac; }
+.luxury-section .facade-card {
+  background: #151515;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+}
+.luxury-section .facade-card:hover {
+  border-color: rgba(247, 127, 0, 0.55);
+  box-shadow: 0 22px 52px rgba(0,0,0,0.42);
+}
+.luxury-section .facade-card-info h3 { color: #fff; }
+.luxury-section .facade-card-info p { color: #aaa; }
+.luxury-section .facade-tag {
+  color: #ffc27d;
+  background: rgba(247, 127, 0, 0.15);
 }
 
 /* Image grid */
@@ -430,11 +455,12 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
  <h1 class="reveal stagger-1">Choose Your <span>Home Style</span></h1>
  <p class="reveal stagger-2">We build all types of homes on your lot in Florida. Explore our facade styles and find the design that fits your vision.</p>
  <div class="style-tabs reveal stagger-3">
- <button type="button" class="style-tab active" onclick="scrollToStyle('all')">All Styles</button>
- <button type="button" class="style-tab" onclick="scrollToStyle('modern')">Modern</button>
- <button type="button" class="style-tab" onclick="scrollToStyle('coastal')">Coastal</button>
- <button type="button" class="style-tab" onclick="scrollToStyle('contemporary')">Contemporary</button>
- <button type="button" class="style-tab" onclick="scrollToStyle('traditional')">Traditional</button>
+ <button type="button" class="style-tab active" onclick="scrollToStyle('all', this)">All Styles</button>
+ <button type="button" class="style-tab" onclick="scrollToStyle('modern', this)">Modern</button>
+ <button type="button" class="style-tab" onclick="scrollToStyle('coastal', this)">Coastal</button>
+ <button type="button" class="style-tab" onclick="scrollToStyle('contemporary', this)">Contemporary</button>
+ <button type="button" class="style-tab" onclick="scrollToStyle('luxury', this)">Luxury</button>
+ <button type="button" class="style-tab" onclick="scrollToStyle('traditional', this)">Traditional</button>
  </div>
 </section>
 
@@ -554,6 +580,41 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
  <h3>Clean Lines</h3>
  <p>Warm white and beige stucco, mixed flat and low slope roof lines, stone accent entry column.</p>
  <span class="facade-tag">1 Story</span>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- LUXURY -->
+<section class="style-section luxury-section" id="luxury">
+ <div class="style-header reveal">
+ <div class="style-label">Luxury</div>
+ <h2>Luxury Homes</h2>
+ <p>Grand proportions, memorable entrances, refined materials, and dramatic lighting. These two story homes bring estate scale architecture to a custom Florida residence.</p>
+ </div>
+ <div class="facade-grid">
+ <div class="facade-card featured reveal stagger-1">
+ <img src="images/facades/luxury-mediterranean-estate.jpg" alt="Luxury Mediterranean two story estate with columns, balconies, and a tile roof" loading="lazy" decoding="async" width="1536" height="1024">
+ <div class="facade-card-info">
+ <h3>Mediterranean Estate</h3>
+ <p>Symmetrical wings, a monumental arched entrance, classical columns, upper balconies, and a dark tile roof create a timeless estate presence.</p>
+ <span class="facade-tag">2 Story</span>
+ </div>
+ </div>
+ <div class="facade-card reveal stagger-2">
+ <img src="images/facades/luxury-modern-courtyard-estate.jpg" alt="Luxury modern two story estate with layered volumes and floor to ceiling glass" loading="lazy" decoding="async" width="1536" height="1024">
+ <div class="facade-card-info">
+ <h3>Modern Courtyard Estate</h3>
+ <p>Layered white stucco volumes, warm stone accents, full height glazing, and a broad courtyard approach give this home a private resort character.</p>
+ <span class="facade-tag">2 Story</span>
+ </div>
+ </div>
+ <div class="facade-card reveal stagger-3">
+ <img src="images/facades/luxury-contemporary-grand-estate.jpg" alt="Luxury contemporary two story estate with double height glass and stone accents" loading="lazy" decoding="async" width="1536" height="1024">
+ <div class="facade-card-info">
+ <h3>Contemporary Grand Estate</h3>
+ <p>A balanced facade with double height glass, stone cladding, glass balconies, and wide rooflines creates a bold but refined arrival.</p>
+ <span class="facade-tag">2 Story</span>
  </div>
  </div>
  </div>
@@ -686,9 +747,9 @@ if (navbar) {
 }
 
 // ===== STYLE TAB NAVIGATION =====
-function scrollToStyle(style) {
+function scrollToStyle(style, trigger) {
   document.querySelectorAll('.style-tab').forEach(function(t) { t.classList.remove('active'); });
-  if (event && event.target) event.target.classList.add('active');
+  if (trigger) trigger.classList.add('active');
   if (style === 'all') {
     var modernEl = document.getElementById('modern');
     if (modernEl) window.scrollTo({ top: modernEl.offsetTop - 80, behavior: 'smooth' });
