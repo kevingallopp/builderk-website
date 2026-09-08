@@ -506,6 +506,7 @@ function detailPage(plan) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/scripts/lead-attribution.js"></script>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S03X1HTEDN"></script>

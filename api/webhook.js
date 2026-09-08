@@ -353,7 +353,10 @@ function buildLeadNote(data) {
     'calc_sqft','calc_beds','calc_baths','calc_tier','calc_garage','calc_garage_sqft','calc_covered_exterior_sqft',
     'calc_complexity','calc_extras','estimate_total','estimate_range','pricing_market','pricing_updated',
     'monthly_payment','example_interest_rate','lot_value','lot_balance','cash_down','down_mode','down_percent',
-    'utm_source','utm_medium','utm_campaign','referrer_name','referrer_email','referrer_phone','referrer_company',
+    'utm_source','utm_medium','utm_campaign','utm_content','utm_term','submission_page','attribution_scope',
+    'first_source','first_medium','first_campaign','first_content','first_term','first_landing_page','first_referrer_host','first_touch_at',
+    'last_source','last_medium','last_campaign','last_content','last_term','last_landing_page','last_referrer_host','last_touch_at',
+    'referrer_name','referrer_email','referrer_phone','referrer_company',
     'client_name','client_email','client_phone'];
   return ['BuilderK website request', 'Planning estimates are not quotes.', ...fields
     .filter(key => data[key] !== undefined && data[key] !== '')
