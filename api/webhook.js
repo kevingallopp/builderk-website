@@ -31,6 +31,14 @@ export default async function handler(req, res) {
       return res.status(400).json({success: false, received: false, error: 'Valid contact information is required.'});
     const isReferral = !!data.referrer_name;
     const isCalc = data.form_type === 'calculator-estimate';
+    if (data.form_type === 'website-contact' && (!String(data.name || '').trim() ||
+        !/^\+?[\d\s().-]{8,24}$/.test(String(data.phone || '')) ||
+        !String(data.lot_ownership || '').trim() || !String(data.budget || '').trim() ||
+        !String(data.timeline || '').trim()))
+      return res.status(400).json({success: false, received: false, error: 'Please complete your contact and project details.'});
+    if (data.form_version === '2' && data.form_type === 'website-contact' &&
+        !String(data.project_location || data.zip_code || '').trim())
+      return res.status(400).json({success: false, received: false, error: 'Please tell us where you plan to build.'});
 
     // Build contact payload based on form type
     const contact = isReferral
@@ -62,6 +70,18 @@ export default async function handler(req, res) {
     }
 
     if (!contactId) return res.status(502).json({success: false, received: false});
+    // GHL notes form a durable replay check after a lost client response. Never create
+    // another opportunity for a request whose context is already saved. Cross-instance
+    // simultaneous requests still require a transactional ledger for atomic exclusion.
+    const submissionId = /^[a-f0-9-]{36}$/i.test(String(data.submission_id || '')) ? data.submission_id : '';
+    if (existingContact && submissionId) {
+      const previousResponse = await ghlFetch(`https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}/notes`, {headers: GHL_HEADERS});
+      const previousNotes = await previousResponse.json();
+      if (!previousResponse.ok || !Array.isArray(previousNotes.notes))
+        return res.status(502).json({success: false, received: false, error: 'Previous receipt could not be checked.'});
+      if (previousNotes.notes.some(note => String(note.body || '').split('\n').includes('submission_id: ' + submissionId)))
+        return res.status(200).json({success: true, received: true, opportunity: false, duplicate: true});
+    }
     // Preserve every request, including an existing contact's latest plan and project notes.
     // Contact creation alone is not a receipt for a calculator estimate.
     const noteResponse = await ghlFetch(`https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}/notes`, {
@@ -86,6 +106,7 @@ export default async function handler(req, res) {
 
     if (!pipelineStage) {
       console.error('Could not find Lead Generation pipeline stage');
+      await saveWebsiteFields(contactId, contact, data, 'Contact saved; sales handoff needs review', GHL_HEADERS);
       return res.status(200).json({ success: true, received: true, opportunity: false });
     }
 
@@ -117,10 +138,12 @@ export default async function handler(req, res) {
 
     if (!oppResponse.ok || !oppData.opportunity?.id) {
       console.error('Lead delivery: opportunity not confirmed', oppResponse.status);
+      await saveWebsiteFields(contactId, contact, data, 'Contact saved; sales handoff needs review', GHL_HEADERS);
       return res.status(200).json({ success: true, received: true, opportunity: false });
     }
 
-    return res.status(200).json({ success: true, received: true, opportunity: true });
+    const attributionSaved = await saveWebsiteFields(contactId, contact, data, 'Opportunity received; awaiting qualification', GHL_HEADERS);
+    return res.status(200).json({ success: true, received: true, opportunity: true, attributionSaved });
 
   } catch (error) {
     console.error('Lead delivery: upstream request failed', {received});
@@ -347,9 +370,70 @@ async function ghlFetch(url, options, timeoutMs = 4000) {
   return fetch(url, {...options, signal: AbortSignal.timeout(timeoutMs)});
 }
 
+async function saveWebsiteFields(contactId, submitted, data, delivery, headers) {
+  if (!/^[a-f0-9-]{36}$/i.test(String(data.submission_id || '')) || data.form_type === 'referral') return false;
+  const ids = {first_touch:'r6O9RljxSBj3PxPsGOOg',last_touch:'cNtoGEjf2oz1CWlWhfwd',
+    first_source:'mxlSVlzipI3wNOsO7chr',first_campaign:'xizi5rIxdIKFPXWqyMXP',
+    last_source:'py6Sul9d28adXmi14cRG',last_campaign:'aPv418oAledts2cZnXAM',
+    submission_id:'cM2Py4uUu9Uj4xmrH52v',delivery_status:'jZoh9X0cpNSNUsMF8VXX',
+    project_location:'Qswaspdjn6udsjWt9BH0',lot_ownership:'7JCtrvNYDbk3X913DCmV',
+    budget:'t12BUfifRAcaCk7Uu3un',budget_basis:'SQIBXEy9SywARPO9sc1H',
+    financing_status:'NSEhuUlLoLKGGOkMFDrQ',timeline:'TZwSC1LGvvvtU0lvwFV0',
+    home_size:'duNS5CcJSjVC1XBZtqTg',qualification_status:'eQmHfW9Q3KSCnXs8lAMh'};
+  try {
+    const url = `https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}`;
+    const read = await ghlFetch(url, {headers}, 2500);
+    const current = (await read.json()).contact;
+    if (!read.ok || current?.id !== contactId || current.locationId !== submitted.locationId ||
+        String(current.email || '').toLowerCase() !== String(submitted.email || '').toLowerCase() || !Array.isArray(current.customFields))
+      throw Error('contact_not_confirmed');
+    const existing = new Map((current.customFields || []).map(field => [field.id, field.value]));
+    const clean = value => typeof value === 'string' ? value.replace(/[\r\n<>]/g, ' ').slice(0, 500) : '';
+    const touch = prefix => {
+      const result = {};
+      for (const field of ['source','medium','campaign','content','term','landing_page','referrer_host','touch_at',
+        'bk_campaign_id','bk_adgroup_id','bk_ad_id','bk_match_type','bk_network'])
+        if (data[prefix + '_' + field]) result[field] = clean(data[prefix + '_' + field]);
+      result.ad_measurement_consent = data.ad_measurement_consent === 'granted' ? 'granted' : 'denied';
+      if (result.ad_measurement_consent === 'granted') for (const field of ['gclid','wbraid','gbraid'])
+        if (/^[A-Za-z0-9_-]{10,300}$/.test(String(data[prefix + '_' + field] || '')))
+          result[field] = data[prefix + '_' + field];
+      return JSON.stringify(result);
+    };
+    const values = {submission_id:data.submission_id,delivery_status:delivery,
+      project_location:data.project_location || data.zip_code,lot_ownership:data.lot_ownership,
+      budget:data.budget,budget_basis:data.budget_basis,financing_status:data.financing_status,
+      timeline:data.timeline,home_size:data.home_size,qualification_status:'Awaiting review'};
+    if (data.first_source) Object.assign(values, {first_touch:touch('first'),first_source:data.first_source,first_campaign:data.first_campaign});
+    if (data.last_source) Object.assign(values, {last_touch:touch('last'),last_source:data.last_source,last_campaign:data.last_campaign});
+    const changes = [];
+    const firstRecorded = existing.get(ids.first_touch) || existing.get(ids.first_source);
+    for (const [key, raw] of Object.entries(values)) {
+      const value = key.endsWith('_touch') ? raw : clean(raw);
+      if ((!value && !['first_campaign','last_campaign'].includes(key)) ||
+          (key.startsWith('first_') && firstRecorded) ||
+          (key === 'qualification_status' && existing.get(ids[key]))) continue;
+      changes.push({id:ids[key],field_value:value});
+    }
+    if (!changes.length) return true;
+    // Send only dedicated website fields. Never replace source, owners, tags, consent,
+    // unrelated custom fields, or a human's qualification decision.
+    const write = await ghlFetch(url, {method:'PUT',headers,body:JSON.stringify({customFields:changes})}, 2500);
+    const saved = await write.json();
+    const fields = new Map((saved.contact?.customFields || []).map(field => [field.id, field.value]));
+    if (!write.ok || saved.succeeded === false || saved.succeded === false || saved.contact?.id !== contactId ||
+        !changes.every(field => field.field_value === '' ? !fields.get(field.id) : String(fields.get(field.id)) === String(field.field_value)))
+      throw Error('custom_fields_not_confirmed');
+    return true;
+  } catch (error) {
+    console.error('Lead delivery: website fields need review', {contactId, submissionId:data.submission_id});
+    return false;
+  }
+}
+
 function buildLeadNote(data) {
   const fields = ['submission_id','form_type','name','email','phone','message','project_notes',
-    'budget','home_size','timeline','zip_code','lot_ownership','source_page','city_interest','plan_interest',
+    'budget','budget_basis','financing_status','home_size','timeline','zip_code','project_location','lot_ownership','source_page','city_interest','plan_interest',
     'calc_sqft','calc_beds','calc_baths','calc_tier','calc_garage','calc_garage_sqft','calc_covered_exterior_sqft',
     'calc_complexity','calc_extras','estimate_total','estimate_range','pricing_market','pricing_updated',
     'monthly_payment','example_interest_rate','lot_value','lot_balance','cash_down','down_mode','down_percent',
@@ -357,8 +441,11 @@ function buildLeadNote(data) {
     'first_source','first_medium','first_campaign','first_content','first_term','first_landing_page','first_referrer_host','first_touch_at',
     'last_source','last_medium','last_campaign','last_content','last_term','last_landing_page','last_referrer_host','last_touch_at',
     'referrer_name','referrer_email','referrer_phone','referrer_company',
-    'client_name','client_email','client_phone'];
+    'client_name','client_email','client_phone','ad_measurement_consent',
+    'bk_campaign_id','bk_adgroup_id','bk_ad_id','bk_match_type','bk_network',
+    ...['first','last'].flatMap(prefix => ['gclid','wbraid','gbraid','bk_campaign_id','bk_adgroup_id','bk_ad_id','bk_match_type','bk_network'].map(field => prefix + '_' + field))];
   return ['BuilderK website request', 'Planning estimates are not quotes.', ...fields
-    .filter(key => data[key] !== undefined && data[key] !== '')
+    .filter(key => data[key] !== undefined && data[key] !== '' &&
+      (!/_(gclid|wbraid|gbraid)$/.test(key) || data.ad_measurement_consent === 'granted'))
     .map(key => `${key}: ${String(data[key]).slice(0, 4000)}`)].join('\n');
 }

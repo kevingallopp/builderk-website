@@ -148,7 +148,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
  </select>
  </div>
  <div class="form-field">
- <label for="cf-budget">Estimated budget <span style="color:var(--orange);">*</span></label>
+ <label for="cf-budget">Total project budget <span style="color:var(--orange);">*</span></label>
  <select id="cf-budget" name="budget" required>
  <option value="" disabled selected>Select one</option>
  <option>$200K to $400K</option>
@@ -160,8 +160,9 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
  </div>
  <div class="form-row">
  <div class="form-field">
- <label for="cf-zip">Lot ZIP code (if you have one)</label>
- <input type="text" id="cf-zip" name="zip_code" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" placeholder="e.g. 32839">
+ <label for="cf-zip">Where in Florida will you build? *</label>
+ <input id="cf-zip" type="text" name="project_location" placeholder="Project ZIP code or Florida city" maxlength="100" required aria-describedby="cf-location-help">
+ <small id="cf-location-help">Tell us the intended building location, even if you are still looking for land.</small>
  </div>
  <div class="form-field">
  <label for="cf-size">Home size</label>
@@ -186,9 +187,18 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
  </select>
  </div>
  <div class="form-field">
+ <label for="cf-budget-basis">Does your budget include buying the land?</label>
+ <select id="cf-budget-basis" name="budget_basis"><option value="Not specified">Select if known</option><option>Includes buying land</option><option>Land already owned or budgeted separately</option><option>Need help estimating the total</option></select>
+ </div>
+ <div class="form-field">
+ <label for="cf-financing">How do you plan to fund the project?</label>
+ <select id="cf-financing" name="financing_status"><option value="Not specified">Select if known</option><option>Cash funds available</option><option>Discussing a loan with a lender</option><option>Need an introduction to a lender</option><option>Still exploring options</option></select>
+ </div>
+ <div class="form-field">
  <label for="cf-message">Project notes (optional)</label>
  <textarea id="cf-message" name="message" placeholder="Tell us about your dream home..."></textarea>
  </div>
+ <input type="hidden" name="form_version" value="2">
  <input type="hidden" name="source_page" id="hf-source" value="">
  <input type="hidden" name="city_interest" id="hf-city" value="">
  <input type="hidden" name="plan_interest" id="hf-plan" value="">

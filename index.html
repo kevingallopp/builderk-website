@@ -1734,8 +1734,9 @@ body {
  </div>
  <div class="cta-form-row">
  <div class="cta-form-field">
- <label for="form-zip">Lot ZIP code</label>
- <input id="form-zip" type="text" placeholder="33101" name="zip_code" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}">
+ <label for="form-zip">Where in Florida will you build? *</label>
+ <input id="form-zip" type="text" name="project_location" placeholder="Project ZIP code or Florida city" maxlength="100" required aria-describedby="form-location-help">
+ <small id="form-location-help">Tell us the intended building location, even if you are still looking for land.</small>
  </div>
  <div class="cta-form-field">
  <label for="form-lot">Lot ownership <span style="color:var(--orange);">*</span></label>
@@ -1759,12 +1760,12 @@ body {
  </select>
  </div>
  <div class="cta-form-field">
- <label for="form-budget">Estimated budget <span style="color:var(--orange);">*</span></label>
+ <label for="form-budget">Total project budget <span style="color:var(--orange);">*</span></label>
  <select id="form-budget" name="budget" required>
  <option value="" disabled selected>Select range</option>
- <option value="$200K - $400K">$200K, $400K</option>
- <option value="$400K - $700K">$400K, $700K</option>
- <option value="$700K - $1M">$700K, $1M</option>
+ <option value="$200K - $400K">$200K to $400K</option>
+ <option value="$400K - $700K">$400K to $700K</option>
+ <option value="$700K - $1M">$700K to $1M</option>
  <option value="$1M+">$1M+</option>
  </select>
  </div>
@@ -1781,9 +1782,18 @@ body {
  </select>
  </div>
  <div class="cta-form-field">
+ <label for="form-budget-basis">Does your budget include buying the land?</label>
+ <select id="form-budget-basis" name="budget_basis"><option value="Not specified">Select if known</option><option>Includes buying land</option><option>Land already owned or budgeted separately</option><option>Need help estimating the total</option></select>
+ </div>
+ <div class="cta-form-field">
+ <label for="form-financing">How do you plan to fund the project?</label>
+ <select id="form-financing" name="financing_status"><option value="Not specified">Select if known</option><option>Cash funds available</option><option>Discussing a loan with a lender</option><option>Need an introduction to a lender</option><option>Still exploring options</option></select>
+ </div>
+ <div class="cta-form-field">
  <label for="form-message">Project notes (optional)</label>
  <textarea id="form-message" placeholder="Tell us about your dream home..." name="message"></textarea>
  </div>
+ <input type="hidden" name="form_version" value="2">
  <input type="hidden" name="source_page" id="hf-source" value="">
  <input type="hidden" name="city_interest" id="hf-city" value="">
  <input type="hidden" name="plan_interest" id="hf-plan" value="">
