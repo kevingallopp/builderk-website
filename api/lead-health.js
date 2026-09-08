@@ -25,7 +25,9 @@ export default async function handler(req, res) {
       'NSEhuUlLoLKGGOkMFDrQ','TZwSC1LGvvvtU0lvwFV0','duNS5CcJSjVC1XBZtqTg','eQmHfW9Q3KSCnXs8lAMh',
       'guAHS0G9UYjncLlqmYM2','21b3V3mbc2OjHfXJkeHh'];
     const fieldsReady = expectedIds.every(id=>(fields.customFields||[]).some(field=>field.id===id&&field.model==='contact'));
-    const pipelineReady = (pipelines.pipelines||[]).some(pipeline=>(pipeline.stages||[]).some(stage=>stage.name.toLowerCase()==='lead generation'));
+    const allPipelines = pipelines.pipelines || [];
+    const leadPipeline = allPipelines.find(pipeline=>/main|builderk/i.test(pipeline.name)) || allPipelines[0];
+    const pipelineReady = !!leadPipeline && (leadPipeline.stages||[]).some(stage=>/lead\s*gen/i.test(stage.name));
     return res.status(fieldsReady&&pipelineReady?200:503).json({ready:fieldsReady&&pipelineReady,crmAccess:true,
       attributionFields:fieldsReady,leadPipeline:pipelineReady,readOnly:true,checkedAt:new Date().toISOString()});
   } catch (error) { return res.status(503).json({ready:false,crmAccess:false}); }
