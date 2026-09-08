@@ -36,7 +36,9 @@
   }
   async function submit(data, action) {
     var id = window.crypto.randomUUID();
-    data = Object.assign({}, data, {submission_id: id});
+    // Capture just before sending so estimate restore/removal cannot erase or replace attribution.
+    var attribution = window.BuilderKAttribution ? window.BuilderKAttribution.payload() : {};
+    data = Object.assign({}, data, attribution, {submission_id: id});
     var crmPromise = post('/api/webhook', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)}, true);
     var formspreePromise = Promise.resolve({received: false, status: 'not_used'});
     if (action) {
