@@ -327,6 +327,8 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 <link rel="stylesheet" href="/css/site-a11y.css">
 <script src="/scripts/pricing-config.js"></script>
 <script defer src="/scripts/lucide.min.js"></script>
+<script src="/scripts/lead-context.js"></script>
+<script src="/scripts/lead-submit.js"></script>
 </head>
 <body>
 
@@ -346,11 +348,12 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 <section class="calc-hero">
  <div class="calc-badge reveal">Free Planning Calculator</div>
  <h1 class="reveal stagger-1">How Much Does It Cost to<br><span>Build a Home in Florida?</span></h1>
- <p class="reveal stagger-2">Build a planning range from your living area, garage, covered outdoor space, build level, layout, and upgrades. This is an early budgeting tool, not a quote.</p>
+ <p class="reveal stagger-2">Reference market: Central Florida (Orlando metro). Build a planning range from your living area, garage, covered outdoor space, build level, layout, and upgrades. This is an early budgeting tool, not a quote.</p>
 </section>
 
 <div class="calc-container">
  <div class="calc-controls">
+ <p id="plan-context" style="line-height:1.6" hidden></p>
 
  <div class="calc-group reveal">
  <div class="calc-group-label"><div class="icon"><i data-lucide="ruler" aria-hidden="true"></i></div> Home Size</div>
@@ -359,7 +362,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  <span class="num" id="sqft-display">2,000</span>
  <span class="unit">sq ft</span>
  </div>
- <input type="range" id="sqft-slider" min="1200" max="5000" value="2000" step="100" aria-label="Living area in square feet" oninput="updateCalc()">
+ <input type="range" id="sqft-slider" min="1200" max="5000" value="2000" step="1" aria-label="Living area in square feet" oninput="updateCalc()">
  <div class="slider-labels"><span>1,200</span><span>3,000</span><span>5,000</span></div>
  </div>
 
@@ -401,7 +404,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  <span class="num" id="baths-display" style="font-size:1.4rem;">2</span>
  <span class="unit">baths</span>
  </div>
- <input type="range" id="baths-slider" min="1" max="5" value="2" step="1" aria-label="Number of bathrooms" oninput="updateCalc()">
+ <input type="range" id="baths-slider" min="1" max="5" value="2" step="0.5" aria-label="Number of bathrooms" oninput="updateCalc()">
  </div>
  </div>
  </div>
@@ -459,7 +462,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 
  <div class="calc-result reveal stagger-2">
  <div class="result-card">
- <div class="result-label">Planning Midpoint</div>
+ <div class="result-label">Central Florida Planning Midpoint</div>
  <div class="result-price" id="result-total">$427,800</div>
  <div class="result-range" id="result-range">$406,800 to $448,800</div>
  <a href="/contact" class="result-cta">Talk to a Builder</a>
@@ -469,7 +472,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
  <input type="email" id="est-email" placeholder="you@email.com" aria-label="Your email address" style="flex:1;min-width:0;background:var(--dark);border:1px solid var(--dark-border);border-radius:8px;padding:10px 12px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;">
  <button type="button" id="est-send" onclick="sendEstimate()" style="background:var(--orange);color:#fff;border:none;border-radius:8px;padding:10px 16px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">Send</button>
  </div>
- <p id="est-msg" style="font-size:0.72rem;color:#666;margin-top:8px;line-height:1.4;">We'll review your configuration and follow up within 1 business day.</p>
+ <p role="status" aria-live="polite" id="est-msg" style="font-size:0.72rem;color:#666;margin-top:8px;line-height:1.4;">We'll review your configuration and follow up within 1 business day.</p>
  </div>
  <p class="result-note">This is an early Central Florida planning range, not a quote. Land, financing, permits, utilities, unusual site conditions, and owner changes are not included. Coastal and flood zone projects typically cost more. A formal proposal follows plan and site review.</p>
  <div class="equity-box">
@@ -614,6 +617,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 <script>
 // ===== CALCULATOR =====
 var pricing=window.BuilderKPricing;
+var originContext={};
 var state={sqft:2000,finish:'standard',complexity:'typical',beds:3,baths:2,garage:2,coveredExteriorSqft:150,extras:{},ownsLot:true,lotValue:0,lotBalance:0,cashDown:0,downMode:'amount',downPct:0};
 function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
 function fmtRange(low,high){return Math.round(low)===Math.round(high)?fmt(low):fmt(low)+' to '+fmt(high);}
@@ -622,7 +626,7 @@ function formatMoneyInput(el){var value=parseInt((el.value||'').replace(/[^0-9]/
 function updateCalc(){
   state.sqft=parseInt(document.getElementById('sqft-slider').value);
   state.beds=parseInt(document.getElementById('beds-slider').value);
-  state.baths=parseInt(document.getElementById('baths-slider').value);
+  state.baths=parseFloat(document.getElementById('baths-slider').value);
   state.coveredExteriorSqft=parseInt(document.getElementById('covered-slider').value);
   document.getElementById('sqft-display').textContent=state.sqft.toLocaleString('en-US');
   document.getElementById('beds-display').textContent=state.beds;
@@ -651,6 +655,7 @@ function updateCalc(){
   document.getElementById('mortgage-amount').textContent=fmt(monthly)+'/mo';
   var paymentBasis=state.ownsLot?'Based on the planning midpoint, any lot balance, and your cash down payment. Lot equity may help meet lender requirements but does not directly reduce construction costs.':'Based on the planning midpoint after your cash down payment. Land purchase is not included.';
   document.getElementById('mortgage-note').textContent=paymentBasis+' '+pricing.mortgageExample.termYears+' year principal and interest at '+annualRate.toFixed(2)+'%.';
+  window.BuilderKLeadContext.save(estimatePayload());
   updateSliderFill('sqft-slider',1200,5000);updateSliderFill('beds-slider',2,6);updateSliderFill('baths-slider',1,5);updateSliderFill('covered-slider',0,600);
 }
 function updateSliderFill(id,min,max){var s=document.getElementById(id);var pct=((s.value-min)/(max-min))*100;s.style.background='linear-gradient(to right,var(--orange) '+pct+'%,#1E1E1E '+pct+'%)';}
@@ -661,29 +666,31 @@ function setGarage(size){state.garage=size;setPressed(document.querySelectorAll(
 function toggleExtra(el){var key=el.dataset.extra;state.extras[key]=!state.extras[key];el.classList.toggle('active',state.extras[key]);el.setAttribute('aria-pressed',state.extras[key]?'true':'false');updateCalc();}
 function setDown(pct){state.downPct=pct;state.downMode='percent';setPressed(document.querySelectorAll('.down-pct-btn'),function(b){return parseInt(b.textContent)===pct;});updateCalc();}
 function setCashAmount(){state.downMode='amount';setPressed(document.querySelectorAll('.down-pct-btn'),function(){return false;});updateCalc();}
-function sendEstimate(){
-  var emailEl=document.getElementById('est-email');var btn=document.getElementById('est-send');var msg=document.getElementById('est-msg');
-  var email=(emailEl.value||'').trim();
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='Please enter a valid email address.';msg.style.color='#f87171';return;}
-  btn.disabled=true;btn.style.opacity='0.7';
-  var extras=Object.keys(state.extras).filter(function(k){return state.extras[k];});
-  var payload={form_type:'calculator-estimate',email:email,name:'',
+function estimatePayload(){
+  return Object.assign({}, originContext, {form_type:'calculator-estimate',
     estimate_total:document.getElementById('result-total').textContent,
     estimate_range:document.getElementById('result-range').textContent,
     monthly_payment:document.getElementById('mortgage-amount').textContent,
     calc_sqft:state.sqft,calc_tier:state.finish,calc_beds:state.beds,calc_baths:state.baths,
-    calc_garage:state.garage+'-car',calc_garage_sqft:pricing.garages[state.garage].sqft,calc_covered_exterior_sqft:state.coveredExteriorSqft,
-    calc_complexity:state.complexity,calc_extras:extras.join(', ')||'none',
+    calc_garage:state.garage+'-car',calc_garage_sqft:pricing.garages[state.garage].sqft,
+    calc_covered_exterior_sqft:state.coveredExteriorSqft,calc_complexity:state.complexity,
+    calc_extras:Object.keys(state.extras).filter(function(k){return state.extras[k];}).join(', ')||'none',
     example_interest_rate:document.getElementById('interest-rate').value,
     lot_ownership:state.ownsLot?'Yes, I own a lot':'No, still looking',
-    source_page:'/calculator'};
-  try{gtag('event','conversion',{'send_to':'AW-11388675250/9Kh3CO3wu_oYELLJxbYq'});}catch(e){}
-  fetch('/api/webhook',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-    .then(function(r){
-      if(r.ok){msg.textContent='Sent! A builder will review your estimate and follow up within 1 business day.';msg.style.color='#22C55E';btn.textContent='Sent';emailEl.disabled=true;}
-      else{throw new Error('send failed');}
-    })
-    .catch(function(){btn.disabled=false;btn.style.opacity='1';msg.innerHTML='Could not send right now. Call <a href="tel:2392304868" style="color:var(--orange);">(239) 230-4868</a> or use the <a href="/contact" style="color:var(--orange);">contact form</a>.';msg.style.color='#f87171';});
+    lot_value:state.lotValue,lot_balance:state.lotBalance,cash_down:state.cashDown,
+    down_mode:state.downMode,down_percent:state.downPct,
+    pricing_market:pricing.market,pricing_updated:pricing.lastUpdated,source_page:'/calculator'});
+}
+async function sendEstimate(){
+  var emailEl=document.getElementById('est-email');var btn=document.getElementById('est-send');var msg=document.getElementById('est-msg');
+  if(btn.disabled)return;
+  if(!emailEl.value.trim()||!emailEl.reportValidity()){msg.textContent='Please enter a valid email address.';return;}
+  btn.disabled=true;msg.textContent='Sending your estimate…';
+  var payload=Object.assign(estimatePayload(),{email:emailEl.value.trim()});
+  var receipt;
+  try{receipt=await window.BuilderKLeadSubmit.submit(payload);}catch(error){receipt={received:false};}
+  if(receipt.received){msg.textContent='Your estimate has been received by the BuilderK team.';btn.textContent='Received';emailEl.disabled=true;window.BuilderKLeadContext.clear();}
+  else{btn.disabled=false;msg.textContent='We could not confirm receipt. Your estimate is still here. Call (239) 230 4868 to confirm before submitting again.';}
 }
 function setLotOwner(owns){
   state.ownsLot=owns;
@@ -697,8 +704,38 @@ function setLotOwner(owns){
 window.addEventListener('DOMContentLoaded',function(){
   if(window.lucide)window.lucide.createIcons();
   document.querySelectorAll('.calc-hero .reveal').forEach(function(el){el.classList.add('visible');});
-  var params=new URLSearchParams(window.location.search);var requestedSqft=parseInt(params.get('sqft'));
-  if(requestedSqft){document.getElementById('sqft-slider').value=Math.max(1200,Math.min(5000,Math.round(requestedSqft/100)*100));}
+  var params=new URLSearchParams(window.location.search);
+  var saved=params.get('resume')==='1'?window.BuilderKLeadContext.read():{};
+  function setRange(id,value){var el=document.getElementById(id);var n=Number(value);if(value!=null&&value!==''&&Number.isFinite(n))el.value=Math.max(Number(el.min),Math.min(Number(el.max),n));}
+  setRange('sqft-slider',params.get('sqft')||saved.calc_sqft);
+  setRange('beds-slider',params.get('beds')||saved.calc_beds);
+  setRange('baths-slider',params.get('baths')||saved.calc_baths);
+  setRange('covered-slider',saved.calc_covered_exterior_sqft);
+  var plan=params.get('plan')||saved.plan_interest;
+  if(plan&&/^floor-plan-\d+-sq-ft$/.test(plan)){
+    originContext.plan_interest=plan;
+    var planContext=document.getElementById('plan-context');planContext.hidden=false;
+    planContext.textContent='Starting plan: '+plan.replace('floor-plan-','').replace('-sq-ft',' sq ft')+'. Adjust the options below for your project.';
+  }
+  if(saved.calc_tier&&pricing.tiers[saved.calc_tier])state.finish=saved.calc_tier;
+  if(saved.calc_complexity&&pricing.complexity[saved.calc_complexity])state.complexity=saved.calc_complexity;
+  if(saved.calc_garage){var g=parseInt(saved.calc_garage);if(pricing.garages[g])state.garage=g;}
+  if(saved.calc_extras) saved.calc_extras.split(', ').forEach(function(k){if(pricing.extras[k])state.extras[k]=true;});
+  if(saved.lot_ownership)state.ownsLot=saved.lot_ownership==='Yes, I own a lot';
+  ['lot-value-input','lot-balance-input','cash-down-input','interest-rate'].forEach(function(id,i){
+    var value=saved[['lot_value','lot_balance','cash_down','example_interest_rate'][i]];
+    if(value!=null&&Number.isFinite(Number(value)))document.getElementById(id).value=value;
+  });
+  if(saved.down_mode==='percent'){state.downMode='percent';state.downPct=Math.max(0,Math.min(100,Number(saved.down_percent)||0));}
+  setPressed(document.querySelectorAll('.down-pct-btn'),function(el){return state.downMode==='percent'&&parseInt(el.textContent)===state.downPct;});
+  ['utm_source','utm_medium','utm_campaign','city_interest'].forEach(function(k){var v=params.get(k)||saved[k];if(v)originContext[k]=v.slice(0,80);});
+  try{var ref=new URL(document.referrer);var city=ref.pathname.replace(/^\//,'').replace(/\.html$/,'');if(ref.origin===location.origin&&['orlando','tampa','miami','cape-coral','fort-myers','jacksonville','melbourne','ocala'].indexOf(city)!==-1)originContext.city_interest=city;}catch(error){}
+  setPressed(document.querySelectorAll('[data-finish]'),function(el){return el.dataset.finish===state.finish;});
+  setPressed(document.querySelectorAll('[data-complexity]'),function(el){return el.dataset.complexity===state.complexity;});
+  setPressed(document.querySelectorAll('[data-garage]'),function(el){return Number(el.dataset.garage)===state.garage;});
+  setPressed(document.querySelectorAll('[data-extra]'),function(el){return !!state.extras[el.dataset.extra];});
+  setLotOwner(state.ownsLot);
+  document.querySelectorAll('a[href="/contact"]').forEach(function(link){link.addEventListener('click',function(){window.BuilderKLeadContext.save(estimatePayload());});});
   document.querySelectorAll('[data-pricing-tier]').forEach(function(el){var tier=pricing.tiers[el.dataset.pricingTier];if(tier)el.textContent='$'+tier.low+' to $'+tier.high+(el.dataset.pricingTier==='luxury'?'+':'');});
   document.querySelectorAll('[data-pricing-updated]').forEach(function(el){el.textContent=pricing.lastUpdated;});
   updateCalc();
@@ -731,20 +768,7 @@ if(hamburger&&navLinks){hamburger.addEventListener('click', function() {
     }
   });navLinks.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){navLinks.classList.remove('open');hamburger.classList.remove('active');});});}
 </script>
-<!-- Google Ads Conversion Tracking on Form Submit -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var form = document.querySelector('form[action*="formspree"]');
-    if (form) {
-      form.addEventListener('submit', function() {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-11388675250/9Kh3CO3wu_oYELLJxbYq'
-        });
-      });
-    }
-  });
-</script>
-<!-- End Google Ads Conversion Tracking -->
+
 <!-- Sticky Mobile CTA -->
 <div class="calc-sticky-cta">
  <a href="/contact" class="sticky-primary">Have a Builder Review My Range</a>

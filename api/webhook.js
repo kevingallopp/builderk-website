@@ -14,14 +14,21 @@ export default async function handler(req, res) {
 
   const GHL_TOKEN = process.env.GHL_PIT_TOKEN;
   const GHL_LOCATION = process.env.GHL_LOCATION_ID;
+  if (!GHL_TOKEN || !GHL_LOCATION) return res.status(503).json({success: false, received: false});
   const GHL_HEADERS = {
     'Authorization': `Bearer ${GHL_TOKEN}`,
     'Version': '2021-07-28',
     'Content-Type': 'application/json',
   };
 
+  let received = false;
   try {
     const data = req.body;
+    if (!data || typeof data !== 'object' || Array.isArray(data) ||
+        Object.values(data).some(value => !['string', 'number', 'boolean'].includes(typeof value)) ||
+        JSON.stringify(data).length > 24000 ||
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(data.client_email || data.email || '')))
+      return res.status(400).json({success: false, received: false, error: 'Valid contact information is required.'});
     const isReferral = !!data.referrer_name;
     const isCalc = data.form_type === 'calculator-estimate';
 
@@ -31,7 +38,7 @@ export default async function handler(req, res) {
       : buildWebsiteContact(data, GHL_LOCATION);
 
     // 1. Create or update the contact in GHL
-    const ghlResponse = await fetch('https://services.leadconnectorhq.com/contacts/', {
+    const ghlResponse = await ghlFetch('https://services.leadconnectorhq.com/contacts/', {
       method: 'POST',
       headers: GHL_HEADERS,
       body: JSON.stringify(contact),
@@ -42,24 +49,35 @@ export default async function handler(req, res) {
     let contactId;
     if (!ghlResponse.ok) {
       // Handle duplicate contact — GHL returns the existing contactId in meta
-      if (ghlData.meta?.contactId) {
+      if ((ghlResponse.status === 400 || ghlResponse.status === 409) && ghlData.meta?.contactId) {
         contactId = ghlData.meta.contactId;
-        console.log('Contact already exists in GHL:', contactId, ghlData.meta.contactName);
       } else {
-        console.error('GHL contact error:', ghlData);
+        console.error('Lead delivery: contact rejected', ghlResponse.status);
         return res.status(500).json({ error: 'Failed to create contact. Please try again.' });
       }
     } else {
       contactId = ghlData.contact?.id;
-      console.log('Contact created in GHL:', contactId, contact.firstName, contact.lastName);
     }
+
+    if (!contactId) return res.status(502).json({success: false, received: false});
+    // Preserve every request, including an existing contact's latest plan and project notes.
+    // Contact creation alone is not a receipt for a calculator estimate.
+    const noteResponse = await ghlFetch(`https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}/notes`, {
+      method: 'POST', headers: GHL_HEADERS, body: JSON.stringify({body: buildLeadNote(data)})
+    });
+    const noteData = await noteResponse.json();
+    if (!noteResponse.ok || !noteData.note?.id) {
+      console.error('Lead delivery: context note not confirmed', noteResponse.status);
+      return res.status(502).json({success: false, received: false});
+    }
+    received = true;
 
     // 2. Look up the pipeline and "Lead Generation" stage
     const pipelineStage = await findLeadGenStage(GHL_LOCATION, GHL_HEADERS);
 
     if (!pipelineStage) {
       console.error('Could not find Lead Generation pipeline stage');
-      return res.status(200).json({ success: true, contactId, opportunity: false, reason: 'Pipeline stage not found' });
+      return res.status(200).json({ success: true, received: true, opportunity: false });
     }
 
     // 3. Create the opportunity
@@ -80,7 +98,7 @@ export default async function handler(req, res) {
       monetaryValue: estimateValue(data),
     };
 
-    const oppResponse = await fetch('https://services.leadconnectorhq.com/opportunities/', {
+    const oppResponse = await ghlFetch('https://services.leadconnectorhq.com/opportunities/', {
       method: 'POST',
       headers: GHL_HEADERS,
       body: JSON.stringify(opportunityPayload),
@@ -88,17 +106,17 @@ export default async function handler(req, res) {
 
     const oppData = await oppResponse.json();
 
-    if (!oppResponse.ok) {
-      console.error('GHL opportunity error:', oppData);
-      return res.status(200).json({ success: true, contactId, opportunity: false, reason: oppData });
+    if (!oppResponse.ok || !oppData.opportunity?.id) {
+      console.error('Lead delivery: opportunity not confirmed', oppResponse.status);
+      return res.status(200).json({ success: true, received: true, opportunity: false });
     }
 
-    console.log('Opportunity created in GHL:', oppData.opportunity?.id, oppName);
-    return res.status(200).json({ success: true, contactId, opportunityId: oppData.opportunity?.id });
+    return res.status(200).json({ success: true, received: true, opportunity: true });
 
   } catch (error) {
-    console.error('Webhook error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error('Lead delivery: upstream request failed', {received});
+    if (received) return res.status(200).json({success: true, received: true, opportunity: false});
+    return res.status(502).json({ success: false, received: false, error: 'Receipt could not be confirmed.' });
   }
 }
 
@@ -147,14 +165,14 @@ function buildReferralContact(data, locationId) {
 
 async function findLeadGenStage(locationId, headers) {
   try {
-    const resp = await fetch(
+    const resp = await ghlFetch(
       `https://services.leadconnectorhq.com/opportunities/pipelines?locationId=${locationId}`,
       { headers }
     );
     const data = await resp.json();
 
     if (!resp.ok || !data.pipelines) {
-      console.error('Pipeline fetch error:', data);
+      console.error('Lead delivery: pipeline lookup failed', resp.status);
       return null;
     }
 
@@ -168,14 +186,15 @@ async function findLeadGenStage(locationId, headers) {
     // Find the "Lead Generation" stage
     const stage = pipeline.stages.find(s =>
       /lead\s*gen/i.test(s.name)
-    ) || pipeline.stages[0]; // fallback to first stage
+    );
+    if (!stage) return null;
 
     return {
       pipelineId: pipeline.id,
       stageId: stage.id,
     };
   } catch (err) {
-    console.error('Pipeline lookup error:', err);
+    console.error('Lead delivery: pipeline lookup failed');
     return null;
   }
 }
@@ -195,7 +214,7 @@ function estimateValue(data) {
     '$700K - $1M': 850000,
     '$1M+': 1250000,
   };
-  return map[data.budget] || 0;
+  return map[String(data.budget).replace(/ to /g, ' - ')] || 0;
 }
 
 function extractFirstName(name) {
@@ -208,7 +227,7 @@ function extractLastName(name) {
 }
 
 function formatPhone(phone) {
-  const digits = phone.replace(/\D/g, '');
+  const digits = String(phone).replace(/\D/g, '');
   if (digits.length === 10) return `+1${digits}`;
   if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`;
   return phone;
@@ -225,7 +244,7 @@ function buildTags(data) {
       '$700K - $1M': '700k-1m',
       '$1M+': '1m-plus',
     };
-    tags.push(budgetMap[data.budget] || data.budget.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+    tags.push(budgetMap[String(data.budget).replace(/ to /g, ' - ')] || String(data.budget).toLowerCase().replace(/[^a-z0-9]/g, '-'));
   }
 
   // Home size tag
@@ -236,12 +255,13 @@ function buildTags(data) {
       '2,000 - 3,000 sq ft': '2000-3000sqft',
       '3,000+ sq ft': '3000-plus-sqft',
     };
-    tags.push(sizeMap[data.home_size] || 'custom-size');
+    tags.push(sizeMap[String(data.home_size).replace(/ to /g, ' - ')] || 'custom-size');
   }
 
   // Lot ownership tag
   if (data.lot_ownership) {
-    if (data.lot_ownership.includes('Yes')) tags.push('owns-lot');
+    if (String(data.lot_ownership).includes('Yes')) tags.push('owns-lot');
+    else if (String(data.lot_ownership).includes('Under contract')) tags.push('lot-under-contract');
     else tags.push('still-looking-lot');
   }
 
@@ -276,4 +296,21 @@ function buildTags(data) {
   if (data.utm_campaign) tags.push('camp-' + slugify(data.utm_campaign));
 
   return tags;
+}
+
+async function ghlFetch(url, options) {
+  return fetch(url, {...options, signal: AbortSignal.timeout(4000)});
+}
+
+function buildLeadNote(data) {
+  const fields = ['submission_id','form_type','name','email','phone','message','project_notes',
+    'budget','home_size','timeline','zip_code','lot_ownership','source_page','city_interest','plan_interest',
+    'calc_sqft','calc_beds','calc_baths','calc_tier','calc_garage','calc_garage_sqft','calc_covered_exterior_sqft',
+    'calc_complexity','calc_extras','estimate_total','estimate_range','pricing_market','pricing_updated',
+    'monthly_payment','example_interest_rate','lot_value','lot_balance','cash_down','down_mode','down_percent',
+    'utm_source','utm_medium','utm_campaign','referrer_name','referrer_email','referrer_phone','referrer_company',
+    'client_name','client_email','client_phone'];
+  return ['BuilderK website request', 'Planning estimates are not quotes.', ...fields
+    .filter(key => data[key] !== undefined && data[key] !== '')
+    .map(key => `${key}: ${String(data[key]).slice(0, 4000)}`)].join('\n');
 }

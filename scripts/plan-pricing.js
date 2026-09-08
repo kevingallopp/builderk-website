@@ -18,7 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('[data-pricing-updated]').forEach(function (el) {
     el.textContent = window.BuilderKPricing.lastUpdated;
   });
+  var params = new URLSearchParams({sqft: sqft, plan: window.location.pathname.replace(/^\//, '').replace(/\.html$/, '')});
+  document.querySelectorAll('.spec').forEach(function (spec) {
+    var label = spec.querySelector('.spec-label'); var value = spec.querySelector('.spec-value');
+    if (!label || !value) return;
+    if (label.textContent === 'Bedrooms') params.set('beds', value.textContent);
+    if (label.textContent === 'Bathrooms') params.set('baths', value.textContent);
+  });
   document.querySelectorAll('a[href="/calculator"]').forEach(function (link) {
-    link.href = '/calculator?sqft=' + sqft;
+    link.href = '/calculator?' + params.toString();
   });
 });
