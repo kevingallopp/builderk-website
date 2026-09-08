@@ -22,6 +22,7 @@ export default async function handler(req, res) {
   };
 
   let received = false;
+  let contactPhone = 'not_needed';
   try {
     const data = req.body;
     if (!data || typeof data !== 'object' || Array.isArray(data) ||
@@ -37,7 +38,7 @@ export default async function handler(req, res) {
       ? buildReferralContact(data, GHL_LOCATION)
       : buildWebsiteContact(data, GHL_LOCATION);
 
-    // 1. Create or update the contact in GHL
+    // 1. Create the contact, or use GHL's existing contact on a duplicate response.
     const ghlResponse = await ghlFetch('https://services.leadconnectorhq.com/contacts/', {
       method: 'POST',
       headers: GHL_HEADERS,
@@ -47,10 +48,12 @@ export default async function handler(req, res) {
     const ghlData = await ghlResponse.json();
 
     let contactId;
+    let existingContact = false;
     if (!ghlResponse.ok) {
       // Handle duplicate contact — GHL returns the existing contactId in meta
       if ((ghlResponse.status === 400 || ghlResponse.status === 409) && ghlData.meta?.contactId) {
         contactId = ghlData.meta.contactId;
+        existingContact = true;
       } else {
         console.error('Lead delivery: contact rejected', ghlResponse.status);
         return res.status(500).json({ error: 'Failed to create contact. Please try again.' });
@@ -73,11 +76,19 @@ export default async function handler(req, res) {
     received = true;
 
     // 2. Look up the pipeline and "Lead Generation" stage
-    const pipelineStage = await findLeadGenStage(GHL_LOCATION, GHL_HEADERS);
+    // Keep the complete request saved even if updating the primary phone fails.
+    // The optional update runs alongside pipeline lookup to bound delivery latency.
+    const [pipelineStage, phoneResult] = await Promise.all([
+      findLeadGenStage(GHL_LOCATION, GHL_HEADERS),
+      existingContact
+        ? fillMissingContactPhone(contactId, contact, GHL_HEADERS, noteData.note.id)
+        : Promise.resolve('not_needed'),
+    ]);
+    contactPhone = phoneResult;
 
     if (!pipelineStage) {
       console.error('Could not find Lead Generation pipeline stage');
-      return res.status(200).json({ success: true, received: true, opportunity: false });
+      return res.status(200).json({ success: true, received: true, opportunity: false, contactPhone });
     }
 
     // 3. Create the opportunity
@@ -108,19 +119,55 @@ export default async function handler(req, res) {
 
     if (!oppResponse.ok || !oppData.opportunity?.id) {
       console.error('Lead delivery: opportunity not confirmed', oppResponse.status);
-      return res.status(200).json({ success: true, received: true, opportunity: false });
+      return res.status(200).json({ success: true, received: true, opportunity: false, contactPhone });
     }
 
-    return res.status(200).json({ success: true, received: true, opportunity: true });
+    return res.status(200).json({ success: true, received: true, opportunity: true, contactPhone });
 
   } catch (error) {
     console.error('Lead delivery: upstream request failed', {received});
-    if (received) return res.status(200).json({success: true, received: true, opportunity: false});
+    if (received) return res.status(200).json({success: true, received: true, opportunity: false, contactPhone});
     return res.status(502).json({ success: false, received: false, error: 'Receipt could not be confirmed.' });
   }
 }
 
 // --- Contact builders ---
+
+async function fillMissingContactPhone(contactId, submitted, headers, noteId) {
+  if (!submitted.phone) return 'not_needed';
+  const pending = reason => {
+    // IDs allow Operations to find the saved request without logging its personal data.
+    console.error('Lead delivery: contact phone needs review', {reason, contactId, noteId});
+    return 'pending';
+  };
+  if (!/^\+[1-9]\d{7,14}$/.test(submitted.phone)) return pending('invalid_phone');
+
+  try {
+    const url = `https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}`;
+    const response = await ghlFetch(url, {headers}, 2000);
+    const current = (await response.json()).contact;
+    const sameContact = current?.id === contactId && current.locationId === submitted.locationId &&
+      typeof current.email === 'string' &&
+      current.email.trim().toLowerCase() === String(submitted.email).trim().toLowerCase();
+    if (!response.ok || !sameContact) return pending('contact_not_confirmed');
+    // Treat unexpected field types as populated rather than overwriting them.
+    if (current.phone != null && (typeof current.phone !== 'string' || current.phone.trim() !== ''))
+      return 'preserved';
+
+    // Send only the missing field. Never replace names, tags, owners or consent settings.
+    const update = await ghlFetch(url, {
+      method: 'PUT', headers, body: JSON.stringify({phone: submitted.phone}),
+    }, 2000);
+    const updated = await update.json();
+    if (!update.ok || updated.succeeded === false || updated.succeded === false ||
+        updated.contact?.id !== contactId || formatPhone(updated.contact.phone || '') !== submitted.phone)
+      return pending('update_not_confirmed');
+    return 'updated';
+  } catch (error) {
+    // A lost response is uncertain; do not retry or ask the visitor to resubmit a saved request.
+    return pending('upstream_unavailable');
+  }
+}
 
 function buildWebsiteContact(data, locationId) {
   // Calculator estimates arrive with email only; use the email handle as a stand-in name
@@ -298,8 +345,8 @@ function buildTags(data) {
   return tags;
 }
 
-async function ghlFetch(url, options) {
-  return fetch(url, {...options, signal: AbortSignal.timeout(4000)});
+async function ghlFetch(url, options, timeoutMs = 4000) {
+  return fetch(url, {...options, signal: AbortSignal.timeout(timeoutMs)});
 }
 
 function buildLeadNote(data) {
