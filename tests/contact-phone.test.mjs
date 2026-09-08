@@ -46,7 +46,7 @@ async function submit({body = request, duplicate = true, status = 400, current =
 
 for (const phone of [null, undefined, '', '  ']) test(`email-only contact receives phone when stored value is ${JSON.stringify(phone)}`, async () => {
   const {res, calls} = await submit({current: {phone}});
-  assert.equal(res.body.contactPhone, 'updated');
+  assert.equal('contactPhone' in res.body, false);
   assert.equal(res.body.received, true);
   assert.equal(res.body.opportunity, true);
   const updates = calls.filter(x => x.method === 'PUT');
@@ -56,20 +56,23 @@ for (const phone of [null, undefined, '', '  ']) test(`email-only contact receiv
 });
 
 test('409 duplicate response also fills the missing phone', async () => {
-  const {res} = await submit({status: 409});
-  assert.equal(res.body.contactPhone, 'updated');
+  const {res, calls} = await submit({status: 409});
+  assert.equal(calls.filter(x => x.method === 'PUT').length, 1);
+  assert.equal('contactPhone' in res.body, false);
 });
 
 for (const phone of ['+12025550199', 'unknown', 123]) test(`existing phone ${phone} is preserved`, async () => {
   const {res, calls} = await submit({current: {phone}});
-  assert.equal(res.body.contactPhone, 'preserved');
+  assert.equal('contactPhone' in res.body, false);
   assert.equal(calls.filter(x => x.method === 'PUT').length, 0);
 });
 
 for (const current of [{email: 'different@example.test'}, {email: null}, {locationId: 'other-location'},
   {id: 'other-contact'}, {locationId: undefined}]) test(`unconfirmed contact identity prevents update: ${JSON.stringify(current)}`, async () => {
   const {res, calls, logs} = await submit({current});
-  assert.equal(res.body.contactPhone, 'pending');
+  assert.equal('contactPhone' in res.body, false);
+  assert.equal(logs.length, 1);
+  assert.equal(logs[0][0], 'Lead delivery: contact phone needs review');
   assert.equal(res.body.received, true);
   assert.equal(calls.filter(x => x.method === 'PUT').length, 0);
   assert.equal(logs[0][1].reason, 'contact_not_confirmed');
@@ -77,13 +80,13 @@ for (const current of [{email: 'different@example.test'}, {email: null}, {locati
 
 test('calculator requests without a phone perform no additional contact read or update', async () => {
   const {res, calls} = await submit({body: {email: request.email, form_type: 'calculator-estimate'}});
-  assert.equal(res.body.contactPhone, 'not_needed');
+  assert.equal('contactPhone' in res.body, false);
   assert.equal(calls.filter(x => x.url.endsWith('/contacts/contact-1')).length, 0);
 });
 
 test('new contacts keep the existing creation path', async () => {
   const {res, calls} = await submit({duplicate: false});
-  assert.equal(res.body.contactPhone, 'not_needed');
+  assert.equal('contactPhone' in res.body, false);
   assert.equal(calls[0].payload.phone, '+12025550123');
   assert.equal(calls.filter(x => x.url.endsWith('/contacts/contact-1')).length, 0);
 });
@@ -92,13 +95,15 @@ test('referral fills the client phone, never the referrer phone', async () => {
   const {res, calls} = await submit({body: {referrer_name: 'Test Referrer', referrer_phone: '2025550199',
     referrer_email: 'referrer@example.test', client_name: request.name, client_email: request.email,
     client_phone: request.phone}});
-  assert.equal(res.body.contactPhone, 'updated');
+  assert.equal('contactPhone' in res.body, false);
   assert.deepEqual(calls.find(x => x.method === 'PUT').payload, {phone: '+12025550123'});
 });
 
 for (const phone of ['call me', '123', '+00000000000']) test(`invalid submitted phone remains in the note: ${phone}`, async () => {
-  const {res, calls} = await submit({body: {...request, phone}});
-  assert.equal(res.body.contactPhone, 'pending');
+  const {res, calls, logs} = await submit({body: {...request, phone}});
+  assert.equal('contactPhone' in res.body, false);
+  assert.equal(logs.length, 1);
+  assert.equal(logs[0][0], 'Lead delivery: contact phone needs review');
   assert.equal(res.body.received, true);
   assert.equal(calls.filter(x => x.url.endsWith('/contacts/contact-1')).length, 0);
   assert.ok(calls.find(x => x.url.endsWith('/notes')).payload.body.includes('phone: ' + phone));
@@ -106,7 +111,9 @@ for (const phone of ['call me', '123', '+00000000000']) test(`invalid submitted 
 
 for (const fail of ['GET-http', 'GET-network', 'PUT-http', 'PUT-network']) test(`${fail} preserves receipt and never retries the update`, async () => {
   const {res, calls, logs} = await submit({fail});
-  assert.equal(res.body.contactPhone, 'pending');
+  assert.equal('contactPhone' in res.body, false);
+  assert.equal(logs.length, 1);
+  assert.equal(logs[0][0], 'Lead delivery: contact phone needs review');
   assert.equal(res.body.received, true);
   assert.equal(res.body.opportunity, true);
   assert.equal(calls.filter(x => x.method === 'PUT').length, fail.startsWith('PUT') ? 1 : 0);
@@ -119,8 +126,10 @@ for (const fail of ['GET-http', 'GET-network', 'PUT-http', 'PUT-network']) test(
 for (const updateBody of [{}, {succeeded: false, contact: {id: 'contact-1', phone: '+12025550123'}},
   {contact: {id: 'wrong-contact', phone: '+12025550123'}}, {contact: {id: 'contact-1', phone: null}}])
   test(`unconfirmed update never reports completion: ${JSON.stringify(updateBody)}`, async () => {
-    const {res, calls} = await submit({updateBody});
-    assert.equal(res.body.contactPhone, 'pending');
+    const {res, calls, logs} = await submit({updateBody});
+    assert.equal('contactPhone' in res.body, false);
+  assert.equal(logs.length, 1);
+  assert.equal(logs[0][0], 'Lead delivery: contact phone needs review');
     assert.equal(res.body.received, true);
     assert.equal(calls.filter(x => x.method === 'PUT').length, 1);
   });

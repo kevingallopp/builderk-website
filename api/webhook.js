@@ -22,7 +22,6 @@ export default async function handler(req, res) {
   };
 
   let received = false;
-  let contactPhone = 'not_needed';
   try {
     const data = req.body;
     if (!data || typeof data !== 'object' || Array.isArray(data) ||
@@ -78,17 +77,16 @@ export default async function handler(req, res) {
     // 2. Look up the pipeline and "Lead Generation" stage
     // Keep the complete request saved even if updating the primary phone fails.
     // The optional update runs alongside pipeline lookup to bound delivery latency.
-    const [pipelineStage, phoneResult] = await Promise.all([
+    const [pipelineStage] = await Promise.all([
       findLeadGenStage(GHL_LOCATION, GHL_HEADERS),
       existingContact
         ? fillMissingContactPhone(contactId, contact, GHL_HEADERS, noteData.note.id)
         : Promise.resolve('not_needed'),
     ]);
-    contactPhone = phoneResult;
 
     if (!pipelineStage) {
       console.error('Could not find Lead Generation pipeline stage');
-      return res.status(200).json({ success: true, received: true, opportunity: false, contactPhone });
+      return res.status(200).json({ success: true, received: true, opportunity: false });
     }
 
     // 3. Create the opportunity
@@ -119,14 +117,14 @@ export default async function handler(req, res) {
 
     if (!oppResponse.ok || !oppData.opportunity?.id) {
       console.error('Lead delivery: opportunity not confirmed', oppResponse.status);
-      return res.status(200).json({ success: true, received: true, opportunity: false, contactPhone });
+      return res.status(200).json({ success: true, received: true, opportunity: false });
     }
 
-    return res.status(200).json({ success: true, received: true, opportunity: true, contactPhone });
+    return res.status(200).json({ success: true, received: true, opportunity: true });
 
   } catch (error) {
     console.error('Lead delivery: upstream request failed', {received});
-    if (received) return res.status(200).json({success: true, received: true, opportunity: false, contactPhone});
+    if (received) return res.status(200).json({success: true, received: true, opportunity: false});
     return res.status(502).json({ success: false, received: false, error: 'Receipt could not be confirmed.' });
   }
 }
