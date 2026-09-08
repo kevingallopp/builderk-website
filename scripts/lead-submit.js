@@ -2,9 +2,11 @@
   'use strict';
   // A conversion means a destination acknowledged receipt, not a form click.
   var tracked = new Set();
+  var crmTracked = new Set();
+  var attempts = new Map();
   async function post(url, options, crm) {
     var controller = new AbortController();
-    var timer = setTimeout(function () { controller.abort(); }, 20000);
+    var timer = setTimeout(function () { controller.abort(); }, 30000);
     try {
       var response = await fetch(url, Object.assign({}, options, {signal: controller.signal}));
       if (!response.ok) return {received: false, status: 'rejected'};
@@ -19,23 +21,36 @@
     } finally { clearTimeout(timer); }
   }
   function track(id, kind, receipt) {
-    if (tracked.has(id)) return;
+    var firstReceipt = !tracked.has(id);
     tracked.add(id);
     try {
       if (typeof window.gtag === 'function') {
-        window.gtag('event', 'conversion', {send_to: 'AW-11388675250/9Kh3CO3wu_oYELLJxbYq', transaction_id: id});
-        window.gtag('event', 'lead_received', {form_type: kind, crm_status: receipt.crm.status,
-          formspree_status: receipt.formspree.status, pipeline_created: receipt.crm.opportunity === true});
+        if (firstReceipt) {
+          window.gtag('event', 'conversion', {send_to: 'AW-11388675250/9Kh3CO3wu_oYELLJxbYq', transaction_id: id});
+          window.gtag('event', 'lead_received', {form_type: kind, crm_status: receipt.crm.status,
+            formspree_status: receipt.formspree.status, pipeline_created: receipt.crm.opportunity === true});
+        }
+        if (receipt.crm.received && !crmTracked.has(id)) {
+          crmTracked.add(id);
+          window.gtag('event', 'crm_lead_received', {form_type: kind,
+            transaction_id: id, pipeline_created: receipt.crm.opportunity === true});
+        }
       }
     } catch (error) {}
     try {
-      if (window.ttq) window.ttq.track('CompleteRegistration', {
+      if (firstReceipt && window.ttq) window.ttq.track('CompleteRegistration', {
         contents: [{content_id: kind, content_type: 'product', content_name: 'BuilderK Request'}], value: 0, currency: 'USD'
       });
     } catch (error) {}
   }
   async function submit(data, action) {
-    var id = window.crypto.randomUUID();
+    // Reuse the same identity for an unchanged request after an uncertain response.
+    // Keep the signature in page memory only, never browser storage or analytics.
+    var signature = JSON.stringify(Object.keys(data).sort().map(function (key) { return [key, data[key]]; }));
+    var previous = attempts.get(signature);
+    var id = previous && Date.now() - previous.at < 30 * 60 * 1000 ? previous.id : window.crypto.randomUUID();
+    if (attempts.size > 20) attempts.clear();
+    attempts.set(signature, {id: id, at: Date.now()});
     // Capture just before sending so estimate restore/removal cannot erase or replace attribution.
     var attribution = window.BuilderKAttribution ? window.BuilderKAttribution.payload() : {};
     data = Object.assign({}, data, attribution, {submission_id: id});
