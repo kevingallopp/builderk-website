@@ -199,8 +199,8 @@ function buildWebsiteContact(data, locationId) {
     email: data.email || '',
     phone: formatPhone(data.phone || ''),
     locationId,
-    state: 'Florida',
-    postalCode: data.zip_code || '',
+    // The construction site is not necessarily the buyer's home address.
+    // Project location is retained in the request note and dedicated website fields.
     source: data.form_type === 'calculator-estimate' ? 'Cost Calculator' : 'Website Form',
     tags: buildTags(data),
   };

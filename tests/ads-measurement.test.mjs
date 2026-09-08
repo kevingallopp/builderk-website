@@ -87,3 +87,9 @@ test('website inquiry requires project details while calculator remains a separa
  const bad=await backend({body:{form_type:'website-contact',email:'qa@example.test'}});assert.equal(bad.res.code,400);assert.equal(bad.calls.length,0);
  const calc=await backend({body:{form_type:'calculator-estimate',email:'qa@example.test'}});assert.equal(calc.res.body.received,true);
 });
+test('a Florida project does not invent the buyer residential state or postal code',async()=>{
+ const {calls}=await backend();const contact=calls.find(call=>call.url.endsWith('/contacts/')).data;
+ assert.equal(Object.hasOwn(contact,'state'),false);assert.equal(Object.hasOwn(contact,'postalCode'),false);
+ const note=calls.find(call=>call.url.endsWith('/notes')&&call.method==='POST').data.body;
+ assert.match(note,/project_location: Orlando/);
+});
