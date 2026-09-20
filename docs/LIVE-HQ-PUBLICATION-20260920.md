@@ -20,3 +20,5 @@ In scripts/live-hq run npm ci then npm run build. Copy dist/index.html to ../../
 Local production build passed. Real browser /live at 1280×720: compact dark HQ and both logos display; demo room preflight, join/leave and chat message rendering passed. Source changes vs approved mockup are only the two logo asset URL prefixes. Design specialist approves PR isolation and preservation. Existing HTML/CSS/APIs/vercel.json unchanged.
 
 Connected GitHub account has pull:true, push:false on the canonical repository. Owner merge and Vercel Git deployment remain required, followed by live /live and existing-site regression checks. No production success is claimed.
+
+Clean npm ci from the committed isolated lockfile and production rebuild also pass. Direct dependency versions pinned for repeatability. Generated vendor JS contains upstream whitespace; hand-authored source is clean.
