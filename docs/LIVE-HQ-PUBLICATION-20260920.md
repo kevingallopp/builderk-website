@@ -22,3 +22,5 @@ Local production build passed. Real browser /live at 1280×720: compact dark HQ 
 Connected GitHub account has pull:true, push:false on the canonical repository. Owner merge and Vercel Git deployment remain required, followed by live /live and existing-site regression checks. No production success is claimed.
 
 Clean npm ci from the committed isolated lockfile and production rebuild also pass. Direct dependency versions pinned for repeatability. Generated vendor JS contains upstream whitespace; hand-authored source is clean.
+
+Fence clarification after CI: tests/attribution.test.mjs classifies all root HTML as marketing except explicit internal pages. Add live.html to both the nonmarketing exclusion and assertion that it must not load lead-attribution.js. No marketing page or runtime changes; preserves communications isolation. Initial CI was 78/79 with only that new-page classification failure. Vercel preview requires owner authorization for the fork contribution.

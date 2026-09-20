@@ -157,13 +157,13 @@ test('GHL saves first and last attribution in the request note for an existing c
 });
 
 test('every public marketing page and the floor-plan generator include attribution once before form scripts', () => {
-  const publicFiles = readdirSync(new URL('..', import.meta.url)).filter(x => x.endsWith('.html') && !['intranet.html', 'selections-image-options.html'].includes(x));
+  const publicFiles = readdirSync(new URL('..', import.meta.url)).filter(x => x.endsWith('.html') && !['intranet.html', 'selections-image-options.html', 'live.html'].includes(x));
   publicFiles.push('referral-program/index.html', 'scripts/generate-floor-plan-pages.mjs');
   for (const name of publicFiles) {
     const html = read(name);
     assert.equal((html.match(/src="\/scripts\/lead-attribution.js"/g) || []).length, 1, name);
     if (html.includes('src="/scripts/lead-submit.js"')) assert.ok(html.indexOf('lead-attribution.js') < html.indexOf('lead-submit.js'), name);
   }
-  for (const name of ['intranet.html', 'selections-image-options.html', 'intranet/calendar.html'])
+  for (const name of ['intranet.html', 'selections-image-options.html', 'intranet/calendar.html', 'live.html'])
     assert.ok(!read(name).includes('lead-attribution.js'), name);
 });
