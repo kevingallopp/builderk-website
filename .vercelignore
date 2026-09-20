@@ -3,3 +3,6 @@ AGENTS.md
 .wrangler
 tests/
 node_modules/
+
+# Reproducible communications source; only compiled /live is public.
+scripts/live-hq/
