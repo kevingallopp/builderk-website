@@ -4,30 +4,74 @@ import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import vm from 'node:vm';
 const read = name => readFileSync(new URL('../'+name,import.meta.url),'utf8');
-function visit(path,{previous,gpc=false,dnt=false}={}) {
- const w = new JSDOM('<body></body>',{url:'https://www.builderk.com'+path,runScripts:'outside-only'}).window;
- if(previous) for(const key of ['builderk-lead-attribution-v1','builderk-ad-measurement-v1']){
-  const value=previous.sessionStorage.getItem(key);if(value)w.sessionStorage.setItem(key,value);
+function visit(path,{previous,gpc=false,dnt=false,html='<body></body>'}={}) {
+ const w = new JSDOM(html,{url:'https://www.builderk.com'+path,runScripts:'outside-only'}).window;
+ if(previous){
+  for(const key of ['builderk-lead-attribution-v1','builderk-ad-measurement-v1']){
+   const value=previous.sessionStorage.getItem(key);if(value)w.sessionStorage.setItem(key,value);
+  }
+  const choice=previous.localStorage.getItem('builderk-ad-measurement-v2');if(choice)w.localStorage.setItem('builderk-ad-measurement-v2',choice);
  }
  Object.defineProperty(w.navigator,'globalPrivacyControl',{value:gpc});Object.defineProperty(w.navigator,'doNotTrack',{value:dnt?'1':null});
  w.eval(read('scripts/lead-attribution.js'));return w;
 }
 const payload=w=>JSON.parse(JSON.stringify(w.BuilderKAttribution.payload()));
-for(const id of ['gclid','wbraid','gbraid']) test(id+' requires consent and survives navigation after consent',()=>{
+const consentCalls=w=>JSON.parse(JSON.stringify(w.dataLayer.map(a=>Array.from(a)).filter(a=>a[0]==='consent')));
+const on={ad_storage:'granted',ad_user_data:'granted',ad_personalization:'denied',analytics_storage:'granted'};
+const off={ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'};
+const ready=async w=>{if(w.document.readyState==='loading')await new Promise(r=>w.document.addEventListener('DOMContentLoaded',r));};
+const footer='<body><main>Page</main><footer><div class="footer-bottom"><a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms</a></div></footer></body>';
+for(const id of ['gclid','wbraid','gbraid']) test(id+' is kept by default, survives navigation, and is dropped once measurement is turned off',()=>{
  const a=visit('/?'+id+'=Audit_Click_123456&bk_campaign_id=23660601595&bk_adgroup_id=193913054843');
- assert.equal(payload(a).first_source,'google');assert.equal(payload(a)['first_'+id],'');
- assert(!a.sessionStorage.getItem('builderk-lead-attribution-v1').includes('Audit_Click_123456'));
- a.BuilderKAttribution.setMeasurementConsent(true);
+ assert.equal(payload(a).first_source,'google');assert.equal(payload(a)['first_'+id],'Audit_Click_123456');
+ assert.equal(payload(a).ad_measurement_consent,'granted');
  const b=visit('/contact',{previous:a});
  assert.equal(payload(b)['first_'+id],'Audit_Click_123456');assert.equal(payload(b).bk_campaign_id,'23660601595');
- assert.equal(payload(b).ad_measurement_consent,'granted');
  b.BuilderKAttribution.setMeasurementConsent(false);
- assert.equal(payload(b)['first_'+id],'');assert(!b.sessionStorage.getItem('builderk-lead-attribution-v1').includes('Audit_Click_123456'));
- a.close();b.close();
+ assert.equal(payload(b)['first_'+id],'');assert.equal(payload(b).ad_measurement_consent,'denied');
+ assert(!b.sessionStorage.getItem('builderk-lead-attribution-v1').includes('Audit_Click_123456'));
+ const c=visit('/calculator?'+id+'=Audit_Click_654321',{previous:b});
+ assert.equal(payload(c).ad_measurement_consent,'denied');assert.equal(payload(c)['last_'+id],'');
+ assert(!c.sessionStorage.getItem('builderk-lead-attribution-v1').includes('Audit_Click_654321'));
+ a.close();b.close();c.close();
 });
-for(const option of ['gpc','dnt']) test(option+' prevents ad identifier collection even if allow is invoked',()=>{
- const w=visit('/?gclid=Audit_Click_123456',{[option]:true});w.BuilderKAttribution.setMeasurementConsent(true);
- assert.equal(payload(w).ad_measurement_consent,'denied');assert.equal(payload(w).first_gclid,'');w.close();
+for(const option of ['gpc','dnt']) test(option+' keeps measurement off and ad identifiers out, even if allow is invoked',async()=>{
+ const w=visit('/?gclid=Audit_Click_123456',{[option]:true,html:footer});
+ assert.equal(payload(w).ad_measurement_consent,'denied');assert.equal(payload(w).first_gclid,'');
+ assert.deepEqual(consentCalls(w),[['consent','default',off]]);
+ w.BuilderKAttribution.setMeasurementConsent(true);
+ assert.equal(payload(w).ad_measurement_consent,'denied');assert.equal(payload(w).first_gclid,'');
+ await ready(w);assert.equal(w.document.getElementById('bk-privacy-choices'),null);w.close();
+});
+test('Google measurement starts on for United States visitors only, and a remembered choice wins',()=>{
+ const a=visit('/');
+ assert.deepEqual(consentCalls(a),[['consent','default',off],['consent','default',{region:['US'],...on}]]);
+ a.BuilderKAttribution.setMeasurementConsent(false);
+ assert.deepEqual(consentCalls(a).at(-1),['consent','update',off]);
+ const b=visit('/process',{previous:a});
+ assert.deepEqual(consentCalls(b),[['consent','default',off]]);
+ b.BuilderKAttribution.setMeasurementConsent(true);
+ const c=visit('/contact',{previous:b});
+ assert.deepEqual(consentCalls(c),[['consent','default',on]]);
+ a.close();b.close();c.close();
+});
+test('a decline from the old tab only choice is still honored for its two hours',()=>{
+ const w=new JSDOM('<body></body>',{url:'https://www.builderk.com/',runScripts:'outside-only'}).window;
+ w.sessionStorage.setItem('builderk-ad-measurement-v1',JSON.stringify({value:'denied',at:Date.now()-60000}));
+ w.eval(read('scripts/lead-attribution.js'));
+ assert.deepEqual(consentCalls(w),[['consent','default',off]]);assert.equal(payload(w).ad_measurement_consent,'denied');w.close();
+});
+test('nothing covers the page on arrival; Privacy choices sits next to the footer privacy link',async()=>{
+ const w=visit('/',{html:footer});await ready(w);
+ assert.equal(w.document.getElementById('bk-measurement-choice'),null);
+ assert.equal(w.document.querySelectorAll('button').length,0);
+ const link=w.document.getElementById('bk-privacy-choices');assert(link);
+ assert.equal(link.previousSibling.textContent,' · ');assert.equal(link.previousSibling.previousSibling.getAttribute('href'),'/privacy');
+ link.click();const panel=w.document.getElementById('bk-measurement-choice');assert(panel);
+ assert.match(panel.textContent,/measurement is on for your visit/);
+ [...panel.querySelectorAll('button')].find(b=>/Turn off/.test(b.textContent)).click();
+ assert.equal(w.document.getElementById('bk-measurement-choice'),null);assert.equal(payload(w).ad_measurement_consent,'denied');
+ w.close();
 });
 test('a later campaign does not inherit the previous paid click identifier',()=>{
  const a=visit('/?gclid=Audit_Click_123456&utm_campaign=old');a.BuilderKAttribution.setMeasurementConsent(true);

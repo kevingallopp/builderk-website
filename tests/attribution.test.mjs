@@ -77,10 +77,12 @@ test('unknown and partial campaign sources remain explicit', () => {
 });
 
 test('storage excludes arbitrary query parameters, full URLs and rejected UTM values', () => {
-  const w = visit('/contact?utm_source=google&utm_campaign=user%40example.test&email=private@example.test&token=private-token&gclid=private-click#private-fragment');
+  const w = visit('/contact?utm_source=google&utm_campaign=user%40example.test&email=private@example.test&token=private-token&gclid=Audit_Click_123456#private-fragment');
   const stored = w.sessionStorage.getItem(key);
   assert.ok(!stored.includes('private'));
   assert.ok(!stored.includes('example.test'));
+  // The ad click identifier is the one query value kept, while Google measurement is on.
+  assert.ok(stored.includes('Audit_Click_123456'));
   assert.equal(data(w).utm_source, 'google');
   assert.equal(data(w).utm_campaign, '');
   w.close();
