@@ -29,6 +29,8 @@ export default async function handler(req, res) {
         JSON.stringify(data).length > 24000 ||
         !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(data.client_email || data.email || '')))
       return res.status(400).json({success: false, received: false, error: 'Valid contact information is required.'});
+    // Spam trap: people never see this field; bots that fill it get a normal answer and nothing is saved.
+    if (String(data._gotcha || '').trim()) return res.status(200).json({success: true, received: true});
     const isReferral = !!data.referrer_name;
     const isCalc = data.form_type === 'calculator-estimate';
     if (data.form_type === 'website-contact' && (!String(data.name || '').trim() ||

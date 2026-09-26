@@ -26,7 +26,7 @@
  <!-- TikTok Pixel Code End -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BuilderK, Custom Home Builders in Florida</title>
+<title>Custom Home Builder in Florida | Build on Your Lot | BuilderK</title>
 <meta name="description" content="BuilderK builds custom homes in Florida. You bring the lot. BuilderK coordinates design, permitting, and construction and can introduce independent lenders.">
  <meta name="keywords" content="custom home builder florida, build house on my lot, construction loan florida, general contractor orlando, new construction homes florida, custom home builder orlando, one time close construction loan, home builder near me">
  <meta name="author" content="BuilderK, Builders Knowledge Development Inc.">
@@ -378,6 +378,7 @@ body {
 .hero-stats {
   display: flex;
   gap: 48px;
+  margin-top: 28px;
 }
 .hero-stat {
   position: relative;
@@ -1102,11 +1103,21 @@ body {
 .cta-form .form-more summary { cursor: pointer; color: var(--orange); font-family: var(--font-display); font-weight: 600; font-size: 0.92rem; padding: 10px 0; }
 .cta-form .form-more[open] summary { margin-bottom: 10px; }
 
+/* ===== HERO PROOF ===== */
+.hero-proof { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.hero-proof a, .hero-proof span { font-size: 13px; line-height: 1.3; color: rgba(255,255,255,0.88); padding: 7px 12px; border: 1px solid rgba(255,255,255,0.24); border-radius: 999px; background: rgba(10,10,10,0.38); text-decoration: none; }
+.hero-proof a { color: #fff; }
+.hero-proof a:hover { border-color: var(--orange); }
+.hero-areas { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.75); max-width: 580px; }
+
 /* ===== CALL BUTTON (phones) ===== */
 .nav-call { display: none; }
 @media (max-width: 900px) {
   .nav-call { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; margin-right: 16px; padding: 9px 16px; min-height: 40px; border-radius: 50px; background: var(--orange); color: #0A0A0A; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none; }
   .hero-inner { padding: 104px 20px 36px !important; }
+  .nav-call { min-height: 44px; }
+  .nav-hamburger { min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+  .cta-form input, .cta-form select, .cta-form textarea { font-size: 16px !important; }
 }
 
 /* ===== MOBILE FIXES ===== */
@@ -1124,9 +1135,9 @@ body {
   .hero-subtitle { font-size: 0.95rem !important; }
   .hero-stats { gap: 24px !important; display: flex !important; flex-wrap: nowrap !important; }
   .hero-stat-number { font-size: 1.3rem !important; }
-  .hero-stat-label { font-size: 0.65rem !important; }
+  .hero-stat-label { font-size: 12px !important; color: rgba(255,255,255,0.8) !important; }
   .hero-stat::after { height: 30px !important; right: -12px !important; }
-  .hero-badge { font-size: 0.6rem !important; padding: 6px 12px !important; }
+  .hero-badge { display: none !important; }
   .hero-actions { gap: 12px !important; }
   .btn-primary { padding: 14px 28px !important; font-size: 0.9rem !important; }
   
@@ -1410,7 +1421,7 @@ body {
  <div class="hero-grid-lines"></div>
  <div class="hero-inner" style="position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:160px 48px 100px;width:100%;">
  <div class="hero-badge reveal stagger-1">Licensed General Contractor, Florida CGC #1537163</div>
- <h1 class="reveal stagger-2" style="max-width:720px;">Build Your Custom Home<br>in <span class="highlight">Florida</span></h1>
+ <h1 class="reveal stagger-2" style="max-width:760px;text-wrap:balance;">Build a Custom Home on <span class="highlight">Your Lot</span> in Florida</h1>
  <p class="hero-subtitle reveal stagger-3" style="max-width:580px;font-size:1.25rem;">You bring the lot, we build. We help you get the loan, pick your plan and handle the permits, then build your home from the ground up.</p>
  <div class="hero-actions reveal stagger-4">
  <a href="#contact" class="btn-primary">Talk to a Builder<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -1419,6 +1430,12 @@ body {
  <div class="reveal stagger-4" style="margin-top:14px;color:rgba(255,255,255,0.7);font-size:0.95rem;">
  Or call <a href="tel:2392304868" style="color:var(--orange);text-decoration:none;font-weight:700;">(239) 230 4868</a>
  </div>
+ <div class="hero-proof reveal stagger-4">
+ <a href="https://www.myfloridalicense.com/wl11.asp?mode=0" target="_blank" rel="noopener">Licensed Florida GC, CGC #1537163 · Verify</a>
+ <span>1 year builder warranty</span>
+ <span>Reply within 1 business day</span>
+ </div>
+ <p class="hero-areas reveal stagger-4">Serving Orlando, Tampa, Jacksonville, Ocala, Miami, the Space Coast and Southwest Florida.</p>
  <div class="hero-stats reveal stagger-5">
  <div class="hero-stat"><div class="hero-stat-number">150+</div><div class="hero-stat-label">Units Delivered by Our Leadership</div></div>
  <div class="hero-stat"><div class="hero-stat-number">25+</div><div class="hero-stat-label">Years Combined Experience</div></div>
@@ -1839,6 +1856,7 @@ body {
  <textarea id="form-message" placeholder="Tell us about your dream home..." name="message"></textarea>
  </div>
  </details>
+ <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
  <input type="hidden" name="form_version" value="3">
  <input type="hidden" name="source_page" id="hf-source" value="">
  <input type="hidden" name="city_interest" id="hf-city" value="">

@@ -3,3 +3,8 @@ AGENTS.md
 .wrangler
 tests/
 node_modules/
+docs/
+templates/
+*.md
+scripts/*.mjs
+selections-image-options.html

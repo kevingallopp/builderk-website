@@ -526,5 +526,6 @@ if (hamburger && navLinks) {
 // Click-to-call GA4 event tracking
 document.querySelectorAll('a[href^="tel:"]').forEach(function(a){ a.addEventListener('click', function(){ if (typeof gtag === 'function') gtag('event', 'phone_click', { 'page_path': location.pathname }); }); });
 </script>
+<script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>

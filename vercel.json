@@ -3,7 +3,11 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/privacy-policy", "destination": "/privacy", "permanent": true },
-    { "source": "/resources", "destination": "/blog", "permanent": true }
+    { "source": "/resources", "destination": "/blog", "permanent": true },
+    { "source": "/about-us", "destination": "/about", "permanent": true },
+    { "source": "/professionals", "destination": "/referral-program", "permanent": true },
+    { "source": "/core-professional-team-opportunity", "destination": "/about", "permanent": true },
+    { "source": "/bdms", "destination": "/", "permanent": true }
   ],
   "headers": [
     {

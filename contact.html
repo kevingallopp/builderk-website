@@ -204,6 +204,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
  <textarea id="cf-message" name="message" placeholder="Tell us about your dream home..."></textarea>
  </div>
  </details>
+ <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
  <input type="hidden" name="form_version" value="3">
  <input type="hidden" name="source_page" id="hf-source" value="">
  <input type="hidden" name="city_interest" id="hf-city" value="">
@@ -316,5 +317,6 @@ document.addEventListener('DOMContentLoaded',function(){
   window.BuilderKLeadSubmit.bind(form, 'website-contact');
 });
 </script>
+<script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>
