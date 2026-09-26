@@ -31,10 +31,10 @@
       metalRoof: { name: 'Metal roof upgrade', low: 14000, high: 32000 }
     },
     mortgageExample: {
-      rate: 6.55,
+      rate: 7.03,
       termYears: 30,
       sourceName: 'Freddie Mac PMMS',
-      sourceDate: 'July 16, 2026',
+      sourceDate: 'September 24, 2026',
       sourceUrl: 'https://www.freddiemac.com/pmms'
     }
   };
