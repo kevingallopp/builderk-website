@@ -1,5 +1,17 @@
 (function (window) {
   'use strict';
+  // Text color that reads on the card behind the form: white on dark cards, near black on light ones.
+  function inkFor(el) {
+    for (var node = el; node && node.nodeType === 1; node = node.parentElement) {
+      var m = window.getComputedStyle(node).backgroundColor.match(/rgba?\(([^)]+)\)/);
+      if (!m) continue;
+      var p = m[1].split(',').map(parseFloat);
+      if (p.length === 4 && p[3] < 0.5) continue;
+      var lum = (0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2]) / 255;
+      return lum < 0.5 ? '#FFFFFF' : '#111111';
+    }
+    return '#111111';
+  }
   var key = 'builderk-planning-context-v1';
   var fields = ['plan_interest','calc_sqft','calc_tier','calc_beds','calc_baths','calc_garage',
     'calc_garage_sqft','calc_covered_exterior_sqft','calc_complexity','calc_extras',
@@ -37,14 +49,16 @@
     });
     var panel = document.createElement('section');
     panel.style.cssText = 'padding:20px;margin:0 0 24px;border:1px solid #F77F00;border-radius:12px;line-height:1.6';
-    var heading = document.createElement('h3'); heading.textContent = 'Your planning estimate'; panel.appendChild(heading);
+    var ink = inkFor(form);
+    panel.style.color = ink;
+    var heading = document.createElement('h3'); heading.textContent = 'Your planning estimate'; heading.style.color = ink; panel.appendChild(heading);
     var summary = document.createElement('p');
     var planName = data.plan_interest ? data.plan_interest.replace(/^floor-plan-/, '').replace(/-sq-ft$/, ' sq ft plan') : '';
     summary.textContent = data.calc_sqft + ' sq ft · ' + data.calc_beds + ' beds · ' + data.calc_baths + ' baths · ' + data.calc_tier;
     panel.appendChild(summary);
     var range = document.createElement('p'); range.textContent = data.estimate_range + ' · Central Florida reference'; panel.appendChild(range);
     var details = document.createElement('details');
-    var caption = document.createElement('summary'); caption.textContent = 'Estimate details'; details.appendChild(caption);
+    var caption = document.createElement('summary'); caption.textContent = 'Estimate details'; caption.style.color = ink; details.appendChild(caption);
     var description = document.createElement('p');
     description.textContent = (planName ? 'Starting plan: ' + planName + '. ' : '') + data.calc_garage + ' garage; ' + data.calc_covered_exterior_sqft + ' sq ft covered outdoor space. ' +
       'Complexity: ' + data.calc_complexity + '. Extras: ' + data.calc_extras + '. Planning range: ' + data.estimate_range +
@@ -52,7 +66,7 @@
     details.appendChild(description); panel.appendChild(details);
     var edit = document.createElement('a'); edit.href = '/calculator?resume=1'; edit.textContent = 'Edit estimate'; edit.style.cssText = 'color:#F77F00;display:inline-block;margin-top:12px'; panel.appendChild(edit);
     var remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'Remove estimate';
-    remove.style.cssText = 'margin-left:20px;background:transparent;color:inherit;border:0;text-decoration:underline;cursor:pointer';
+    remove.style.cssText = 'margin-left:20px;min-height:44px;background:transparent;color:inherit;border:0;text-decoration:underline;cursor:pointer';
     remove.addEventListener('click', function () {
       clear(); Object.keys(data).forEach(function (name) { var el = form.elements.namedItem(name); if (el && el.type === 'hidden') el.value = ''; }); panel.remove();
     });

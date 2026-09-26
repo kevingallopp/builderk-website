@@ -137,3 +137,8 @@ test('a Florida project does not invent the buyer residential state or postal co
  const note=calls.find(call=>call.url.endsWith('/notes')&&call.method==='POST').data.body;
  assert.match(note,/project_location: Orlando/);
 });
+
+test('the spam trap answers normally and saves nothing',async()=>{
+ const {res,calls}=await backend({body:{form_type:'website-contact',form_version:'3',email:'qa@example.test',name:'Audit Fixture',phone:'2025550123',lot_ownership:'Yes, I own a lot',budget:'$200K - $400K',timeline:'ASAP',_gotcha:'filled by a bot'}});
+ assert.equal(res.code,200);assert.equal(res.body.received,true);assert.equal(calls.length,0);
+});

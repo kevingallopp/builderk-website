@@ -382,5 +382,6 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 document.querySelectorAll('a[href^="tel:"]').forEach(function(a){ a.addEventListener('click', function(){ if (typeof gtag === 'function') gtag('event', 'phone_click', { 'page_path': location.pathname }); }); });
 </script>
 <script src="/scripts/plan-detail-accessibility.js"></script>
+<script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>

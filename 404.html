@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="/scripts/lead-attribution.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found | BuilderK</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { --orange: #F77F00; --dark: #0A0A0A; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background: var(--dark); color: #fff; font: 16px/1.6 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column; }
+header { padding: 20px 24px; }
+.logo { font: 800 1.5rem/1 'Outfit', system-ui, sans-serif; color: #fff; text-decoration: none; letter-spacing: -0.02em; }
+.logo span { color: var(--orange); }
+main { flex: 1; max-width: 720px; width: 100%; margin: 0 auto; padding: 48px 24px 64px; }
+h1 { font: 800 clamp(2rem, 6vw, 3rem)/1.1 'Outfit', system-ui, sans-serif; margin: 0 0 16px; text-wrap: balance; }
+p { color: rgba(255,255,255,0.75); margin: 0 0 28px; max-width: 56ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 50px; font: 700 1rem/1 'Outfit', system-ui, sans-serif; text-decoration: none; }
+.btn-primary { background: var(--orange); color: var(--dark); }
+.btn-outline { border: 1.5px solid rgba(255,255,255,0.45); color: #fff; }
+h2 { font: 600 1rem/1.3 'Outfit', system-ui, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); margin: 0 0 12px; }
+.areas { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; padding: 0; margin: 0; }
+.areas a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); padding: 6px 0; display: inline-block; }
+.areas a:hover, .areas a:focus-visible { border-color: var(--orange); color: var(--orange); }
+a:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+footer { padding: 24px; color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<header><a href="/" class="logo">BUILDER<span>K</span></a></header>
+<main>
+ <h1>We could not find that page</h1>
+ <p>The link may be old or mistyped. You can still plan your custom home on your lot with a licensed Florida builder: call us, send your project details, or start from the home page.</p>
+ <div class="actions">
+ <a class="btn btn-primary" href="/contact">Talk to a Builder</a>
+ <a class="btn btn-outline" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868">Call (239) 230 4868</a>
+ <a class="btn btn-outline" href="/">Home page</a>
+ </div>
+ <h2>Areas we serve</h2>
+ <ul class="areas">
+ <li><a href="/orlando">Orlando</a></li>
+ <li><a href="/tampa">Tampa</a></li>
+ <li><a href="/jacksonville">Jacksonville</a></li>
+ <li><a href="/ocala">Ocala</a></li>
+ <li><a href="/melbourne">Melbourne</a></li>
+ <li><a href="/cape-coral">Cape Coral</a></li>
+ <li><a href="/fort-myers">Fort Myers</a></li>
+ <li><a href="/miami">Miami</a></li>
+ <li><a href="/service-areas">All service areas</a></li>
+ </ul>
+</main>
+<footer>Licensed Florida General Contractor, CGC #1537163 · Builders Knowledge Development Inc.</footer>
+<script defer src="/scripts/call-bar.js"></script>
+</body>
+</html>
