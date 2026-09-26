@@ -1083,6 +1083,18 @@ body {
 ::-webkit-scrollbar-track { background: var(--dark); }
 ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 4px; }
 
+/* ===== OPTIONAL FORM DETAILS ===== */
+.cta-form .form-more { margin: 2px 0 18px; text-align: left; }
+.cta-form .form-more summary { cursor: pointer; color: var(--orange); font-family: var(--font-display); font-weight: 600; font-size: 0.92rem; padding: 10px 0; }
+.cta-form .form-more[open] summary { margin-bottom: 10px; }
+
+/* ===== CALL BUTTON (phones) ===== */
+.nav-call { display: none; }
+@media (max-width: 900px) {
+  .nav-call { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; margin-right: 16px; padding: 9px 16px; min-height: 40px; border-radius: 50px; background: var(--orange); color: #0A0A0A; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+  .hero-inner { padding: 104px 20px 36px !important; }
+}
+
 /* ===== MOBILE FIXES ===== */
 @media (max-width: 900px) {
   /* Nav */
@@ -1245,6 +1257,13 @@ body {
     background: var(--orange);
     color: #0A0A0A;
   }
+  .mobile-cta-bar .mcta-call {
+    flex: 0 0 auto;
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    padding: 14px 22px;
+  }
 }
 /* === FULL-SCREEN MOBILE MENU FIX === */
 @media (max-width: 1280px) {
@@ -1365,6 +1384,7 @@ body {
 <li><a href="/calculator">Calculator</a></li>
  <li><a href="#contact" class="nav-cta">Talk to a Builder</a></li>
 </ul>
+ <a href="tel:2392304868" class="nav-call" aria-label="Call BuilderK at (239) 230 4868"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Call</span></a>
  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
  <span></span><span></span><span></span>
  </button>
@@ -1374,10 +1394,10 @@ body {
 <section class="hero" style="background: url('images/hero-house.png') center/cover no-repeat;">
  <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.15) 100%);"></div>
  <div class="hero-grid-lines"></div>
- <div style="position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:160px 48px 100px;width:100%;">
+ <div class="hero-inner" style="position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:160px 48px 100px;width:100%;">
  <div class="hero-badge reveal stagger-1">Licensed General Contractor, Florida CGC #1537163</div>
  <h1 class="reveal stagger-2" style="max-width:720px;">Build Your Custom Home<br>in <span class="highlight">Florida</span></h1>
- <p class="hero-subtitle reveal stagger-3" style="max-width:580px;font-size:1.25rem;">Plan, finance, and build your Florida custom home through one coordinated process. We prepare the builder documents, connect you with independent lenders, and manage the project from plans through construction.</p>
+ <p class="hero-subtitle reveal stagger-3" style="max-width:580px;font-size:1.25rem;">You bring the lot, we build. We help you get the loan, pick your plan and handle the permits, then build your home from the ground up.</p>
  <div class="hero-actions reveal stagger-4">
  <a href="#contact" class="btn-primary">Talk to a Builder<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
  <a href="#process" class="btn-secondary">See How It Works <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
@@ -1402,8 +1422,9 @@ body {
  <p style="font-size:1.05rem;line-height:1.7;color:rgba(255,255,255,0.5);max-width:550px;margin:0 auto;">See how a BuilderK home comes together, from the structure designed for Florida weather to the final finishes.</p>
  </div>
  <div style="width:100%;border-radius:24px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.3);">
- <video autoplay loop muted playsinline preload="metadata" poster="images/hero-house.png" style="width:100%;display:block;">
- <source src="videos/house-video.mp4" type="video/mp4">
+ <video autoplay loop muted playsinline preload="metadata" poster="images/hero-house-poster.webp" style="width:100%;display:block;">
+ <source src="videos/house-video-720.mp4" type="video/mp4" media="(max-width: 768px)">
+ <source src="videos/house-video-1280.mp4" type="video/mp4">
  </video>
  </div>
  </div>
@@ -1734,8 +1755,8 @@ body {
  </div>
  <div class="cta-form-row">
  <div class="cta-form-field">
- <label for="form-zip">Where in Florida will you build? *</label>
- <input id="form-zip" type="text" name="project_location" placeholder="Project ZIP code or Florida city" maxlength="100" required aria-describedby="form-location-help">
+ <label for="form-zip">Where in Florida will you build?</label>
+ <input id="form-zip" type="text" name="project_location" placeholder="Project ZIP code or Florida city" maxlength="100" aria-describedby="form-location-help">
  <small id="form-location-help">Tell us the intended building location, even if you are still looking for land.</small>
  </div>
  <div class="cta-form-field">
@@ -1781,6 +1802,8 @@ body {
  <option value="Just exploring">Just exploring options</option>
  </select>
  </div>
+ <details class="form-more">
+ <summary>Add more details (optional)</summary>
  <div class="cta-form-field">
  <label for="form-budget-basis">Does your budget include buying the land?</label>
  <select id="form-budget-basis" name="budget_basis"><option value="Not specified">Select if known</option><option>Includes buying land</option><option>Land already owned or budgeted separately</option><option>Need help estimating the total</option></select>
@@ -1793,7 +1816,8 @@ body {
  <label for="form-message">Project notes (optional)</label>
  <textarea id="form-message" placeholder="Tell us about your dream home..." name="message"></textarea>
  </div>
- <input type="hidden" name="form_version" value="2">
+ </details>
+ <input type="hidden" name="form_version" value="3">
  <input type="hidden" name="source_page" id="hf-source" value="">
  <input type="hidden" name="city_interest" id="hf-city" value="">
  <input type="hidden" name="plan_interest" id="hf-plan" value="">
@@ -2025,6 +2049,7 @@ if (hamburger && navLinks) {
 
 <!-- STICKY MOBILE CTA BAR -->
 <div class="mobile-cta-bar">
+ <a href="tel:2392304868" class="mcta-call" aria-label="Call BuilderK at (239) 230 4868">Call</a>
  <a href="#contact" class="mcta-estimate">Talk to a Builder</a>
 </div>
 
