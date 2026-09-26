@@ -61,10 +61,21 @@
       Object.keys(data).forEach(function (key) { formData.append(key, data[key]); });
       formspreePromise = post(action, {method: 'POST', body: formData, headers: {Accept: 'application/json'}}, false);
     }
-    var outcomes = await Promise.all([crmPromise, formspreePromise]);
-    var receipt = {crm: outcomes[0], formspree: outcomes[1]};
-    receipt.received = receipt.crm.received || receipt.formspree.received;
-    if (receipt.received) track(id, data.form_type || 'website-contact', receipt);
+    // Thank the visitor as soon as either destination confirms; the other keeps running,
+    // and a later CRM receipt is still recorded once.
+    var kind = data.form_type || 'website-contact';
+    var receipt = {crm: {received: false, status: 'pending'}, formspree: {received: false, status: 'pending'}, received: false};
+    await new Promise(function (resolve) {
+      var settled = 0;
+      function settle() {
+        settled++;
+        receipt.received = receipt.crm.received || receipt.formspree.received;
+        if (receipt.received) track(id, kind, receipt);
+        if (receipt.received || settled === 2) resolve();
+      }
+      crmPromise.then(function (outcome) { receipt.crm = outcome; settle(); });
+      formspreePromise.then(function (outcome) { receipt.formspree = outcome; settle(); });
+    });
     return receipt;
   }
   function bind(form, kind) {
