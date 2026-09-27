@@ -164,6 +164,9 @@
 .mortgage-amount { font-family: var(--a5-cond); font-weight: 800; font-size: 56px; line-height: 1; color: var(--a5-finance-ink); }
 .mortgage-amount .per { font-size: 26px; }
 .mortgage-note { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--a5-finance-body); }
+/* shows once a lot value is typed: what the land does for the buyer */
+.land-note { margin: 0; padding: 12px 14px; border-left: 4px solid #F77F00; border-radius: 0 10px 10px 0; background: rgba(247, 127, 0, 0.1); font-size: 15px; line-height: 1.5; font-weight: 500; color: var(--a5-finance-ink); }
+.land-note[hidden] { display: none; }
 .rate-source { margin: 0; font-size: 12.5px; line-height: 1.55; color: var(--a5-finance-body); }
 .rate-source a { color: var(--a5-finance-ink); font-weight: 700; }
 .mortgage-construction-note { margin: 0; padding: 10px 12px; border-radius: 10px; background: rgba(255, 255, 255, 0.6); font-size: 12.5px; line-height: 1.5; color: var(--a5-finance-body); }
@@ -516,6 +519,7 @@
         <input class="rate-input" type="number" id="interest-rate" min="1" max="20" step="0.01" value="7.03" aria-describedby="rate-source" oninput="updateCalc()">
         </div>
         <div class="mortgage-amount" id="mortgage-amount">$2,855/mo</div>
+        <p class="land-note" id="land-note" aria-live="polite" hidden></p>
         <p class="mortgage-note" id="mortgage-note">Based on the planning midpoint and your cash down payment. Lot equity may help meet lender requirements.</p>
         <p class="rate-source" id="rate-source">Default example rate: <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">Freddie Mac PMMS</a>, September 24, 2026. Edit the rate to model another scenario.</p>
         <p class="mortgage-construction-note">During construction, many programs charge interest only on funds already disbursed. Timing and payment structure vary by lender and loan terms.</p>
@@ -650,6 +654,8 @@ function updateCalc(){
   document.getElementById('total-contribution-amount').textContent=fmt(combinedPosition);
   document.getElementById('loan-amount').textContent=fmt(loanAmt);
   document.getElementById('mortgage-amount').textContent=fmt(monthly)+'/mo';
+  var landNote=document.getElementById('land-note');
+  if(landNote){var showLand=state.ownsLot&&lotEquity>0;landNote.hidden=!showLand;if(showLand)landNote.textContent='Your land is your down payment, subject to approval. Your '+fmt(lotEquity)+' in lot equity may replace cash you would otherwise bring. The monthly payment is for building the home, so it stays the same.';}
   var paymentBasis=state.ownsLot?'Based on the planning midpoint, any lot balance, and your cash down payment. Lot equity may help meet lender requirements but does not directly reduce construction costs.':'Based on the planning midpoint after your cash down payment. Land purchase is not included.';
   document.getElementById('mortgage-note').textContent=paymentBasis+' '+pricing.mortgageExample.termYears+' year principal and interest at '+annualRate.toFixed(2)+'%.';
   window.BuilderKLeadContext.save(estimatePayload());
