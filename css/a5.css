@@ -106,16 +106,17 @@ button { font: inherit; }
 .a5-logo { display: block; flex-shrink: 0; }
 .a5-logo img { width: 138px; height: 22px; }
 .a5-nav { display: flex; gap: 34px; font-size: 15px; font-weight: 500; }
-.a5-nav a { color: #ECE7DF; text-decoration: none; padding: 6px 0 5px; border-bottom: 2px solid transparent; }
+.a5-nav a { color: #ECE7DF; text-decoration: none; padding: 6px 0 5px; border-bottom: 2px solid transparent; white-space: nowrap; }
 .a5-nav a:hover { color: #FFFFFF; }
 .a5-nav a[aria-current="page"] { color: #FFFFFF; border-bottom-color: var(--a5-orange); }
 .a5-header-actions { display: flex; align-items: center; gap: 22px; }
 .a5-header-phone { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: var(--a5-on-dark); text-decoration: none; white-space: nowrap; }
 .a5-header-cta { height: 48px; padding: 0 22px; display: flex; align-items: center; border-radius: 10px; background: var(--a5-orange); color: #0C0B0A; font-family: var(--a5-cond); font-weight: 800; font-size: 19px; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
 .a5-header-call, .a5-menu-btn { display: none; }
-@media (max-width: 1179px) { .a5-nav { gap: 22px; } .a5-header-phone { display: none; } }
-@media (max-width: 899px) {
-  .a5-header-bar { height: 64px; padding: 0 10px 0 16px; }
+/* the full menu needs about 1,000 px; the phone number only shows on wide screens */
+@media (max-width: 1319px) { .a5-nav { gap: 24px; } .a5-header-phone { display: none; } }
+@media (max-width: 1023px) {
+  .a5-header-bar { height: 64px; padding: 0 max(10px, calc(var(--a5-gutter) - 6px)) 0 var(--a5-gutter); }
   .a5-logo img { width: 113px; height: 18px; }
   .a5-nav, .a5-header-phone, .a5-header-cta { display: none; }
   .a5-header-actions { gap: 6px; }
@@ -190,7 +191,7 @@ body.a5-menu-open { overflow: hidden; }
 .a5-figure figcaption { font-size: 14px; font-weight: 700; color: var(--a5-ink); }
 .a5-tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.3; background: #F2F1ED; color: #57534D; }
 .a5-tag-accent { background: #FDF1E3; color: #9A4D00; }
-.a5-render-tag { position: absolute; top: 10px; left: 10px; z-index: 2; padding: 4px 9px; border-radius: 6px; background: rgba(12, 11, 10, 0.78); color: #FFFFFF; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.a5-render-tag { position: absolute; top: 10px; left: 10px; z-index: 2; padding: 4px 9px; border-radius: 6px; background: rgba(12, 11, 10, 0.78); color: #FFFFFF; font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .a5-icon { width: 56px; height: 56px; flex-shrink: 0; }
 .a5-num { width: 34px; height: 34px; flex-shrink: 0; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-family: var(--a5-cond); font-weight: 800; font-size: 19px; }
 .a5-num-accent { background: var(--a5-orange); color: var(--a5-ink); }

@@ -76,14 +76,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/a5.css?v=2">
+<link rel="stylesheet" href="/css/a5.css?v=3">
 <link rel="preload" href="/images/home/drone-hero-end.webp" as="image" type="image/webp" media="(min-width: 900px)">
 <link rel="preload" href="/images/home/drone-hero-end-vertical.webp" as="image" type="image/webp" media="(max-width: 899px)">
 <script defer src="/scripts/pricing-config.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/scripts/lead-context.js"></script>
 <script defer src="/scripts/lead-submit.js"></script>
-<script defer src="/scripts/a5.js?v=2"></script>
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
 /* home: hero with the drone video */
 .home-hero { position: relative; background: var(--a5-dark); color: var(--a5-on-dark); overflow: hidden; isolation: isolate; }
@@ -125,6 +125,10 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
   .allinone-item span { font-size: 12.5px; line-height: 1.35; }
 }
 @media (min-width: 900px) { .home-hero-reply { display: none; } }
+/* on narrower computers the headline runs further right, over brighter parts of the video: darken more of it */
+@media (min-width: 900px) and (max-width: 1279px) {
+  .home-hero-shade { background: linear-gradient(90deg, rgba(12,11,10,0.95) 0%, rgba(12,11,10,0.86) 45%, rgba(12,11,10,0.5) 68%, rgba(12,11,10,0.12) 86%), linear-gradient(180deg, rgba(12,11,10,0.7) 0%, rgba(12,11,10,0) 22%, rgba(12,11,10,0) 70%, rgba(12,11,10,0.85) 100%); }
+}
 
 /* jobsites strip */
 .strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
