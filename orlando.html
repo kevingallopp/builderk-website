@@ -143,342 +143,372 @@
   ]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
+<style>
+/* areas group: shared pieces */
+.a5-hero-photo picture { display: block; width: 100%; height: 100%; }
+.hero-call { display: none; }
+.hero-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; padding-top: 22px; border-top: 1px solid rgba(245,242,237,0.24); }
+.hero-stat { display: flex; flex-direction: column; gap: 6px; }
+.hero-stat-num { font-family: var(--a5-cond); font-weight: 800; font-size: 44px; line-height: 1; color: var(--a5-on-dark); }
+.hero-stat-label { font-size: 15px; line-height: 1.4; color: var(--a5-on-dark-muted); }
+.hero-shade::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 300px; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(12,11,10,0) 0%, rgba(12,11,10,0.95) 70%); }
+.card-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.small-label { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
+.step-tag { margin-top: auto; padding-top: 14px; border-top: 1px solid #ECE8E1; display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.45; text-transform: uppercase; color: #3D3A36; }
+.step-tag svg { flex-shrink: 0; margin-top: 1px; }
+.step-tape { --h: 64px; }
+.step-tape .ticks { background-size: 100% calc(var(--h) * 0.4), 100% calc(var(--h) * 0.28), 100% calc(var(--h) * 0.19); }
+.step-tape .nums { top: calc(var(--h) * 0.47); display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); font-family: var(--a5-cond); font-weight: 800; font-size: calc(var(--h) * 0.34); line-height: 1; }
+.step-tape .nums span { width: auto; padding-left: 6px; display: block; }
+.step-tape .nums b { padding: 0 5px; background: var(--a5-orange); font-weight: 800; }
+.faq-layout { display: grid; grid-template-columns: 420px minmax(0, 1fr); column-gap: 64px; align-items: start; }
+.faq-intro { display: flex; flex-direction: column; gap: 14px; }
+.faq-cards { display: flex; flex-direction: column; gap: 12px; }
+.faq-cards details { border-radius: 14px; background: var(--a5-white); border: 1px solid var(--a5-line); }
+.faq-cards summary { list-style: none; cursor: pointer; padding: 20px 24px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 14px; font-weight: 700; font-size: 17px; line-height: 1.4; color: var(--a5-ink); }
+.faq-cards summary::-webkit-details-marker { display: none; }
+.faq-cards summary::after { content: "+"; width: 30px; height: 30px; flex-shrink: 0; border-radius: 999px; background: var(--a5-concrete); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; line-height: 1; }
+.faq-cards details[open] summary::after { content: "\2212"; }
+.faq-answer { padding: 0 24px 22px; font-size: 16px; line-height: 1.6; color: var(--a5-body); }
+.faq-answer a { color: var(--a5-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.faq-answer a:hover { text-decoration-color: var(--a5-orange); }
+.a5-bg-white .faq-cards summary::after { background: var(--a5-concrete); }
+@media (min-width: 900px) { .a5-hero .a5-h1 { text-wrap: wrap; } }
+@media (max-width: 1099px) { .faq-layout { grid-template-columns: minmax(0, 1fr); row-gap: 28px; } }
+@media (max-width: 899px) {
+  .hero-call { display: inline-flex; }
+  .hero-shade::after { display: none; }
+  .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; padding-top: 18px; border-top-color: rgba(245,242,237,0.16); }
+  .hero-stat { gap: 5px; }
+  .hero-stat-num { font-size: 32px; }
+  .hero-stat-label { font-size: 12.5px; line-height: 1.35; }
+  .a5-btn { white-space: normal; text-align: center; line-height: 1.08; padding-block: 8px; }
+  .br-wide { display: none; }
+  .card-title { font-size: 22px; }
+  .step-tag { font-size: 11.5px; }
+  .faq-cards { gap: 10px; }
+  .faq-cards summary { padding: 16px; font-size: 16px; }
+  .faq-answer { padding: 0 16px 18px; font-size: 15px; }
+}
 
- <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet"/>
- <link rel="stylesheet" href="css/city.css">
+/* city page */
+.city-hero { --hero-min: 780px; --pos: 50% 55%; --hero-photo-h: 300px; }
+.why-cards, .svc-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.why-card { padding: 30px 28px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
+.why-card .card-title { font-size: 27px; }
+.why-card p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--a5-body); }
+.svc-card { padding: 28px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 14px; }
+.svc-body { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+.svc-body p { margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--a5-body); }
+.svc-body .a5-link { margin-top: auto; align-self: flex-start; font-size: 15px; }
+.hood-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
+.hood { padding: 18px 16px; border-radius: 14px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16.5px; line-height: 1.3; color: var(--a5-ink); }
+.hood svg { width: 18px; height: 18px; flex-shrink: 0; }
+.steps-loop .a5-tapebar-y { display: none; }
+.city-steps { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.step-card { padding: 26px 24px 22px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
+.step-card .card-title { font-size: 28px; }
+.step-card p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--a5-body); }
+.step-card .step-tag { min-height: 51px; }
+.tier-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.tier-card { padding: 26px 28px 28px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 10px; }
+.tier-card.tier-featured { border: 2px solid var(--a5-ink); }
+.tier-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 26px; }
+.tier-pill { padding: 5px 10px; border-radius: 999px; background: #FFF0E0; color: #9A4A00; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.3; text-transform: uppercase; }
+.tier-label { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--a5-muted); }
+.bars { display: flex; gap: 4px; }
+.bars i { width: 10px; height: 22px; border-radius: 2px; background: #DDD8D0; }
+.bars i.on { background: var(--a5-ink); }
+.tier-name { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.tier-price { margin-top: 10px; display: flex; flex-direction: column; gap: 10px; }
+.tier-price .price { font-family: var(--a5-cond); font-weight: 800; font-size: clamp(40px, 3.9vw, 56px); line-height: 1; color: var(--a5-ink); }
+.tier-price .unit { font-size: 15px; color: var(--a5-muted); }
+.tier-foot { margin-top: 36px; display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.tier-note { margin: 0; max-width: 900px; font-size: 14px; line-height: 1.6; color: var(--a5-muted); }
+.city-cta { padding-block: 104px; }
+.cta-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.city-cta .a5-h2 { font-size: clamp(44px, 4.6vw, 66px); }
+.city-cta .a5-p { font-size: 18px; max-width: 640px; }
+.city-cta .a5-btn { margin-top: 8px; min-height: 62px; font-size: 23px; }
+@media (max-width: 1099px) {
+  .svc-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hood-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .city-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps-loop .step-tape { display: none; }
+}
+@media (max-width: 899px) {
+  .city-hero .a5-btn-hero { font-size: 21px; padding-inline: 20px; }
+  .why-cards, .svc-cards { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .why-card { padding: 20px 18px; border-radius: 14px; gap: 8px; }
+  .why-card .card-title { font-size: 24px; }
+  .why-card p { font-size: 15px; line-height: 1.55; }
+  .svc-card { padding: 18px 16px; border-radius: 14px; display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 14px; align-items: start; }
+  .svc-card .a5-icon { width: 48px; height: 48px; }
+  .svc-body { gap: 6px; }
+  .svc-body p { font-size: 14.5px; line-height: 1.55; }
+  .svc-body .a5-link { margin-top: 4px; font-size: 14.5px; }
+  .hood-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .hood { padding: 13px 12px; border-radius: 12px; gap: 8px; font-size: 14.5px; }
+  .hood svg { width: 16px; height: 16px; }
+  .steps-loop { display: grid; grid-template-columns: 58px minmax(0, 1fr); column-gap: 16px; }
+  .steps-loop .a5-tapebar-y { display: block; width: 58px; }
+  .steps-col { padding: 20px 0 6px; }
+  .city-steps { grid-template-columns: minmax(0, 1fr); gap: 14px; margin: 0; }
+  .step-card { padding: 18px 16px 16px; border-radius: 14px; gap: 8px; }
+  .step-card .card-title { font-size: 26px; }
+  .step-card p { font-size: 14.5px; }
+  .step-card .step-tag { min-height: 0; }
+  .tier-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .tier-card { padding: 18px; border-radius: 14px; gap: 6px; }
+  .tier-pill { font-size: 11.5px; }
+  .tier-label { font-size: 12px; }
+  .bars i { width: 9px; height: 20px; }
+  .tier-name { font-size: 26px; }
+  .tier-price { margin-top: 4px; flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+  .tier-price .price { font-size: 42px; }
+  .tier-price .unit { font-size: 14px; }
+  .tier-foot { margin-top: 20px; align-items: stretch; }
+  .tier-foot .a5-btn { width: 100%; min-height: 56px; font-size: 20px; }
+  .tier-note { font-size: 13px; line-height: 1.55; }
+  .city-cta { padding-block: 52px; }
+  .cta-inner { gap: 14px; }
+  .city-cta .a5-h2 { font-size: 44px; }
+  .city-cta .a5-p { font-size: 15.5px; line-height: 1.55; }
+  .city-cta .a5-btn { width: 100%; min-height: 66px; font-size: 19px; }
+}
+</style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<!-- NAV -->
-<nav>
- <a href="/" class="logo">BUILDER<span>K</span></a>
-<ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
- <span></span><span></span><span></span>
- </button>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
- <div class="hero-inner">
- <div class="hero-text">
- <div class="hero-badge">Custom Home Builder in Orlando, FL</div>
- <h1>Build Your Custom Home in <em>Orlando</em></h1>
- <p>BuilderK coordinates floor plans, permitting, and construction and prepares the documents independent lenders request. Your lender remains a separate company and sets all financing terms.</p>
- <a href="/contact" class="hero-cta">Start Your Orlando Project →</a>
- <div class="hero-stats">
- <div class="hero-stat"><div class="number">25+</div><div class="label">Years Combined Experience</div></div>
- <div class="hero-stat"><div class="number">100%</div><div class="label">Licensed & Insured</div></div>
- </div>
- </div>
- <div class="hero-image">
- <img src="images/hero-house.webp" alt="Modern two story Florida home exterior" loading="eager">
- </div>
- </div>
+<main id="main">
+<section class="a5-hero hero-shade city-hero" aria-labelledby="city-title">
+  <div class="a5-hero-photo"><picture><source media="(min-width: 900px)" srcset="/images/projects/jobsite/s14.jpg"><img src="/images/projects/jobsite/strip/s14.webp" alt="Three story home exterior in Florida" width="600" height="800" fetchpriority="high"></picture></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">Custom Home Builder in Orlando, FL</div>
+      <h1 class="a5-h1" id="city-title">Build Your Custom Home in <span class="a5-accent">Orlando</span></h1>
+      <p class="a5-hero-sub">BuilderK coordinates floor plans, permitting, and construction and prepares the documents independent lenders request. Your lender remains a separate company and sets all financing terms.</p>
+      <div class="a5-hero-actions">
+        <a class="a5-btn a5-btn-hero" href="/contact">Start Your Orlando Project <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        <a class="a5-btn a5-btn-call hero-call" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a>
+      </div>
+    </div>
+    <div class="hero-stats"><div class="hero-stat"><span class="hero-stat-num">25+</span><span class="hero-stat-label">Years Combined Experience</span></div><div class="hero-stat"><span class="hero-stat-num">100%</span><span class="hero-stat-label">Licensed &amp; Insured</span></div></div>
+  </div>
 </section>
 
-<!-- WHY BUILD IN ORLANDO -->
-<section class="section section-light">
- <div class="max-w">
- <div class="section-label">Why Orlando</div>
- <h2 class="section-title" style="color:var(--dark);">Why <em>Orlando</em> Is the Place to Build</h2>
- <p class="section-sub section-sub-dark">Central Florida continues to attract new residents and new development. Building here gives you control over the design, while the completed value still depends on the market and an independent appraisal.</p>
- <div class="features-grid">
- <div class="service-card">
- <div class="icon"><i data-lucide="chart-no-axes-column-increasing" aria-hidden="true"></i></div>
- <h3>Rapid Market Growth</h3>
- <p>Demand varies across Orlando area submarkets, including Lake Nona and Winter Garden. Market growth does not guarantee equity; completed value is determined by an independent appraisal and current comparable sales.</p>
- </div>
- <div class="service-card">
- <div class="icon"><i data-lucide="waves" aria-hidden="true"></i></div>
- <h3>Florida Lifestyle</h3>
- <p>Orlando offers sunshine throughout the year, no state income tax, theme parks, restaurants, and plenty of outdoor recreation.</p>
- </div>
- <div class="service-card">
- <div class="icon"><i data-lucide="house" aria-hidden="true"></i></div>
- <h3>Build on Your Lot</h3>
- <p>Own a lot in Orange County, Osceola County, or Seminole County? Its appraised equity may reduce or replace cash required by a lender, depending on the appraisal, total project cost, borrower qualifications, and loan program.</p>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" aria-labelledby="why-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Why Orlando</div>
+        <h2 class="a5-h2" id="why-title">Why <span class="a5-hl">Orlando</span> Is the Place to Build</h2>
+        <p class="a5-p">Central Florida continues to attract new residents and new development. Building here gives you control over the design, while the completed value still depends on the market and an independent appraisal.</p>
+      </div>
+    </div>
+    <div class="why-cards"><article class="why-card"><h3 class="card-title">Rapid Market Growth</h3><p>Demand varies across Orlando area submarkets, including Lake Nona and Winter Garden. Market growth does not guarantee equity; completed value is determined by an independent appraisal and current comparable sales.</p></article><article class="why-card"><h3 class="card-title">Florida Lifestyle</h3><p>Orlando offers sunshine throughout the year, no state income tax, theme parks, restaurants, and plenty of outdoor recreation.</p></article><article class="why-card"><h3 class="card-title">Build on Your Lot</h3><p>Own a lot in Orange County, Osceola County, or Seminole County? Its appraised equity may reduce or replace cash required by a lender, depending on the appraisal, total project cost, borrower qualifications, and loan program.</p></article></div>
+  </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section section-dark">
- <div class="max-w">
- <div class="section-label">Our Orlando Services</div>
- <h2 class="section-title">Everything Under <em>One Roof</em></h2>
- <p class="section-sub">BuilderK coordinates design, permitting, and construction and prepares the project documents independent lenders request. The lender remains separate and manages the loan.</p>
- <div class="services-grid">
- <div class="feature-card">
- <div class="icon"><i data-lucide="ruler" aria-hidden="true"></i></div>
- <h3>Floor Plans & Design</h3>
- <p>Start with a plan from our current catalog or bring your own. We tailor the layout and finishes to your Orlando lot and lifestyle.</p>
- <a href="/facades" style="color:var(--orange);text-decoration:none;font-weight:600;font-size:0.9rem;margin-top:12px;display:inline-block;">Explore Plans →</a>
- </div>
- <div class="feature-card">
- <div class="icon"><i data-lucide="landmark" aria-hidden="true"></i></div>
- <h3>Construction Loan Assistance</h3>
- <p>We can introduce independent construction lenders and prepare the builder documents they request. Single close availability, approval, rate, fees, and conversion conditions vary by lender and program.</p>
- <a href="/financing" style="color:var(--orange);text-decoration:none;font-weight:600;font-size:0.9rem;margin-top:12px;display:inline-block;">Learn About Financing →</a>
- </div>
- <div class="feature-card">
- <div class="icon"><i data-lucide="clipboard-list" aria-hidden="true"></i></div>
- <h3>Permitting & Compliance</h3>
- <p>Orange County and Orlando building permits require flood zone analysis, wind load calculations, HOA reviews, and impact rated materials. We navigate every inspection for you.</p>
- </div>
- <div class="feature-card">
- <div class="icon"><i data-lucide="hard-hat" aria-hidden="true"></i></div>
- <h3>Full Construction Management</h3>
- <p>BuilderK is a licensed General Contractor (CGC 1537163). We coordinate subcontractors, schedules, quality reviews, and budget tracking from the start of construction through the certificate of occupancy.</p>
- </div>
- <div class="feature-card">
- <div class="icon"><i data-lucide="sparkles" aria-hidden="true"></i></div>
- <h3>Interior Selections</h3>
- <p>Choose your flooring, cabinets, countertops, bathroom fixtures, lighting, and paint. We guide you through every option to match your style and budget.</p>
- <a href="/interiors" style="color:var(--orange);text-decoration:none;font-weight:600;font-size:0.9rem;margin-top:12px;display:inline-block;">View Options →</a>
- </div>
- <div class="feature-card">
- <div class="icon"><i data-lucide="key-round" aria-hidden="true"></i></div>
- <h3>Ready for Move In</h3>
- <p>From permitting through final inspections, we manage the approved schedule, budget, and scope, communicate changes, and coordinate the work against your approved plans and selections.</p>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete" aria-labelledby="services-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Our Orlando Services</div>
+        <h2 class="a5-h2" id="services-title">Everything Under <span class="a5-hl">One Roof</span></h2>
+        <p class="a5-p">BuilderK coordinates design, permitting, and construction and prepares the project documents independent lenders request. The lender remains separate and manages the loan.</p>
+      </div>
+    </div>
+    <div class="svc-cards"><article class="svc-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="bpSk1-a1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D8BFD"></stop><stop offset="1" stop-color="#1F5FD1"></stop></linearGradient><linearGradient id="bpRk1-a1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC0FF"></stop><stop offset="0.5" stop-color="#4A92F7"></stop><stop offset="1" stop-color="#2566D4"></stop></linearGradient><linearGradient id="bpPk1-a1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFD24D"></stop><stop offset="1" stop-color="#F5A524"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="8" y="12" width="48" height="42" rx="4" fill="url(#bpSk1-a1)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M14 18 V50 M20 18 V50 M26 18 V50 M32 18 V50 M38 18 V50 M44 18 V50 M50 18 V50 M12 22 H54 M12 28 H54 M12 34 H54 M12 40 H54 M12 46 H54" stroke="#FFFFFF" stroke-width="0.6" opacity="0.22"></path><path d="M15 21 H49 V47 H15 Z M15 35 H29 M29 21 V41 M38 35 H49" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"></path><path d="M29 41 A6 6 0 0 0 35 47" fill="none" stroke="#FFFFFF" stroke-width="1.4"></path><rect x="5" y="7" width="54" height="9" rx="4.5" fill="url(#bpRk1-a1)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M10 9.5 H54" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.6"></path><g transform="rotate(-38 46 46)"><rect x="34" y="42" width="22" height="7" rx="1.5" fill="url(#bpPk1-a1)" stroke="#8A5A00" stroke-width="1"></rect><path d="M56 42 L63 45.5 L56 49 Z" fill="#F6D7A7" stroke="#8A5A00" stroke-width="1"></path><path d="M60.5 44.3 L63 45.5 L60.5 46.7 Z" fill="#374151"></path><rect x="30" y="42" width="4" height="7" rx="1" fill="#F5A3C7" stroke="#8A5A00" stroke-width="1"></rect></g></svg><div class="svc-body"><h3 class="card-title">Floor Plans and Design</h3><p>Start with a plan from our current catalog or bring your own. We tailor the layout and finishes to your Orlando lot and lifestyle.</p><a class="a5-link" href="/facades">Explore plans</a></div></article><article class="svc-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="mBk3-a2" cx="0.38" cy="0.35" r="0.75"><stop offset="0" stop-color="#F7DA8E"></stop><stop offset="0.6" stop-color="#E2B25A"></stop><stop offset="1" stop-color="#BF8733"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M32 22 C19 23 10 34 11 45 C12 54 20 58 32 58 C44 58 52 54 53 45 C54 34 45 23 32 22 Z" fill="url(#mBk3-a2)" stroke="#8A5A1B" stroke-width="1.6" stroke-linejoin="round"></path><path d="M23 9 C26 12 38 12 41 9 C42 13 39 18 35 20 L29 20 C25 18 22 13 23 9 Z" fill="#E7BD66" stroke="#8A5A1B" stroke-width="1.5" stroke-linejoin="round"></path><rect x="25" y="18.5" width="14" height="4.5" rx="2.2" fill="#7A4A12"></rect><path d="M17 36 C18 30 22 27 26 26" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5" fill="none"></path><text x="32" y="49" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-weight="700" font-size="20" fill="#1F7A3A">$</text></svg><div class="svc-body"><h3 class="card-title">Construction Loan Assistance</h3><p>We can introduce independent construction lenders and prepare the builder documents they request. Single close availability, approval, rate, fees, and conversion conditions vary by lender and program.</p><a class="a5-link" href="/financing">Learn about financing</a></div></article><article class="svc-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="pPk4-a3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#E9EDF2"></stop></linearGradient><radialGradient id="pSk4-a3" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#5EE08A"></stop><stop offset="1" stop-color="#1F9D4C"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M14 6 H40 L50 16 V54 Q50 56 48 56 H14 Q12 56 12 54 V8 Q12 6 14 6 Z" fill="url(#pPk4-a3)" stroke="#6B7785" stroke-width="1.5"></path><path d="M40 6 V14 Q40 16 42 16 H50" fill="#D5DCE4" stroke="#6B7785" stroke-width="1.5"></path><path d="M18 22 H42 M18 28 H42 M18 34 H34" stroke="#A7B2BE" stroke-width="2.2" stroke-linecap="round"></path><circle cx="42" cy="44" r="11" fill="url(#pSk4-a3)" stroke="#146B33" stroke-width="1.5"></circle><path d="M37 44 L41 48 L48 40" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg><div class="svc-body"><h3 class="card-title">Permitting and Compliance</h3><p>Orange County and Orlando building permits require flood zone analysis, wind load calculations, HOA reviews, and impact rated materials. We navigate every inspection for you.</p></div></article><article class="svc-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="hhk5-a4" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#FFC266"></stop><stop offset="0.55" stop-color="#FF8A1F"></stop><stop offset="1" stop-color="#D45A00"></stop></radialGradient><linearGradient id="hbk5-a4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9E3D"></stop><stop offset="1" stop-color="#C95200"></stop></linearGradient></defs><ellipse cx="32" cy="58" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M10 44 C10 24 20 12 32 12 C44 12 54 24 54 44 Z" fill="url(#hhk5-a4)" stroke="#8A3A00" stroke-width="1.6" stroke-linejoin="round"></path><path d="M28 13 C27 22 27 34 28 44 H36 C37 34 37 22 36 13 C34 12.4 30 12.4 28 13 Z" fill="#FF9E3D" stroke="#8A3A00" stroke-width="1.3" stroke-linejoin="round"></path><path d="M17 34 C18 25 22 19 27 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.6"></path><rect x="4" y="43" width="56" height="8" rx="4" fill="url(#hbk5-a4)" stroke="#8A3A00" stroke-width="1.6"></rect></svg><div class="svc-body"><h3 class="card-title">Full Construction Management</h3><p>BuilderK is a licensed General Contractor (CGC 1537163). We coordinate subcontractors, schedules, quality reviews, and budget tracking from the start of construction through the certificate of occupancy.</p></div></article><article class="svc-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><ellipse cx="32" cy="58" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><g transform="rotate(-24 22 52)"><rect x="14" y="10" width="16" height="44" rx="3" fill="#FFFFFF" stroke="#6B7785" stroke-width="1.3"></rect><rect x="16" y="12" width="12" height="12" rx="2" fill="#3E8ED0"></rect><rect x="16" y="26" width="12" height="12" rx="2" fill="#7FB8E6"></rect><rect x="16" y="40" width="12" height="8" rx="2" fill="#C9E2F6"></rect></g><g transform="rotate(-6 30 54)"><rect x="24" y="8" width="16" height="46" rx="3" fill="#FFFFFF" stroke="#6B7785" stroke-width="1.3"></rect><rect x="26" y="10" width="12" height="12" rx="2" fill="#2FA36B"></rect><rect x="26" y="24" width="12" height="12" rx="2" fill="#7FD1A5"></rect><rect x="26" y="38" width="12" height="10" rx="2" fill="#CDEEDB"></rect></g><g transform="rotate(14 38 56)"><rect x="34" y="8" width="16" height="46" rx="3" fill="#FFFFFF" stroke="#6B7785" stroke-width="1.3"></rect><rect x="36" y="10" width="12" height="12" rx="2" fill="#F77F00"></rect><rect x="36" y="24" width="12" height="12" rx="2" fill="#FFB266"></rect><rect x="36" y="38" width="12" height="10" rx="2" fill="#FFE0BF"></rect></g><circle cx="27" cy="52" r="2.4" fill="#6B7785"></circle></svg><div class="svc-body"><h3 class="card-title">Interior Selections</h3><p>Choose your flooring, cabinets, countertops, bathroom fixtures, lighting, and paint. We guide you through every option to match your style and budget.</p><a class="a5-link" href="/interiors">View options</a></div></article><article class="svc-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2-a6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2-a6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2-a6)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2-a6)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg><div class="svc-body"><h3 class="card-title">Ready for Move In</h3><p>From permitting through final inspections, we manage the approved schedule, budget, and scope, communicate changes, and coordinate the work against your approved plans and selections.</p></div></article></div>
+  </div>
 </section>
 
-<!-- NEIGHBORHOODS -->
-<section class="section section-black">
- <div class="max-w">
- <div class="section-label">Service Areas</div>
- <h2 class="section-title">Orlando Neighborhoods <em>We Serve</em></h2>
- <p class="section-sub">We build custom homes throughout the greater Orlando metro area. If you have a lot in any of these areas, we can build on it.</p>
- <div class="neighborhoods-grid">
- <div class="neighborhood">Orlando</div>
- <div class="neighborhood">Winter Park</div>
- <div class="neighborhood">Lake Nona</div>
- <div class="neighborhood">Dr. Phillips</div>
- <div class="neighborhood">Windermere</div>
- <div class="neighborhood">Winter Garden</div>
- <div class="neighborhood">Celebration</div>
- <div class="neighborhood">Kissimmee</div>
- <div class="neighborhood">Ocoee</div>
- <div class="neighborhood">Apopka</div>
- <div class="neighborhood">Clermont</div>
- <div class="neighborhood">Davenport</div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" aria-labelledby="hoods-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Service Areas</div>
+        <h2 class="a5-h2" id="hoods-title">Orlando Neighborhoods <span class="a5-hl">We Serve</span></h2>
+        <p class="a5-p">We build custom homes throughout the greater Orlando metro area. If you have a lot in any of these areas, we can build on it.</p>
+      </div>
+    </div>
+    <ul class="hood-grid"><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Orlando</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Winter Park</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Lake Nona</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Dr. Phillips</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Windermere</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Winter Garden</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Celebration</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Kissimmee</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Ocoee</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Apopka</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Clermont</span></li><li class="hood"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span>Davenport</span></li></ul>
+  </div>
 </section>
 
-<!-- PROCESS -->
-<section class="section section-light">
- <div class="max-w">
- <div class="section-label">The Process</div>
- <h2 class="section-title" style="color:var(--dark);">How We Build Your <em>Orlando Home</em></h2>
- <p class="section-sub section-sub-dark">Here is the path from your first conversation to receiving the keys.</p>
- <div class="process-grid">
- <div class="process-card" style="background:var(--white);border-color:#eee;">
- <div class="step-num">Step 01</div>
- <h3 style="color:var(--dark);">Share Your Vision</h3>
- <p style="color:#666;">Tell us about your Orlando lot, your dream home, and your budget. Don't have plans yet? We guide you from day one.</p>
- <div class="timeline-tag"><i data-lucide="clock" aria-hidden="true"></i> Free consultation. We respond within 1 business day.</div>
- </div>
- <div class="process-card" style="background:var(--white);border-color:#eee;">
- <div class="step-num">Step 02</div>
- <h3 style="color:var(--dark);">Design & Finance</h3>
- <p style="color:#666;">Choose from existing floor plans or customize your own. We can introduce independent construction lenders, and each lender determines the available loan structure and terms.</p>
- <div class="timeline-tag">⏱ Plans & Loan · 3 to 6 Weeks</div>
- </div>
- <div class="process-card" style="background:var(--white);border-color:#eee;">
- <div class="step-num">Step 03</div>
- <h3 style="color:var(--dark);">We Build It</h3>
- <p style="color:#666;">From pulling Orange County permits to pouring the foundation to final inspections, our licensed team manages every phase with regular updates.</p>
- <div class="timeline-tag">⏱ Permits 4 to 6 Wks · Build 6 to 10 Mo</div>
- </div>
- <div class="process-card" style="background:var(--white);border-color:#eee;">
- <div class="step-num">Step 04</div>
- <h3 style="color:var(--dark);">Move In</h3>
- <p style="color:#666;">Complete the final walkthrough and receive the keys to your Orlando home. If you use an approved construction to permanent loan, conversion follows the lender's completion conditions and loan terms.</p>
- <div class="timeline-tag">⏱ Final Walkthrough · Keys in Hand</div>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete" aria-labelledby="process-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">The Process</div>
+        <h2 class="a5-h2" id="process-title">How We Build Your <span class="a5-hl">Orlando Home</span></h2>
+        <p class="a5-p">Here is the path from your first conversation to receiving the keys.</p>
+      </div>
+    </div>
+    <div class="steps-loop" data-a5-loop>
+      <div class="a5-tapebar-y a5-tape-y" aria-hidden="true"><i class="hook"></i><i class="ticks"></i><div class="nums"><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span class="stud">16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span class="stud">32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span></div></div>
+      <div class="steps-col">
+        <ol class="city-steps"><li class="step-card a5-step-a"><div class="small-label">Step 01</div><h3 class="card-title">Share Your Vision</h3><p>Tell us about your Orlando lot, your dream home, and your budget. Don't have plans yet? We guide you from day one.</p><div class="step-tag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg><span>Free consultation. We respond within 1 business day.</span></div></li><li class="step-card a5-step-b"><div class="small-label">Step 02</div><h3 class="card-title">Design and Finance</h3><p>Choose from existing floor plans or customize your own. We can introduce independent construction lenders, and each lender determines the available loan structure and terms.</p><div class="step-tag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg><span>Plans and Loan · 3 to 6 Weeks</span></div></li><li class="step-card a5-step-c"><div class="small-label">Step 03</div><h3 class="card-title">We Build It</h3><p>From pulling Orange County permits to pouring the foundation to final inspections, our licensed team manages every phase with regular updates.</p><div class="step-tag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg><span>Permits 4 to 6 weeks · Build 6 to 10 months</span></div></li><li class="step-card a5-step-d"><div class="small-label">Step 04</div><h3 class="card-title">Move In</h3><p>Complete the final walkthrough and receive the keys to your Orlando home. If you use an approved construction to permanent loan, conversion follows the lender's completion conditions and loan terms.</p><div class="step-tag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg><span>Final Walkthrough · Keys in Hand</span></div></li></ol>
+        <div class="a5-tapebar a5-tape-x step-tape" aria-hidden="true"><i class="hook"></i><i class="ticks"></i><div class="nums" style="--n:4"><span>1</span><span>2</span><span>3</span><span><b>4</b></span></div></div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- PRICING -->
-<section class="section section-black">
- <div class="max-w" style="text-align:center;">
- <div class="section-label">Transparent Pricing</div>
- <h2 class="section-title">How Much Does It Cost to Build in <em>Orlando?</em></h2>
- <p class="section-sub" style="margin:0 auto 48px;">Planning ranges show assumptions and major exclusions; your formal proposal confirms the scope and allowances for your site. Interior selections remain customizable.</p>
- <div class="pricing-grid">
- <div class="pricing-card featured">
- <div class="tier" style="color:var(--orange);font-weight:700;">Most Popular</div>
- <div style="font-family:'Outfit',sans-serif;font-weight:600;margin-bottom:8px;">Standard</div>
- <div class="price">$160 to $180</div>
- <div class="unit">per sq ft</div>
- </div>
- <div class="pricing-card">
- <div class="tier">Midrange</div>
- <div style="font-family:'Outfit',sans-serif;font-weight:600;margin-bottom:8px;">Enhanced</div>
- <div class="price">$180 to $220</div>
- <div class="unit">per sq ft</div>
- </div>
- <div class="pricing-card">
- <div class="tier">Premium</div>
- <div style="font-family:'Outfit',sans-serif;font-weight:600;margin-bottom:8px;">Luxury</div>
- <div class="price">$220+</div>
- <div class="unit">per sq ft</div>
- </div>
- </div>
- <a href="/calculator" class="cta-btn" style="margin-top:16px;">Estimate Your Build Cost →</a>
- <p style="text-align:center;font-size:0.8rem;color:#777;max-width:680px;margin:18px auto 0;">Base construction pricing for Central Florida (Orlando metro). Government permit and impact fees are billed at cost. Site work beyond standard slab foundation construction (land clearing, fill, stem wall or elevated foundations) is quoted separately. Coastal and flood zone builds typically cost more.</p>
- </div>
+<section class="a5-section a5-bg-white" aria-labelledby="pricing-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Transparent Pricing</div>
+        <h2 class="a5-h2" id="pricing-title">How Much Does It Cost to Build in <span class="a5-hl">Orlando</span>?</h2>
+        <p class="a5-p">Planning ranges show assumptions and major exclusions; your formal proposal confirms the scope and allowances for your site. Interior selections remain customizable.</p>
+      </div>
+    </div>
+    <div class="tier-grid"><div class="tier-card tier-featured"><div class="tier-top"><span class="tier-pill">Most Popular</span><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i></span></div><h3 class="tier-name">Standard</h3><div class="tier-price"><div class="price">$160 to $180</div><div class="unit">per sq ft</div></div></div><div class="tier-card"><div class="tier-top"><span class="tier-label">Midrange</span><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span></div><h3 class="tier-name">Enhanced</h3><div class="tier-price"><div class="price">$180 to $220</div><div class="unit">per sq ft</div></div></div><div class="tier-card"><div class="tier-top"><span class="tier-label">Premium</span><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span></div><h3 class="tier-name">Luxury</h3><div class="tier-price"><div class="price">$220+</div><div class="unit">per sq ft</div></div></div></div>
+    <div class="tier-foot">
+      <a class="a5-btn a5-btn-dark" href="/calculator">Estimate Your Build Cost <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+      <p class="tier-note">Base construction pricing for Central Florida (Orlando metro). Government permit and impact fees are billed at cost. Site work beyond standard slab foundation construction (land clearing, fill, stem wall or elevated foundations) is quoted separately. Coastal and flood zone builds typically cost more.</p>
+    </div>
+  </div>
 </section>
 
-
-<!-- FAQ -->
-<section class="section section-black">
- <div class="max-w">
- <div class="section-label" style="text-align:center;">Common Questions</div>
- <h2 class="section-title" style="text-align:center;">Building a Custom Home in <em>Orlando?</em></h2>
- <p class="section-sub" style="text-align:center;margin:0 auto 48px;">Everything Orlando homebuilders need to know before breaking ground.</p>
- <div class="faq-list">
- <div class="faq-item">
- <button type="button" class="faq-q">How much does it cost to build a custom home in Orlando? <span aria-hidden="true">+</span></button>
- <div class="faq-a"><div class="faq-a-inner">BuilderK's shared calculator uses Central Florida base planning rates of Standard ($160 to $180/sqft), Midrange ($180 to $220/sqft), and Luxury ($220 to $280+/sqft), last updated July 18, 2026. It returns one combined planning range from the selections entered. Land, financing, government permit and impact fees, utilities, unusual site work, and the calculator's other listed exclusions are not included. Orlando lot, utility, HOA, and jurisdiction requirements can materially change the range. After we review the plan, scope and site, we send a formal proposal. <a href="/calculator" style="color:var(--orange);">Use the planning calculator</a> for an early range.</div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q">How long does it take to build a custom home in Orlando? <span aria-hidden="true">+</span></button>
- <div class="faq-a"><div class="faq-a-inner">A typical custom home in Orlando takes 6 to 10 months from permit approval to move in. The full timeline including design, financing, and permitting is usually 9 to 14 months from your first consultation. BuilderK provides regular progress updates throughout the entire build.</div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q">Can I build on my own lot in Orlando? <span aria-hidden="true">+</span></button>
- <div class="faq-a"><div class="faq-a-inner">Yes. If you own a lot in Orlando, Orange County, Osceola County, or Seminole County, BuilderK can build your custom home on it. Your lot's appraised equity may reduce or replace cash required by a lender, depending on the appraisal, total project cost, borrower qualifications, and loan program. <a href="/financing" style="color:var(--orange);">Learn about financing →</a></div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q">Do I need a permit to build a home in Orlando? <span aria-hidden="true">+</span></button>
- <div class="faq-a"><div class="faq-a-inner">Yes, all new home construction in Orlando requires building permits from Orange County or your local municipality. This includes site plans, engineering, flood zone compliance, wind load calculations, and HOA reviews. BuilderK handles the entire permitting process so you don't have to deal with any of it.</div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q">What credit score do I need for a construction loan in Orlando? <span aria-hidden="true">+</span></button>
- <div class="faq-a"><div class="faq-a-inner">Construction loan requirements vary by lender and program. Many programs look for a credit score around 680, while others accept lower scores or are based on assets and weigh the project more than the borrower's credit. BuilderK connects you with lenders who specialize in construction to permanent loans, and we handle all the builder paperwork to streamline your approval. <a href="/financing" style="color:var(--orange);">Check your eligibility →</a></div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q">What neighborhoods in Orlando does BuilderK serve? <span aria-hidden="true">+</span></button>
- <div class="faq-a"><div class="faq-a-inner">We build throughout the greater Orlando metro including Winter Park, Lake Nona, Dr. Phillips, Windermere, Celebration, Kissimmee, Winter Garden, Ocoee, Apopka, Clermont, and Davenport. If you have a lot anywhere in Orange, Osceola, or Seminole County, we can build on it.</div></div>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete" aria-labelledby="faq-title">
+  <div class="a5-wrap faq-layout">
+    <div class="faq-intro">
+      <div class="a5-label">Common Questions</div>
+      <h2 class="a5-h2" id="faq-title">Building a Custom Home in <span class="a5-hl">Orlando</span>?</h2>
+      <p class="a5-p">Everything Orlando homebuilders need to know before breaking ground.</p>
+    </div>
+    <div class="faq-cards">
+      <details open><summary>How much does it cost to build a custom home in Orlando?</summary><div class="faq-answer">BuilderK's shared calculator uses Central Florida base planning rates of Standard ($160 to $180/sqft), Midrange ($180 to $220/sqft), and Luxury ($220 to $280+/sqft), last updated July 18, 2026. It returns one combined planning range from the selections entered. Land, financing, government permit and impact fees, utilities, unusual site work, and the calculator's other listed exclusions are not included. Orlando lot, utility, HOA, and jurisdiction requirements can materially change the range. After we review the plan, scope and site, we send a formal proposal. <a href="/calculator">Use the planning calculator</a> for an early range.</div></details>
+      <details><summary>How long does it take to build a custom home in Orlando?</summary><div class="faq-answer">A typical custom home in Orlando takes 6 to 10 months from permit approval to move in. The full timeline including design, financing, and permitting is usually 9 to 14 months from your first consultation. BuilderK provides regular progress updates throughout the entire build.</div></details>
+      <details><summary>Can I build on my own lot in Orlando?</summary><div class="faq-answer">Yes. If you own a lot in Orlando, Orange County, Osceola County, or Seminole County, BuilderK can build your custom home on it. Your lot's appraised equity may reduce or replace cash required by a lender, depending on the appraisal, total project cost, borrower qualifications, and loan program. <a href="/financing">Learn about financing</a></div></details>
+      <details><summary>Do I need a permit to build a home in Orlando?</summary><div class="faq-answer">Yes, all new home construction in Orlando requires building permits from Orange County or your local municipality. This includes site plans, engineering, flood zone compliance, wind load calculations, and HOA reviews. BuilderK handles the entire permitting process so you don't have to deal with any of it.</div></details>
+      <details><summary>What credit score do I need for a construction loan in Orlando?</summary><div class="faq-answer">Construction loan requirements vary by lender and program. Many programs look for a credit score around 680, while others accept lower scores or are based on assets and weigh the project more than the borrower's credit. BuilderK connects you with lenders who specialize in construction to permanent loans, and we handle all the builder paperwork to streamline your approval. <a href="/financing">Check your eligibility</a></div></details>
+      <details><summary>What neighborhoods in Orlando does BuilderK serve?</summary><div class="faq-answer">We build throughout the greater Orlando metro including Winter Park, Lake Nona, Dr. Phillips, Windermere, Celebration, Kissimmee, Winter Garden, Ocoee, Apopka, Clermont, and Davenport. If you have a lot anywhere in Orange, Osceola, or Seminole County, we can build on it.</div></details>
+    </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
- <h2>Ready to Build in <em>Orlando?</em></h2>
- <p>Start with a free conversation about your lot, your ideas, and your budget.</p>
- <a href="/contact" class="cta-btn">Get Your Free Orlando Consultation →</a>
+<section class="a5-section a5-bg-white city-cta" aria-labelledby="cta-title">
+  <div class="a5-wrap cta-inner">
+    <h2 class="a5-h2" id="cta-title">Ready to Build in <span class="a5-hl">Orlando</span>?</h2>
+    <p class="a5-p">Start with a free conversation about your lot, your ideas, and your budget.</p>
+    <a class="a5-btn a5-btn-dark" href="/contact">Get Your Free Orlando Consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
 </section>
+</main>
 
-<!-- FOOTER -->
-<footer>
- <div class="footer-grid">
- <div class="footer-brand">
- <a href="/" class="logo">BUILDER<span>K</span></a>
- <p>A Florida custom home builder. You bring the lot. We guide the project from plans through construction.</p>
- <p style="margin-top: 8px; font-size: 0.85rem;">CGC License #1537163</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/about">About Us</a>
- <a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a>
- <a href="/#services">Services</a>
- <a href="/financing">Financing</a>
- <a href="/calculator">Pricing Calculator</a>
- <a href="/interiors">Interior Selections</a>
- </div>
- <div class="footer-col">
- <h4>Build</h4>
- <a href="/floor-plans">Floor Plans</a>
- <a href="/construction">Construction Gallery</a>
- <a href="/interior-gallery">Interior Gallery</a>
- <a href="/blog">Blog</a>
- <a href="/referral-program/">Referral Program</a>
- <a href="/#styles">Styles</a>
- <a href="/contact">Free consultation</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:+12392304868">(239) 230 4868</a>
- <a href="mailto:info@builderk.com">info@builderk.com</a>
- <a>4700 Millenia Blvd, Ste 500<br>Orlando, FL 32839</a>
- </div>
- </div>
- <div class="footer-bottom">
- &copy; 2026 Builders Knowledge Development Inc. All rights reserved.
- &nbsp;·&nbsp; <a href="/privacy" style="color:var(--gray);">Privacy Policy</a>
- &nbsp;·&nbsp; <a href="/terms" style="color:var(--gray);">Terms & Conditions</a>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
-<script>
-// Hamburger menu
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.querySelector('.nav-links');
-if (hamburger && navLinks) {
-    hamburger.addEventListener('click', function() {
-    var isOpen = navLinks.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Open menu');
-      document.body.style.overflow = '';
-    }
-  });
-    navLinks.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-            navLinks.classList.remove('open');
-            hamburger.classList.remove('active');
-        });
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-            navLinks.classList.remove('open');
-            hamburger.classList.remove('active');
-        }
-    });
-}
-</script>
-
-
-<script>
-// Click-to-call GA4 event tracking
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (typeof gtag === 'function') {
-        gtag('event', 'phone_click', { 'page_path': location.pathname });
-      }
-    });
-  });
-});
-</script>
-<script src="/scripts/lucide.min.js"></script>
-<script src="/scripts/city-accessibility.js"></script>
 <script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>
