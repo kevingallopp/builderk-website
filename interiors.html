@@ -28,468 +28,477 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=4">
+<script defer src="/scripts/a5.js?v=4"></script>
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;color:#F5F5F0;background:#0A0A0A;line-height:1.6;overflow-x:hidden}h1,h2,h3,h4,h5{font-family:'Outfit',sans-serif;font-weight:700;line-height:1.2}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
-.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;transition:all .4s;background:transparent}.navbar.scrolled{background:rgba(10,10,10,.95);backdrop-filter:blur(20px);padding:12px 40px;border-bottom:1px solid rgba(247,127,0,.15)}.logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:2px}.logo span{color:#F77F00}.nav-links{display:flex;align-items:center;gap:28px;list-style:none}.nav-links a{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;color:#ccc;transition:color .3s}.nav-links a:hover{color:#F77F00}.nav-cta{background:#F77F00;color:#000!important;padding:10px 22px;border-radius:8px;font-weight:700!important;font-size:.85rem!important;transition:background .3s}.nav-cta:hover{background:#FF9A2E}.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:5px}.hamburger span{width:26px;height:2px;background:#F5F5F0;transition:all .3s;display:block}.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.page-hero{padding:160px 40px 80px;text-align:center;background:linear-gradient(180deg,rgba(247,127,0,.08) 0%,transparent 60%);position:relative}.page-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(247,127,0,.06) 0%,transparent 70%);pointer-events:none}.hero-badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#F77F00;margin-bottom:20px;position:relative}.page-hero h1{font-size:clamp(2.2rem,5vw,3.5rem);margin-bottom:20px;position:relative}.page-hero p{font-size:1.15rem;color:#aaa;max-width:680px;margin:0 auto;position:relative}
-.key-msg{padding:0 40px 60px;text-align:center}.key-msg-box{max-width:900px;margin:0 auto;background:linear-gradient(135deg,rgba(247,127,0,.08),rgba(247,127,0,.03));border:1px solid rgba(247,127,0,.15);border-radius:16px;padding:40px}.key-msg-box h3{font-size:1.3rem;margin-bottom:10px;color:#F77F00}.key-msg-box p{font-size:1.05rem;color:#bbb;line-height:1.7}
-.tabs-section{padding:0 40px 50px;text-align:center}.tabs-wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:900px;margin:0 auto}.tab-btn{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;padding:10px 22px;border-radius:50px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#aaa;cursor:pointer;transition:all .3s}.tab-btn:hover{border-color:rgba(247,127,0,.4);color:#F5F5F0}.tab-btn.active{background:#F77F00;color:#000;border-color:#F77F00}
-.cat-section{padding:80px 40px;max-width:1200px;margin:0 auto}.cat-alt{background:rgba(255,255,255,.015);max-width:100%;padding:80px 40px}.cat-alt .cat-wrap{max-width:1200px;margin:0 auto}
-.cat-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:48px}.cat-layout.reverse .cat-img-wrap{order:2}.cat-layout.reverse .cat-text{order:1}.cat-img-wrap{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3}.cat-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.cat-img-wrap:hover img{transform:scale(1.03)}.cat-img-wrap::after{content:'';position:absolute;inset:0;border-radius:16px;border:1px solid rgba(255,255,255,.08);pointer-events:none}.cat-text h2{font-size:2rem;margin-bottom:16px}.cat-text>p{font-size:1.05rem;color:#aaa;line-height:1.7;margin-bottom:24px}
-.materials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:16px}.mat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:22px;transition:all .3s}.mat-card:hover{border-color:rgba(247,127,0,.3);transform:translateY(-2px)}.mat-card h4{font-size:1.05rem;margin-bottom:6px}.mat-card p{font-size:.9rem;color:#999;line-height:1.5;margin-bottom:10px}.mat-card .advantages{display:flex;flex-wrap:wrap;gap:6px}.mat-card .advantages span{font-size:.75rem;font-weight:600;color:#F77F00;background:rgba(247,127,0,.1);padding:3px 10px;border-radius:50px}
-.img-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px}.img-row img{width:100%;height:180px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.06);transition:transform .3s}.img-row img:hover{transform:scale(1.03)}
-.process-section{padding:80px 40px;text-align:center}.process-section h2{font-size:2rem;margin-bottom:12px}.process-section>p{color:#aaa;font-size:1.05rem;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto}.process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;max-width:1100px;margin:0 auto}.process-step{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:28px;text-align:center}.step-num{font-family:'Outfit',sans-serif;font-size:2.5rem;font-weight:800;color:rgba(247,127,0,.2);margin-bottom:8px}.process-step h4{font-size:1.05rem;margin-bottom:8px}.process-step p{font-size:.9rem;color:#888}
-.cta-section{padding:80px 40px;text-align:center}.cta-section h2{font-size:2rem;margin-bottom:16px}.cta-section p{color:#aaa;font-size:1.05rem;max-width:550px;margin:0 auto 32px}.cta-btn{display:inline-block;background:#F77F00;color:#000;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;padding:16px 36px;border-radius:10px;transition:background .3s,transform .2s}.cta-btn:hover{background:#FF9A2E;transform:translateY(-2px)}
-.footer{padding:60px 40px 30px;border-top:1px solid rgba(255,255,255,.06)}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;max-width:1100px;margin:0 auto 40px}.footer-brand .logo{margin-bottom:12px}.footer-brand p{font-size:.9rem;color:#777;max-width:280px}.footer-col h4{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:16px;color:#F5F5F0}.footer-col a{display:block;font-size:.88rem;color:#777;margin-bottom:10px;transition:color .3s}.footer-col a:hover{color:#F77F00}.footer-bottom{max-width:1100px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:#555}.footer-bottom a{color:#666;margin-left:16px;transition:color .3s}.footer-bottom a:hover{color:#F77F00}
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
-@media(max-width:900px){.cat-layout{grid-template-columns:1fr;gap:24px}.cat-layout.reverse .cat-img-wrap{order:0}.cat-layout.reverse .cat-text{order:0}.footer-grid{grid-template-columns:1fr 1fr}.img-row{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){.navbar{padding:14px 20px}.navbar.scrolled{padding:10px 20px}.nav-links{display:none;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,.98);backdrop-filter:blur(20px);justify-content:center;align-items:center;gap:24px}.nav-links.open{display:flex}.hamburger{display:flex;z-index:1001}.page-hero{padding:130px 20px 60px}.page-hero h1{font-size:2rem}.cat-section,.cat-alt{padding:50px 20px}.materials-grid{grid-template-columns:1fr}.img-row{grid-template-columns:1fr}.img-row img{height:200px}.key-msg-box{padding:28px 20px}.footer-grid{grid-template-columns:1fr;gap:30px}.footer-bottom{flex-direction:column;gap:8px;text-align:center}.tabs-wrap{gap:6px}.tab-btn{font-size:.8rem;padding:8px 16px}.process-section,.cta-section{padding:60px 20px}}
-@media(max-width:480px){.process-steps{grid-template-columns:1fr}}
+/* selections: hero (the photo is BuilderK's own finished bathroom, as on the board) */
+.sel-hero { --hero-min: 660px; }
+.sel-hero .a5-hero-photo img { object-position: 50% 55%; }
+@media (max-width: 899px) { .sel-hero .a5-hero-photo img { object-position: 50% 60%; } }
+/* the longest button label on the site: a little smaller on the narrowest phones so it keeps its side padding */
+@media (max-width: 374px) { .sel-hero .a5-btn-hero { padding: 0 14px; gap: 8px; font-size: 20px; } }
 
-/* === FULL-SCREEN MOBILE MENU FIX === */
-@media (max-width: 1280px) {
-  body:has(.nav-links.open),
-  body:has(.nav-links.show) {
-    overflow: hidden;
-  }
+/* selections: fully customizable, then the category buttons */
+.sel-intro { padding-block: 72px; }
+.sel-key { max-width: 1040px; margin: 0 auto; padding: 36px 40px; border-radius: 18px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: grid; grid-template-columns: 72px minmax(0, 1fr); column-gap: 26px; align-items: center; }
+.sel-key .a5-icon { width: 72px; height: 72px; }
+.sel-key-text { display: flex; flex-direction: column; gap: 10px; }
+.sel-key-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.sel-key-text p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--a5-body); }
+.tabs-wrap { margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.tab-btn { height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid #D9D4CC; background: var(--a5-white); color: #3D3A36; font: 700 15.5px/1 var(--a5-sans); white-space: nowrap; cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+.tab-btn:hover { border-color: var(--a5-ink); color: var(--a5-ink); }
+.tab-btn.active { background: var(--a5-ink); border-color: var(--a5-ink); color: #FFFFFF; }
+.sel-note { margin: 18px 0 0; text-align: center; font-size: 14.5px; line-height: 1.5; color: var(--a5-muted); }
+@media (max-width: 899px) {
+  .sel-intro { padding-block: 40px; }
+  .sel-key { grid-template-columns: minmax(0, 1fr); row-gap: 12px; padding: 24px 20px; border-radius: 16px; }
+  .sel-key .a5-icon { width: 56px; height: 56px; }
+  .sel-key-title { font-size: 27px; }
+  .sel-key-text p { font-size: 15.5px; line-height: 1.55; }
+  .tabs-wrap { margin-top: 28px; justify-content: flex-start; gap: 8px; }
+  .tab-btn { height: 40px; padding: 0 16px; font-size: 14.5px; }
+  .sel-note { margin-top: 16px; text-align: left; font-size: 14px; }
+}
 
-  .navbar:has(.nav-links.open),
-  .navbar:has(.nav-links.show),
-  nav:has(.nav-links.open),
-  nav:has(.nav-links.show) {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    padding: 18px 20px !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    overflow: hidden !important;
-    z-index: 10000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
+/* selections: one section per category; every product card has its own photo */
+.sel-cat { padding-block: 88px; }
+.sel-cat-head { display: flex; flex-direction: column; gap: 16px; max-width: 780px; margin-bottom: 40px; }
+.sel-cat-head .a5-p { font-size: 17.5px; }
+.mat-grid { display: grid; gap: 16px; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.mat-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.mat-grid-7 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+.mat-grid-7 > :nth-child(-n+4) { grid-column: span 3; }
+.mat-grid-7 > :nth-child(n+5) { grid-column: span 4; }
+.mat-card { display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; background: var(--a5-white); border: 1px solid var(--a5-line); }
+.a5-bg-white .mat-card { background: var(--a5-paper); }
+.mat-photo { flex-shrink: 0; aspect-ratio: 3 / 2; border-radius: 0; }
+.mat-body { flex: 1 1 auto; display: flex; flex-direction: column; gap: 10px; padding: 20px 22px 20px; }
+.mat-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.mat-text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--a5-body); }
+.mat-tags { list-style: none; margin: auto 0 0; padding: 4px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.mat-tags li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: var(--a5-paper); border: 1px solid var(--a5-line); font-size: 12.5px; font-weight: 700; line-height: 1.3; color: #3D3A36; }
+.a5-bg-white .mat-tags li { background: var(--a5-white); }
+.mat-tags li::before { content: ""; flex-shrink: 0; width: 13px; height: 13px; background: no-repeat center / 13px 13px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+/* narrower computers: five cards in a row get too thin, so those sections use three */
+@media (max-width: 1279px) { .mat-grid-5 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1099px) {
+  .mat-grid-4, .mat-grid-7 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mat-grid-7 > :nth-child(n) { grid-column: auto; }
+}
+@media (max-width: 899px) {
+  .sel-cat { padding-block: 48px; }
+  .sel-cat-head { gap: 10px; margin-bottom: 22px; }
+  .sel-cat-head .a5-h2 { font-size: 42px; }
+  .sel-cat-head .a5-p { font-size: 15.5px; line-height: 1.55; }
+  .mat-grid, .mat-grid-4, .mat-grid-5, .mat-grid-7 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .mat-body { padding: 16px; gap: 8px; }
+}
+@media (max-width: 599px) { .mat-grid, .mat-grid-4, .mat-grid-5, .mat-grid-7 { grid-template-columns: minmax(0, 1fr); } }
 
-  .navbar:has(.nav-links.open) .nav-logo,
-  .navbar:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .nav-logo,
-  nav:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .logo,
-  nav:has(.nav-links.show) .logo {
-    position: fixed !important;
-    top: 22px !important;
-    left: 20px !important;
-    z-index: 10002 !important;
-  }
+/* selections: how the selection process works (the steps appear as the tape runs out, every 8 seconds while on screen) */
+.sel-process { padding-block: 96px; }
+.sel-process-head { display: flex; flex-direction: column; gap: 12px; max-width: 860px; margin-bottom: 40px; }
+.sel-steps-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; margin-bottom: 18px; }
+.sel-step { display: flex; flex-direction: column; gap: 8px; }
+.sel-step-num { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; line-height: 1.3; color: var(--a5-muted); }
+.sel-step h3 { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 25px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.sel-step p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--a5-body); }
+.sel-tape .ticks { background-image: repeating-linear-gradient(90deg, #1B1A18 0, #1B1A18 1.6px, transparent 1.6px, transparent 20px), repeating-linear-gradient(90deg, rgba(27, 26, 24, 0.8) 0, rgba(27, 26, 24, 0.8) 1px, transparent 1px, transparent 5px); background-size: 100% 26px, 100% 12px; background-repeat: no-repeat; }
+.sel-tape-nums { position: absolute; left: 18px; right: 0; top: 30px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1.15; color: #1B1A18; }
+.sel-tape-nums b, .sel-tape-y-nums b { font-weight: 800; }
+.sel-tape-nums b { padding-left: 6px; }
+.sel-tape-nums .hi span { padding: 0 5px; background: var(--a5-orange); }
+.sel-tape-y { display: none; width: 58px; }
+.sel-tape-y-nums { position: absolute; top: 16px; left: 0; right: 0; bottom: 0; display: grid; grid-template-rows: repeat(4, minmax(0, 1fr)); font-family: var(--a5-cond); font-size: 20px; line-height: 1; color: #1B1A18; }
+.sel-tape-y-nums b { padding: 22px 6px 0 0; text-align: right; }
+.sel-tape-y-nums .hi span { padding: 1px 4px; background: var(--a5-orange); }
+@media (max-width: 899px) {
+  .sel-process { padding-block: 48px 44px; }
+  .sel-process-head { gap: 8px; margin-bottom: 24px; }
+  .sel-process-head .a5-h2 { font-size: 42px; }
+  .sel-process-head .a5-p { font-size: 15.5px; line-height: 1.55; }
+  .sel-steps { display: grid; grid-template-columns: 58px minmax(0, 1fr); column-gap: 18px; }
+  .sel-tape-y { display: block; }
+  .sel-tape { display: none; }
+  .sel-steps-row { grid-template-columns: minmax(0, 1fr); row-gap: 28px; margin: 0; padding: 22px 0 8px; }
+  .sel-step { gap: 5px; }
+  .sel-step h3 { font-size: 27px; }
+  .sel-step p { font-size: 15px; line-height: 1.5; }
+}
 
-  .navbar:has(.nav-links.open) .nav-hamburger,
-  .navbar:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .nav-hamburger,
-  nav:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .mobile-menu,
-  nav:has(.nav-links.show) .mobile-menu {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 10003 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-links.open,
-  .navbar:has(.nav-links.show) .nav-links.show,
-  nav:has(.nav-links.open) .nav-links.open,
-  nav:has(.nav-links.show) .nav-links.show {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 96px 24px 48px !important;
-    overflow-y: auto !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
+/* selections: ready to start choosing */
+.sel-cta { padding-block: 104px; }
+.sel-cta-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.sel-cta .a5-h2 { font-size: clamp(44px, 4.6vw, 66px); }
+.sel-cta .a5-p { max-width: 620px; font-size: 18px; line-height: 1.55; }
+.sel-cta .a5-btn { margin-top: 6px; min-height: 62px; padding: 0 28px; font-size: 23px; }
+@media (max-width: 899px) {
+  .sel-cta { padding-block: 56px; }
+  .sel-cta-inner { gap: 14px; }
+  .sel-cta .a5-h2 { font-size: 42px; }
+  .sel-cta .a5-p { font-size: 16px; }
+  .sel-cta .a5-btn { width: 100%; min-height: 58px; font-size: 21px; margin-top: 4px; }
 }
 </style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<nav class="navbar" id="navbar">
- <a href="/" class="logo">BUILDER<span>K</span></a>
- <button type="button" class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
- <ul class="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
-</nav>
-
-<section class="page-hero">
- <div class="hero-badge reveal">Your Home, Your Choices</div>
- <h1 class="reveal">Interior Selections</h1>
- <p class="reveal">Every finish in your BuilderK home is chosen by you. From cabinets to countertops to the paint on the walls, we walk you through every decision so your home feels like yours from day one.</p>
- <a href="/interior-gallery" class="cta-btn reveal" style="margin-top:24px;display:inline-block;">View Our Interior Gallery</a>
+<main id="main">
+<section class="a5-hero sel-hero" aria-labelledby="sel-title">
+  <div class="a5-hero-photo"><img src="/images/projects/jobsite/s18.jpg" srcset="/images/projects/jobsite/strip/s18.webp 600w, /images/projects/jobsite/s18.jpg 1203w" sizes="(max-width: 899px) 100vw, 52vw" alt="Glass enclosed wet room with a freestanding tub, blue stone walls, pebble tile floor and brass fixtures." width="1203" height="1600" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">Your Home, Your Choices</div>
+      <h1 class="a5-h1" id="sel-title">Interior <span class="a5-accent">Selections</span></h1>
+      <p class="a5-hero-sub">Every finish in your BuilderK home is chosen by you. From cabinets to countertops to the paint on the walls, we walk you through every decision so your home feels like yours from day one.</p>
+      <div class="a5-hero-actions"><a class="a5-btn a5-btn-hero" href="/interior-gallery">View Our Interior Gallery <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </div>
+  </div>
 </section>
 
-<section class="key-msg reveal">
- <div class="key-msg-box">
- <h3>Fully Customizable at Every Build Level</h3>
- <p>Unlike other builders who lock you into curated packages, BuilderK lets you choose your own cabinets, countertops, flooring, fixtures, lighting, and paint at every build level. Your structure defines the tier. Your interior is always your call.</p>
- </div>
+<section class="a5-bg-white sel-intro" aria-labelledby="custom-title">
+  <div class="a5-wrap">
+    <div class="sel-key">
+      <svg width="72" height="72" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><ellipse cx="32" cy="58" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><g transform="rotate(-24 22 52)"><rect x="14" y="10" width="16" height="44" rx="3" fill="#FFFFFF" stroke="#6B7785" stroke-width="1.3"></rect><rect x="16" y="12" width="12" height="12" rx="2" fill="#3E8ED0"></rect><rect x="16" y="26" width="12" height="12" rx="2" fill="#7FB8E6"></rect><rect x="16" y="40" width="12" height="8" rx="2" fill="#C9E2F6"></rect></g><g transform="rotate(-6 30 54)"><rect x="24" y="8" width="16" height="46" rx="3" fill="#FFFFFF" stroke="#6B7785" stroke-width="1.3"></rect><rect x="26" y="10" width="12" height="12" rx="2" fill="#2FA36B"></rect><rect x="26" y="24" width="12" height="12" rx="2" fill="#7FD1A5"></rect><rect x="26" y="38" width="12" height="10" rx="2" fill="#CDEEDB"></rect></g><g transform="rotate(14 38 56)"><rect x="34" y="8" width="16" height="46" rx="3" fill="#FFFFFF" stroke="#6B7785" stroke-width="1.3"></rect><rect x="36" y="10" width="12" height="12" rx="2" fill="#F77F00"></rect><rect x="36" y="24" width="12" height="12" rx="2" fill="#FFB266"></rect><rect x="36" y="38" width="12" height="10" rx="2" fill="#FFE0BF"></rect></g><circle cx="27" cy="52" r="2.4" fill="#6B7785"></circle></svg>
+      <div class="sel-key-text">
+        <h2 class="sel-key-title" id="custom-title">Fully Customizable at Every Build Level</h2>
+        <p>Unlike other builders who lock you into curated packages, BuilderK lets you choose your own cabinets, countertops, flooring, fixtures, lighting, and paint at every build level. Your structure defines the tier. Your interior is always your call.</p>
+      </div>
+    </div>
+    <div class="tabs-wrap" role="group" aria-label="Jump to a selection category">
+      <button type="button" class="tab-btn active" onclick="scrollToCat('all')">All</button>
+      <button type="button" class="tab-btn" onclick="scrollToCat('kitchen')">Kitchen Cabinets</button>
+      <button type="button" class="tab-btn" onclick="scrollToCat('countertops')">Countertops</button>
+      <button type="button" class="tab-btn" onclick="scrollToCat('flooring')">Flooring</button>
+      <button type="button" class="tab-btn" onclick="scrollToCat('bathroom')">Bathroom</button>
+      <button type="button" class="tab-btn" onclick="scrollToCat('lighting')">Lighting</button>
+      <button type="button" class="tab-btn" onclick="scrollToCat('paint')">Paint & Walls</button>
+    </div>
+    <p class="sel-note">Photos show examples of each option.</p>
+  </div>
 </section>
 
-<section class="tabs-section">
- <div class="tabs-wrap">
- <button type="button" class="tab-btn active" onclick="scrollToCat('all')">All</button>
- <button type="button" class="tab-btn" onclick="scrollToCat('kitchen')">Kitchen Cabinets</button>
- <button type="button" class="tab-btn" onclick="scrollToCat('countertops')">Countertops</button>
- <button type="button" class="tab-btn" onclick="scrollToCat('flooring')">Flooring</button>
- <button type="button" class="tab-btn" onclick="scrollToCat('bathroom')">Bathroom</button>
- <button type="button" class="tab-btn" onclick="scrollToCat('lighting')">Lighting</button>
- <button type="button" class="tab-btn" onclick="scrollToCat('paint')">Paint & Walls</button>
- </div>
+<section class="sel-cat a5-bg-concrete" id="kitchen" aria-labelledby="kitchen-title">
+  <div class="a5-wrap">
+    <div class="sel-cat-head">
+      <h2 class="a5-h2" id="kitchen-title">Kitchen <span class="a5-hl">Cabinets</span></h2>
+      <p class="a5-p">The kitchen is the center of your home. We offer a full range of cabinet styles, door profiles, materials, and hardware so you can create the exact look you want, from clean modern flat panels to timeless shaker designs.</p>
+    </div>
+    <div class="mat-grid mat-grid-7">
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/01-shaker.webp" srcset="/images/selections/01-shaker-640.webp 640w, /images/selections/01-shaker.webp 1200w" sizes="(min-width: 1440px) 316px, (min-width: 1100px) 22vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="White shaker cabinet doors with black pulls in a bright kitchen" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Shaker Style</h3><p class="mat-text">The most popular door style in new construction. Clean recessed panels that work with any direction, farmhouse, transitional, or modern.</p><ul class="mat-tags"><li>Timeless</li><li>Versatile</li><li>Easy to clean</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/02-flat-panel.webp" srcset="/images/selections/02-flat-panel-640.webp 640w, /images/selections/02-flat-panel.webp 1200w" sizes="(min-width: 1440px) 316px, (min-width: 1100px) 22vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Flat slab cabinet doors with no handles in a sunlit modern kitchen with a large window" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Flat Panel (Slab)</h3><p class="mat-text">Smooth, frameless doors for a sleek minimalist look. A favorite for modern and contemporary kitchens. No grooves, no detail, just clean surfaces.</p><ul class="mat-tags"><li>Modern</li><li>Minimalist</li><li>Sleek</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/03-raised-panel.webp" srcset="/images/selections/03-raised-panel-640.webp 640w, /images/selections/03-raised-panel.webp 1200w" sizes="(min-width: 1440px) 316px, (min-width: 1100px) 22vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Cream raised panel cabinets around a stone topped island with three glass pendants" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Raised Panel</h3><p class="mat-text">A center panel raised above the frame for a classic, elegant feel. Perfect for traditional and Mediterranean influenced Florida homes.</p><ul class="mat-tags"><li>Classic elegance</li><li>Detailed</li><li>Traditional</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/04-glass-front.webp" srcset="/images/selections/04-glass-front-640.webp 640w, /images/selections/04-glass-front.webp 1200w" sizes="(min-width: 1440px) 316px, (min-width: 1100px) 22vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Black framed glass front upper cabinets with lit shelves of white dishes" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Glass Front Inserts</h3><p class="mat-text">Mix solid and glass front doors to display dishes or add depth. Available in clear, frosted, seeded, or textured glass.</p><ul class="mat-tags"><li>Visual depth</li><li>Display storage</li><li>Custom</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/05-thermofoil.webp" srcset="/images/selections/05-thermofoil-640.webp 640w, /images/selections/05-thermofoil.webp 1200w" sizes="(min-width: 1440px) 427px, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Smooth white gloss slab cabinets with long black pulls and a stainless range hood" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Thermofoil (MDF Core)</h3><p class="mat-text">A vinyl layer bonded to MDF. Resistant to moisture and easy to maintain, ideal for Florida's humidity. Comes in dozens of colors and finishes.</p><ul class="mat-tags"><li>Moisture resistant</li><li>Low maintenance</li><li>Many colors</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/06-solid-hardwood.webp" srcset="/images/selections/06-solid-hardwood-640.webp 640w, /images/selections/06-solid-hardwood.webp 1200w" sizes="(min-width: 1440px) 427px, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Natural wood cabinets and island in an open kitchen with a wood plank ceiling" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Solid Hardwood</h3><p class="mat-text">Real maple, birch, or oak cabinets with natural grain and lasting durability. Can be stained, painted, or left natural. The premium choice.</p><ul class="mat-tags"><li>Natural beauty</li><li>Durable</li><li>Refinishable</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/07-soft-close.webp" srcset="/images/selections/07-soft-close-640.webp 640w, /images/selections/07-soft-close.webp 1200w" sizes="(min-width: 1440px) 427px, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Open white drawers on full extension runners with a utensil organizer" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Soft Close Everything</h3><p class="mat-text">Every cabinet comes with soft close hinges and full extension drawers as standard. No slamming, full access to the back of every drawer.</p><ul class="mat-tags"><li>Quiet close</li><li>Full access</li><li>Standard</li></ul></div>
+      </article>
+    </div>
+  </div>
 </section>
 
-<!-- KITCHEN CABINETS -->
-<section class="cat-section" id="kitchen">
- <div class="cat-layout reveal">
- <div class="cat-img-wrap">
- <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop&q=80" alt="Modern kitchen with white shaker cabinets and island" loading="lazy">
- </div>
- <div class="cat-text">
- <h2>Kitchen Cabinets</h2>
- <p>The kitchen is the center of your home. We offer a full range of cabinet styles, door profiles, materials, and hardware so you can create the exact look you want, from clean modern flat panels to timeless shaker designs.</p>
- </div>
- </div>
- <div class="materials-grid">
- <div class="mat-card reveal">
- <h4>Shaker Style</h4>
- <p>The most popular door style in new construction. Clean recessed panels that work with any direction, farmhouse, transitional, or modern.</p>
- <div class="advantages"><span>Timeless</span><span>Versatile</span><span>Easy to clean</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Flat Panel (Slab)</h4>
- <p>Smooth, frameless doors for a sleek minimalist look. A favorite for modern and contemporary kitchens. No grooves, no detail, just clean surfaces.</p>
- <div class="advantages"><span>Modern</span><span>Minimalist</span><span>Sleek</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Raised Panel</h4>
- <p>A center panel raised above the frame for a classic, elegant feel. Perfect for traditional and Mediterranean influenced Florida homes.</p>
- <div class="advantages"><span>Classic elegance</span><span>Detailed</span><span>Traditional</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Glass Front Inserts</h4>
- <p>Mix solid and glass front doors to display dishes or add depth. Available in clear, frosted, seeded, or textured glass.</p>
- <div class="advantages"><span>Visual depth</span><span>Display storage</span><span>Custom</span></div>
- </div>
- </div>
- <div class="materials-grid">
- <div class="mat-card reveal">
- <h4>Thermofoil (MDF Core)</h4>
- <p>A vinyl layer bonded to MDF. Resistant to moisture and easy to maintain, ideal for Florida's humidity. Comes in dozens of colors and finishes.</p>
- <div class="advantages"><span>Moisture resistant</span><span>Low maintenance</span><span>Many colors</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Solid Hardwood</h4>
- <p>Real maple, birch, or oak cabinets with natural grain and lasting durability. Can be stained, painted, or left natural. The premium choice.</p>
- <div class="advantages"><span>Natural beauty</span><span>Durable</span><span>Refinishable</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Soft Close Everything</h4>
- <p>Every cabinet comes with soft close hinges and full extension drawers as standard. No slamming, full access to the back of every drawer.</p>
- <div class="advantages"><span>Quiet close</span><span>Full access</span><span>Standard</span></div>
- </div>
- </div>
- <div class="img-row reveal">
- <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=350&fit=crop&q=80" alt="White shaker kitchen with island" loading="lazy">
- <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=350&fit=crop&q=80" alt="Modern flat panel kitchen" loading="lazy">
- <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=500&h=350&fit=crop&q=80" alt="Kitchen with wood and white cabinets" loading="lazy">
- </div>
+<section class="sel-cat a5-bg-white" id="countertops" aria-labelledby="countertops-title">
+  <div class="a5-wrap">
+    <div class="sel-cat-head">
+      <h2 class="a5-h2" id="countertops-title"><span class="a5-hl">Countertops</span></h2>
+      <p class="a5-p">Your countertops set the tone for kitchens and bathrooms. We offer everything from engineered quartz to natural stone, each with different durability, maintenance, and aesthetic profiles perfectly suited for Florida living.</p>
+    </div>
+    <div class="mat-grid mat-grid-4">
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/08-quartz.webp" srcset="/images/selections/08-quartz-640.webp 640w, /images/selections/08-quartz.webp 1200w" sizes="(min-width: 1440px) 316px, (min-width: 1100px) 22vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Bright white countertop with an undermount sink and a tall chrome faucet" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Quartz (Engineered Stone)</h3><p class="mat-text">Nonporous, resistant to stains, and easy to maintain. Consistent patterns throughout the slab. Handles Florida's humidity perfectly, no sealing required, ever.</p><ul class="mat-tags"><li>Nonporous</li><li>Stain resistant</li><li>No sealing</li><li>Humidity proof</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/09-granite.webp" srcset="/images/selections/09-granite-640.webp 640w, /images/selections/09-granite.webp 1200w" sizes="(min-width: 1440px) 316px, (min-width: 1100px) 22vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Speckled stone countertop with a double sink in a white kitchen" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Granite (Natural Stone)</h3><p class="mat-text">Every slab is unique with natural veining and depth. Extremely resistant to heat, set a hot pan right on it. Hundreds of colors from subtle to dramatic. Needs annual sealing.</p><ul class="mat-tags"><li>Made for You</li><li>Heat resistant</li><li>Natural beauty</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/10-quartzite.webp" srcset="/images/selections/10-quartzite-640.webp 640w, /images/selections/10-quartzite.webp 1200w" sizes="(min-width: 1440px) 316px, (min-width: 1100px) 22vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="White stone countertops with long gray veins next to green shaker cabinets" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Quartzite (Natural)</h3><p class="mat-text">Looks like marble but performs like granite. Incredible veining with the hardness to handle daily kitchen use. The choice for those who want natural beauty without the softness of marble.</p><ul class="mat-tags"><li>Marble look</li><li>Granite strength</li><li>Stunning veining</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/11-marble.webp" srcset="/images/selections/11-marble-640.webp 640w, /images/selections/11-marble.webp 1200w" sizes="(min-width: 1440px) 316px, (min-width: 1100px) 22vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="White waterfall island with bold gray veining under three pendant lights" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Marble</h3><p class="mat-text">Timeless elegance with dramatic veining. Softer than granite, it develops a beautiful patina over time. Best for bathrooms, feature islands, and lovers of comfortable luxury.</p><ul class="mat-tags"><li>Timeless</li><li>Dramatic veining</li><li>Luxury feel</li></ul></div>
+      </article>
+    </div>
+  </div>
 </section>
 
-<!-- COUNTERTOPS -->
-<section class="cat-alt" id="countertops">
- <div class="cat-wrap">
- <div class="cat-layout reverse reveal">
- <div class="cat-img-wrap">
- <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop&q=80" alt="Kitchen with quartz countertops" loading="lazy">
- </div>
- <div class="cat-text">
- <h2>Countertops</h2>
- <p>Your countertops set the tone for kitchens and bathrooms. We offer everything from engineered quartz to natural stone, each with different durability, maintenance, and aesthetic profiles perfectly suited for Florida living.</p>
- </div>
- </div>
- <div class="materials-grid">
- <div class="mat-card reveal">
- <h4>Quartz (Engineered Stone)</h4>
- <p>Nonporous, resistant to stains, and easy to maintain. Consistent patterns throughout the slab. Handles Florida's humidity perfectly, no sealing required, ever.</p>
- <div class="advantages"><span>Nonporous</span><span>Stain resistant</span><span>No sealing</span><span>Humidity proof</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Granite (Natural Stone)</h4>
- <p>Every slab is unique with natural veining and depth. Extremely resistant to heat, set a hot pan right on it. Hundreds of colors from subtle to dramatic. Needs annual sealing.</p>
- <div class="advantages"><span>Made for You</span><span>Heat resistant</span><span>Natural beauty</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Quartzite (Natural)</h4>
- <p>Looks like marble but performs like granite. Incredible veining with the hardness to handle daily kitchen use. The choice for those who want natural beauty without the softness of marble.</p>
- <div class="advantages"><span>Marble look</span><span>Granite strength</span><span>Stunning veining</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Marble</h4>
- <p>Timeless elegance with dramatic veining. Softer than granite, it develops a beautiful patina over time. Best for bathrooms, feature islands, and lovers of comfortable luxury.</p>
- <div class="advantages"><span>Timeless</span><span>Dramatic veining</span><span>Luxury feel</span></div>
- </div>
- </div>
- <div class="img-row reveal">
- <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=500&h=350&fit=crop&q=80" alt="White quartz countertop" loading="lazy">
- <img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=500&h=350&fit=crop&q=80" alt="Granite countertop detail" loading="lazy">
- <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=500&h=350&fit=crop&q=80" alt="Waterfall countertop island" loading="lazy">
- </div>
- </div>
+<section class="sel-cat a5-bg-concrete" id="flooring" aria-labelledby="flooring-title">
+  <div class="a5-wrap">
+    <div class="sel-cat-head">
+      <h2 class="a5-h2" id="flooring-title"><span class="a5-hl">Flooring</span></h2>
+      <p class="a5-p">Florida homes need flooring that handles humidity, heavy foot traffic, and still looks amazing years later. We help you pick the right material for every room, from living areas to wet spaces.</p>
+    </div>
+    <div class="mat-grid mat-grid-5">
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/12-lvp.webp" srcset="/images/selections/12-lvp-640.webp 640w, /images/selections/12-lvp.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Wood look plank floor across a bright, empty room" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Luxury Vinyl Plank (LVP)</h3><p class="mat-text">The #1 choice for Florida new construction. 100% waterproof, resistant to scratches, and available in incredibly realistic wood and stone looks. Comfortable underfoot and easy to maintain.</p><ul class="mat-tags"><li>100% waterproof</li><li>Scratch resistant</li><li>Realistic textures</li><li>Florida #1</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/13-porcelain-tile.webp" srcset="/images/selections/13-porcelain-tile-640.webp 640w, /images/selections/13-porcelain-tile.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Large glossy white floor tiles with gray veining in a formal room" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Porcelain Tile</h3><p class="mat-text">Large Format porcelain (24x24 or 12x48 plank) is the classic Florida flooring. Extremely durable, water resistant, available in wood look, marble look, and concrete finishes.</p><ul class="mat-tags"><li>Extremely durable</li><li>Water resistant</li><li>Large formats</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/14-ceramic-tile.webp" srcset="/images/selections/14-ceramic-tile-640.webp 640w, /images/selections/14-ceramic-tile.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Gray and white patterned floor tile in a kitchen with wood cabinets" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Ceramic Tile</h3><p class="mat-text">Versatile and reliable for bathrooms, laundry, and wet areas. Endless patterns, colors, and sizes including subway, hexagon, and decorative mosaics.</p><ul class="mat-tags"><li>Versatile</li><li>Wet area ideal</li><li>Many patterns</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/15-engineered-hardwood.webp" srcset="/images/selections/15-engineered-hardwood-640.webp 640w, /images/selections/15-engineered-hardwood.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Light wood plank floor in a sunlit dining area with tall windows" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Engineered Hardwood</h3><p class="mat-text">Real wood veneer over a stable plywood core. More resistant to moisture than solid hardwood. Beautiful natural warmth for bedrooms and living areas in climate controlled spaces.</p><ul class="mat-tags"><li>Real wood</li><li>Natural warmth</li><li>Stable in humidity</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/16-travertine.webp" srcset="/images/selections/16-travertine-640.webp 640w, /images/selections/16-travertine.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Tumbled stone pavers around a spa and pool with two lounge chairs" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Natural Stone (Travertine)</h3><p class="mat-text">Imported travertine or marble tile for a truly unique floor. Warm tones and Old World character, especially popular in Florida for its Mediterranean feel.</p><ul class="mat-tags"><li>Unique character</li><li>Warm tones</li><li>Premium</li></ul></div>
+      </article>
+    </div>
+  </div>
 </section>
 
-<!-- FLOORING -->
-<section class="cat-section" id="flooring">
- <div class="cat-layout reveal">
- <div class="cat-img-wrap">
- <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&h=600&fit=crop&q=80" alt="Modern living room with luxury vinyl plank flooring" loading="lazy">
- </div>
- <div class="cat-text">
- <h2>Flooring</h2>
- <p>Florida homes need flooring that handles humidity, heavy foot traffic, and still looks amazing years later. We help you pick the right material for every room, from living areas to wet spaces.</p>
- </div>
- </div>
- <div class="materials-grid">
- <div class="mat-card reveal">
- <h4>Luxury Vinyl Plank (LVP)</h4>
- <p>The #1 choice for Florida new construction. 100% waterproof, resistant to scratches, and available in incredibly realistic wood and stone looks. Comfortable underfoot and easy to maintain.</p>
- <div class="advantages"><span>100% waterproof</span><span>Scratch resistant</span><span>Realistic textures</span><span>Florida #1</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Porcelain Tile</h4>
- <p>Large Format porcelain (24x24 or 12x48 plank) is the classic Florida flooring. Extremely durable, water resistant, available in wood look, marble look, and concrete finishes.</p>
- <div class="advantages"><span>Extremely durable</span><span>Water resistant</span><span>Large formats</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Ceramic Tile</h4>
- <p>Versatile and reliable for bathrooms, laundry, and wet areas. Endless patterns, colors, and sizes including subway, hexagon, and decorative mosaics.</p>
- <div class="advantages"><span>Versatile</span><span>Wet area ideal</span><span>Many patterns</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Engineered Hardwood</h4>
- <p>Real wood veneer over a stable plywood core. More resistant to moisture than solid hardwood. Beautiful natural warmth for bedrooms and living areas in climate controlled spaces.</p>
- <div class="advantages"><span>Real wood</span><span>Natural warmth</span><span>Stable in humidity</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Natural Stone (Travertine)</h4>
- <p>Imported travertine or marble tile for a truly unique floor. Warm tones and Old World character, especially popular in Florida for its Mediterranean feel.</p>
- <div class="advantages"><span>Unique character</span><span>Warm tones</span><span>Premium</span></div>
- </div>
- </div>
- <div class="img-row reveal">
- <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=500&h=350&fit=crop&q=80" alt="Living room with vinyl plank flooring" loading="lazy">
- <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=500&h=350&fit=crop&q=80" alt="Porcelain tile modern home" loading="lazy">
- <img src="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?w=500&h=350&fit=crop&q=80" alt="Engineered hardwood floor" loading="lazy">
- </div>
+<section class="sel-cat a5-bg-white" id="bathroom" aria-labelledby="bathroom-title">
+  <div class="a5-wrap">
+    <div class="sel-cat-head">
+      <h2 class="a5-h2" id="bathroom-title">Bathroom <span class="a5-hl">Fixtures</span> & Finishes</h2>
+      <p class="a5-p">From the master bath to guest powder rooms, every fixture and finish is selected by you. Vanities, shower systems, tubs, tile, and hardware, we help you create the bathroom you've always wanted.</p>
+    </div>
+    <div class="mat-grid mat-grid-5">
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/17-walk-in-shower.webp" srcset="/images/selections/17-walk-in-shower-640.webp 640w, /images/selections/17-walk-in-shower.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Walk in shower with a frameless glass panel, marble look walls and black fixtures" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Walk In Showers</h3><p class="mat-text">Custom Tile walk in showers with frameless glass enclosures. Choose your tile, niche placement, bench style, and showerhead. From compact to spa inspired.</p><ul class="mat-tags"><li>Custom tile</li><li>Frameless glass</li><li>Built in niches</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/18-freestanding-tub.webp" srcset="/images/selections/18-freestanding-tub-640.webp 640w, /images/selections/18-freestanding-tub.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Oval freestanding tub with a floor mounted filler below shuttered windows" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Freestanding Tubs</h3><p class="mat-text">A statement piece for your master bath. Acrylic, cast iron, or stone resin. From classic clawfoot to modern sculptural shapes. We help you pick the right size for your space.</p><ul class="mat-tags"><li>Statement piece</li><li>Multiple styles</li><li>Spa feel</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/19-vanity.webp" srcset="/images/selections/19-vanity-640.webp 640w, /images/selections/19-vanity.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Double vanity with two sinks, oval mirrors and black faucets" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Vanities & Sinks</h3><p class="mat-text">Single or double vanities, floating, freestanding, or built in. Pair with vessel sinks, undermount, or integrated basins. Coordinate with your countertop and cabinet choices.</p><ul class="mat-tags"><li>Custom configs</li><li>Multiple styles</li><li>Coordinated</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/20-hardware-finishes.webp" srcset="/images/selections/20-hardware-finishes-640.webp 640w, /images/selections/20-hardware-finishes.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Matte black faucet with a knurled brass spray head over a white stone counter" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Hardware Finishes</h3><p class="mat-text">Chrome, brushed nickel, matte black, brushed gold, or oil rubbed bronze. Every faucet, showerhead, towel bar, and accessory is coordinated to your chosen finish.</p><ul class="mat-tags"><li>5+ finishes</li><li>Coordinated sets</li><li>Quality brands</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/21-shower-system.webp" srcset="/images/selections/21-shower-system-640.webp 640w, /images/selections/21-shower-system.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Shower with a ceiling rain head, a handheld sprayer and a digital control panel in matte black" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Shower Systems</h3><p class="mat-text">Standard showerheads, rain showers, handheld combos, or full body jet systems. Thermostatic valves for precise temperature control. Built for daily comfort.</p><ul class="mat-tags"><li>Rain showers</li><li>Body jets</li><li>Thermostatic</li></ul></div>
+      </article>
+    </div>
+  </div>
 </section>
 
-<!-- BATHROOM -->
-<section class="cat-alt" id="bathroom">
- <div class="cat-wrap">
- <div class="cat-layout reverse reveal">
- <div class="cat-img-wrap">
- <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?w=800&h=600&fit=crop&q=80" alt="Modern bathroom with freestanding tub" loading="lazy">
- </div>
- <div class="cat-text">
- <h2>Bathroom Fixtures & Finishes</h2>
- <p>From the master bath to guest powder rooms, every fixture and finish is selected by you. Vanities, shower systems, tubs, tile, and hardware, we help you create the bathroom you've always wanted.</p>
- </div>
- </div>
- <div class="materials-grid">
- <div class="mat-card reveal">
- <h4>Walk In Showers</h4>
- <p>Custom Tile walk in showers with frameless glass enclosures. Choose your tile, niche placement, bench style, and showerhead. From compact to spa inspired.</p>
- <div class="advantages"><span>Custom tile</span><span>Frameless glass</span><span>Built in niches</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Freestanding Tubs</h4>
- <p>A statement piece for your master bath. Acrylic, cast iron, or stone resin. From classic clawfoot to modern sculptural shapes. We help you pick the right size for your space.</p>
- <div class="advantages"><span>Statement piece</span><span>Multiple styles</span><span>Spa feel</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Vanities & Sinks</h4>
- <p>Single or double vanities, floating, freestanding, or built in. Pair with vessel sinks, undermount, or integrated basins. Coordinate with your countertop and cabinet choices.</p>
- <div class="advantages"><span>Custom configs</span><span>Multiple styles</span><span>Coordinated</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Hardware Finishes</h4>
- <p>Chrome, brushed nickel, matte black, brushed gold, or oil rubbed bronze. Every faucet, showerhead, towel bar, and accessory is coordinated to your chosen finish.</p>
- <div class="advantages"><span>5+ finishes</span><span>Coordinated sets</span><span>Quality brands</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Shower Systems</h4>
- <p>Standard showerheads, rain showers, handheld combos, or full body jet systems. Thermostatic valves for precise temperature control. Built for daily comfort.</p>
- <div class="advantages"><span>Rain showers</span><span>Body jets</span><span>Thermostatic</span></div>
- </div>
- </div>
- <div class="img-row reveal">
- <img src="https://images.unsplash.com/photo-1600566752547-33fc0426e68c?w=500&h=350&fit=crop&q=80" alt="Walk in shower glass enclosure" loading="lazy">
- <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=350&fit=crop&q=80" alt="Modern bathroom vanity" loading="lazy">
- <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=500&h=350&fit=crop&q=80" alt="Freestanding bathtub modern" loading="lazy">
- </div>
- </div>
+<section class="sel-cat a5-bg-concrete" id="lighting" aria-labelledby="lighting-title">
+  <div class="a5-wrap">
+    <div class="sel-cat-head">
+      <h2 class="a5-h2" id="lighting-title"><span class="a5-hl">Lighting</span></h2>
+      <p class="a5-p">Lighting transforms how every room feels. We plan every fixture with you, recessed cans, under cabinet LEDs, statement pendants, and exterior landscape lighting. A complete plan is part of your build.</p>
+    </div>
+    <div class="mat-grid mat-grid-5">
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/22-recessed-lights.webp" srcset="/images/selections/22-recessed-lights-640.webp 640w, /images/selections/22-recessed-lights.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Rows of recessed ceiling lights over an open living room and kitchen" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Recessed LED Cans</h3><p class="mat-text">The foundation of any lighting plan. Energy Efficient LEDs placed for even, shadowless light. Adjustable color temps from warm (2700K) to daylight (5000K).</p><ul class="mat-tags"><li>Energy efficient</li><li>Even coverage</li><li>Adjustable warmth</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/23-pendants.webp" srcset="/images/selections/23-pendants-640.webp 640w, /images/selections/23-pendants.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Brass dome pendants over a white kitchen island with a lantern chandelier beyond" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Pendants & Chandeliers</h3><p class="mat-text">Statement fixtures over kitchen islands, dining tables, and entryways. Hundreds of styles from industrial to coastal to very modern. The pieces people notice first.</p><ul class="mat-tags"><li>Statement pieces</li><li>Hundreds of styles</li><li>Focal points</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/24-under-cabinet.webp" srcset="/images/selections/24-under-cabinet-640.webp 640w, /images/selections/24-under-cabinet.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Warm LED strip lighting the backsplash under dark glass upper cabinets" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Under Cabinet & Task Lighting</h3><p class="mat-text">LED strips under kitchen cabinets, inside pantries, and in closets. Functional light exactly where you need it for cooking, prepping, and daily life.</p><ul class="mat-tags"><li>Functional</li><li>Hidden install</li><li>LED strips</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/25-exterior-lighting.webp" srcset="/images/selections/25-exterior-lighting-640.webp 640w, /images/selections/25-exterior-lighting.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="House at dusk with lit coach lights, a lamp post and glowing windows" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Exterior & Landscape</h3><p class="mat-text">Coach lights at entries, soffit lights, pathway lighting, and palm tree uplighting. Designed for Florida's outdoor living lifestyle and serious curb appeal.</p><ul class="mat-tags"><li>Curb appeal</li><li>Security</li><li>Outdoor living</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/26-smart-controls.webp" srcset="/images/selections/26-smart-controls-640.webp 640w, /images/selections/26-smart-controls.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Smart keypad light switch with on, off and dimming buttons beside a door" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Smart Controls & Dimmers</h3><p class="mat-text">Dimmer switches, smart systems (Lutron Caseta), and scene controls. Set the mood for dinner, movies, or mornings. Control from your phone or voice assistant.</p><ul class="mat-tags"><li>App control</li><li>Scene presets</li><li>Voice compatible</li></ul></div>
+      </article>
+    </div>
+  </div>
 </section>
 
-<!-- LIGHTING -->
-<section class="cat-section" id="lighting">
- <div class="cat-layout reveal">
- <div class="cat-img-wrap">
- <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop&q=80" alt="Kitchen with designer pendant lighting" loading="lazy">
- </div>
- <div class="cat-text">
- <h2>Lighting</h2>
- <p>Lighting transforms how every room feels. We plan every fixture with you, recessed cans, under cabinet LEDs, statement pendants, and exterior landscape lighting. A complete plan is part of your build.</p>
- </div>
- </div>
- <div class="materials-grid">
- <div class="mat-card reveal">
- <h4>Recessed LED Cans</h4>
- <p>The foundation of any lighting plan. Energy Efficient LEDs placed for even, shadowless light. Adjustable color temps from warm (2700K) to daylight (5000K).</p>
- <div class="advantages"><span>Energy efficient</span><span>Even coverage</span><span>Adjustable warmth</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Pendants & Chandeliers</h4>
- <p>Statement fixtures over kitchen islands, dining tables, and entryways. Hundreds of styles from industrial to coastal to very modern. The pieces people notice first.</p>
- <div class="advantages"><span>Statement pieces</span><span>Hundreds of styles</span><span>Focal points</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Under Cabinet & Task Lighting</h4>
- <p>LED strips under kitchen cabinets, inside pantries, and in closets. Functional light exactly where you need it for cooking, prepping, and daily life.</p>
- <div class="advantages"><span>Functional</span><span>Hidden install</span><span>LED strips</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Exterior & Landscape</h4>
- <p>Coach lights at entries, soffit lights, pathway lighting, and palm tree uplighting. Designed for Florida's outdoor living lifestyle and serious curb appeal.</p>
- <div class="advantages"><span>Curb appeal</span><span>Security</span><span>Outdoor living</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Smart Controls & Dimmers</h4>
- <p>Dimmer switches, smart systems (Lutron Caseta), and scene controls. Set the mood for dinner, movies, or mornings. Control from your phone or voice assistant.</p>
- <div class="advantages"><span>App control</span><span>Scene presets</span><span>Voice compatible</span></div>
- </div>
- </div>
+<section class="sel-cat a5-bg-white" id="paint" aria-labelledby="paint-title">
+  <div class="a5-wrap">
+    <div class="sel-cat-head">
+      <h2 class="a5-h2" id="paint-title"><span class="a5-hl">Paint</span> & Wall Finishes</h2>
+      <p class="a5-p">Color sets the mood of every room. Beyond paint, we offer accent wall treatments, shiplap, board & batten, wainscoting, and stone, to give your home personality and architectural texture.</p>
+    </div>
+    <div class="mat-grid mat-grid-5">
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/27-interior-paint.webp" srcset="/images/selections/27-interior-paint-640.webp 640w, /images/selections/27-interior-paint.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Bedroom with blue gray walls, white trim and a tray ceiling" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Interior Paint (Sherwin Williams)</h3><p class="mat-text">Choose any color from the full Sherwin Williams palette. Eggshell finish on walls for a soft, washable surface. Semi gloss on trim, doors, and wet areas for durability.</p><ul class="mat-tags"><li>Any color</li><li>Washable eggshell</li><li>Semi gloss trim</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/28-shiplap.webp" srcset="/images/selections/28-shiplap-640.webp 640w, /images/selections/28-shiplap.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="White horizontal shiplap wall in a breakfast nook with a round table" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Shiplap Accent Walls</h3><p class="mat-text">Horizontal or vertical boards on a feature wall. Creates texture and depth that flat paint can't achieve. Paintable in any color. Popular in living rooms, bedrooms, and offices.</p><ul class="mat-tags"><li>Texture & depth</li><li>Feature wall</li><li>Paintable</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/29-board-and-batten.webp" srcset="/images/selections/29-board-and-batten-640.webp 640w, /images/selections/29-board-and-batten.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Full height white board and batten wall panels in a sunny dining room" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Board & Batten</h3><p class="mat-text">Vertical battens applied to walls or at wainscoting height. Adds architectural detail to hallways, dining rooms, and bedrooms. Classic, elegant, and makes ceilings feel taller.</p><ul class="mat-tags"><li>Architectural</li><li>Visual height</li><li>Elegant</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/30-crown-molding.webp" srcset="/images/selections/30-crown-molding-640.webp 640w, /images/selections/30-crown-molding.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="Close view of layered white crown molding along a ceiling" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Crown Molding & Trim</h3><p class="mat-text">Crown molding, chair rail, and upgraded baseboards take your home from basic builder finishes to custom finishes. Available in modern clean profiles or ornate traditional styles.</p><ul class="mat-tags"><li>Finished feel</li><li>Custom profiles</li><li>Elevated look</li></ul></div>
+      </article>
+      <article class="mat-card">
+        <div class="a5-photo mat-photo"><img src="/images/selections/31-coffered-ceiling.webp" srcset="/images/selections/31-coffered-ceiling-640.webp 640w, /images/selections/31-coffered-ceiling.webp 1200w" sizes="(min-width: 1440px) 250px, (min-width: 1280px) 17vw, (min-width: 900px) 30vw, (min-width: 600px) 50vw, 100vw" alt="White coffered ceiling beams with gray panels over a living room with a fireplace" width="1200" height="800" loading="lazy" decoding="async"></div>
+        <div class="mat-body"><h3 class="mat-title">Coffered Ceilings & Niches</h3><p class="mat-text">Coffered or tray ceilings add dimension overhead. Recessed wall niches create display areas. These architectural details make your home feel truly designed, not just built.</p><ul class="mat-tags"><li>Dimension</li><li>Architectural</li><li>Custom feel</li></ul></div>
+      </article>
+    </div>
+  </div>
 </section>
 
-<!-- PAINT & WALLS -->
-<section class="cat-alt" id="paint">
- <div class="cat-wrap">
- <div class="cat-layout reverse reveal">
- <div class="cat-img-wrap">
- <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=800&h=600&fit=crop&q=80" alt="Living room with accent wall" loading="lazy">
- </div>
- <div class="cat-text">
- <h2>Paint & Wall Finishes</h2>
- <p>Color sets the mood of every room. Beyond paint, we offer accent wall treatments, shiplap, board & batten, wainscoting, and stone, to give your home personality and architectural texture.</p>
- </div>
- </div>
- <div class="materials-grid">
- <div class="mat-card reveal">
- <h4>Interior Paint (Sherwin Williams)</h4>
- <p>Choose any color from the full Sherwin Williams palette. Eggshell finish on walls for a soft, washable surface. Semi gloss on trim, doors, and wet areas for durability.</p>
- <div class="advantages"><span>Any color</span><span>Washable eggshell</span><span>Semi gloss trim</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Shiplap Accent Walls</h4>
- <p>Horizontal or vertical boards on a feature wall. Creates texture and depth that flat paint can't achieve. Paintable in any color. Popular in living rooms, bedrooms, and offices.</p>
- <div class="advantages"><span>Texture & depth</span><span>Feature wall</span><span>Paintable</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Board & Batten</h4>
- <p>Vertical battens applied to walls or at wainscoting height. Adds architectural detail to hallways, dining rooms, and bedrooms. Classic, elegant, and makes ceilings feel taller.</p>
- <div class="advantages"><span>Architectural</span><span>Visual height</span><span>Elegant</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Crown Molding & Trim</h4>
- <p>Crown molding, chair rail, and upgraded baseboards take your home from basic builder finishes to custom finishes. Available in modern clean profiles or ornate traditional styles.</p>
- <div class="advantages"><span>Finished feel</span><span>Custom profiles</span><span>Elevated look</span></div>
- </div>
- <div class="mat-card reveal">
- <h4>Coffered Ceilings & Niches</h4>
- <p>Coffered or tray ceilings add dimension overhead. Recessed wall niches create display areas. These architectural details make your home feel truly designed, not just built.</p>
- <div class="advantages"><span>Dimension</span><span>Architectural</span><span>Custom feel</span></div>
- </div>
- </div>
- </div>
+<section class="sel-process a5-bg-concrete" aria-labelledby="process-title">
+  <div class="a5-wrap">
+    <div class="sel-process-head">
+      <h2 class="a5-h2" id="process-title">How the <span class="a5-hl">Selection</span> Process Works</h2>
+      <p class="a5-p">We walk you through every decision so nothing is rushed and nothing is missed.</p>
+    </div>
+    <div class="sel-steps" data-a5-loop>
+      <div class="a5-tapebar-y a5-tape-y sel-tape-y" aria-hidden="true"><i class="hook"></i><i class="ticks"></i><div class="sel-tape-y-nums"><b><span>1</span></b><b><span>2</span></b><b><span>3</span></b><b class="hi"><span>4</span></b></div></div>
+      <div class="sel-steps-body"><div class="sel-steps-row"><div class="sel-step a5-step-a"><div class="sel-step-num">01</div><h3>Design Consultation</h3><p>Discuss your style and priorities for each room with our team.</p></div><div class="sel-step a5-step-b"><div class="sel-step-num">02</div><h3>Online Selections Portal</h3><p>You get access to your BuilderK client portal, where you review every option and select all your finishes.</p></div><div class="sel-step a5-step-c"><div class="sel-step-num">03</div><h3>Review & Finalize</h3><p>We provide a complete selections sheet. Review everything together before construction begins.</p></div><div class="sel-step a5-step-d"><div class="sel-step-num">04</div><h3>Installed with Care</h3><p>Every selection is installed by licensed tradespeople and inspected by our team for quality.</p></div></div><div class="a5-tapebar a5-tape-x sel-tape" aria-hidden="true" style="--h:64px"><i class="hook"></i><i class="ticks"></i><div class="sel-tape-nums"><b><span>1</span></b><b><span>2</span></b><b><span>3</span></b><b class="hi"><span>4</span></b></div></div></div>
+    </div>
+  </div>
 </section>
 
-<!-- PROCESS -->
-<section class="process-section">
- <h2 class="reveal">How the Selection Process Works</h2>
- <p class="reveal">We walk you through every decision so nothing is rushed and nothing is missed.</p>
- <div class="process-steps">
- <div class="process-step reveal"><div class="step-num">01</div><h4>Design Consultation</h4><p>Discuss your style and priorities for each room with our team.</p></div>
- <div class="process-step reveal"><div class="step-num">02</div><h4>Online Selections Portal</h4><p>You get access to your BuilderK client portal, where you review every option and select all your finishes.</p></div>
- <div class="process-step reveal"><div class="step-num">03</div><h4>Review & Finalize</h4><p>We provide a complete selections sheet. Review everything together before construction begins.</p></div>
- <div class="process-step reveal"><div class="step-num">04</div><h4>Installed with Care</h4><p>Every selection is installed by licensed tradespeople and inspected by our team for quality.</p></div>
- </div>
+<section class="sel-cta a5-bg-white" aria-labelledby="cta-title">
+  <div class="a5-wrap sel-cta-inner">
+    <h2 class="a5-h2" id="cta-title">Ready to Start <span class="a5-hl">Choosing</span>?</h2>
+    <p class="a5-p">Tell us about your project and we'll guide you through the entire selections process, from first consultation to final walkthrough.</p>
+    <a class="a5-btn a5-btn-dark" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
 </section>
+</main>
 
-<!-- CTA -->
-<section class="cta-section">
- <h2 class="reveal">Ready to Start Choosing?</h2>
- <p class="reveal">Tell us about your project and we'll guide you through the entire selections process, from first consultation to final walkthrough.</p>
- <a href="/contact" class="cta-btn reveal">Get my free consultation</a>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
- <div class="footer-grid">
- <div class="footer-brand"><div class="logo">BUILDER<span>K</span></div><p>We build custom homes across Florida, starting with your lot and your goals.</p></div>
- <div class="footer-col"><h4>Company</h4><a href="/">Home</a><a href="/about">About Us</a><a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a><a href="/facades">Facades & Styles</a><a href="/floor-plans">Floor Plans</a></div>
- <div class="footer-col"><h4>Services</h4><a href="/">Custom Homes</a><a href="/financing">Financing</a><a href="/construction">Construction Gallery</a><a href="/interior-gallery">Interior Gallery</a><a href="/blog">Blog</a><a href="/calculator">Pricing Calculator</a><a href="/referral-program/">Referral Program</a></div>
- <div class="footer-col"><h4>Contact</h4><a href="tel:2392304868">(239) 230 4868</a><a href="mailto:info@builderk.com">info@builderk.com</a><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839">Orlando, FL</a></div>
- </div>
- <div class="footer-bottom"><span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span><div><a href="/privacy">Privacy Policy</a><a href="/terms">Terms & Conditions</a></div></div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">4700 Millenia Blvd, Ste&nbsp;500<br>Orlando, FL 32839</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
 <script>
-window.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.page-hero .reveal').forEach(function(el){el.classList.add('visible')})});
-if(typeof IntersectionObserver!=='undefined'){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.05});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)})}
-var navbar=document.getElementById('navbar');if(navbar)window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.pageYOffset>60)});
-var hamburger=document.getElementById('hamburger');var navLinks=document.querySelector('.nav-links');if(hamburger&&navLinks){hamburger.addEventListener('click',function(){navLinks.classList.toggle('open');hamburger.classList.toggle('active')});navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){navLinks.classList.remove('open');hamburger.classList.remove('active')})})}
 function scrollToCat(id){document.querySelectorAll('.tab-btn').forEach(function(t){t.classList.remove('active')});if(event&&event.target)event.target.classList.add('active');if(id==='all'){var f=document.getElementById('kitchen');if(f)window.scrollTo({top:f.offsetTop-100,behavior:'smooth'})}else{var el=document.getElementById(id);if(el)window.scrollTo({top:el.offsetTop-100,behavior:'smooth'})}}
-</script>
-
-<script>
-// Click-to-call GA4 event tracking
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (typeof gtag === 'function') {
-        gtag('event', 'phone_click', { 'page_path': location.pathname });
-      }
-    });
-  });
-});
 </script>
 <script defer src="/scripts/call-bar.js"></script>
 </body>
