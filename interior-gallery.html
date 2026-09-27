@@ -30,734 +30,369 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
-:root {
-  --orange: #F77F00;
-  --orange-hover: #FF9A2E;
-  --dark: #0A0A0A;
-  --light: #FAFAF8;
-  --gray-100: #F5F5F3;
-  --gray-200: #E8E8E5;
-  --gray-600: #6B6B6B;
-  --gray-800: #2A2A2A;
+/* gallery pages: photo hero with filter pills */
+.gal-hero { --hero-min: 660px; }
+.gal-hero .a5-hero-photo img { object-position: var(--pos-d, 50% 40%); }
+.gal-hero .a5-hero-body { gap: 20px; }
+.gal-hero .a5-hero-photo .a5-render-tag { top: auto; left: auto; right: 16px; bottom: 16px; }
+/* on narrower computers keep the text on the dark side of the photo */
+@media (min-width: 900px) { .gal-hero .a5-hero-body { width: min(var(--hero-text, 620px), calc(48.6vw - var(--a5-gutter) + 60px), 100%); } }
+.gal-filters { margin-top: 6px; display: flex; flex-direction: column; gap: 14px; }
+.filter-tabs, .style-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-tab, .style-tab { height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(245, 242, 237, 0.32); background: transparent; color: var(--a5-on-dark-soft); font: 700 15.5px/1 var(--a5-sans); white-space: nowrap; cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+.filter-tab:hover, .style-tab:hover { border-color: rgba(245, 242, 237, 0.75); color: #FFFFFF; }
+.filter-tab.active, .style-tab.active { background: var(--a5-orange); border-color: var(--a5-orange); color: #0C0B0A; }
+.gallery-count { margin: 0; font-size: 14px; color: var(--a5-on-dark-muted); }
+.gallery-count:empty { display: none; }
+@media (max-width: 899px) {
+  .gal-hero .a5-hero-photo img { object-position: var(--pos-p, 50% 40%); }
+  .gal-hero .a5-hero-body { gap: 16px; }
+  .gal-hero .a5-hero-sub { line-height: 1.55; }
+  .gal-hero .a5-hero-photo .a5-render-tag { bottom: 22px; right: 12px; }
+  .gal-filters { margin-top: 4px; gap: 12px; }
+  .filter-tab, .style-tab { height: 40px; font-size: 14.5px; }
+  .gallery-count { font-size: 13.5px; }
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--dark);
-  background: var(--light);
-  -webkit-font-smoothing: antialiased;
+/* intro: centered on computers, left aligned on phones */
+.gal-intro { padding-block: 88px; }
+.gal-intro-text { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.gal-intro .a5-p { max-width: 760px; }
+.gal-intro .a5-h2, .gal-cta .a5-h2 { text-wrap: wrap; }  /* the boards break these lines normally, not balanced */
+@media (max-width: 899px) {
+  .gal-intro { padding-block: 48px 44px; }
+  .gal-intro-text { align-items: flex-start; text-align: left; gap: 8px; }
+  .gal-intro .a5-h2 { font-size: 42px; }
+  .gal-intro .a5-p { font-size: 15.5px; line-height: 1.55; }
 }
 
-h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+/* photo grid on concrete */
+.gal-section { padding-block: 72px 88px; }
+.gallery-item { position: relative; margin: 0; display: flex; flex-direction: column; background: var(--a5-white); border: 1px solid var(--a5-line); border-radius: 14px; overflow: hidden; cursor: pointer; transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.gallery-item:hover { box-shadow: 0 14px 34px rgba(12, 11, 10, 0.12); transform: translateY(-2px); }
+.gallery-item:focus-visible { outline: 3px solid var(--a5-orange); outline-offset: 3px; }
+.gallery-item.hidden { display: none; }
+.gallery-item .gi-media { flex-shrink: 0; border-radius: 0; }
+.gallery-item .gi-media img, .gallery-item .gi-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0C0B0A; }
+.gallery-item .gi-media img { background: #E9E6E0; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.gallery-item:hover .gi-media img { transform: scale(1.03); }
+.gi-zoom { position: absolute; top: 10px; right: 10px; z-index: 2; width: 30px; height: 30px; border-radius: 999px; background: rgba(12, 11, 10, 0.55); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.gv-badge { position: absolute; top: 10px; left: 10px; z-index: 2; background: var(--a5-orange); color: #0C0B0A; font-size: 9.6px; font-weight: 700; letter-spacing: 1px; line-height: 1.4; padding: 3px 8px; border-radius: 4px; pointer-events: none; }
+.gallery-item-overlay { flex: 1; min-height: 58px; padding: 9px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.gallery-item-overlay h3 { margin: 0; min-width: 0; font-family: var(--a5-sans); font-weight: 700; font-size: 15.5px; line-height: 1.3; color: var(--a5-ink); }
+.gallery-tag { flex-shrink: 0; padding: 4px 10px; border-radius: 999px; background: var(--a5-concrete); color: var(--a5-body); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.3; text-transform: uppercase; white-space: nowrap; }
+@media (max-width: 899px) { .gal-section { padding-block: 40px 48px; } }
+@media (hover: none) { .gallery-item:hover { transform: none; box-shadow: none; } .gallery-item:hover .gi-media img { transform: none; } }
 
-/* ===== NAV ===== */
-.navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 48px;
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(12px);
-  transition: all 0.3s;
-}
-.navbar.scrolled { padding: 14px 48px; background: rgba(10,10,10,0.97); }
-.nav-logo { text-decoration: none; display: flex; align-items: baseline; }
-.nav-logo .builder { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: #fff; letter-spacing: 1px; }
-.nav-logo .k { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--orange); }
-.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-.nav-links a { color: #ccc; text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--orange); }
-.nav-cta { background: var(--orange) !important; color: #fff !important; padding: 10px 22px; border-radius: 8px; font-weight: 600 !important; }
-.nav-cta:hover { background: var(--orange-hover) !important; }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1000; position: relative; }
-.nav-hamburger span { width: 26px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
-
-/* ===== HERO ===== */
-.page-hero {
-  padding: 160px 48px 80px;
-  background: var(--dark);
-  text-align: center;
-}
-.page-hero h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 16px;
-  line-height: 1.1;
-}
-.page-hero h1 span { color: var(--orange); }
-.page-hero p {
-  font-size: 1.2rem;
-  color: #aaa;
-  max-width: 640px;
-  margin: 0 auto 32px;
-  line-height: 1.6;
-}
-
-/* Filter tabs */
-.filter-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.filter-tab {
-  padding: 10px 24px;
-  border-radius: 50px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: transparent;
-  color: #ccc;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.filter-tab:hover { border-color: var(--orange); color: var(--orange); }
-.filter-tab.active { background: var(--orange); color: #fff; border-color: var(--orange); }
-
-/* ===== GALLERY ===== */
-.gallery-section {
-  padding: 80px 48px;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.gallery-item {
-  border-radius: 16px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
-  cursor: pointer;
-  position: relative;
-}
-.gallery-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.14);
-}
-.gallery-item img {
-  width: 100%;
-  aspect-ratio: 16/11;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.gallery-item:hover img {
-  transform: scale(1.04);
-}
-
-.gallery-item-overlay {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 24px 20px 18px;
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.gallery-item:hover .gallery-item-overlay {
-  opacity: 1;
-}
-.gallery-item-overlay h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 4px;
-}
-.gallery-item-overlay .gallery-tag {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--orange);
-  background: rgba(247, 127, 0, 0.15);
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-
-/* Featured (span 2 cols) */
-.gallery-item.featured {
-  grid-column: span 2;
-}
-.gallery-item.featured img {
-  aspect-ratio: 21/11;
-}
-
-/* Hide items when filtered */
-.gallery-item.hidden {
-  display: none;
-}
-
-/* ===== INTRO STRIP ===== */
-.intro-strip {
-  padding: 60px 48px;
-  background: var(--gray-100);
-  text-align: center;
-}
-.intro-strip h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 12px;
-}
-.intro-strip p {
-  font-size: 1.05rem;
-  color: var(--gray-600);
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* ===== LIGHTBOX ===== */
-.lightbox {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.92);
-  z-index: 2000;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  cursor: zoom-out;
-}
+/* image viewer */
+.lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(12, 11, 10, 0.95); align-items: center; justify-content: center; padding: 72px 96px 96px; cursor: zoom-out; }
 .lightbox.active { display: flex; }
-.lightbox img {
-  max-width: 90vw;
-  max-height: 85vh;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-}
-.lightbox-close {
-  position: absolute;
-  top: 24px;
-  right: 32px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.lightbox-close:hover { background: rgba(255,255,255,0.2); }
-.lightbox-caption {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #fff;
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-align: center;
-  opacity: 0.8;
-}
-.lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  font-size: 1.3rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 168px); width: auto; height: auto; object-fit: contain; border-radius: 12px; box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45); cursor: default; }
+.lightbox-close, .lightbox-nav { position: absolute; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border-radius: 999px; border: 1.5px solid rgba(245, 242, 237, 0.3); background: rgba(245, 242, 237, 0.08); color: #FFFFFF; font-size: 28px; line-height: 1; cursor: pointer; transition: background-color 0.15s ease; }
+.lightbox-close:hover, .lightbox-nav:hover { background: rgba(245, 242, 237, 0.2); }
+.lightbox-close { top: 20px; right: 24px; }
+.lightbox-nav { top: 50%; transform: translateY(-50%); width: 52px; height: 52px; font-size: 32px; }
 .lightbox-nav.prev { left: 24px; }
 .lightbox-nav.next { right: 24px; }
-
-/* ===== CTA SECTION ===== */
-.cta-section {
-  padding: 100px 48px;
-  background: var(--dark);
-  text-align: center;
-}
-.cta-section h2 {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 16px;
-}
-.cta-section h2 span { color: var(--orange); }
-.cta-section p {
-  font-size: 1.15rem;
-  color: #aaa;
-  max-width: 550px;
-  margin: 0 auto 32px;
-  line-height: 1.6;
-}
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 36px;
-  background: var(--orange);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.05rem;
-  transition: background 0.2s, transform 0.2s;
-}
-.btn-primary:hover { background: var(--orange-hover); transform: translateY(-2px); }
-
-/* ===== FOOTER ===== */
-.footer { background: var(--dark); padding: 60px 48px 30px; border-top: 1px solid rgba(255,255,255,0.06); }
-.footer-inner { max-width: 1200px; margin: 0 auto; }
-.footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; }
-.footer-brand { max-width: 280px; }
-.footer-brand p { color: #888; font-size: 0.9rem; margin-top: 12px; line-height: 1.5; }
-.footer-col { display: flex; flex-direction: column; gap: 10px; }
-.footer-col h4 { color: #fff; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
-.footer-col a { color: #888; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-.footer-col a:hover { color: var(--orange); }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); color: #555; font-size: 0.82rem; }
-
-/* ===== SCROLL ANIMATIONS ===== */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.stagger-1 { transition-delay: 0.1s; }
-.stagger-2 { transition-delay: 0.2s; }
-.stagger-3 { transition-delay: 0.3s; }
-.stagger-4 { transition-delay: 0.4s; }
-.stagger-5 { transition-delay: 0.5s; }
-
-/* ===== NAV BREAKPOINT ===== */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex !important; }
-  .navbar { padding: 14px 20px !important; }
-}
-/* ===== MOBILE ===== */
-@media (max-width: 900px) {
-  .navbar { padding: 14px 20px !important; }
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex !important; }
-  .page-hero { padding: 120px 24px 60px; }
-  .page-hero h1 { font-size: 2.2rem; }
-  .page-hero p { font-size: 1rem; }
-  .gallery-section { padding: 48px 16px; }
-  .gallery-grid { grid-template-columns: 1fr; gap: 16px; }
-  .gallery-item.featured { grid-column: span 1; }
-  .gallery-item.featured img { aspect-ratio: 16/11; }
-  .gallery-item-overlay { opacity: 1; }
-  .intro-strip { padding: 48px 24px; }
-  .intro-strip h2 { font-size: 1.6rem; }
-  .cta-section { padding: 60px 24px; }
-  .cta-section h2 { font-size: 2rem; }
-  .footer { padding: 40px 20px 24px; }
-  .footer-top { flex-direction: column; gap: 32px; }
-  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-  .filter-tabs { gap: 8px; }
-  .filter-tab { padding: 8px 18px; font-size: 0.85rem; }
-  .lightbox { padding: 16px; }
-  .lightbox-nav.prev { left: 8px; }
-  .lightbox-nav.next { right: 8px; }
+.lightbox-caption { position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%); width: calc(100% - 48px); text-align: center; color: var(--a5-on-dark); font-family: var(--a5-cond); font-weight: 700; font-size: 22px; line-height: 1.1; letter-spacing: 0.04em; text-transform: uppercase; }
+@media (max-width: 899px) {
+  .lightbox { padding: 72px 12px 88px; }
+  .lightbox img { max-height: calc(100vh - 160px); }
+  .lightbox-close { top: 12px; right: 12px; }
+  .lightbox-nav { top: auto; bottom: 20px; transform: none; width: 48px; height: 48px; }
+  .lightbox-nav.prev { left: 12px; }
+  .lightbox-nav.next { right: 12px; }
+  .lightbox-caption { bottom: 32px; width: calc(100% - 144px); font-size: 17px; }
 }
 
-@media (min-width: 901px) and (max-width: 1100px) {
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-item.featured { grid-column: span 2; }
+/* closing call to action */
+.gal-cta { padding-block: 104px; }
+.gal-cta-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.gal-cta .a5-h2 { font-size: clamp(42px, 4.6vw, 66px); }
+.gal-cta .a5-p { max-width: 620px; font-size: 18px; line-height: 1.55; }
+.gal-cta .a5-btn { margin-top: 24px; min-height: 62px; padding: 0 28px; font-size: 23px; }
+@media (max-width: 899px) {
+  .gal-cta { padding-block: 56px; }
+  .gal-cta-inner { gap: 14px; }
+  .gal-cta .a5-p { font-size: 16px; }
+  .gal-cta .a5-btn { width: 100%; margin-top: 18px; min-height: 58px; font-size: 21px; }
 }
 
-/* === MOBILE MENU === */
-.nav-links.open {
-  display: flex !important;
-  flex-direction: column;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(10, 10, 10, 0.98);
-  z-index: 999;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 24px;
-  padding: 88px 24px 32px; overflow-y: auto;
+/* interior gallery: three columns; on computers the three featured photos take two columns and two rows */
+.gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.gallery-item .gi-media { aspect-ratio: 422 / 290; }
+@media (min-width: 1100px) {
+  .gallery-item.featured { grid-column: span 2; grid-row: span 2; }
+  .gallery-item.featured .gi-media { aspect-ratio: auto; flex: 1 1 auto; min-height: 420px; }
+  .gallery-item.featured .gallery-item-overlay { flex: 0 0 auto; }
 }
-.nav-links.open li { list-style: none; }
-.nav-links.open li a { font-size: 1.4rem; padding: 12px 0; color: #fff; }
-.nav-links.open li a:hover { color: #F77F00; }
-.nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.nav-hamburger.active span:nth-child(2) { opacity: 0; }
-.nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-/* === FULL-SCREEN MOBILE MENU FIX === */
-@media (max-width: 1280px) {
-  body:has(.nav-links.open),
-  body:has(.nav-links.show) {
-    overflow: hidden;
-  }
-
-  .navbar:has(.nav-links.open),
-  .navbar:has(.nav-links.show),
-  nav:has(.nav-links.open),
-  nav:has(.nav-links.show) {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    padding: 18px 20px !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    overflow: hidden !important;
-    z-index: 10000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-logo,
-  .navbar:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .nav-logo,
-  nav:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .logo,
-  nav:has(.nav-links.show) .logo {
-    position: fixed !important;
-    top: 22px !important;
-    left: 20px !important;
-    z-index: 10002 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-hamburger,
-  .navbar:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .nav-hamburger,
-  nav:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .mobile-menu,
-  nav:has(.nav-links.show) .mobile-menu {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 10003 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-links.open,
-  .navbar:has(.nav-links.show) .nav-links.show,
-  nav:has(.nav-links.open) .nav-links.open,
-  nav:has(.nav-links.show) .nav-links.show {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 96px 24px 48px !important;
-    overflow-y: auto !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
+@media (max-width: 1099px) { .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599px) {
+  .gallery-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .gallery-item .gi-media { aspect-ratio: 356 / 230; }
+  .gallery-item-overlay { min-height: 56px; }
+  .gallery-item-overlay h3 { font-size: 15px; }
 }
 </style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<!-- NAV -->
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo">
- <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
- </a>
-<ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
- <span></span><span></span><span></span>
- </button>
-</nav>
-
-<!-- HERO -->
-<section class="page-hero">
- <h1 class="reveal stagger-1">Step Inside Your <span>Dream Home</span></h1>
- <p class="reveal stagger-2">Every BuilderK home is designed with luxury finishes, thoughtful layouts, and the details that make a house feel like home. Explore our interior selections.</p>
- <div class="filter-tabs reveal stagger-3">
- <button type="button" class="filter-tab active" data-filter="all">All Rooms</button>
- <button type="button" class="filter-tab" data-filter="living">Living Spaces</button>
- <button type="button" class="filter-tab" data-filter="kitchen">Kitchen & Dining</button>
- <button type="button" class="filter-tab" data-filter="bedroom">Bedrooms</button>
- <button type="button" class="filter-tab" data-filter="bathroom">Bathrooms</button>
- <button type="button" class="filter-tab" data-filter="details">Details</button>
- </div>
+<main id="main">
+<section class="a5-hero gal-hero" aria-labelledby="page-title" style="--pos-d:50% 60%;--pos-p:50% 55%">
+  <div class="a5-hero-photo"><img src="/images/projects/jobsite/3586.jpg" srcset="/images/projects/jobsite/strip/3586.webp 600w, /images/projects/jobsite/3586.jpg 1200w" sizes="(max-width: 899px) 100vw, 52vw" alt="White kitchen with stainless appliances and an island with four upholstered stools over dark plank floors." width="1200" height="1600" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <h1 class="a5-h1" id="page-title">Step Inside Your <span class="a5-accent">Dream Home</span></h1>
+      <p class="a5-hero-sub">Every BuilderK home is designed with luxury finishes, thoughtful layouts, and the details that make a house feel like home. Explore our interior selections.</p>
+      <div class="gal-filters">
+        <div class="filter-tabs" role="group" aria-label="Filter interior gallery by room">
+          <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All Rooms</button>
+          <button type="button" class="filter-tab" data-filter="living" aria-pressed="false">Living Spaces</button>
+          <button type="button" class="filter-tab" data-filter="kitchen" aria-pressed="false">Kitchen & Dining</button>
+          <button type="button" class="filter-tab" data-filter="bedroom" aria-pressed="false">Bedrooms</button>
+          <button type="button" class="filter-tab" data-filter="bathroom" aria-pressed="false">Bathrooms</button>
+          <button type="button" class="filter-tab" data-filter="details" aria-pressed="false">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- INTRO -->
-<section class="intro-strip reveal">
- <h2>Luxury Is in the Details</h2>
- <p>From marble countertops to custom closets, you pick the finishes for every room. These are selections from our Florida custom homes.</p>
+<section class="a5-section a5-bg-white gal-intro" aria-labelledby="intro-title">
+  <div class="a5-wrap">
+    <div class="gal-intro-text">
+      <h2 class="a5-h2" id="intro-title">Luxury Is in the <span class="a5-hl">Details</span></h2>
+      <p class="a5-p">From marble countertops to custom closets, you pick the finishes for every room. These are selections from our Florida custom homes.</p>
+    </div>
+  </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery-section">
- <div class="gallery-grid">
+<section class="gal-section a5-bg-concrete" aria-label="Interior photos and design renders">
+  <div class="a5-wrap">
+    <div class="gallery-grid">
 
  <!-- 1. Great Room — FEATURED -->
- <div class="gallery-item featured reveal stagger-1" data-category="living" data-title="Open Concept Great Room">
- <img src="images/interiors/great-room-open-concept.png" alt="Open concept great room with kitchen, wood beams, and pool view in a luxury Florida custom home" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Open Concept Great Room</h3>
- <span class="gallery-tag">Living Space</span>
- </div>
+ <div class="gallery-item featured" data-category="living" data-title="Open Concept Great Room">
+  <div class="gi-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/interiors/great-room-open-concept.png" alt="Open concept great room with kitchen, wood beams, and pool view in a luxury Florida custom home" loading="lazy" width="1406" height="689" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Open Concept Great Room</h3><span class="gallery-tag">Living Space</span></div>
  </div>
 
  <!-- 2. Foyer -->
- <div class="gallery-item reveal stagger-2" data-category="details" data-title="Tall Foyer">
- <img src="images/interiors/foyer-double-height.png" alt="Tall foyer with chandelier and fluted accent wall in luxury Florida home" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Tall Foyer</h3>
- <span class="gallery-tag">Entry</span>
- </div>
+ <div class="gallery-item" data-category="details" data-title="Tall Foyer">
+  <div class="gi-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/interiors/foyer-double-height.png" alt="Tall foyer with chandelier and fluted accent wall in luxury Florida home" loading="lazy" width="2624" height="1484" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Tall Foyer</h3><span class="gallery-tag">Entry</span></div>
  </div>
 
  <!-- 3. Kitchen Render -->
- <div class="gallery-item reveal stagger-3" data-category="kitchen" data-title="Marble Island Kitchen">
- <img src="images/interiors/kitchen-marble-island.png" alt="Luxury kitchen with white cabinets, marble waterfall island, and pendant lights" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Marble Island Kitchen</h3>
- <span class="gallery-tag">Kitchen</span>
- </div>
+ <div class="gallery-item" data-category="kitchen" data-title="Marble Island Kitchen">
+  <div class="gi-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/interiors/kitchen-marble-island.png" alt="Luxury kitchen with white cabinets, marble waterfall island, and pendant lights" loading="lazy" width="2644" height="1512" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Marble Island Kitchen</h3><span class="gallery-tag">Kitchen</span></div>
  </div>
 
  <!-- 4. Master Bedroom -->
- <div class="gallery-item reveal stagger-1" data-category="bedroom" data-title="Master Suite, Pool View">
- <img src="images/interiors/master-bedroom-pool-view.png" alt="Master bedroom suite with sliding doors opening to pool and palm trees" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Master Suite, Pool View</h3>
- <span class="gallery-tag">Bedroom</span>
- </div>
+ <div class="gallery-item" data-category="bedroom" data-title="Master Suite, Pool View">
+  <div class="gi-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/interiors/master-bedroom-pool-view.png" alt="Master bedroom suite with sliding doors opening to pool and palm trees" loading="lazy" width="1718" height="836" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Master Suite, Pool View</h3><span class="gallery-tag">Bedroom</span></div>
  </div>
 
  <!-- 5. Master Bath — FEATURED -->
- <div class="gallery-item featured reveal stagger-2" data-category="bathroom" data-title="Spa Style Master Bath">
- <img src="images/interiors/master-bath-freestanding-tub.png" alt="Spa style master bathroom with freestanding tub and glass shower" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Spa Style Master Bath</h3>
- <span class="gallery-tag">Bathroom</span>
- </div>
+ <div class="gallery-item featured" data-category="bathroom" data-title="Spa Style Master Bath">
+  <div class="gi-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/interiors/master-bath-freestanding-tub.png" alt="Spa style master bathroom with freestanding tub and glass shower" loading="lazy" width="1349" height="758" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Spa Style Master Bath</h3><span class="gallery-tag">Bathroom</span></div>
  </div>
 
  <!-- 6. Walk-in Closet -->
- <div class="gallery-item reveal stagger-3" data-category="details" data-title="Custom Walk in Closet">
- <img src="images/interiors/walk-in-closet-luxury.png" alt="Luxury walk in closet with built in shelving and wood island" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Custom Walk in Closet</h3>
- <span class="gallery-tag">Details</span>
- </div>
+ <div class="gallery-item" data-category="details" data-title="Custom Walk in Closet">
+  <div class="gi-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/interiors/walk-in-closet-luxury.png" alt="Luxury walk in closet with built in shelving and wood island" loading="lazy" width="2610" height="1504" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Custom Walk in Closet</h3><span class="gallery-tag">Details</span></div>
  </div>
 
  <!-- 7. Real Living Room -->
- <div class="gallery-item reveal stagger-1" data-category="living" data-title="Living Room, Fireplace">
- <img src="images/interiors/real-living-room-fireplace.jpg" alt="Living room with stone fireplace, chandelier, and arched built in cabinet" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Living Room, Fireplace</h3>
- <span class="gallery-tag">Living Space</span>
- </div>
+ <div class="gallery-item" data-category="living" data-title="Living Room, Fireplace">
+  <div class="gi-media a5-photo"><img src="images/interiors/real-living-room-fireplace.jpg" alt="Living room with stone fireplace, chandelier, and arched built in cabinet" loading="lazy" width="1080" height="1439" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Living Room, Fireplace</h3><span class="gallery-tag">Living Space</span></div>
  </div>
 
  <!-- 8. Living Room Render -->
- <div class="gallery-item reveal stagger-2" data-category="living" data-title="Living Room, Lanai Access">
- <img src="images/interiors/living-room-sectional.png" alt="Contemporary living room with large sectional sofa and lanai slider" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Living Room, Lanai Access</h3>
- <span class="gallery-tag">Living Space</span>
- </div>
+ <div class="gallery-item" data-category="living" data-title="Living Room, Lanai Access">
+  <div class="gi-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/interiors/living-room-sectional.png" alt="Contemporary living room with large sectional sofa and lanai slider" loading="lazy" width="2580" height="1502" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Living Room, Lanai Access</h3><span class="gallery-tag">Living Space</span></div>
  </div>
 
  <!-- 9. Guest Bedroom -->
- <div class="gallery-item reveal stagger-3" data-category="bedroom" data-title="Guest Bedroom, Window Seat">
- <img src="images/interiors/guest-bedroom-window-seat.png" alt="Guest bedroom with built in window seat and garden views" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Guest Bedroom, Window Seat</h3>
- <span class="gallery-tag">Bedroom</span>
- </div>
+ <div class="gallery-item" data-category="bedroom" data-title="Guest Bedroom, Window Seat">
+  <div class="gi-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/interiors/guest-bedroom-window-seat.png" alt="Guest bedroom with built in window seat and garden views" loading="lazy" width="2588" height="1476" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Guest Bedroom, Window Seat</h3><span class="gallery-tag">Bedroom</span></div>
  </div>
 
  <!-- 10. Real Kitchen — FEATURED -->
- <div class="gallery-item featured reveal stagger-1" data-category="kitchen" data-title="Gourmet Kitchen, Dark Cabinets">
- <img src="images/interiors/real-kitchen-dark-cabinets.jpg" alt="Gourmet kitchen with dark cabinets, marble backsplash, and large island" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Gourmet Kitchen, Dark Cabinets</h3>
- <span class="gallery-tag">Kitchen</span>
- </div>
+ <div class="gallery-item featured" data-category="kitchen" data-title="Gourmet Kitchen, Dark Cabinets">
+  <div class="gi-media a5-photo"><img src="images/interiors/real-kitchen-dark-cabinets.jpg" alt="Gourmet kitchen with dark cabinets, marble backsplash, and large island" loading="lazy" width="1080" height="1439" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Gourmet Kitchen, Dark Cabinets</h3><span class="gallery-tag">Kitchen</span></div>
  </div>
 
  <!-- 11. Double Vanity -->
- <div class="gallery-item reveal stagger-2" data-category="bathroom" data-title="Modern Double Vanity">
- <img src="images/interiors/double-vanity-modern.png" alt="Modern double vanity bathroom with floating cabinet and LED backlit mirrors" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Modern Double Vanity</h3>
- <span class="gallery-tag">Bathroom</span>
- </div>
+ <div class="gallery-item" data-category="bathroom" data-title="Modern Double Vanity">
+  <div class="gi-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/interiors/double-vanity-modern.png" alt="Modern double vanity bathroom with floating cabinet and LED backlit mirrors" loading="lazy" width="2642" height="1520" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Modern Double Vanity</h3><span class="gallery-tag">Bathroom</span></div>
  </div>
 
  <!-- 12. Real Dining -->
- <div class="gallery-item reveal stagger-3" data-category="kitchen" data-title="Dining, Open to Kitchen">
- <img src="images/interiors/real-dining-open-concept.jpg" alt="Open concept dining area with modern chandelier flowing into kitchen" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Dining, Open to Kitchen</h3>
- <span class="gallery-tag">Dining</span>
- </div>
+ <div class="gallery-item" data-category="kitchen" data-title="Dining, Open to Kitchen">
+  <div class="gi-media a5-photo"><img src="images/interiors/real-dining-open-concept.jpg" alt="Open concept dining area with modern chandelier flowing into kitchen" loading="lazy" width="1080" height="1439" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Dining, Open to Kitchen</h3><span class="gallery-tag">Dining</span></div>
  </div>
 
  <!-- 13. Real Master Bedroom Tray -->
- <div class="gallery-item reveal stagger-1" data-category="bedroom" data-title="Master Suite, Tray Ceiling">
- <img src="images/interiors/real-master-bedroom-tray-ceiling.jpg" alt="Master bedroom with tray ceiling, canopy bed frame, and wood accents" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Master Suite, Tray Ceiling</h3>
- <span class="gallery-tag">Bedroom</span>
- </div>
+ <div class="gallery-item" data-category="bedroom" data-title="Master Suite, Tray Ceiling">
+  <div class="gi-media a5-photo"><img src="images/interiors/real-master-bedroom-tray-ceiling.jpg" alt="Master bedroom with tray ceiling, canopy bed frame, and wood accents" loading="lazy" width="1080" height="1439" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Master Suite, Tray Ceiling</h3><span class="gallery-tag">Bedroom</span></div>
  </div>
 
  <!-- 14. Real Master Bedroom Neutral -->
- <div class="gallery-item reveal stagger-2" data-category="bedroom" data-title="Master Suite, Neutral Palette">
- <img src="images/interiors/real-master-bedroom-neutral.jpg" alt="Master bedroom with neutral palette, ceiling fan, and large windows" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Master Suite, Neutral Palette</h3>
- <span class="gallery-tag">Bedroom</span>
- </div>
+ <div class="gallery-item" data-category="bedroom" data-title="Master Suite, Neutral Palette">
+  <div class="gi-media a5-photo"><img src="images/interiors/real-master-bedroom-neutral.jpg" alt="Master bedroom with neutral palette, ceiling fan, and large windows" loading="lazy" width="1080" height="1439" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Master Suite, Neutral Palette</h3><span class="gallery-tag">Bedroom</span></div>
  </div>
 
  <!-- 15. Real Game Room -->
- <div class="gallery-item reveal stagger-3" data-category="details" data-title="Game Room & Bonus Space">
- <img src="images/interiors/real-game-room-pool-table.jpg" alt="Game room with pool table, sliding doors, and lounge seating" loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Game Room & Bonus Space</h3>
- <span class="gallery-tag">Bonus</span>
- </div>
+ <div class="gallery-item" data-category="details" data-title="Game Room & Bonus Space">
+  <div class="gi-media a5-photo"><img src="images/interiors/real-game-room-pool-table.jpg" alt="Game room with pool table, sliding doors, and lounge seating" loading="lazy" width="1080" height="1439" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Game Room & Bonus Space</h3><span class="gallery-tag">Bonus</span></div>
  </div>
 
  </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
- <h2 class="reveal">Love What You See? <span>Let's Build It.</span></h2>
- <p class="reveal stagger-1">Every interior is fully customizable. Choose your finishes, layouts, and luxury upgrades, we handle the rest.</p>
- <a href="/calculator" class="btn-primary reveal stagger-2">Estimate My Build<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<section class="a5-section a5-bg-white gal-cta" aria-labelledby="cta-title">
+  <div class="a5-wrap gal-cta-inner">
+    <h2 class="a5-h2" id="cta-title">Love What You See? Let's <span class="a5-hl">Build</span> It.</h2>
+    <p class="a5-p">Every interior is fully customizable. Choose your finishes, layouts, and luxury upgrades, we handle the rest.</p>
+    <a class="a5-btn a5-btn-dark" href="/calculator">Estimate My Build <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
 </section>
+</main>
 
-<!-- FOOTER -->
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand">
- <a href="/" class="nav-logo">
- <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
- </a>
- <p>We build custom homes across Florida, starting with your lot and your goals.</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/">Home</a>
- <a href="/about">About Us</a>
- <a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a>
- <a href="/facades">Facades & Styles</a>
- <a href="/floor-plans">Floor Plans</a>
- </div>
- <div class="footer-col">
- <h4>Services</h4>
- <a href="/">Custom Homes</a>
- <a href="/financing">Financing</a>
- <a href="/#services">Construction Management</a>
- <a href="/blog">Blog</a>
- <a href="/calculator">Pricing Calculator</a>
- <a href="/interiors">Interior Selections</a>
- <a href="/construction">Construction Gallery</a>
- <a href="/interior-gallery">Interior Gallery</a>
- <a href="/referral-program/">Referral Program</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:2392304868">(239) 230 4868</a>
- <a href="mailto:info@builderk.com">info@builderk.com</a>
- <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
- </div>
- </div>
- <div class="footer-bottom">
- <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
- <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
- </div>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
- <button type="button" class="lightbox-close" id="lightbox-close">&times;</button>
- <button type="button" class="lightbox-nav prev" id="lightbox-prev">&#8249;</button>
- <button type="button" class="lightbox-nav next" id="lightbox-next">&#8250;</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+ <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+ <button type="button" class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+ <button type="button" class="lightbox-nav next" id="lightbox-next" aria-label="Next image">&#8250;</button>
  <img src="" alt="" id="lightbox-img">
  <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
 
 <script>
-// ===== SCROLL REVEAL =====
-window.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.page-hero .reveal').forEach(function(el) {
-    el.classList.add('visible');
-  });
-});
-
-var observer = null;
-if (typeof IntersectionObserver !== 'undefined') {
-  observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.05 });
-  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-}
-
-// ===== NAVBAR SCROLL =====
-var navbar = document.getElementById('navbar');
-if (navbar) {
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
-}
-
 // ===== FILTER TABS =====
 var filterTabs = document.querySelectorAll('.filter-tab');
 var galleryItems = document.querySelectorAll('.gallery-item');
@@ -838,47 +473,34 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'ArrowLeft') lightboxPrev.click();
   if (e.key === 'ArrowRight') lightboxNext.click();
 });
-
-// ===== MOBILE MENU =====
-var hamburger = document.getElementById('hamburger');
-var navLinks = document.querySelector('.nav-links');
-if (hamburger && navLinks) {
-  hamburger.addEventListener('click', function() {
-    var isOpen = navLinks.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Open menu');
-      document.body.style.overflow = '';
-    }
-  });
-  navLinks.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-    });
-  });
-}
 </script>
-
 <script>
-// Click-to-call GA4 event tracking
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (typeof gtag === 'function') {
-        gtag('event', 'phone_click', { 'page_path': location.pathname });
-      }
+// Keyboard and screen reader support for the gallery above: photos open with Enter or Space,
+// focus goes to the viewer and back to the photo, and the filters say which one is on.
+(function () {
+  var items = document.querySelectorAll('.gallery-item');
+  var viewer = document.getElementById('lightbox');
+  var closeBtn = document.getElementById('lightbox-close');
+  var opener = null;
+  items.forEach(function (item) {
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('aria-label', 'Open image: ' + (item.getAttribute('data-title') || 'interior photo') + (item.querySelector('.a5-render-tag') ? ', design render' : ''));
+    item.addEventListener('click', function () { opener = item; if (closeBtn) closeBtn.focus(); });
+    item.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); } });
+  });
+  if (viewer && 'MutationObserver' in window) {
+    new MutationObserver(function () {
+      if (!viewer.classList.contains('active') && opener) { opener.focus(); opener = null; }
+    }).observe(viewer, { attributes: true, attributeFilter: ['class'] });
+  }
+  var tabs = document.querySelectorAll('.filter-tab');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.setAttribute('aria-pressed', t === tab ? 'true' : 'false'); });
     });
   });
-});
+})();
 </script>
 <script defer src="/scripts/call-bar.js"></script>
 </body>

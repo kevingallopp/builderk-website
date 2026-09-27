@@ -30,723 +30,469 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
-:root {
-  --orange: #F77F00;
-  --orange-hover: #FF9A2E;
-  --dark: #0A0A0A;
-  --light: #FAFAF8;
-  --gray-100: #F5F5F3;
-  --gray-200: #E8E8E5;
-  --gray-600: #6B6B6B;
-  --gray-800: #2A2A2A;
+/* gallery pages: photo hero with filter pills */
+.gal-hero { --hero-min: 660px; }
+.gal-hero .a5-hero-photo img { object-position: var(--pos-d, 50% 40%); }
+.gal-hero .a5-hero-body { gap: 20px; }
+.gal-hero .a5-hero-photo .a5-render-tag { top: auto; left: auto; right: 16px; bottom: 16px; }
+/* on narrower computers keep the text on the dark side of the photo */
+@media (min-width: 900px) { .gal-hero .a5-hero-body { width: min(var(--hero-text, 620px), calc(48.6vw - var(--a5-gutter) + 60px), 100%); } }
+.gal-filters { margin-top: 6px; display: flex; flex-direction: column; gap: 14px; }
+.filter-tabs, .style-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-tab, .style-tab { height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(245, 242, 237, 0.32); background: transparent; color: var(--a5-on-dark-soft); font: 700 15.5px/1 var(--a5-sans); white-space: nowrap; cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+.filter-tab:hover, .style-tab:hover { border-color: rgba(245, 242, 237, 0.75); color: #FFFFFF; }
+.filter-tab.active, .style-tab.active { background: var(--a5-orange); border-color: var(--a5-orange); color: #0C0B0A; }
+.gallery-count { margin: 0; font-size: 14px; color: var(--a5-on-dark-muted); }
+.gallery-count:empty { display: none; }
+@media (max-width: 899px) {
+  .gal-hero .a5-hero-photo img { object-position: var(--pos-p, 50% 40%); }
+  .gal-hero .a5-hero-body { gap: 16px; }
+  .gal-hero .a5-hero-sub { line-height: 1.55; }
+  .gal-hero .a5-hero-photo .a5-render-tag { bottom: 22px; right: 12px; }
+  .gal-filters { margin-top: 4px; gap: 12px; }
+  .filter-tab, .style-tab { height: 40px; font-size: 14.5px; }
+  .gallery-count { font-size: 13.5px; }
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--dark);
-  background: var(--light);
-  -webkit-font-smoothing: antialiased;
+/* intro: centered on computers, left aligned on phones */
+.gal-intro { padding-block: 88px; }
+.gal-intro-text { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.gal-intro .a5-p { max-width: 760px; }
+.gal-intro .a5-h2, .gal-cta .a5-h2 { text-wrap: wrap; }  /* the boards break these lines normally, not balanced */
+@media (max-width: 899px) {
+  .gal-intro { padding-block: 48px 44px; }
+  .gal-intro-text { align-items: flex-start; text-align: left; gap: 8px; }
+  .gal-intro .a5-h2 { font-size: 42px; }
+  .gal-intro .a5-p { font-size: 15.5px; line-height: 1.55; }
 }
 
-h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+/* photo grid on concrete */
+.gal-section { padding-block: 72px 88px; }
+.gallery-item { position: relative; margin: 0; display: flex; flex-direction: column; background: var(--a5-white); border: 1px solid var(--a5-line); border-radius: 14px; overflow: hidden; cursor: pointer; transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.gallery-item:hover { box-shadow: 0 14px 34px rgba(12, 11, 10, 0.12); transform: translateY(-2px); }
+.gallery-item:focus-visible { outline: 3px solid var(--a5-orange); outline-offset: 3px; }
+.gallery-item.hidden { display: none; }
+.gallery-item .gi-media { flex-shrink: 0; border-radius: 0; }
+.gallery-item .gi-media img, .gallery-item .gi-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0C0B0A; }
+.gallery-item .gi-media img { background: #E9E6E0; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.gallery-item:hover .gi-media img { transform: scale(1.03); }
+.gi-zoom { position: absolute; top: 10px; right: 10px; z-index: 2; width: 30px; height: 30px; border-radius: 999px; background: rgba(12, 11, 10, 0.55); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.gv-badge { position: absolute; top: 10px; left: 10px; z-index: 2; background: var(--a5-orange); color: #0C0B0A; font-size: 9.6px; font-weight: 700; letter-spacing: 1px; line-height: 1.4; padding: 3px 8px; border-radius: 4px; pointer-events: none; }
+.gallery-item-overlay { flex: 1; min-height: 58px; padding: 9px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.gallery-item-overlay h3 { margin: 0; min-width: 0; font-family: var(--a5-sans); font-weight: 700; font-size: 15.5px; line-height: 1.3; color: var(--a5-ink); }
+.gallery-tag { flex-shrink: 0; padding: 4px 10px; border-radius: 999px; background: var(--a5-concrete); color: var(--a5-body); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.3; text-transform: uppercase; white-space: nowrap; }
+@media (max-width: 899px) { .gal-section { padding-block: 40px 48px; } }
+@media (hover: none) { .gallery-item:hover { transform: none; box-shadow: none; } .gallery-item:hover .gi-media img { transform: none; } }
 
-/* ===== NAV ===== */
-.navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 48px;
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(12px);
-  transition: all 0.3s;
-}
-.navbar.scrolled { padding: 14px 48px; background: rgba(10,10,10,0.97); }
-.nav-logo { text-decoration: none; display: flex; align-items: baseline; }
-.nav-logo .builder { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: #fff; letter-spacing: 1px; }
-.nav-logo .k { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--orange); }
-.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-.nav-links a { color: #ccc; text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--orange); }
-.nav-cta { background: var(--orange) !important; color: #fff !important; padding: 10px 22px; border-radius: 8px; font-weight: 600 !important; }
-.nav-cta:hover { background: var(--orange-hover) !important; }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1000; position: relative; }
-.nav-hamburger span { width: 26px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
-
-/* ===== HERO ===== */
-.page-hero {
-  padding: 160px 48px 80px;
-  background: var(--dark);
-  text-align: center;
-}
-.page-hero h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 16px;
-  line-height: 1.1;
-}
-.page-hero h1 span { color: var(--orange); }
-.page-hero p {
-  font-size: 1.2rem;
-  color: #aaa;
-  max-width: 600px;
-  margin: 0 auto 32px;
-  line-height: 1.6;
+/* image viewer */
+.lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(12, 11, 10, 0.95); align-items: center; justify-content: center; padding: 72px 96px 96px; cursor: zoom-out; }
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 168px); width: auto; height: auto; object-fit: contain; border-radius: 12px; box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45); cursor: default; }
+.lightbox-close, .lightbox-nav { position: absolute; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border-radius: 999px; border: 1.5px solid rgba(245, 242, 237, 0.3); background: rgba(245, 242, 237, 0.08); color: #FFFFFF; font-size: 28px; line-height: 1; cursor: pointer; transition: background-color 0.15s ease; }
+.lightbox-close:hover, .lightbox-nav:hover { background: rgba(245, 242, 237, 0.2); }
+.lightbox-close { top: 20px; right: 24px; }
+.lightbox-nav { top: 50%; transform: translateY(-50%); width: 52px; height: 52px; font-size: 32px; }
+.lightbox-nav.prev { left: 24px; }
+.lightbox-nav.next { right: 24px; }
+.lightbox-caption { position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%); width: calc(100% - 48px); text-align: center; color: var(--a5-on-dark); font-family: var(--a5-cond); font-weight: 700; font-size: 22px; line-height: 1.1; letter-spacing: 0.04em; text-transform: uppercase; }
+@media (max-width: 899px) {
+  .lightbox { padding: 72px 12px 88px; }
+  .lightbox img { max-height: calc(100vh - 160px); }
+  .lightbox-close { top: 12px; right: 12px; }
+  .lightbox-nav { top: auto; bottom: 20px; transform: none; width: 48px; height: 48px; }
+  .lightbox-nav.prev { left: 12px; }
+  .lightbox-nav.next { right: 12px; }
+  .lightbox-caption { bottom: 32px; width: calc(100% - 144px); font-size: 17px; }
 }
 
-/* Style filter tabs */
-.style-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.style-tab {
-  padding: 10px 24px;
-  border-radius: 50px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: transparent;
-  color: #ccc;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.style-tab:hover { border-color: var(--orange); color: var(--orange); }
-.style-tab.active { background: var(--orange); color: #fff; border-color: var(--orange); }
-
-/* ===== STYLE SECTIONS ===== */
-.style-section {
-  padding: 80px 48px;
-  scroll-margin-top: 80px;
-}
-.style-section:nth-child(even) { background: var(--gray-100); }
-
-.style-header {
-  max-width: 1200px;
-  margin: 0 auto 48px;
-}
-.style-label {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--orange);
-  margin-bottom: 12px;
-}
-.style-header h2 {
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 12px;
-}
-.style-header p {
-  font-size: 1.05rem;
-  color: var(--gray-600);
-  max-width: 700px;
-  line-height: 1.6;
+/* closing call to action */
+.gal-cta { padding-block: 104px; }
+.gal-cta-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.gal-cta .a5-h2 { font-size: clamp(42px, 4.6vw, 66px); }
+.gal-cta .a5-p { max-width: 620px; font-size: 18px; line-height: 1.55; }
+.gal-cta .a5-btn { margin-top: 24px; min-height: 62px; padding: 0 28px; font-size: 23px; }
+@media (max-width: 899px) {
+  .gal-cta { padding-block: 56px; }
+  .gal-cta-inner { gap: 14px; }
+  .gal-cta .a5-p { font-size: 16px; }
+  .gal-cta .a5-btn { width: 100%; margin-top: 18px; min-height: 58px; font-size: 21px; }
 }
 
-/* Luxury collection */
-.style-section.luxury-section {
-  background:
-    radial-gradient(circle at 85% 15%, rgba(247, 127, 0, 0.14), transparent 34%),
-    linear-gradient(145deg, #0a0a0a 0%, #18130f 100%);
+/* styles: one section per style, three cards across on computers */
+.style-section { padding-block: 88px 96px; }
+.style-header { display: flex; flex-direction: column; gap: 12px; max-width: 860px; margin-bottom: 40px; }
+.style-header .a5-p { max-width: 860px; }
+.facade-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.facade-card { position: relative; display: flex; flex-direction: column; background: var(--a5-white); border: 1px solid var(--a5-line); border-radius: 16px; overflow: hidden; transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.facade-card:hover { box-shadow: 0 14px 34px rgba(12, 11, 10, 0.12); transform: translateY(-2px); }
+.facade-card.featured { border: 2px solid var(--a5-ink); }
+.facade-media { flex-shrink: 0; aspect-ratio: 16 / 10; border-radius: 0; }
+.facade-card.featured .facade-media::after { content: '\2605  FEATURED'; position: absolute; top: 12px; right: 12px; z-index: 2; padding: 4px 10px; border-radius: 6px; background: rgba(12, 11, 10, 0.78); color: #FFFFFF; font-size: 10.4px; font-weight: 700; letter-spacing: 1px; line-height: 1.4; }
+.facade-card-info { flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 20px 22px 22px; }
+.facade-card-info h3 { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 24px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.facade-card-info p { margin: 0 0 6px; font-size: 15px; line-height: 1.55; color: var(--a5-body); }
+.facade-tag { margin-top: auto; align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: var(--a5-concrete); color: var(--a5-body); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.3; text-transform: uppercase; white-space: nowrap; }
+.facade-tag.a5-tag-accent { background: #FFF0E0; color: #9A4A00; }
+@media (max-width: 1099px) { .facade-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 899px) {
+  .style-section { padding-block: 48px; }
+  .style-header { gap: 8px; margin-bottom: 24px; }
+  .style-header .a5-h2 { font-size: 42px; }
+  .style-header .a5-p { font-size: 15.5px; line-height: 1.55; }
+  .facade-card-info { padding: 18px 18px 20px; }
+  .facade-card-info h3 { font-size: 25px; }
 }
-.luxury-section .style-label { color: var(--orange-hover); }
-.luxury-section .style-header h2 { color: #fff; }
-.luxury-section .style-header p { color: #bbb4ac; }
-.luxury-section .facade-card {
-  background: #151515;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 16px 40px rgba(0,0,0,0.28);
-}
-.luxury-section .facade-card:hover {
-  box-shadow: inset 0 0 0 1px rgba(247, 127, 0, 0.55), 0 22px 52px rgba(0,0,0,0.42);
-}
-.luxury-section .facade-card-info h3 { color: #fff; }
-.luxury-section .facade-card-info p { color: #aaa; }
-.luxury-section .facade-tag {
-  color: #ffc27d;
-  background: rgba(247, 127, 0, 0.15);
-}
-
-/* Image grid */
-.facade-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.facade-card {
-  border-radius: 16px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.facade-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
-}
-.facade-card img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16/10;
-  object-fit: cover;
-  display: block;
-}
-.facade-card-info {
-  padding: 20px 24px;
-}
-.facade-card-info h3 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--dark);
-  margin-bottom: 6px;
-}
-.facade-card-info p {
-  font-size: 0.9rem;
-  color: var(--gray-600);
-  line-height: 1.5;
-}
-.facade-tag {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--orange);
-  background: rgba(247, 127, 0, 0.08);
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-top: 10px;
-}
-
-/* Featured card style */
-.facade-card.featured {
-  border: 2px solid var(--orange);
-  position: relative;
-}
-.facade-card.featured::before {
-  content: '\2605  FEATURED';
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: var(--orange);
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 4px 10px;
-  border-radius: 6px;
-  z-index: 2;
-}
-
-/* ===== CTA SECTION ===== */
-.cta-section {
-  padding: 100px 48px;
-  background: var(--dark);
-  text-align: center;
-}
-.cta-section h2 {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 16px;
-}
-.cta-section h2 span { color: var(--orange); }
-.cta-section p {
-  font-size: 1.15rem;
-  color: #aaa;
-  max-width: 550px;
-  margin: 0 auto 32px;
-  line-height: 1.6;
-}
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 36px;
-  background: var(--orange);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.05rem;
-  transition: background 0.2s, transform 0.2s;
-}
-.btn-primary:hover { background: var(--orange-hover); transform: translateY(-2px); }
-
-/* ===== FOOTER ===== */
-.footer { background: var(--dark); padding: 60px 48px 30px; border-top: 1px solid rgba(255,255,255,0.06); }
-.footer-inner { max-width: 1200px; margin: 0 auto; }
-.footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; }
-.footer-brand { max-width: 280px; }
-.footer-brand p { color: #888; font-size: 0.9rem; margin-top: 12px; line-height: 1.5; }
-.footer-col { display: flex; flex-direction: column; gap: 10px; }
-.footer-col h4 { color: #fff; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
-.footer-col a { color: #888; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-.footer-col a:hover { color: var(--orange); }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); color: #555; font-size: 0.82rem; }
-
-/* ===== SCROLL ANIMATIONS ===== */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.stagger-1 { transition-delay: 0.1s; }
-.stagger-2 { transition-delay: 0.2s; }
-.stagger-3 { transition-delay: 0.3s; }
-
-/* ===== NAV BREAKPOINT ===== */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex !important; }
-  .navbar { padding: 14px 20px !important; }
-}
-/* ===== MOBILE ===== */
-@media (max-width: 900px) {
-  .navbar { padding: 14px 20px !important; }
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex !important; }
-  .page-hero { padding: 120px 24px 60px; }
-  .page-hero h1 { font-size: 2.2rem; }
-  .page-hero p { font-size: 1rem; }
-  .style-section { padding: 60px 20px; }
-  .style-header h2 { font-size: 1.8rem; }
-  .facade-grid { grid-template-columns: 1fr; gap: 16px; }
-  .cta-section { padding: 60px 24px; }
-  .cta-section h2 { font-size: 2rem; }
-  .footer { padding: 40px 20px 24px; }
-  .footer-top { flex-direction: column; gap: 32px; }
-  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-  .style-tabs { gap: 8px; }
-  .style-tab { padding: 8px 18px; font-size: 0.85rem; }
-  .facade-card.featured::before { font-size: 0.6rem; top: 8px; right: 8px; padding: 3px 8px; }
-}
-
-/* === MOBILE MENU === */
-.nav-links.open {
-  display: flex !important;
-  flex-direction: column;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(10, 10, 10, 0.98);
-  z-index: 999;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 24px;
-  padding: 88px 24px 32px; overflow-y: auto;
-}
-.nav-links.open li { list-style: none; }
-.nav-links.open li a { font-size: 1.4rem; padding: 12px 0; color: #fff; }
-.nav-links.open li a:hover { color: #F77F00; }
-.nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.nav-hamburger.active span:nth-child(2) { opacity: 0; }
-.nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-/* === FULL-SCREEN MOBILE MENU FIX === */
-@media (max-width: 1280px) {
-  body:has(.nav-links.open),
-  body:has(.nav-links.show) {
-    overflow: hidden;
-  }
-
-  .navbar:has(.nav-links.open),
-  .navbar:has(.nav-links.show),
-  nav:has(.nav-links.open),
-  nav:has(.nav-links.show) {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    padding: 18px 20px !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    overflow: hidden !important;
-    z-index: 10000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-logo,
-  .navbar:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .nav-logo,
-  nav:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .logo,
-  nav:has(.nav-links.show) .logo {
-    position: fixed !important;
-    top: 22px !important;
-    left: 20px !important;
-    z-index: 10002 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-hamburger,
-  .navbar:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .nav-hamburger,
-  nav:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .mobile-menu,
-  nav:has(.nav-links.show) .mobile-menu {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 10003 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-links.open,
-  .navbar:has(.nav-links.show) .nav-links.show,
-  nav:has(.nav-links.open) .nav-links.open,
-  nav:has(.nav-links.show) .nav-links.show {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 96px 24px 48px !important;
-    overflow-y: auto !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
-}
+@media (max-width: 639px) { .facade-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+@media (hover: none) { .facade-card:hover { transform: none; box-shadow: none; } }
 </style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<!-- NAV -->
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo">
- <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
- </a>
-<ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
-<li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
- <span></span><span></span><span></span>
- </button>
-</nav>
-
-<!-- HERO -->
-<section class="page-hero">
- <h1 class="reveal stagger-1">Choose Your <span>Home Style</span></h1>
- <p class="reveal stagger-2">We build all types of homes on your lot in Florida. Explore our facade styles and find the design that fits your vision.</p>
- <div class="style-tabs reveal stagger-3">
- <button type="button" class="style-tab active" onclick="scrollToStyle('all', this)">All Styles</button>
- <button type="button" class="style-tab" onclick="scrollToStyle('modern', this)">Modern</button>
- <button type="button" class="style-tab" onclick="scrollToStyle('coastal', this)">Coastal</button>
- <button type="button" class="style-tab" onclick="scrollToStyle('contemporary', this)">Contemporary</button>
- <button type="button" class="style-tab" onclick="scrollToStyle('luxury', this)">Luxury</button>
- <button type="button" class="style-tab" onclick="scrollToStyle('traditional', this)">Traditional</button>
- </div>
+<main id="main">
+<section class="a5-hero gal-hero" aria-labelledby="page-title" style="--pos-d:100% 50%;--pos-p:100% 50%;--hero-text:690px">
+  <div class="a5-hero-photo"><span class="a5-render-tag">Design render</span><img src="/images/style-modern.png" srcset="/images/home/style-modern.webp 800w, /images/style-modern.png 1142w" sizes="(max-width: 899px) 100vw, 52vw" alt="Modern home style Florida, open layouts and flat rooflines" width="1142" height="1328" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <h1 class="a5-h1" id="page-title">Choose Your <span class="a5-accent">Home Style</span></h1>
+      <p class="a5-hero-sub">We build all types of homes on your lot in Florida. Explore our facade styles and find the design that fits your vision.</p>
+      <div class="gal-filters">
+        <div class="style-tabs" role="group" aria-label="Jump to a home style">
+          <button type="button" class="style-tab active" onclick="scrollToStyle('all', this)">All Styles</button>
+          <button type="button" class="style-tab" onclick="scrollToStyle('modern', this)">Modern</button>
+          <button type="button" class="style-tab" onclick="scrollToStyle('coastal', this)">Coastal</button>
+          <button type="button" class="style-tab" onclick="scrollToStyle('contemporary', this)">Contemporary</button>
+          <button type="button" class="style-tab" onclick="scrollToStyle('luxury', this)">Luxury</button>
+          <button type="button" class="style-tab" onclick="scrollToStyle('traditional', this)">Traditional</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- MODERN -->
-<section class="style-section" id="modern">
- <div class="style-header reveal">
- <div class="style-label">Modern</div>
- <h2>Modern Homes</h2>
- <p>Clean lines, flat roofs, and minimalist aesthetics. Modern homes feature open floor plans, large windows, and a focus on indoor and outdoor living designed for Florida's climate.</p>
- </div>
- <div class="facade-grid">
- <div class="facade-card featured reveal stagger-1">
- <img src="images/style-modern.png" alt="Modern home style Florida, open layouts and flat rooflines" loading="lazy">
- <div class="facade-card-info">
- <h3>Modern Style Overview</h3>
- <p>Open layouts, flat rooflines, and full height glass. Designed for Florida's indoor and outdoor lifestyle.</p>
- <span class="facade-tag">Featured</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-2">
- <img src="images/facades/P1%20%E2%80%94%20Modern%201-Story%20White-Black%20(Minimalist).png" alt="Modern minimalist single story home with white exterior and black window frames" loading="lazy">
- <div class="facade-card-info">
- <h3>Minimalist White</h3>
- <p>All white exterior with black window frames, flat roof, and clean concrete walkway. Pure minimalist design.</p>
- <span class="facade-tag">1 Story</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-3">
- <img src="images/facades/P3%20%E2%80%94%20Modern%201-Story%20Gray-White%20(Two-Tone).png" alt="Modern single story home with gray and white two tone exterior" loading="lazy">
- <div class="facade-card-info">
- <h3>Gray & White Two Tone</h3>
- <p>Dark gray and white exterior with stone accent at entrance. Bold contrast with tropical landscaping.</p>
- <span class="facade-tag">1 Story</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-1">
- <img src="images/facades/P5%20%E2%80%94%20Modern%202-Story%20Tropical%20(Dark%20Wood).png" alt="Modern two story home with dark wood cladding accents" loading="lazy">
- <div class="facade-card-info">
- <h3>Tropical Modern</h3>
- <p>White stucco with dark wood cladding, second floor balcony with horizontal railing. Statement design.</p>
- <span class="facade-tag">2 Story</span>
- </div>
- </div>
- </div>
+<section class="a5-section style-section a5-bg-white" id="modern" aria-labelledby="modern-title">
+  <div class="a5-wrap">
+    <div class="style-header">
+      <div class="style-label a5-label">Modern</div>
+      <h2 class="a5-h2" id="modern-title"><span class="a5-hl">Modern</span> Homes</h2>
+      <p class="a5-p">Clean lines, flat roofs, and minimalist aesthetics. Modern homes feature open floor plans, large windows, and a focus on indoor and outdoor living designed for Florida's climate.</p>
+    </div>
+    <div class="facade-grid">
+      <div class="facade-card featured">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/style-modern.png" srcset="/images/home/style-modern.webp 800w, images/style-modern.png 1142w" sizes="(max-width: 639px) 100vw, (max-width: 1099px) 50vw, 424px" alt="Modern home style Florida, open layouts and flat rooflines" loading="lazy" width="1142" height="1328" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Modern Style Overview</h3>
+          <p>Open layouts, flat rooflines, and full height glass. Designed for Florida's indoor and outdoor lifestyle.</p>
+          <span class="facade-tag a5-tag-accent">Featured</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/P1%20%E2%80%94%20Modern%201-Story%20White-Black%20(Minimalist).png" alt="Modern minimalist single story home with white exterior and black window frames" loading="lazy" width="2566" height="1482" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Minimalist White</h3>
+          <p>All white exterior with black window frames, flat roof, and clean concrete walkway. Pure minimalist design.</p>
+          <span class="facade-tag">1 Story</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/P3%20%E2%80%94%20Modern%201-Story%20Gray-White%20(Two-Tone).png" alt="Modern single story home with gray and white two tone exterior" loading="lazy" width="2618" height="1480" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Gray & White Two Tone</h3>
+          <p>Dark gray and white exterior with stone accent at entrance. Bold contrast with tropical landscaping.</p>
+          <span class="facade-tag">1 Story</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/P5%20%E2%80%94%20Modern%202-Story%20Tropical%20(Dark%20Wood).png" alt="Modern two story home with dark wood cladding accents" loading="lazy" width="2610" height="1510" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Tropical Modern</h3>
+          <p>White stucco with dark wood cladding, second floor balcony with horizontal railing. Statement design.</p>
+          <span class="facade-tag">2 Story</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-
 <!-- COASTAL -->
-<section class="style-section" id="coastal">
- <div class="style-header reveal">
- <div class="style-label">Coastal</div>
- <h2>Coastal Homes</h2>
- <p>Inspired by Florida's waterfront lifestyle. Metal roofs, light color palettes, covered porches, and construction built for Florida weather make these homes perfect for coastal living.</p>
- </div>
- <div class="facade-grid">
- <div class="facade-card featured reveal stagger-1">
- <img src="images/style-coastal.png" alt="Coastal home style Florida, breezy porches and metal roofs" loading="lazy">
- <div class="facade-card-info">
- <h3>Coastal Style Overview</h3>
- <p>Breezy, light filled homes with covered porches, metal roofs, and tropical landscaping. Built for the beach life.</p>
- <span class="facade-tag">Featured</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-2">
- <img src="images/facades/C1%20%E2%80%94%20Coastal%201-Story%20(Classic%20Beach).png" alt="Coastal single story home with light gray exterior and metal roof" loading="lazy">
- <div class="facade-card-info">
- <h3>Classic Beach</h3>
- <p>Light gray exterior with white trim, metal standing seam roof, covered front porch with columns.</p>
- <span class="facade-tag">1 Story</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-3">
- <img src="images/facades/C3%20%E2%80%94%20Modern%20Coastal%201-Story%20(All%20Stucco).png" alt="Modern coastal single story home with all stucco exterior" loading="lazy">
- <div class="facade-card-info">
- <h3>Modern Coastal</h3>
- <p>All stucco in white and light gray, metal roof, black window frames. Modern meets coastal elegance.</p>
- <span class="facade-tag">1 Story</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-1">
- <img src="images/facades/C4%20%E2%80%94%20Coastal%202-Story%20Beach%20Luxury%20(All%20Stucco).png" alt="Coastal two story luxury home with all stucco exterior" loading="lazy">
- <div class="facade-card-info">
- <h3>Beach Luxury</h3>
- <p>All stucco two story with metal standing seam roof, second floor balcony with white railing.</p>
- <span class="facade-tag">2 Story</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-2">
- <img src="images/facades/C5%20%E2%80%94%20Coastal%202-Story%20(Tropical%20Coastal).png" alt="Tropical coastal two story home with wraparound balcony" loading="lazy">
- <div class="facade-card-info">
- <h3>Tropical Coastal</h3>
- <p>Beige and white exterior, wraparound balcony on second floor, metal roof, tropical landscaping.</p>
- <span class="facade-tag">2 Story</span>
- </div>
- </div>
- </div>
+<section class="a5-section style-section a5-bg-concrete" id="coastal" aria-labelledby="coastal-title">
+  <div class="a5-wrap">
+    <div class="style-header">
+      <div class="style-label a5-label">Coastal</div>
+      <h2 class="a5-h2" id="coastal-title"><span class="a5-hl">Coastal</span> Homes</h2>
+      <p class="a5-p">Inspired by Florida's waterfront lifestyle. Metal roofs, light color palettes, covered porches, and construction built for Florida weather make these homes perfect for coastal living.</p>
+    </div>
+    <div class="facade-grid">
+      <div class="facade-card featured">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/style-coastal.png" srcset="/images/home/style-coastal.webp 800w, images/style-coastal.png 1146w" sizes="(max-width: 639px) 100vw, (max-width: 1099px) 50vw, 424px" alt="Coastal home style Florida, breezy porches and metal roofs" loading="lazy" width="1146" height="1326" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Coastal Style Overview</h3>
+          <p>Breezy, light filled homes with covered porches, metal roofs, and tropical landscaping. Built for the beach life.</p>
+          <span class="facade-tag a5-tag-accent">Featured</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/C1%20%E2%80%94%20Coastal%201-Story%20(Classic%20Beach).png" alt="Coastal single story home with light gray exterior and metal roof" loading="lazy" width="2648" height="1508" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Classic Beach</h3>
+          <p>Light gray exterior with white trim, metal standing seam roof, covered front porch with columns.</p>
+          <span class="facade-tag">1 Story</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/C3%20%E2%80%94%20Modern%20Coastal%201-Story%20(All%20Stucco).png" alt="Modern coastal single story home with all stucco exterior" loading="lazy" width="2656" height="1492" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Modern Coastal</h3>
+          <p>All stucco in white and light gray, metal roof, black window frames. Modern meets coastal elegance.</p>
+          <span class="facade-tag">1 Story</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/C4%20%E2%80%94%20Coastal%202-Story%20Beach%20Luxury%20(All%20Stucco).png" alt="Coastal two story luxury home with all stucco exterior" loading="lazy" width="2816" height="1536" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Beach Luxury</h3>
+          <p>All stucco two story with metal standing seam roof, second floor balcony with white railing.</p>
+          <span class="facade-tag">2 Story</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/C5%20%E2%80%94%20Coastal%202-Story%20(Tropical%20Coastal).png" alt="Tropical coastal two story home with wraparound balcony" loading="lazy" width="2690" height="1364" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Tropical Coastal</h3>
+          <p>Beige and white exterior, wraparound balcony on second floor, metal roof, tropical landscaping.</p>
+          <span class="facade-tag">2 Story</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-
 <!-- CONTEMPORARY -->
-<section class="style-section" id="contemporary">
- <div class="style-header reveal">
- <div class="style-label">Contemporary</div>
- <h2>Contemporary Homes</h2>
- <p>A blend of modern and classic elements. Mixed roof lines, warm tones, stone accents, and architectural details that create homes with character and curb appeal.</p>
- </div>
- <div class="facade-grid">
- <div class="facade-card featured reveal stagger-1">
- <img src="images/style-contemporary.png" alt="Contemporary home style Florida, warm tones and mixed materials" loading="lazy">
- <div class="facade-card-info">
- <h3>Contemporary Style Overview</h3>
- <p>Warm tones meet clean geometry. Stone accents, mixed rooflines, and architectural details with character.</p>
- <span class="facade-tag">Featured</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-2">
- <img src="images/facades/CO1%20%E2%80%94%20Contemporary%201-Story%20(Clean%20Lines).png" alt="Contemporary single story home with clean lines and mixed materials" loading="lazy">
- <div class="facade-card-info">
- <h3>Clean Lines</h3>
- <p>Warm white and beige stucco, mixed flat and low slope roof lines, stone accent entry column.</p>
- <span class="facade-tag">1 Story</span>
- </div>
- </div>
- </div>
+<section class="a5-section style-section a5-bg-white" id="contemporary" aria-labelledby="contemporary-title">
+  <div class="a5-wrap">
+    <div class="style-header">
+      <div class="style-label a5-label">Contemporary</div>
+      <h2 class="a5-h2" id="contemporary-title"><span class="a5-hl">Contemporary</span> Homes</h2>
+      <p class="a5-p">A blend of modern and classic elements. Mixed roof lines, warm tones, stone accents, and architectural details that create homes with character and curb appeal.</p>
+    </div>
+    <div class="facade-grid">
+      <div class="facade-card featured">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/style-contemporary.png" srcset="/images/home/style-contemporary.webp 800w, images/style-contemporary.png 976w" sizes="(max-width: 639px) 100vw, (max-width: 1099px) 50vw, 424px" alt="Contemporary home style Florida, warm tones and mixed materials" loading="lazy" width="976" height="1102" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Contemporary Style Overview</h3>
+          <p>Warm tones meet clean geometry. Stone accents, mixed rooflines, and architectural details with character.</p>
+          <span class="facade-tag a5-tag-accent">Featured</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/CO1%20%E2%80%94%20Contemporary%201-Story%20(Clean%20Lines).png" alt="Contemporary single story home with clean lines and mixed materials" loading="lazy" width="2628" height="1504" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Clean Lines</h3>
+          <p>Warm white and beige stucco, mixed flat and low slope roof lines, stone accent entry column.</p>
+          <span class="facade-tag">1 Story</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-
 <!-- LUXURY -->
-<section class="style-section luxury-section" id="luxury">
- <div class="style-header reveal">
- <div class="style-label">Luxury</div>
- <h2>Luxury Homes</h2>
- <p>Grand proportions, memorable entrances, refined materials, and dramatic lighting. These two story homes bring estate scale architecture to a custom Florida residence.</p>
- </div>
- <div class="facade-grid">
- <div class="facade-card featured reveal stagger-1">
- <img src="images/facades/luxury-mediterranean-estate.jpg" alt="Luxury Mediterranean two story estate with columns, balconies, and a tile roof" loading="lazy" decoding="async" width="1536" height="1024">
- <div class="facade-card-info">
- <h3>Mediterranean Estate</h3>
- <p>Mediterranean symmetry, an arched entrance, columns, balconies, and a dark tile roof create a timeless estate.</p>
- <span class="facade-tag">2 Story</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-2">
- <img src="images/facades/luxury-modern-courtyard-estate.jpg" alt="Luxury modern two story estate with layered volumes and floor to ceiling glass" loading="lazy" decoding="async" width="1536" height="1024">
- <div class="facade-card-info">
- <h3>Modern Courtyard Estate</h3>
- <p>Layered white stucco, warm stone, full height glass, and a broad courtyard create a private resort character.</p>
- <span class="facade-tag">2 Story</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-3">
- <img src="images/facades/luxury-contemporary-grand-estate.jpg" alt="Luxury contemporary two story estate with double height glass and stone accents" loading="lazy" decoding="async" width="1536" height="1024">
- <div class="facade-card-info">
- <h3>Contemporary Grand Estate</h3>
- <p>Double height glass, stone cladding, glass balconies, and broad rooflines create a bold, refined arrival.</p>
- <span class="facade-tag">2 Story</span>
- </div>
- </div>
- </div>
+<section class="a5-section style-section luxury-section a5-bg-concrete" id="luxury" aria-labelledby="luxury-title">
+  <div class="a5-wrap">
+    <div class="style-header">
+      <div class="style-label a5-label">Luxury</div>
+      <h2 class="a5-h2" id="luxury-title"><span class="a5-hl">Luxury</span> Homes</h2>
+      <p class="a5-p">Grand proportions, memorable entrances, refined materials, and dramatic lighting. These two story homes bring estate scale architecture to a custom Florida residence.</p>
+    </div>
+    <div class="facade-grid">
+      <div class="facade-card featured">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/luxury-mediterranean-estate.jpg" alt="Luxury Mediterranean two story estate with columns, balconies, and a tile roof" loading="lazy" decoding="async" width="1536" height="1024"></div>
+        <div class="facade-card-info">
+          <h3>Mediterranean Estate</h3>
+          <p>Mediterranean symmetry, an arched entrance, columns, balconies, and a dark tile roof create a timeless estate.</p>
+          <span class="facade-tag">2 Story</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/luxury-modern-courtyard-estate.jpg" alt="Luxury modern two story estate with layered volumes and floor to ceiling glass" loading="lazy" decoding="async" width="1536" height="1024"></div>
+        <div class="facade-card-info">
+          <h3>Modern Courtyard Estate</h3>
+          <p>Layered white stucco, warm stone, full height glass, and a broad courtyard create a private resort character.</p>
+          <span class="facade-tag">2 Story</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/luxury-contemporary-grand-estate.jpg" alt="Luxury contemporary two story estate with double height glass and stone accents" loading="lazy" decoding="async" width="1536" height="1024"></div>
+        <div class="facade-card-info">
+          <h3>Contemporary Grand Estate</h3>
+          <p>Double height glass, stone cladding, glass balconies, and broad rooflines create a bold, refined arrival.</p>
+          <span class="facade-tag">2 Story</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-
 <!-- TRADITIONAL -->
-<section class="style-section" id="traditional">
- <div class="style-header reveal">
- <div class="style-label">Traditional</div>
- <h2>Traditional Homes</h2>
- <p>Timeless Florida design with barrel tile roofs, arched entryways, stucco exteriors, and decorative details. Built to last with classic appeal that never goes out of style.</p>
- </div>
- <div class="facade-grid">
- <div class="facade-card featured reveal stagger-1">
- <img src="images/style-traditional.png" alt="Traditional home style Florida, barrel tile roofs and arched entries" loading="lazy">
- <div class="facade-card-info">
- <h3>Traditional Style Overview</h3>
- <p>Timeless elegance with barrel tile roofs, arched entryways, and stucco exteriors. Classic Florida charm.</p>
- <span class="facade-tag">Featured</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-2">
- <img src="images/facades/T1%20%E2%80%94%20Traditional%201-Story%20(Classic%20Florida).png" alt="Traditional single story Florida home with cream stucco and tile roof" loading="lazy">
- <div class="facade-card-info">
- <h3>Classic Florida</h3>
- <p>Warm cream stucco, hip roof with barrel tile, arched entryway, paver driveway. Timeless Florida elegance.</p>
- <span class="facade-tag">1 Story</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-3">
- <img src="images/facades/T2%20%E2%80%94%20Traditional%201-Story%20(Mediterranean%20Touch).png" alt="Traditional Mediterranean influenced single story home" loading="lazy">
- <div class="facade-card-info">
- <h3>Mediterranean Touch</h3>
- <p>Light beige stucco with brown barrel tile, stone accent at entrance, decorative shutters.</p>
- <span class="facade-tag">1 Story</span>
- </div>
- </div>
- <div class="facade-card reveal stagger-1">
- <img src="images/facades/T3%20%E2%80%94%20Traditional%201-Story%20(Southern%20Charm).png" alt="Traditional Southern Charm single story home" loading="lazy">
- <div class="facade-card-info">
- <h3>Southern Charm</h3>
- <p>Soft white stucco, hip roof with concrete tile, covered front porch with square columns.</p>
- <span class="facade-tag">1 Story</span>
- </div>
- </div>
- </div>
+<section class="a5-section style-section a5-bg-white" id="traditional" aria-labelledby="traditional-title">
+  <div class="a5-wrap">
+    <div class="style-header">
+      <div class="style-label a5-label">Traditional</div>
+      <h2 class="a5-h2" id="traditional-title"><span class="a5-hl">Traditional</span> Homes</h2>
+      <p class="a5-p">Timeless Florida design with barrel tile roofs, arched entryways, stucco exteriors, and decorative details. Built to last with classic appeal that never goes out of style.</p>
+    </div>
+    <div class="facade-grid">
+      <div class="facade-card featured">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/style-traditional.png" srcset="/images/home/style-traditional.webp 800w, images/style-traditional.png 1144w" sizes="(max-width: 639px) 100vw, (max-width: 1099px) 50vw, 424px" alt="Traditional home style Florida, barrel tile roofs and arched entries" loading="lazy" width="1144" height="1398" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Traditional Style Overview</h3>
+          <p>Timeless elegance with barrel tile roofs, arched entryways, and stucco exteriors. Classic Florida charm.</p>
+          <span class="facade-tag a5-tag-accent">Featured</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/T1%20%E2%80%94%20Traditional%201-Story%20(Classic%20Florida).png" alt="Traditional single story Florida home with cream stucco and tile roof" loading="lazy" width="2494" height="1428" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Classic Florida</h3>
+          <p>Warm cream stucco, hip roof with barrel tile, arched entryway, paver driveway. Timeless Florida elegance.</p>
+          <span class="facade-tag">1 Story</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/T2%20%E2%80%94%20Traditional%201-Story%20(Mediterranean%20Touch).png" alt="Traditional Mediterranean influenced single story home" loading="lazy" width="2532" height="1424" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Mediterranean Touch</h3>
+          <p>Light beige stucco with brown barrel tile, stone accent at entrance, decorative shutters.</p>
+          <span class="facade-tag">1 Story</span>
+        </div>
+      </div>
+      <div class="facade-card">
+        <div class="facade-media a5-photo"><span class="a5-render-tag">Design render</span><img src="images/facades/T3%20%E2%80%94%20Traditional%201-Story%20(Southern%20Charm).png" alt="Traditional Southern Charm single story home" loading="lazy" width="2516" height="1354" decoding="async"></div>
+        <div class="facade-card-info">
+          <h3>Southern Charm</h3>
+          <p>Soft white stucco, hip roof with concrete tile, covered front porch with square columns.</p>
+          <span class="facade-tag">1 Story</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
- <h2 class="reveal">Love a Style? <span>Let's Build It.</span></h2>
- <p class="reveal stagger-1">We build on your lot. Choose a style, customize the floor plan, and let our team coordinate the project from design through the final walkthrough.</p>
- <a href="/calculator" class="btn-primary reveal stagger-2">Estimate My Build<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<section class="a5-section a5-bg-concrete gal-cta" aria-labelledby="cta-title">
+  <div class="a5-wrap gal-cta-inner">
+    <h2 class="a5-h2" id="cta-title">Love a Style? Let's <span class="a5-hl">Build</span> It.</h2>
+    <p class="a5-p">We build on your lot. Choose a style, customize the floor plan, and let our team coordinate the project from design through the final walkthrough.</p>
+    <a class="a5-btn a5-btn-dark" href="/calculator">Estimate My Build <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
 </section>
+</main>
 
-<!-- FOOTER -->
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand">
- <a href="/" class="nav-logo">
- <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
- </a>
- <p>We build custom homes across Florida, starting with your lot and your goals.</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/">Home</a>
- <a href="/about">About Us</a>
- <a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a>
- <a href="/facades">Facades & Styles</a>
- <a href="/floor-plans">Floor Plans</a>
- <a href="/referral-program/">Referral Program</a>
- </div>
- <div class="footer-col">
- <h4>Services</h4>
- <a href="/">Custom Homes</a>
- <a href="/financing">Financing</a>
- <a href="/#services">Construction Management</a>
- <a href="/blog">Blog</a>
- <a href="/calculator">Pricing Calculator</a>
- <a href="/interiors">Interior Selections</a>
- <a href="/construction">Construction Gallery</a>
- <a href="/interior-gallery">Interior Gallery</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:2392304868">(239) 230 4868</a>
- <a href="mailto:info@builderk.com">info@builderk.com</a>
- <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
- </div>
- </div>
- <div class="footer-bottom">
- <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
- <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
- </div>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
 <script>
-// ===== SCROLL REVEAL =====
-window.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.page-hero .reveal').forEach(function(el) {
-    el.classList.add('visible');
-  });
-});
-
-var observer = null;
-if (typeof IntersectionObserver !== 'undefined') {
-  observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.05 });
-  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-}
-
-// ===== NAVBAR SCROLL =====
-var navbar = document.getElementById('navbar');
-if (navbar) {
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
-}
-
 // ===== STYLE TAB NAVIGATION =====
 function scrollToStyle(style, trigger) {
   document.querySelectorAll('.style-tab').forEach(function(t) { t.classList.remove('active'); });
@@ -759,47 +505,6 @@ function scrollToStyle(style, trigger) {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
-
-// ===== MOBILE MENU =====
-var hamburger = document.getElementById('hamburger');
-var navLinks = document.querySelector('.nav-links');
-if (hamburger && navLinks) {
-  hamburger.addEventListener('click', function() {
-    var isOpen = navLinks.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Open menu');
-      document.body.style.overflow = '';
-    }
-  });
-  navLinks.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-    });
-  });
-}
-</script>
-
-<script>
-// Click-to-call GA4 event tracking
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (typeof gtag === 'function') {
-        gtag('event', 'phone_click', { 'page_path': location.pathname });
-      }
-    });
-  });
-});
 </script>
 <script defer src="/scripts/call-bar.js"></script>
 </body>
