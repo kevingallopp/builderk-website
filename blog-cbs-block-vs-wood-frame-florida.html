@@ -53,131 +53,368 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
-:root{--orange:#F77F00;--orange-hover:#FF9A2E;--dark:#0A0A0A;--dark-card:#111111;--dark-border:#1E1E1E}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;color:#fff;background:var(--dark);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:'Outfit',sans-serif}
-.navbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);transition:all 0.3s}
-.navbar.scrolled{padding:14px 48px;background:rgba(10,10,10,0.97)}
-.nav-logo{text-decoration:none;display:flex;align-items:baseline}
-.nav-logo .builder{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;letter-spacing:1px}
-.nav-logo .k{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.6rem;color:var(--orange)}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{color:#ccc;text-decoration:none;font-size:0.92rem;font-weight:500;transition:color 0.2s}
-.nav-links a:hover{color:var(--orange)}
-.nav-cta{background:var(--orange)!important;color:#fff!important;padding:10px 22px;border-radius:8px;font-weight:600!important}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;z-index:1000;position:relative}
-.nav-hamburger span{width:26px;height:2px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s}
-.nav-hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.nav-hamburger.active span:nth-child(2){opacity:0}
-.nav-hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.nav-links.open{display:flex!important;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:999;justify-content:flex-start;align-items:center;gap:24px;padding:80px 24px}
-.nav-links.open li{list-style:none}
-.nav-links.open li a{font-size:1.4rem;padding:12px 0;color:#fff}
-.post-hero{padding:150px 24px 30px;max-width:760px;margin:0 auto;text-align:center}
-.post-hero .crumb{font-size:0.85rem;color:#777;margin-bottom:18px}
-.post-hero .crumb a{color:var(--orange);text-decoration:none}
-.post-hero h1{font-size:2.6rem;font-weight:800;line-height:1.15;margin-bottom:14px}
-.post-hero .date{font-size:0.9rem;color:#888}
-.article{max-width:720px;margin:0 auto;padding:20px 24px 70px;font-size:1.08rem;line-height:1.8;color:#cfcfcf}
-.article h2{font-size:1.6rem;font-weight:700;color:#fff;margin:38px 0 14px}
-.article p{margin-bottom:20px}
-.article ul{margin:0 0 20px 22px}
-.article li{margin-bottom:10px}
-.article strong{color:#fff}
-.article a{color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(247,127,0,0.4)}
-.article a:hover{color:var(--orange-hover)}
-.cta-section{padding:70px 48px;background:var(--dark-card);text-align:center;border-top:1px solid var(--dark-border)}
-.cta-section h2{font-size:2rem;font-weight:800;margin-bottom:12px}
-.cta-section h2 span{color:var(--orange)}
-.cta-section p{color:#aaa;max-width:520px;margin:0 auto 26px;line-height:1.6}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:15px 34px;background:var(--orange);color:#fff;text-decoration:none;border-radius:12px;font-weight:600;font-size:1.05rem}
-.btn-primary:hover{background:var(--orange-hover)}
-.footer{background:var(--dark);padding:50px 48px 30px;border-top:1px solid rgba(255,255,255,0.06)}
-.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;color:#888;font-size:0.88rem}
-.footer-inner a{color:#888;text-decoration:none}
-.footer-inner a:hover{color:var(--orange)}
-@media(max-width:900px){.navbar{padding:14px 20px!important}.nav-links{display:none}.nav-hamburger{display:flex!important}.post-hero{padding:120px 20px 24px}.post-hero h1{font-size:2rem}.article{font-size:1.02rem;padding:16px 20px 50px}.cta-section{padding:50px 24px}}
+/* page hero: sizes come from --hero-min (computer) and --hero-photo-h (phone photo band) on the section */
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; list-style: none; font-size: 16.5px; line-height: 1.4; color: var(--a5-on-dark-soft); }
+.hero-meta li { display: inline-flex; align-items: center; gap: 8px; }
+.hero-meta svg { flex-shrink: 0; }
+.hero-crumb { margin: 0; font-size: 15px; color: var(--a5-on-dark-muted); }
+.hero-crumb a { color: var(--a5-on-dark); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.hero-phonecall { display: none; }
+@media (min-width: 900px) { .a5-hero .a5-h1 { text-wrap: wrap; } }
+@media (max-width: 899px) {
+  .a5-hero-photo img { object-position: var(--pos-sm, var(--pos, 50% 40%)); }
+  .hero-meta { font-size: 15px; }
+  .hero-meta svg { width: 16px; height: 16px; }
+  .hero-crumb { font-size: 14px; }
+  .a5-hero-actions .hero-phonecall { display: inline-flex; }
+}
+
+/* blog post hero: long titles get a size that fits (set per post with --h1 / --h1-sm) */
+.post-hero .a5-h1 { font-size: clamp(44px, calc(var(--h1, 76) * 100vw / 1440), calc(var(--h1, 76) * 1px)); }
+@media (min-width: 900px) { .post-hero .a5-h1 { text-wrap: pretty; } }
+
+/* intro: table of contents and the opening paragraphs */
+.post-intro { padding-block: 80px 88px; }
+.post-grid { display: grid; grid-template-columns: 400px minmax(0, 1fr); column-gap: 88px; align-items: start; }
+.post-grid-end { align-items: end; }
+.post-body { max-width: 780px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+.post-body > p { margin: 0; font-size: 18px; line-height: 1.7; color: var(--a5-body); }
+.post-body > p.post-lead { font-size: 23px; line-height: 1.5; font-weight: 500; color: var(--a5-ink); }
+.post-body > p.post-note { font-size: 15px; line-height: 1.6; }
+.a5-bg-finance .post-body > p.post-note { color: var(--a5-finance-body); }
+.post-intro-solo { max-width: 900px; }
+.post-body strong { color: var(--a5-ink); }
+.post-body a { color: var(--a5-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; white-space: nowrap; }
+.post-body a:hover { text-decoration-color: var(--a5-orange); }
+.post-toc { padding: 28px 28px 30px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 18px; }
+.post-toc-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-toc ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 13px; counter-reset: toc; }
+.post-toc li { display: flex; gap: 12px; align-items: flex-start; counter-increment: toc; }
+.post-toc li::before { content: counter(toc); width: 26px; height: 26px; flex-shrink: 0; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: var(--a5-cond); font-weight: 800; font-size: 14px; }
+.post-toc a { padding-top: 2px; font-size: 16px; line-height: 1.4; font-weight: 500; color: var(--a5-ink); text-decoration: none; }
+.post-toc a:hover { text-decoration: underline; text-decoration-color: var(--a5-orange); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* one band per section */
+.post-sec { padding-block: 88px 92px; }
+.post-h2 { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: clamp(40px, 3.48vw, 50px); line-height: 0.92; text-transform: uppercase; color: var(--a5-ink); }
+.post-num { display: flex; width: 46px; height: 46px; margin-bottom: 18px; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; align-items: center; justify-content: center; font-size: 24px; line-height: 1; }
+.post-h3 { margin: 10px 0 0; font-family: var(--a5-cond); font-weight: 800; font-size: 30px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-full { margin-top: 44px; }
+.post-grid-after { margin-top: 44px; }
+
+/* lists: orange checks; the mistakes list gets a gray cross */
+.post-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.post-list li { position: relative; padding-left: 32px; font-size: 18px; line-height: 1.6; color: var(--a5-body); }
+.post-list li::before { content: ""; position: absolute; left: 0; top: 5px; width: 20px; height: 20px; background: no-repeat center / 20px 20px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+.post-list-x li::before { left: 2px; top: 7px; width: 16px; height: 16px; background-size: 16px 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A948B' stroke-width='2.6' stroke-linecap='round'%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3C/svg%3E"); }
+.post-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.post-cards li { padding: 20px 22px; border-radius: 14px; background: var(--a5-paper); border: 1px solid var(--a5-line); font-size: 16px; line-height: 1.55; color: var(--a5-body); }
+.a5-bg-concrete .post-cards li, .a5-bg-finance .post-cards li { background: var(--a5-white); }
+.post-cards strong { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-cards strong::before { content: ""; width: 20px; height: 20px; flex-shrink: 0; background: no-repeat center / 20px 20px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+
+/* callouts with the emoji style icons */
+.post-callout { padding: 26px 28px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
+.a5-bg-white .post-callout { background: var(--a5-paper); }
+.a5-bg-finance .post-callout { border-color: #D5DBE0; }
+.post-callout-head { display: flex; align-items: center; gap: 14px; }
+.post-callout .a5-icon { width: 46px; height: 46px; }
+.post-callout-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 25px; line-height: 1.02; text-transform: uppercase; color: var(--a5-ink); }
+.post-callout p { margin: 0; font-size: 17px; line-height: 1.65; color: var(--a5-body); }
+.post-callout a { color: var(--a5-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; white-space: nowrap; }
+
+/* illustrative scenario card */
+.post-scenario { padding: 28px 30px 12px; border-radius: 16px; background: var(--a5-white); border: 1px solid #D5DBE0; }
+.post-scenario-title { margin: 0; padding-bottom: 16px; font-family: var(--a5-cond); font-weight: 800; font-size: 27px; line-height: 1.02; text-transform: uppercase; color: var(--a5-finance-ink); }
+.post-scenario .equity-row { padding: 15px 0; border-top: 1px solid #E3E8EC; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); column-gap: 24px; align-items: baseline; }
+.post-scenario .label { font-size: 16.5px; line-height: 1.45; color: var(--a5-finance-body); }
+.post-scenario .value { font-size: 17px; line-height: 1.4; font-weight: 700; color: var(--a5-finance-ink); text-align: right; }
+.post-scenario .equity-row.total { border-top: 2px solid var(--a5-finance-ink); }
+.post-scenario .total .label { font-size: 17.5px; font-weight: 700; color: var(--a5-finance-ink); }
+.post-scenario .total .value { font-size: 18px; }
+
+/* tables: dark header row; on phones they scroll sideways inside their own box */
+.post-table { border-radius: 16px; border: 1px solid var(--a5-line); background: var(--a5-white); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.post-table table { width: 100%; border-collapse: collapse; }
+.post-table th { background: var(--a5-ink); color: #FFFFFF; text-align: left; vertical-align: bottom; padding: 16px 18px; font-family: var(--a5-cond); font-weight: 800; font-size: 20px; line-height: 1.1; letter-spacing: 0.02em; text-transform: uppercase; }
+.post-table td { padding: 15px 18px; border-top: 1px solid #ECE8E1; vertical-align: top; font-size: 15.5px; line-height: 1.5; color: var(--a5-body); }
+.post-table tbody tr:nth-child(even) td { background: #F7F6F3; }
+.post-table td strong { color: var(--a5-ink); }
+.post-table .check, .post-table .cross { display: inline-flex; align-items: flex-start; gap: 9px; }
+.post-table .check::before, .post-table .cross::before { content: ""; flex-shrink: 0; background-repeat: no-repeat; background-position: center; }
+.post-table .check::before { width: 18px; height: 18px; margin-top: 2px; background-size: 18px 18px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+.post-table .cross::before { width: 16px; height: 16px; margin-top: 3px; background-size: 16px 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A948B' stroke-width='2.6' stroke-linecap='round'%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3C/svg%3E"); }
+
+/* steps with the tape measure (rows of four; the tape and its steps loop together) */
+.post-steps + .post-steps { margin-top: 40px; }
+.post-steps .a5-tapebar-y { display: none; }
+.post-steps-list { list-style: none; margin: 0 0 26px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 32px; row-gap: 28px; }
+.post-step { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+.post-step-when { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
+.post-step-num { width: 34px; height: 34px; margin-bottom: 4px; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-family: var(--a5-cond); font-weight: 800; font-size: 17px; }
+.post-step-title { display: block; margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 28px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-step-text { display: block; margin: 0; font-size: 16px; line-height: 1.55; color: var(--a5-body); }
+.post-tape .post-tape-nums { position: absolute; left: 18px; right: 0; top: 31px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; color: #1B1A18; }
+.post-tape-nums span { padding-left: 6px; }
+.post-tape-nums b { padding: 0 5px; background: var(--a5-orange); font-weight: 800; }
+
+/* closing call to action and the published line */
+.post-cta { text-align: center; padding-block: 96px 64px; }
+.post-cta.post-cta-line { border-top: 1px solid var(--a5-line); }
+.post-cta .a5-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.post-cta .a5-h2 { font-size: clamp(42px, 4.45vw, 64px); }
+.post-cta .a5-p { max-width: 640px; font-size: 18px; }
+.post-published { margin: 14px 0 0; padding-top: 22px; border-top: 1px solid #DAD5CC; max-width: 900px; font-size: 14px; line-height: 1.5; color: var(--a5-muted); }
+
+/* tablets and small laptops: the heading sits above its text, like on phones, with the computer type sizes */
+@media (max-width: 1099px) {
+  .post-grid { grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
+  .post-grid-end { align-items: start; }
+  .post-grid-after { margin-top: 24px; }
+  .post-grid-after > div:first-child { display: none; }
+  .post-toc { max-width: 780px; }
+  .post-steps-list { column-gap: 22px; }
+  .post-step-title { font-size: 24px; }
+}
+@media (max-width: 899px) {
+  .post-hero .a5-h1 { font-size: calc(var(--h1-sm, 46) * 1px); }
+  .post-intro { padding-block: 32px 44px; }
+  .post-grid { grid-template-columns: minmax(0, 1fr); row-gap: 18px; }
+  .post-grid-after { margin-top: 18px; }
+  .post-grid-after > div:first-child { display: none; }
+  .post-body { gap: 18px; }
+  .post-body > p { font-size: 16px; line-height: 1.65; }
+  .post-body > p.post-lead { font-size: 19px; line-height: 1.5; }
+  .post-body > p.post-note { font-size: 14px; }
+  .post-toc { padding: 22px 20px; }
+  .post-toc-title { font-size: 24px; }
+  .post-toc ol { gap: 12px; }
+  .post-toc a { font-size: 15.5px; }
+  .post-sec { padding-block: 48px 44px; }
+  .post-h2 { font-size: 36px; }
+  .post-num { width: 38px; height: 38px; margin-bottom: 14px; font-size: 20px; }
+  .post-h3 { margin-top: 8px; font-size: 25px; }
+  .post-full { margin-top: 24px; }
+  .post-list { gap: 10px; }
+  .post-list li { padding-left: 30px; font-size: 16px; }
+  .post-list li::before { top: 3px; }
+  .post-list-x li::before { top: 5px; }
+  .post-cards { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .post-cards li { padding: 16px 18px; font-size: 15px; }
+  .post-cards strong { font-size: 21px; }
+  .post-callout { padding: 20px 18px; }
+  .post-callout-title { font-size: 22px; }
+  .post-callout p { font-size: 15.5px; }
+  .post-scenario { padding: 20px 18px 8px; }
+  .post-scenario-title { padding-bottom: 12px; font-size: 23px; }
+  .post-scenario .equity-row { display: flex; flex-direction: column; gap: 4px; padding: 13px 0; }
+  .post-scenario .label { font-size: 14.5px; }
+  .post-scenario .value { font-size: 16px; text-align: left; }
+  .post-scenario .total .label { font-size: 14.5px; }
+  .post-scenario .total .value { font-size: 17px; }
+  .post-table table { min-width: 620px; }
+  .post-table th { padding: 13px 14px; font-size: 17px; }
+  .post-table td { padding: 12px 14px; font-size: 14.5px; }
+  .post-steps { display: grid; grid-template-columns: 58px minmax(0, 1fr); column-gap: 18px; }
+  .post-steps + .post-steps { margin-top: 30px; }
+  .post-steps .a5-tapebar-y { display: block; width: 58px; }
+  .post-steps .post-tape { display: none; }
+  .post-steps-list { grid-template-columns: minmax(0, 1fr); row-gap: 30px; margin: 0; padding: 22px 0 8px; }
+  .post-step { gap: 5px; }
+  .post-step-title { font-size: 27px; }
+  .post-step-text { font-size: 15.5px; }
+  .post-cta { padding-block: 48px 40px; }
+  .post-cta .a5-wrap { gap: 18px; }
+  .post-cta .a5-p { font-size: 15.5px; line-height: 1.55; }
+  .post-cta .a5-btn { width: 100%; }
+  .post-published { margin-top: 0; padding-top: 18px; font-size: 13px; line-height: 1.55; }
+}
 </style>
 </head>
 <body>
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
- <ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/blog">Blog</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
-</nav>
-
-<header class="post-hero">
- <div class="crumb"><a href="/blog">Blog</a> / Article</div>
- <h1>CBS Block vs Wood Frame in Florida: The Real Differences</h1>
- <div class="date">June 29, 2026 &middot; BuilderK</div>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
 </header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<article class="article">
-<h2>Why This Question Comes Up So Often</h2>
-<p>If you're planning to build a home in Florida, almost everyone you talk to will eventually ask: "Are you going with block or wood frame?" It's a fair question, and the answer matters more here than it does in most other states. Florida's heat, humidity, hurricane season, and insurance market all push this decision in specific directions. These are the practical differences that matter.</p>
-
-<h2>What CBS Construction Means</h2>
-<p>CBS stands for concrete block and stucco, sometimes called CMU (concrete masonry unit) construction. The exterior walls are built with hollow concrete blocks, filled with concrete and steel rebar at key points, then finished on the outside with stucco. This has been the dominant method for Florida homes for decades, and for good reasons.</p>
-<ul>
-<li><strong>Wind resistance:</strong> A properly built CBS wall system handles high wind loads well. That matters when you're in a hurricane prone state and your insurance company is doing the math on your risk profile.</li>
-<li><strong>Pest resistance:</strong> Concrete doesn't feed termites. Florida has serious termite pressure, and block walls remove a large portion of the structure from that equation.</li>
-<li><strong>Thermal mass:</strong> Block walls absorb heat during the day and release it slowly. In a climate where your AC runs hard, that buffer can help keep interior temperatures more stable.</li>
-<li><strong>Fire resistance:</strong> Concrete block does not burn, which has obvious safety benefits and can affect insurance ratings.</li>
-</ul>
-
-<h2>What Wood Frame Construction Offers</h2>
-<p>Wood frame construction uses dimensional lumber for the wall studs, with exterior sheathing, house wrap, and a cladding material over the top. It is the standard method across most of the United States. In Florida it's used frequently for second stories, interior walls, and in some areas for full exterior construction.</p>
-<ul>
-<li><strong>Design flexibility:</strong> Wood framing is easier to modify and allows for wider spans without special engineering in some configurations. It gives architects and builders more freedom with unusual shapes and openings.</li>
-<li><strong>Cost profile:</strong> Material and labor costs for wood frame can differ from CBS depending on your location, the current lumber market, and the specific design. Neither method is always cheaper. Use our <a href="/calculator">cost calculator</a> to get a realistic range for your project rather than guessing.</li>
-<li><strong>Speed:</strong> In some cases, wood framing goes up quickly, which can affect your overall construction timeline.</li>
-</ul>
-<p>The tradeoff is real, though. Wood is vulnerable to moisture intrusion, termites, and rot in ways that concrete is not. Florida's humidity is not gentle. A wood frame home that is detailed and maintained properly can perform well, but it requires that proper detailing from the start.</p>
-
-<h2>Moisture and Humidity: The Florida Factor</h2>
-<p>This is where a lot of buyers from other states get surprised. Florida's combination of heat, humidity, and frequent rain means moisture management is not optional. It affects both construction types differently.</p>
-<p>With CBS construction, the concern is vapor drive from the outside pushing moisture into the wall assembly. Proper stucco application, vapor barriers, and interior finishes all matter. Done right, block walls handle moisture well. Done poorly, you get mold and efflorescence.</p>
-<p>With wood frame, the concern is any moisture that gets past the cladding reaching the studs and sheathing. Proper house wrap, flashing at every penetration, and good window and door installation details are critical. The consequences of a moisture failure in wood frame tend to be more severe and harder to fix.</p>
-<p>Either way, the quality of the execution matters as much as the material choice. This is a point worth discussing directly with your builder before you finalize plans.</p>
-
-<h2>Insurance Considerations in Florida</h2>
-<p>Florida's property insurance market is one of the most challenging in the country. Construction type is one of the factors insurers use to calculate your premium and coverage options. CBS construction is generally viewed more favorably by insurers because of its wind and fire resistance. That doesn't mean wood frame homes are uninsurable, but it's a real variable you should factor into your long term ownership costs. Talk to an insurance agent licensed in Florida early in your planning process, before you've locked in a structural system.</p>
-
-<h2>What BuilderK Typically Builds</h2>
-<p>Our leadership team has extensive experience with both construction methods across Florida, and our default approach leans toward CBS for exterior walls. The reasons come back to everything above: wind performance, pest resistance, and the realities of Florida's insurance environment. That said, wood framing plays a role in most of our homes, typically for interior partition walls, roof framing, and second story additions where a hybrid approach makes sense structurally and economically.</p>
-<p>Every lot and every floor plan is different, and the right structural system for your home depends on your specific location, design, and priorities. If you want to browse starting points, our <a href="/floor-plans">floor plans</a> can give you a sense of what's possible. When you're ready to talk through your specific site and goals, <a href="/contact">talk to a builder</a> on our team directly.</p>
-
-<h2>The Bottom Line</h2>
-<p>CBS block is the standard in Florida for good reasons. It handles the climate, the pests, and the wind better than wood frame in most situations. Wood frame is a legitimate choice in the right context, and skilled builders use both. What matters most is that your home is designed and built correctly for Florida conditions, regardless of which system ends up on the drawings. Ask questions, understand your options, and make sure your builder can clearly explain the reasoning behind every structural decision on your project.</p>
-</article>
-
-<section class="cta-section">
- <h2>Ready to Build in <span>Florida?</span></h2>
- <p>BuilderK coordinates plans, permitting, and construction and prepares the documents lenders request from the builder. Tell us about your project.</p>
- <a href="/contact" class="btn-primary">Get my free consultation</a>
+<main id="main">
+<section class="a5-hero post-hero" aria-labelledby="post-title" style="--h1:70;--h1-sm:42;--hero-min:640px;--hero-photo-h:330px">
+  <div class="a5-hero-photo" style="--pos:50% 40%;--pos-sm:50% 45%"><img src="/images/projects/jobsite/strip/s14.webp" alt="Three story BuilderK home exterior in Florida" width="600" height="800" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <p class="hero-crumb"><a href="/blog">Blog</a> / Article</p>
+      <h1 class="a5-h1" id="post-title">CBS Block vs Wood Frame in Florida: The Real <span class="a5-accent">Differences</span></h1>
+      <ul class="hero-meta"><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>June 29, 2026</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>BuilderK</li></ul>
+      <div class="a5-hero-actions"><a class="a5-btn a5-btn-hero" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        <a class="a5-btn a5-btn-call hero-phonecall" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a></div>
+    </div>
+  </div>
 </section>
 
-<footer class="footer">
- <div class="footer-inner">
- <div>&copy; 2026 Builders Knowledge Development Inc. &middot; Licensed Florida GC, CGC #1537163</div>
- <div><a href="/blog">Blog</a> &nbsp;&middot;&nbsp; <a href="/calculator">Calculator</a> &nbsp;&middot;&nbsp; <a href="/privacy">Privacy</a></div>
- </div>
-</footer>
+<section class="a5-section post-sec a5-bg-white" aria-labelledby="why-this-question-comes-up-so-often">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="why-this-question-comes-up-so-often">Why This <span class="a5-hl">Question</span> Comes Up So Often</h2></div><div class="post-body"><p>If you're planning to build a home in Florida, almost everyone you talk to will eventually ask: "Are you going with block or wood frame?" It's a fair question, and the answer matters more here than it does in most other states. Florida's heat, humidity, hurricane season, and insurance market all push this decision in specific directions. These are the practical differences that matter.</p></div></div>
+  </div>
+</section>
 
-<script>
-var navbar=document.getElementById('navbar');if(navbar){window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.pageYOffset>60);});}
-var hamburger=document.getElementById('hamburger');var navLinks=document.querySelector('.nav-links');
-if(hamburger&&navLinks){hamburger.addEventListener('click',function(){var o=navLinks.classList.toggle('open');hamburger.classList.toggle('active');hamburger.setAttribute('aria-expanded',o?'true':'false');document.body.style.overflow=o?'hidden':'';});navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){navLinks.classList.remove('open');hamburger.classList.remove('active');});});}
-</script>
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="what-cbs-construction-means">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="what-cbs-construction-means">What <span class="a5-hl">CBS</span> Construction Means</h2></div><div class="post-body"><p>CBS stands for concrete block and stucco, sometimes called CMU (concrete masonry unit) construction. The exterior walls are built with hollow concrete blocks, filled with concrete and steel rebar at key points, then finished on the outside with stucco. This has been the dominant method for Florida homes for decades, and for good reasons.</p>
+<ul class="post-list"><li><strong>Wind resistance:</strong> A properly built CBS wall system handles high wind loads well. That matters when you're in a hurricane prone state and your insurance company is doing the math on your risk profile.</li><li><strong>Pest resistance:</strong> Concrete doesn't feed termites. Florida has serious termite pressure, and block walls remove a large portion of the structure from that equation.</li><li><strong>Thermal mass:</strong> Block walls absorb heat during the day and release it slowly. In a climate where your AC runs hard, that buffer can help keep interior temperatures more stable.</li><li><strong>Fire resistance:</strong> Concrete block does not burn, which has obvious safety benefits and can affect insurance ratings.</li></ul></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-white" aria-labelledby="what-wood-frame-construction-offers">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="what-wood-frame-construction-offers">What <span class="a5-hl">Wood Frame</span> Construction Offers</h2></div><div class="post-body"><p>Wood frame construction uses dimensional lumber for the wall studs, with exterior sheathing, house wrap, and a cladding material over the top. It is the standard method across most of the United States. In Florida it's used frequently for second stories, interior walls, and in some areas for full exterior construction.</p>
+<ul class="post-list"><li><strong>Design flexibility:</strong> Wood framing is easier to modify and allows for wider spans without special engineering in some configurations. It gives architects and builders more freedom with unusual shapes and openings.</li><li><strong>Cost profile:</strong> Material and labor costs for wood frame can differ from CBS depending on your location, the current lumber market, and the specific design. Neither method is always cheaper. Use our <a href="/calculator">cost calculator</a> to get a realistic range for your project rather than guessing.</li><li><strong>Speed:</strong> In some cases, wood framing goes up quickly, which can affect your overall construction timeline.</li></ul>
+<p>The tradeoff is real, though. Wood is vulnerable to moisture intrusion, termites, and rot in ways that concrete is not. Florida's humidity is not gentle. A wood frame home that is detailed and maintained properly can perform well, but it requires that proper detailing from the start.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="moisture-and-humidity-the-florida-factor">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="moisture-and-humidity-the-florida-factor"><span class="a5-hl">Moisture</span> and Humidity: The Florida Factor</h2></div><div class="post-body"><p>This is where a lot of buyers from other states get surprised. Florida's combination of heat, humidity, and frequent rain means moisture management is not optional. It affects both construction types differently.</p>
+<p>With CBS construction, the concern is vapor drive from the outside pushing moisture into the wall assembly. Proper stucco application, vapor barriers, and interior finishes all matter. Done right, block walls handle moisture well. Done poorly, you get mold and efflorescence.</p>
+<p>With wood frame, the concern is any moisture that gets past the cladding reaching the studs and sheathing. Proper house wrap, flashing at every penetration, and good window and door installation details are critical. The consequences of a moisture failure in wood frame tend to be more severe and harder to fix.</p>
+<p>Either way, the quality of the execution matters as much as the material choice. This is a point worth discussing directly with your builder before you finalize plans.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-white" aria-labelledby="insurance-considerations-in-florida">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="insurance-considerations-in-florida"><span class="a5-hl">Insurance</span> Considerations in Florida</h2></div><div class="post-body"><p>Florida's property insurance market is one of the most challenging in the country. Construction type is one of the factors insurers use to calculate your premium and coverage options. CBS construction is generally viewed more favorably by insurers because of its wind and fire resistance. That doesn't mean wood frame homes are uninsurable, but it's a real variable you should factor into your long term ownership costs. Talk to an insurance agent licensed in Florida early in your planning process, before you've locked in a structural system.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="what-builderk-typically-builds">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="what-builderk-typically-builds">What <span class="a5-hl">BuilderK</span> Typically Builds</h2></div><div class="post-body"><p>Our leadership team has extensive experience with both construction methods across Florida, and our default approach leans toward CBS for exterior walls. The reasons come back to everything above: wind performance, pest resistance, and the realities of Florida's insurance environment. That said, wood framing plays a role in most of our homes, typically for interior partition walls, roof framing, and second story additions where a hybrid approach makes sense structurally and economically.</p>
+<p>Every lot and every floor plan is different, and the right structural system for your home depends on your specific location, design, and priorities. If you want to browse starting points, our <a href="/floor-plans">floor plans</a> can give you a sense of what's possible. When you're ready to talk through your specific site and goals, <a href="/contact">talk to a builder</a> on our team directly.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-white" aria-labelledby="the-bottom-line">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="the-bottom-line">The <span class="a5-hl">Bottom Line</span></h2></div><div class="post-body"><p>CBS block is the standard in Florida for good reasons. It handles the climate, the pests, and the wind better than wood frame in most situations. Wood frame is a legitimate choice in the right context, and skilled builders use both. What matters most is that your home is designed and built correctly for Florida conditions, regardless of which system ends up on the drawings. Ask questions, understand your options, and make sure your builder can clearly explain the reasoning behind every structural decision on your project.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section a5-bg-concrete post-cta" aria-labelledby="post-cta-title">
+  <div class="a5-wrap">
+    <h2 class="a5-h2" id="post-cta-title">Ready to Build in <span class="a5-hl">Florida</span>?</h2>
+    <p class="a5-p">BuilderK coordinates plans, permitting, and construction and prepares the documents lenders request from the builder. Tell us about your project.</p>
+    <a class="a5-btn a5-btn-dark" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+
+  </div>
+</section>
+</main>
+
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
+</footer>
+<!-- /a5:footer -->
+
 <script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>

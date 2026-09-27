@@ -60,159 +60,375 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
-:root{--orange:#F77F00;--orange-hover:#FF9A2E;--ink:#111111;--bg:#FAFAF8;--card:#FFFFFF;--border:#ECEAE4;--muted:#6B6B6B;--body:#333333}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:'Outfit',sans-serif}
+/* page hero: sizes come from --hero-min (computer) and --hero-photo-h (phone photo band) on the section */
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; list-style: none; font-size: 16.5px; line-height: 1.4; color: var(--a5-on-dark-soft); }
+.hero-meta li { display: inline-flex; align-items: center; gap: 8px; }
+.hero-meta svg { flex-shrink: 0; }
+.hero-crumb { margin: 0; font-size: 15px; color: var(--a5-on-dark-muted); }
+.hero-crumb a { color: var(--a5-on-dark); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.hero-phonecall { display: none; }
+@media (min-width: 900px) { .a5-hero .a5-h1 { text-wrap: wrap; } }
+@media (max-width: 899px) {
+  .a5-hero-photo img { object-position: var(--pos-sm, var(--pos, 50% 40%)); }
+  .hero-meta { font-size: 15px; }
+  .hero-meta svg { width: 16px; height: 16px; }
+  .hero-crumb { font-size: 14px; }
+  .a5-hero-actions .hero-phonecall { display: inline-flex; }
+}
 
-.navbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(250,250,248,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:padding 0.3s}
-.navbar.scrolled{padding:11px 48px}
-.nav-logo{display:flex;align-items:center}
-.nav-logo img{height:26px;display:block}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{color:#3a3a3a;text-decoration:none;font-size:0.92rem;font-weight:500;white-space:nowrap;transition:color 0.2s}
-.nav-links a:hover{color:var(--orange)}
-.nav-cta{background:var(--orange)!important;color:#fff!important;padding:10px 22px;border-radius:50px;font-weight:600!important}
-.nav-cta:hover{background:var(--orange-hover)!important}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;z-index:1000}
-.nav-hamburger span{width:26px;height:2px;background:#111;border-radius:2px;transition:transform 0.3s,opacity 0.3s}
-.nav-hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.nav-hamburger.active span:nth-child(2){opacity:0}
-.nav-hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+/* blog post hero: long titles get a size that fits (set per post with --h1 / --h1-sm) */
+.post-hero .a5-h1 { font-size: clamp(44px, calc(var(--h1, 76) * 100vw / 1440), calc(var(--h1, 76) * 1px)); }
+@media (min-width: 900px) { .post-hero .a5-h1 { text-wrap: pretty; } }
 
-.post-hero{padding:128px 48px 44px;background:var(--bg);border-bottom:1px solid var(--border)}
-.post-hero-inner{max-width:800px;margin:0 auto}
-.post-crumb{font-size:0.85rem;color:var(--muted);margin-bottom:18px}
-.post-crumb a{color:var(--orange);text-decoration:none}
-.post-badge{display:inline-flex;align-items:center;background:rgba(247,127,0,0.1);border:1px solid rgba(247,127,0,0.25);padding:6px 16px;border-radius:50px;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;color:var(--orange);text-transform:uppercase;margin-bottom:20px}
-.post-hero h1{font-size:clamp(2rem,4.2vw,2.9rem);font-weight:800;line-height:1.15;color:var(--ink);margin-bottom:18px}
-.post-meta{display:flex;gap:22px;align-items:center;color:var(--muted);font-size:0.9rem;flex-wrap:wrap}
+/* intro: table of contents and the opening paragraphs */
+.post-intro { padding-block: 80px 88px; }
+.post-grid { display: grid; grid-template-columns: 400px minmax(0, 1fr); column-gap: 88px; align-items: start; }
+.post-grid-end { align-items: end; }
+.post-body { max-width: 780px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+.post-body > p { margin: 0; font-size: 18px; line-height: 1.7; color: var(--a5-body); }
+.post-body > p.post-lead { font-size: 23px; line-height: 1.5; font-weight: 500; color: var(--a5-ink); }
+.post-body > p.post-note { font-size: 15px; line-height: 1.6; }
+.a5-bg-finance .post-body > p.post-note { color: var(--a5-finance-body); }
+.post-intro-solo { max-width: 900px; }
+.post-body strong { color: var(--a5-ink); }
+.post-body a { color: var(--a5-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; white-space: nowrap; }
+.post-body a:hover { text-decoration-color: var(--a5-orange); }
+.post-toc { padding: 28px 28px 30px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 18px; }
+.post-toc-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-toc ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 13px; counter-reset: toc; }
+.post-toc li { display: flex; gap: 12px; align-items: flex-start; counter-increment: toc; }
+.post-toc li::before { content: counter(toc); width: 26px; height: 26px; flex-shrink: 0; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: var(--a5-cond); font-weight: 800; font-size: 14px; }
+.post-toc a { padding-top: 2px; font-size: 16px; line-height: 1.4; font-weight: 500; color: var(--a5-ink); text-decoration: none; }
+.post-toc a:hover { text-decoration: underline; text-decoration-color: var(--a5-orange); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
-.article-wrap{max-width:800px;margin:0 auto;padding:50px 48px 80px}
-.article-wrap p{font-size:1.07rem;line-height:1.85;color:var(--body);margin-bottom:24px}
-.article-wrap h2{font-size:1.7rem;font-weight:700;color:var(--ink);margin:46px 0 16px;padding-bottom:8px;border-bottom:3px solid var(--orange);display:inline-block}
-.article-wrap h3{font-size:1.25rem;font-weight:600;color:#222;margin:32px 0 12px}
-.article-wrap ul,.article-wrap ol{margin:0 0 24px 26px}
-.article-wrap li{font-size:1.03rem;line-height:1.8;margin-bottom:8px;color:#444}
-.article-wrap strong{color:var(--ink)}
-.article-wrap a{color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(247,127,0,0.35)}
-.article-wrap a:hover{color:var(--orange-hover)}
+/* one band per section */
+.post-sec { padding-block: 88px 92px; }
+.post-h2 { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: clamp(40px, 3.48vw, 50px); line-height: 0.92; text-transform: uppercase; color: var(--a5-ink); }
+.post-num { display: flex; width: 46px; height: 46px; margin-bottom: 18px; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; align-items: center; justify-content: center; font-size: 24px; line-height: 1; }
+.post-h3 { margin: 10px 0 0; font-family: var(--a5-cond); font-weight: 800; font-size: 30px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-full { margin-top: 44px; }
+.post-grid-after { margin-top: 44px; }
 
-.cta-box{margin:52px 0 8px;padding:48px 40px;text-align:center;background:linear-gradient(135deg,#FFF3E6 0%,#FFE9D2 100%);border:1px solid #F6DEBE;border-radius:24px}
-.cta-box h3{font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:12px}
-.cta-box p{color:#7a5a36;font-size:1rem;margin:0 auto 24px;max-width:500px;line-height:1.6}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;padding:15px 34px;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;transition:all 0.25s}
-.cta-btn:hover{background:var(--orange-hover);transform:translateY(-2px)}
-.article-wrap a.cta-btn{color:#fff;border-bottom:none}
-.article-end{font-size:0.85rem;color:#9a9a9a;text-align:center;margin-top:40px}
+/* lists: orange checks; the mistakes list gets a gray cross */
+.post-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.post-list li { position: relative; padding-left: 32px; font-size: 18px; line-height: 1.6; color: var(--a5-body); }
+.post-list li::before { content: ""; position: absolute; left: 0; top: 5px; width: 20px; height: 20px; background: no-repeat center / 20px 20px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+.post-list-x li::before { left: 2px; top: 7px; width: 16px; height: 16px; background-size: 16px 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A948B' stroke-width='2.6' stroke-linecap='round'%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3C/svg%3E"); }
+.post-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.post-cards li { padding: 20px 22px; border-radius: 14px; background: var(--a5-paper); border: 1px solid var(--a5-line); font-size: 16px; line-height: 1.55; color: var(--a5-body); }
+.a5-bg-concrete .post-cards li, .a5-bg-finance .post-cards li { background: var(--a5-white); }
+.post-cards strong { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-cards strong::before { content: ""; width: 20px; height: 20px; flex-shrink: 0; background: no-repeat center / 20px 20px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
 
-.footer{background:#fff;padding:54px 48px 28px;border-top:1px solid var(--border)}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-top{display:flex;justify-content:space-between;gap:48px;margin-bottom:36px;flex-wrap:wrap}
-.footer-brand{max-width:300px}
-.footer-brand img{height:26px;display:block;margin-bottom:12px}
-.footer-brand p{color:var(--muted);font-size:0.9rem;line-height:1.6}
-.footer-col{display:flex;flex-direction:column;gap:10px}
-.footer-col h4{color:var(--ink);font-family:'Outfit',sans-serif;font-weight:600;font-size:0.95rem;margin-bottom:4px}
-.footer-col a{color:var(--muted);text-decoration:none;font-size:0.88rem;transition:color 0.2s}
-.footer-col a:hover{color:var(--orange)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid var(--border);color:#9a9a9a;font-size:0.82rem;flex-wrap:wrap;gap:8px}
-.footer-bottom a{color:#9a9a9a;text-decoration:none}
-.footer-bottom a:hover{color:var(--orange)}
+/* callouts with the emoji style icons */
+.post-callout { padding: 26px 28px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
+.a5-bg-white .post-callout { background: var(--a5-paper); }
+.a5-bg-finance .post-callout { border-color: #D5DBE0; }
+.post-callout-head { display: flex; align-items: center; gap: 14px; }
+.post-callout .a5-icon { width: 46px; height: 46px; }
+.post-callout-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 25px; line-height: 1.02; text-transform: uppercase; color: var(--a5-ink); }
+.post-callout p { margin: 0; font-size: 17px; line-height: 1.65; color: var(--a5-body); }
+.post-callout a { color: var(--a5-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; white-space: nowrap; }
 
-@media(max-width:1024px){
-  .navbar{padding:13px 20px!important}
-  .nav-links{display:none;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(250,250,248,0.98);z-index:999;justify-content:center;align-items:center;gap:26px;padding:80px 24px}
-  .nav-links.open{display:flex}
-  .nav-links.open a{font-size:1.3rem}
-  .nav-hamburger{display:flex}
-  .post-hero{padding:108px 24px 36px}
-  .article-wrap{padding:38px 24px 64px}
-  .footer{padding:44px 22px 24px}.footer-top{flex-direction:column;gap:30px}
+/* illustrative scenario card */
+.post-scenario { padding: 28px 30px 12px; border-radius: 16px; background: var(--a5-white); border: 1px solid #D5DBE0; }
+.post-scenario-title { margin: 0; padding-bottom: 16px; font-family: var(--a5-cond); font-weight: 800; font-size: 27px; line-height: 1.02; text-transform: uppercase; color: var(--a5-finance-ink); }
+.post-scenario .equity-row { padding: 15px 0; border-top: 1px solid #E3E8EC; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); column-gap: 24px; align-items: baseline; }
+.post-scenario .label { font-size: 16.5px; line-height: 1.45; color: var(--a5-finance-body); }
+.post-scenario .value { font-size: 17px; line-height: 1.4; font-weight: 700; color: var(--a5-finance-ink); text-align: right; }
+.post-scenario .equity-row.total { border-top: 2px solid var(--a5-finance-ink); }
+.post-scenario .total .label { font-size: 17.5px; font-weight: 700; color: var(--a5-finance-ink); }
+.post-scenario .total .value { font-size: 18px; }
+
+/* tables: dark header row; on phones they scroll sideways inside their own box */
+.post-table { border-radius: 16px; border: 1px solid var(--a5-line); background: var(--a5-white); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.post-table table { width: 100%; border-collapse: collapse; }
+.post-table th { background: var(--a5-ink); color: #FFFFFF; text-align: left; vertical-align: bottom; padding: 16px 18px; font-family: var(--a5-cond); font-weight: 800; font-size: 20px; line-height: 1.1; letter-spacing: 0.02em; text-transform: uppercase; }
+.post-table td { padding: 15px 18px; border-top: 1px solid #ECE8E1; vertical-align: top; font-size: 15.5px; line-height: 1.5; color: var(--a5-body); }
+.post-table tbody tr:nth-child(even) td { background: #F7F6F3; }
+.post-table td strong { color: var(--a5-ink); }
+.post-table .check, .post-table .cross { display: inline-flex; align-items: flex-start; gap: 9px; }
+.post-table .check::before, .post-table .cross::before { content: ""; flex-shrink: 0; background-repeat: no-repeat; background-position: center; }
+.post-table .check::before { width: 18px; height: 18px; margin-top: 2px; background-size: 18px 18px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+.post-table .cross::before { width: 16px; height: 16px; margin-top: 3px; background-size: 16px 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A948B' stroke-width='2.6' stroke-linecap='round'%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3C/svg%3E"); }
+
+/* steps with the tape measure (rows of four; the tape and its steps loop together) */
+.post-steps + .post-steps { margin-top: 40px; }
+.post-steps .a5-tapebar-y { display: none; }
+.post-steps-list { list-style: none; margin: 0 0 26px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 32px; row-gap: 28px; }
+.post-step { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+.post-step-when { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
+.post-step-num { width: 34px; height: 34px; margin-bottom: 4px; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-family: var(--a5-cond); font-weight: 800; font-size: 17px; }
+.post-step-title { display: block; margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 28px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-step-text { display: block; margin: 0; font-size: 16px; line-height: 1.55; color: var(--a5-body); }
+.post-tape .post-tape-nums { position: absolute; left: 18px; right: 0; top: 31px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; color: #1B1A18; }
+.post-tape-nums span { padding-left: 6px; }
+.post-tape-nums b { padding: 0 5px; background: var(--a5-orange); font-weight: 800; }
+
+/* closing call to action and the published line */
+.post-cta { text-align: center; padding-block: 96px 64px; }
+.post-cta.post-cta-line { border-top: 1px solid var(--a5-line); }
+.post-cta .a5-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.post-cta .a5-h2 { font-size: clamp(42px, 4.45vw, 64px); }
+.post-cta .a5-p { max-width: 640px; font-size: 18px; }
+.post-published { margin: 14px 0 0; padding-top: 22px; border-top: 1px solid #DAD5CC; max-width: 900px; font-size: 14px; line-height: 1.5; color: var(--a5-muted); }
+
+/* tablets and small laptops: the heading sits above its text, like on phones, with the computer type sizes */
+@media (max-width: 1099px) {
+  .post-grid { grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
+  .post-grid-end { align-items: start; }
+  .post-grid-after { margin-top: 24px; }
+  .post-grid-after > div:first-child { display: none; }
+  .post-toc { max-width: 780px; }
+  .post-steps-list { column-gap: 22px; }
+  .post-step-title { font-size: 24px; }
+}
+@media (max-width: 899px) {
+  .post-hero .a5-h1 { font-size: calc(var(--h1-sm, 46) * 1px); }
+  .post-intro { padding-block: 32px 44px; }
+  .post-grid { grid-template-columns: minmax(0, 1fr); row-gap: 18px; }
+  .post-grid-after { margin-top: 18px; }
+  .post-grid-after > div:first-child { display: none; }
+  .post-body { gap: 18px; }
+  .post-body > p { font-size: 16px; line-height: 1.65; }
+  .post-body > p.post-lead { font-size: 19px; line-height: 1.5; }
+  .post-body > p.post-note { font-size: 14px; }
+  .post-toc { padding: 22px 20px; }
+  .post-toc-title { font-size: 24px; }
+  .post-toc ol { gap: 12px; }
+  .post-toc a { font-size: 15.5px; }
+  .post-sec { padding-block: 48px 44px; }
+  .post-h2 { font-size: 36px; }
+  .post-num { width: 38px; height: 38px; margin-bottom: 14px; font-size: 20px; }
+  .post-h3 { margin-top: 8px; font-size: 25px; }
+  .post-full { margin-top: 24px; }
+  .post-list { gap: 10px; }
+  .post-list li { padding-left: 30px; font-size: 16px; }
+  .post-list li::before { top: 3px; }
+  .post-list-x li::before { top: 5px; }
+  .post-cards { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .post-cards li { padding: 16px 18px; font-size: 15px; }
+  .post-cards strong { font-size: 21px; }
+  .post-callout { padding: 20px 18px; }
+  .post-callout-title { font-size: 22px; }
+  .post-callout p { font-size: 15.5px; }
+  .post-scenario { padding: 20px 18px 8px; }
+  .post-scenario-title { padding-bottom: 12px; font-size: 23px; }
+  .post-scenario .equity-row { display: flex; flex-direction: column; gap: 4px; padding: 13px 0; }
+  .post-scenario .label { font-size: 14.5px; }
+  .post-scenario .value { font-size: 16px; text-align: left; }
+  .post-scenario .total .label { font-size: 14.5px; }
+  .post-scenario .total .value { font-size: 17px; }
+  .post-table table { min-width: 620px; }
+  .post-table th { padding: 13px 14px; font-size: 17px; }
+  .post-table td { padding: 12px 14px; font-size: 14.5px; }
+  .post-steps { display: grid; grid-template-columns: 58px minmax(0, 1fr); column-gap: 18px; }
+  .post-steps + .post-steps { margin-top: 30px; }
+  .post-steps .a5-tapebar-y { display: block; width: 58px; }
+  .post-steps .post-tape { display: none; }
+  .post-steps-list { grid-template-columns: minmax(0, 1fr); row-gap: 30px; margin: 0; padding: 22px 0 8px; }
+  .post-step { gap: 5px; }
+  .post-step-title { font-size: 27px; }
+  .post-step-text { font-size: 15.5px; }
+  .post-cta { padding-block: 48px 40px; }
+  .post-cta .a5-wrap { gap: 18px; }
+  .post-cta .a5-p { font-size: 15.5px; line-height: 1.55; }
+  .post-cta .a5-btn { width: 100%; }
+  .post-published { margin-top: 0; padding-top: 18px; font-size: 13px; line-height: 1.55; }
 }
 </style>
 </head>
 <body>
-
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo"><img src="/images/builderk-wordmark.svg" alt="BuilderK" width="163" height="26"></a>
- <ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
-</nav>
-
-<header class="post-hero">
- <div class="post-hero-inner">
- <div class="post-crumb"><a href="/blog">Blog</a> / Article</div>
- <div class="post-badge">Florida Code</div>
- <h1>Florida Hurricane Building Codes 2026: What New Custom Homeowners Need to Know</h1>
- <div class="post-meta">
- <span>June 13, 2026</span>
- <span>6 min read</span>
- <span>BuilderK Team</span>
- </div>
- </div>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
 </header>
-
-<div class="article-wrap">
-<p>Building a custom home in Florida means your new construction will meet the latest hurricane building codes right from the start. The 2026 Florida Building Code continues to strengthen requirements for wind resistance, impact protection, and structural integrity. Understanding these standards helps you make informed decisions about your build and gives you confidence in your home's safety.</p><h2>Wind Load Requirements</h2><p>Florida divides the state into different wind zones based on hurricane risk. Coastal areas face the highest wind speeds, while inland regions have somewhat lower requirements. Your custom home must be designed to withstand specific wind loads measured in pounds per square foot.</p><p>The structural frame, roof system, and exterior walls all receive engineering calculations to ensure they can handle these forces. This includes everything from the foundation structural anchors to the roof to wall connections. Modern construction techniques like hurricane straps, reinforced concrete block construction, and engineered lumber help achieve these standards.</p><p>When reviewing <a href="/floor-plans">floor plans</a>, you'll notice that open floor plans require additional structural considerations. Large spans without interior walls need stronger beams and connections to maintain the required wind resistance. Your builder will work with structural engineers to ensure every design meets code requirements for your specific location.</p><h2>Impact Protection Standards</h2><p>Windows and doors represent vulnerable points during hurricane conditions. Florida requires impact protection for windows and doors in windborne debris regions, which depend on how close you are to the coast and on your area's design wind speed. The strictest rules apply in the High Velocity Hurricane Zone, which covers only Miami Dade and Broward counties. You have two main options: impact resistant glass or protective shutters.</p><p>Impact resistant windows and sliding doors feature laminated glass that stays intact even when struck by debris. The glass may crack, but it won't shatter and create openings for wind and rain. These windows also provide benefits all year, like noise reduction and UV protection.</p><p>Storm shutters offer an alternative approach. These can be permanent accordion shutters, removable panels, or rolling systems. While less convenient than impact glass, quality shutters provide effective protection when properly installed and deployed.</p><p>Your garage door also needs impact rating or reinforcement. Large garage doors create significant openings, and failure during a storm can lead to dangerous pressure changes inside your home.</p><h2>Roof System Requirements</h2><p>Florida's roof standards address both wind uplift and water intrusion. The roof structure must resist the upward forces created by hurricane winds passing over your home. This requires specific fastening schedules for roof sheathing and enhanced connections between trusses and walls.</p><p>Whether you choose tile, metal, or shingles, roof covering products need testing and approval for your wind zone. Many homeowners appreciate that metal roofing often exceeds minimum requirements while providing long term durability.</p><p>Secondary water barriers protect against wind driven rain. These underlayments create an additional seal beneath your primary roof covering. In high wind zones, this protection extends further up the roof slope to guard against water infiltration.</p><h2>Advantages of Building New</h2><p>Starting with new construction means your home meets current codes from day one. Older homes may have been built to earlier standards, requiring expensive retrofits to achieve modern protection levels. Your new custom home incorporates these safety features into the original design rather than adding them later.</p><p>The integrated approach of new construction also creates better performance. When impact windows, reinforced walls, and engineered roof systems work together as designed, they provide superior protection compared to piecemeal upgrades on existing homes.</p><p>Insurance companies recognize this difference. Many offer discounts for homes with current wind mitigation features, especially when documented with proper certifications during construction.</p><h2>Working with Your Building Team</h2><p>Your general contractor coordinates with engineers, suppliers, and inspectors to ensure code compliance throughout construction. This includes submitting detailed plans for permit approval and scheduling required inspections at key construction phases.</p><p>Understanding these requirements helps you make informed choices about upgrades and options. While the code sets minimum standards, you might choose enhanced features like higher rated impact glass or additional structural reinforcement for extra peace of mind.</p><p>Building officials conduct multiple inspections during construction to verify code compliance. These checkpoints ensure that critical elements like foundation connections, structural framing, and impact protection meet specifications before moving to the next construction phase.</p><h2>Planning Your Investment</h2><p>Hurricane protection features represent a significant portion of your construction investment. These safety systems protect both your family and your financial investment in the property. When planning your budget, remember that these features are required, not optional.</p><p>Use our <a href="/calculator">cost calculator</a> to understand how different choices affect your overall budget. This helps you allocate funds appropriately for required safety features while planning for desired upgrades and finishes.</p><p>Building a custom home in Florida means embracing these protective standards as part of creating a safe, comfortable living environment. Your new home will provide the security and peace of mind that comes from meeting the latest hurricane building codes. If you're ready to start planning your hurricane ready custom home, <a href="/contact">talk to a builder</a> about incorporating these essential safety features into your design.</p>
-
- <div class="cta-box">
- <h3>Ready to Build in Florida?</h3>
- <p>BuilderK coordinates plans, permitting, construction, and documents lenders request from the builder, all built to current Florida code.</p>
- <a href="/contact" class="cta-btn">Get my free consultation &rarr;</a>
- </div>
-
- <p class="article-end">Published June 13, 2026 &middot; Updated September 26, 2026 &middot; BuilderK, Builders Knowledge Development Inc. &middot; CGC #1537163 &middot; Orlando, FL</p>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
 </div>
+<!-- /a5:header -->
 
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand">
- <a href="/"><img src="/images/builderk-wordmark.svg" alt="BuilderK" width="163" height="26"></a>
- <p>A Florida custom home builder. You bring the lot. We guide the project from plans through construction.</p>
- <p style="margin-top:8px;font-size:0.85rem;color:#9a9a9a;">Licensed Florida GC, CGC #1537163</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/about">About Us</a><a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a><a href="/blog">Blog</a><a href="/financing">Financing</a><a href="/calculator">Pricing Calculator</a>
- </div>
- <div class="footer-col">
- <h4>Build</h4>
- <a href="/floor-plans">Floor Plans</a><a href="/construction">Construction Gallery</a><a href="/interiors">Interior Selections</a><a href="/facades">Facades &amp; Styles</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:+12392304868">(239) 230 4868</a><a href="mailto:info@builderk.com">info@builderk.com</a><a>Orlando, FL</a>
- </div>
- </div>
- <div class="footer-bottom">
- <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
- <span><a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms &amp; Conditions</a></span>
- </div>
- </div>
+<main id="main">
+<section class="a5-hero post-hero" aria-labelledby="post-title" style="--h1:62;--h1-sm:38;--hero-min:640px;--hero-photo-h:330px">
+  <div class="a5-hero-photo" style="--pos:50% 40%;--pos-sm:50% 40%"><img src="/images/projects/jobsite/strip/s13.webp" alt="Two story room at the drywall stage in a BuilderK home" width="900" height="1200" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <p class="hero-crumb"><a href="/blog">Blog</a> / Article</p>
+      <div class="a5-hero-label">Florida Code</div>
+      <h1 class="a5-h1" id="post-title">Florida <span class="a5-accent">Hurricane</span> Building Codes 2026: What New Custom Homeowners Need to Know</h1>
+      <ul class="hero-meta"><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>June 13, 2026</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><polyline points="12 7 12 12 15.5 14"/></svg>6 min read</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>BuilderK Team</li></ul>
+      <div class="a5-hero-actions"><a class="a5-btn a5-btn-hero" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        <a class="a5-btn a5-btn-call hero-phonecall" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="a5-section a5-bg-white post-intro">
+  <div class="a5-wrap">
+    <div class="post-body post-intro-solo"><p class="post-lead">Building a custom home in Florida means your new construction will meet the latest hurricane building codes right from the start. The 2026 Florida Building Code continues to strengthen requirements for wind resistance, impact protection, and structural integrity. Understanding these standards helps you make informed decisions about your build and gives you confidence in your home's safety.</p></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="wind-load-requirements">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="wind-load-requirements"><span class="a5-hl">Wind Load</span> Requirements</h2></div><div class="post-body"><p>Florida divides the state into different wind zones based on hurricane risk. Coastal areas face the highest wind speeds, while inland regions have somewhat lower requirements. Your custom home must be designed to withstand specific wind loads measured in pounds per square foot.</p>
+<p>The structural frame, roof system, and exterior walls all receive engineering calculations to ensure they can handle these forces. This includes everything from the foundation structural anchors to the roof to wall connections. Modern construction techniques like hurricane straps, reinforced concrete block construction, and engineered lumber help achieve these standards.</p>
+<p>When reviewing <a href="/floor-plans">floor plans</a>, you'll notice that open floor plans require additional structural considerations. Large spans without interior walls need stronger beams and connections to maintain the required wind resistance. Your builder will work with structural engineers to ensure every design meets code requirements for your specific location.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-white" aria-labelledby="impact-protection-standards">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="impact-protection-standards"><span class="a5-hl">Impact</span> Protection Standards</h2></div><div class="post-body"><p>Windows and doors represent vulnerable points during hurricane conditions. Florida requires impact protection for windows and doors in windborne debris regions, which depend on how close you are to the coast and on your area's design wind speed. The strictest rules apply in the High Velocity Hurricane Zone, which covers only Miami Dade and Broward counties. You have two main options: impact resistant glass or protective shutters.</p>
+<p>Impact resistant windows and sliding doors feature laminated glass that stays intact even when struck by debris. The glass may crack, but it won't shatter and create openings for wind and rain. These windows also provide benefits all year, like noise reduction and UV protection.</p>
+<p>Storm shutters offer an alternative approach. These can be permanent accordion shutters, removable panels, or rolling systems. While less convenient than impact glass, quality shutters provide effective protection when properly installed and deployed.</p>
+<p>Your garage door also needs impact rating or reinforcement. Large garage doors create significant openings, and failure during a storm can lead to dangerous pressure changes inside your home.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="roof-system-requirements">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="roof-system-requirements"><span class="a5-hl">Roof</span> System Requirements</h2></div><div class="post-body"><p>Florida's roof standards address both wind uplift and water intrusion. The roof structure must resist the upward forces created by hurricane winds passing over your home. This requires specific fastening schedules for roof sheathing and enhanced connections between trusses and walls.</p>
+<p>Whether you choose tile, metal, or shingles, roof covering products need testing and approval for your wind zone. Many homeowners appreciate that metal roofing often exceeds minimum requirements while providing long term durability.</p>
+<p>Secondary water barriers protect against wind driven rain. These underlayments create an additional seal beneath your primary roof covering. In high wind zones, this protection extends further up the roof slope to guard against water infiltration.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-white" aria-labelledby="advantages-of-building-new">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="advantages-of-building-new">Advantages of <span class="a5-hl">Building New</span></h2></div><div class="post-body"><p>Starting with new construction means your home meets current codes from day one. Older homes may have been built to earlier standards, requiring expensive retrofits to achieve modern protection levels. Your new custom home incorporates these safety features into the original design rather than adding them later.</p>
+<p>The integrated approach of new construction also creates better performance. When impact windows, reinforced walls, and engineered roof systems work together as designed, they provide superior protection compared to piecemeal upgrades on existing homes.</p>
+<p>Insurance companies recognize this difference. Many offer discounts for homes with current wind mitigation features, especially when documented with proper certifications during construction.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="working-with-your-building-team">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="working-with-your-building-team">Working with Your Building <span class="a5-hl">Team</span></h2></div><div class="post-body"><p>Your general contractor coordinates with engineers, suppliers, and inspectors to ensure code compliance throughout construction. This includes submitting detailed plans for permit approval and scheduling required inspections at key construction phases.</p>
+<p>Understanding these requirements helps you make informed choices about upgrades and options. While the code sets minimum standards, you might choose enhanced features like higher rated impact glass or additional structural reinforcement for extra peace of mind.</p>
+<p>Building officials conduct multiple inspections during construction to verify code compliance. These checkpoints ensure that critical elements like foundation connections, structural framing, and impact protection meet specifications before moving to the next construction phase.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section post-sec a5-bg-finance" aria-labelledby="planning-your-investment">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="planning-your-investment">Planning Your <span class="a5-hl">Investment</span></h2></div><div class="post-body"><p>Hurricane protection features represent a significant portion of your construction investment. These safety systems protect both your family and your financial investment in the property. When planning your budget, remember that these features are required, not optional.</p>
+<p>Use our <a href="/calculator">cost calculator</a> to understand how different choices affect your overall budget. This helps you allocate funds appropriately for required safety features while planning for desired upgrades and finishes.</p>
+<p>Building a custom home in Florida means embracing these protective standards as part of creating a safe, comfortable living environment. Your new home will provide the security and peace of mind that comes from meeting the latest hurricane building codes. If you're ready to start planning your hurricane ready custom home, <a href="/contact">talk to a builder</a> about incorporating these essential safety features into your design.</p></div></div>
+  </div>
+</section>
+
+<section class="a5-section a5-bg-concrete post-cta" aria-labelledby="post-cta-title">
+  <div class="a5-wrap">
+    <h2 class="a5-h2" id="post-cta-title">Ready to Build in <span class="a5-hl">Florida</span>?</h2>
+    <p class="a5-p">BuilderK coordinates plans, permitting, construction, and documents lenders request from the builder, all built to current Florida code.</p>
+    <a class="a5-btn a5-btn-dark" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+    <p class="post-published">Published June 13, 2026 · Updated September 26, 2026 · BuilderK, Builders Knowledge Development Inc. · CGC #1537163 · Orlando, FL</p>
+  </div>
+</section>
+</main>
+
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
-<script>
-var navbar=document.getElementById('navbar');if(navbar){window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.pageYOffset>60);});}
-var hamburger=document.getElementById('hamburger');var navLinks=document.getElementById('nav-links');
-if(hamburger&&navLinks){
-  hamburger.addEventListener('click',function(){var o=navLinks.classList.toggle('open');hamburger.classList.toggle('active');hamburger.setAttribute('aria-expanded',o?'true':'false');document.body.style.overflow=o?'hidden':'';});
-  navLinks.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){navLinks.classList.remove('open');hamburger.classList.remove('active');document.body.style.overflow='';});});
-}
-document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('a[href^="tel:"]').forEach(function(a){a.addEventListener('click',function(){if(typeof gtag==='function'){gtag('event','phone_click',{'page_path':location.pathname});}});});});
-</script>
 <script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>
