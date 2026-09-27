@@ -25,371 +25,347 @@
 <meta property="og:image" content="https://www.builderk.com/images/plan-1250.jpg?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root { --orange: #F77F00; --orange-hover: #FF9A2E; --dark: #0A0A0A; --light: #FAFAF8; --gray-100: #F5F5F3; --gray-200: #E8E8E5; --gray-600: #6B6B6B; --gray-800: #2A2A2A; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'DM Sans', sans-serif; color: var(--dark); background: var(--light); -webkit-font-smoothing: antialiased; }
-h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-.navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); transition: all 0.3s; }
-.navbar.scrolled { padding: 14px 48px; background: rgba(10,10,10,0.97); }
-.nav-logo { text-decoration:none; display:flex; align-items:baseline; }
-.nav-logo .builder { font-family:'Outfit',sans-serif; font-weight:800; font-size:1.6rem; color:#fff; letter-spacing:1px; }
-.nav-logo .k { font-family:'Outfit',sans-serif; font-weight:800; font-size:1.6rem; color:var(--orange); }
-.nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
-.nav-links a { color:#ccc; text-decoration:none; font-size:0.92rem; font-weight:500; transition:color 0.2s; }
-.nav-links a:hover { color: var(--orange); }
-.nav-cta { background: var(--orange) !important; color:#fff !important; padding:10px 22px; border-radius:8px; font-weight:600 !important; }
-.nav-cta:hover { background: var(--orange-hover) !important; }
-.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; z-index:1000; position:relative; }
-.nav-hamburger span { width:26px; height:2px; background:#fff; border-radius:2px; transition:transform 0.3s, opacity 0.3s; }
-.crumbs { padding: 100px 48px 16px; max-width: 1400px; margin: 0 auto; }
-.crumbs a { color: var(--gray-600); text-decoration: none; font-size: 0.85rem; }
-.crumbs a:hover { color: var(--orange); }
-.crumbs span { color: var(--gray-600); font-size: 0.85rem; margin: 0 6px; }
-.plan-hero { padding: 24px 48px 64px; max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: start; }
-.plan-image-wrap { background:#FAF8F3; border-radius:16px; overflow:hidden; cursor:zoom-in; position:relative; }
-.plan-image-wrap img { width:100%; height:auto; display:block; transition: transform 0.3s; }
-.plan-image-wrap:hover img { transform: scale(1.01); }
-.plan-image-wrap::after { content:'\1F50D Click to enlarge'; position:absolute; bottom:12px; right:12px; background:rgba(10,10,10,0.7); color:#fff; padding:6px 10px; border-radius:6px; font-size:0.8rem; font-family:'DM Sans',sans-serif; opacity:0; transition:opacity 0.2s; }
-.plan-image-wrap:hover::after { opacity:1; }
-.plan-info { padding-top: 8px; }
-.plan-label { display:inline-block; font-family:'Outfit',sans-serif; font-weight:600; font-size:0.75rem; letter-spacing:1.5px; color:var(--orange); background:rgba(247,127,0,0.1); padding:5px 11px; border-radius:4px; text-transform:uppercase; margin-bottom:14px; }
-.plan-info h1 { font-size:2.8rem; font-weight:800; margin-bottom:10px; letter-spacing:-0.5px; }
-.plan-tagline { color:var(--gray-600); font-size:1.05rem; line-height:1.6; margin-bottom: 24px; }
-.specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 28px; }
-.spec { padding: 16px 18px; background:#fff; border-radius:10px; border:1px solid var(--gray-200); }
-.spec-label { font-size:0.72rem; letter-spacing:1px; text-transform:uppercase; color:var(--gray-600); margin-bottom:4px; }
-.spec-value { font-family:'Outfit',sans-serif; font-weight:700; font-size:1.2rem; color:var(--dark); }
-.price-box { padding:20px 22px; background: var(--dark); color:#fff; border-radius:12px; margin-bottom: 24px; display:flex; justify-content:space-between; align-items:center; }
-.price-box .label { font-size:0.78rem; letter-spacing:1px; text-transform:uppercase; color:#888; }
-.price-box .price { font-family:'Outfit',sans-serif; font-weight:800; font-size:1.8rem; color:var(--orange); }
-.price-box .note { font-size:0.75rem; color:#888; margin-top:2px; }
-.cta-row { display:flex; gap:12px; flex-wrap:wrap; }
-.btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background: var(--orange); color:#fff; text-decoration:none; border-radius:10px; font-weight:600; font-size:0.95rem; transition: background 0.2s, transform 0.2s; }
-.btn-primary:hover { background: var(--orange-hover); transform: translateY(-2px); }
-.btn-outline { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background: transparent; color: var(--dark); text-decoration:none; border-radius:10px; font-weight:600; font-size:0.95rem; border:2px solid var(--dark); transition: all 0.2s; }
-.btn-outline:hover { background: var(--dark); color:#fff; }
-
-.section { padding: 80px 48px; }
-.section-inner { max-width: 1200px; margin: 0 auto; }
-.section h2 { font-size: 2rem; font-weight: 800; margin-bottom: 12px; letter-spacing:-0.5px; }
-.section p.lead { color: var(--gray-600); font-size: 1.05rem; line-height: 1.7; max-width: 700px; margin-bottom: 36px; }
-.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.feature { padding: 28px; background: #fff; border-radius: 14px; border: 1px solid var(--gray-200); }
-.feature svg { color: var(--orange); margin-bottom: 14px; }
-.feature h3 { font-size: 1.1rem; margin-bottom: 6px; }
-.feature p { color: var(--gray-600); font-size: 0.92rem; line-height: 1.6; }
-
-.related { background: var(--gray-100); }
-.related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.related-card { background:#fff; border-radius:14px; overflow:hidden; text-decoration:none; color:inherit; display:block; transition: transform 0.3s, box-shadow 0.3s; }
-.related-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
-.related-card .img { aspect-ratio: 16/10; background:#FAF8F3; }
-.related-card .img img { width:100%; height:100%; object-fit: contain; }
-.related-card .body { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-.related-card .body h3 { font-size: 1.1rem; }
-.related-card .body .arrow { color: var(--orange); font-weight: 700; }
-
-.cta-section { padding: 100px 48px; background: var(--dark); text-align: center; }
-.cta-section h2 { font-size: 2.6rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-.cta-section h2 span { color: var(--orange); }
-.cta-section p { font-size: 1.1rem; color: #aaa; max-width: 600px; margin: 0 auto 32px; line-height: 1.6; }
-
-.footer { background: var(--dark); padding: 60px 48px 30px; border-top: 1px solid rgba(255,255,255,0.06); }
-.footer-inner { max-width: 1200px; margin: 0 auto; }
-.footer-top { display:flex; justify-content:space-between; gap:48px; margin-bottom: 40px; flex-wrap: wrap; }
-.footer-brand { max-width: 280px; }
-.footer-brand p { color:#888; font-size:0.9rem; margin-top: 12px; line-height: 1.5; }
-.footer-col { display:flex; flex-direction:column; gap:10px; }
-.footer-col h4 { color:#fff; font-family:'Outfit',sans-serif; font-weight:600; font-size:0.95rem; margin-bottom:4px; }
-.footer-col a { color:#888; text-decoration:none; font-size:0.88rem; transition:color 0.2s; }
-.footer-col a:hover { color: var(--orange); }
-.footer-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:24px; border-top:1px solid rgba(255,255,255,0.06); color:#555; font-size:0.82rem; }
-
-/* Lightbox */
-.lightbox { position: fixed; inset: 0; background: rgba(10,10,10,0.95); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 40px; cursor: zoom-out; }
-.lightbox.open { display: flex; }
-.lightbox img { max-width: 95%; max-height: 95vh; }
-.lightbox .close { position: absolute; top: 24px; right: 32px; color: #fff; font-size: 2rem; cursor: pointer; background:none; border:none; }
-
-@media (max-width: 900px) { .nav-links { display:none; } .nav-hamburger { display:flex !important; } .navbar { padding:14px 20px !important; } }
-@media (max-width: 900px) {
-  .crumbs { padding: 90px 20px 8px; }
-  .plan-hero { grid-template-columns: 1fr; padding: 16px 20px 40px; gap: 24px; }
-  .plan-info h1 { font-size: 2rem; }
-  .section { padding: 56px 20px; }
-  .features-grid { grid-template-columns: 1fr; }
-  .related-grid { grid-template-columns: 1fr; }
-  .cta-section { padding: 60px 24px; }
-  .cta-section h2 { font-size: 1.9rem; }
-  .footer { padding: 40px 20px 24px; }
-  .footer-top { flex-direction:column; gap:32px; }
-  .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
-  .price-box { flex-direction: column; align-items: flex-start; gap: 8px; }
-}
-.nav-links.open { display:flex !important; flex-direction:column; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(10,10,10,0.98); z-index:999; justify-content: flex-start; align-items:center; gap:24px; padding: 88px 24px 32px; overflow-y: auto; }
-.nav-links.open li { list-style:none; }
-.nav-links.open li a { font-size:1.4rem; padding:12px 0; color:#fff; }
-.nav-hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
-.nav-hamburger.active span:nth-child(2) { opacity:0; }
-.nav-hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
-
-/* === FULL-SCREEN MOBILE MENU FIX === */
-@media (max-width: 1280px) {
-  body:has(.nav-links.open),
-  body:has(.nav-links.show) {
-    overflow: hidden;
-  }
-
-  .navbar:has(.nav-links.open),
-  .navbar:has(.nav-links.show),
-  nav:has(.nav-links.open),
-  nav:has(.nav-links.show) {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    padding: 18px 20px !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    overflow: hidden !important;
-    z-index: 10000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-logo,
-  .navbar:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .nav-logo,
-  nav:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .logo,
-  nav:has(.nav-links.show) .logo {
-    position: fixed !important;
-    top: 22px !important;
-    left: 20px !important;
-    z-index: 10002 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-hamburger,
-  .navbar:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .nav-hamburger,
-  nav:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .mobile-menu,
-  nav:has(.nav-links.show) .mobile-menu {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 10003 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-links.open,
-  .navbar:has(.nav-links.show) .nav-links.show,
-  nav:has(.nav-links.open) .nav-links.open,
-  nav:has(.nav-links.show) .nav-links.show {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 96px 24px 48px !important;
-    overflow-y: auto !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
-}
-</style>
-<link rel="stylesheet" href="/css/site-a11y.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
 <script src="/scripts/pricing-config.js"></script>
 <script src="/scripts/plan-pricing.js"></script>
+<script defer src="/scripts/a5.js?v=3"></script>
+<style>
+/* plan page: dark hero with the specs, the planning range and the drawing */
+.pd-hero { position: relative; background: var(--a5-dark); color: var(--a5-on-dark); }
+.pd-hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 170px; background: linear-gradient(180deg, rgba(12,11,10,0.72) 0%, rgba(12,11,10,0) 100%); pointer-events: none; }
+.pd-hero-inner { position: relative; max-width: var(--a5-max); margin: 0 auto; padding: 124px var(--a5-gutter) 80px; display: flex; flex-direction: column; gap: 30px; }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14.5px; color: var(--a5-on-dark-muted); }
+.crumbs a { color: var(--a5-on-dark-muted); text-decoration: none; }
+.crumbs a:hover { color: #FFFFFF; text-decoration: underline; }
+.crumbs [aria-current] { color: var(--a5-on-dark); }
+.pd-grid { display: grid; grid-template-columns: minmax(0, 600fr) minmax(0, 648fr); column-gap: 64px; align-items: stretch; }
+.plan-info { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.plan-info .a5-h1 { color: var(--a5-on-dark); }
+.plan-tagline { margin: 0; font-size: 19px; line-height: 1.5; color: var(--a5-on-dark-soft); }
+.specs-grid { padding-top: 22px; border-top: 1px solid rgba(245,242,237,0.24); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 28px; }
+.spec { display: flex; flex-direction: column; gap: 6px; }
+.spec-label { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #A8A298; }
+.spec-value { font-family: var(--a5-cond); font-weight: 800; font-size: 38px; line-height: 1; color: var(--a5-on-dark); }
+.price-box { padding: 20px 22px; border-radius: 14px; background: rgba(245,242,237,0.06); border: 1px solid rgba(245,242,237,0.16); display: flex; flex-direction: column; gap: 8px; }
+.price-box .label { font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--a5-on-dark-muted); }
+.price-box .price { font-family: var(--a5-cond); font-weight: 800; font-size: clamp(30px, 2.9vw, 40px); line-height: 1; color: var(--a5-on-dark); }
+.price-box .note { margin: 0; font-size: 13.5px; line-height: 1.55; color: #A8A298; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.pd-btn-ghost { min-height: 62px; padding: 0 24px; border: 1.5px solid rgba(245,242,237,0.55); border-radius: 12px; background: transparent; color: var(--a5-on-dark); font-family: var(--a5-sans); font-weight: 700; font-size: 16.5px; letter-spacing: 0; text-transform: none; }
+.pd-btn-ghost:hover { border-color: var(--a5-on-dark); }
+.plan-image-wrap { grid-column: 2; grid-row: 1; position: relative; min-height: 460px; border-radius: 16px; overflow: hidden; background: #FFFFFF; cursor: zoom-in; container-type: size; }
+/* the drawing without its blank paper: as large as the white card allows, never cut (see CROPS in the build script) */
+.pd-crop { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: calc(100% - 48px); width: min(100cqw - 48px, (100cqh - 48px) * var(--ar)); aspect-ratio: var(--ar); overflow: hidden; }
+.pd-crop img { position: absolute; left: var(--x); top: var(--y); width: var(--w); height: var(--h); max-width: none; }
+.pd-zoom { position: absolute; right: 14px; bottom: 14px; z-index: 1; height: 32px; padding: 0 11px; border-radius: 8px; background: rgba(12,11,10,0.78); color: #FFFFFF; display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; pointer-events: none; }
+.plan-image-wrap:hover .pd-zoom { background: #0C0B0A; }
+
+/* included with every home */
+.pd-features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.pd-feature { padding: 26px 26px 28px; gap: 14px; border-radius: 16px; }
+.pd-feature-top { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.pd-feature .a5-icon { width: 58px; height: 58px; }
+.pd-feature .a5-h3 { font-size: 27px; }
+.pd-feature .a5-p { font-size: 15.5px; line-height: 1.55; }
+
+/* build tiers */
+.pd-tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.pd-tier { padding: 26px 28px; border: 1px solid var(--a5-line); border-radius: 16px; background: var(--a5-white); display: flex; flex-direction: column; gap: 10px; }
+.pd-tier-pop { border: 2px solid var(--a5-ink); }
+.pd-tier-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pd-tier .a5-h3 { font-size: 32px; }
+.pd-tier p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--a5-body); }
+.bars { display: flex; gap: 4px; }
+.bars i { width: 10px; height: 22px; border-radius: 2px; background: #DDD8D0; }
+.bars i.on { background: var(--a5-ink); }
+
+/* other plans */
+.related-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.related-card { display: flex; flex-direction: column; border: 1px solid var(--a5-line); border-radius: 16px; overflow: hidden; background: var(--a5-white); color: var(--a5-ink); text-decoration: none; transition: box-shadow 0.2s ease, transform 0.2s ease; }
+.related-card:hover { box-shadow: 0 16px 36px rgba(12,11,10,0.08); transform: translateY(-2px); }
+.related-card .img { height: 360px; background: #FFFFFF; }
+.related-card .img img { width: 100%; height: 100%; object-fit: contain; }
+.related-card .body { padding: 20px 24px 22px; border-top: 1px solid var(--a5-line); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.related-card h3 { margin: 0 0 6px; font-family: var(--a5-cond); font-weight: 800; font-size: 30px; line-height: 1; text-transform: uppercase; }
+.related-card .meta { margin: 0; font-size: 15px; line-height: 1.4; color: var(--a5-body); }
+.related-card .arrow { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.related-card:hover .arrow { text-decoration-color: var(--a5-orange); }
+
+/* closing call to action */
+.pl-cta { padding-block: 104px; }
+.pl-cta .a5-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.pl-cta .a5-h2 { font-size: clamp(40px, 4.5vw, 64px); text-wrap: wrap; }
+.pl-cta .a5-p { font-size: 18px; line-height: 1.55; max-width: 680px; }
+.pl-cta .a5-btn { margin-top: 8px; }
+
+/* the expanded drawing */
+.lightbox { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; padding: 40px; background: rgba(12,11,10,0.95); cursor: zoom-out; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 95%; max-height: 95vh; width: auto; height: auto; background: #FFFFFF; border-radius: 8px; }
+.lightbox .close { position: absolute; top: 18px; right: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgba(245,242,237,0.4); border-radius: 999px; background: rgba(12,11,10,0.6); color: #FFFFFF; font-size: 30px; line-height: 1; cursor: pointer; }
+.lightbox .close:hover { border-color: #FFFFFF; }
+
+@media (max-width: 1099px) {
+  /* tablets: the drawing on top at a readable size, the details below */
+  .pd-grid { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+  .plan-image-wrap, .plan-info { grid-column: 1; grid-row: auto; }
+  .plan-image-wrap { height: min(62vw, 560px); min-height: 0; }
+  .plan-info { max-width: 760px; }
+  .pd-features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 899px) {
+  .pd-hero::before { display: none; }
+  .pd-hero-inner { padding: 74px 16px 36px; gap: 16px; }
+  .crumbs { font-size: 13.5px; }
+  .pd-grid { grid-template-columns: minmax(0, 1fr); row-gap: 22px; }
+  .plan-image-wrap, .plan-info { grid-column: 1; grid-row: auto; }
+  .plan-image-wrap { container-type: normal; height: auto; min-height: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding: 12px 12px 10px; border-radius: 14px; }
+  .pd-crop { position: relative; left: auto; top: auto; transform: none; width: 100%; }
+  .pd-zoom { position: static; }
+  .plan-info { gap: 16px; }
+  .plan-info .a5-h1 { font-size: clamp(42px, 13.3vw, 52px); line-height: 0.9; }
+  .plan-tagline { font-size: 16.5px; }
+  .specs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 18px; gap: 18px 16px; }
+  .spec-value { font-size: 34px; }
+  .price-box { padding: 18px 16px; }
+  .price-box .price { font-size: clamp(26px, 7.9vw, 34px); }
+  .price-box .note { font-size: 13px; }
+  .cta-row { flex-direction: column; align-items: stretch; gap: 16px; }
+  .cta-row .a5-btn { width: 100%; }
+  .pd-btn-ghost { min-height: 54px; }
+  .pd-features { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .pd-feature { padding: 20px 18px 22px; gap: 12px; border-radius: 14px; }
+  .pd-feature-top { flex-direction: row; align-items: center; }
+  .pd-feature .a5-icon { width: 48px; height: 48px; }
+  .pd-feature .a5-h3 { font-size: 24px; }
+  .pd-feature .a5-p { font-size: 15px; }
+  .pd-tiers { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .pd-tier { padding: 22px 18px; border-radius: 14px; }
+  .pd-tier .a5-h3 { font-size: 30px; }
+  .pd-tier p { font-size: 15.5px; }
+  .related-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .related-card { border-radius: 14px; }
+  .related-card .img { height: 224px; }
+  .related-card .body { padding: 16px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .related-card h3 { font-size: 28px; }
+  .related-card .meta { font-size: 14.5px; }
+  .pl-cta { padding-block: 56px; }
+  .pl-cta .a5-wrap { gap: 16px; }
+  .pl-cta .a5-h2 { font-size: 44px; }
+  .pl-cta .a5-p { font-size: 16px; }
+  .pl-cta .a5-btn { width: 100%; font-size: 21px; }
+  .lightbox { padding: 16px; }
+  .lightbox img { max-width: 100%; max-height: 86vh; }
+}
+
+/* this plan: the part of the file that holds the drawing */
+.pd-crop { --ar: 0.8206; --x: -16.966%; --y: -24.699%; --w: 130.506%; --h: 151.740%; }
+</style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans" aria-current="page">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans" aria-current="page">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
-<ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans" style="color:var(--orange);">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
-</nav>
-
-<div class="crumbs"><a href="/">Home</a><span>›</span><a href="/floor-plans">Floor Plans</a><span>›</span>1,250 Sq Ft Plan</div>
-
-<section class="plan-hero">
- <div class="plan-image-wrap" id="planImage">
- <img src="/images/plan-1250.jpg?v=2" alt="1,250 sq ft single story floor plan with 3 bedrooms, 2 baths, covered porch, and two car garage by BuilderK">
- </div>
- <div class="plan-info">
- <div class="plan-label">Single Story</div>
- <h1>1,250 Sq Ft Plan</h1>
- <p class="plan-tagline">A 3 bedroom, 2 bath single story plan with an open living and dining area, covered porch, and a full two car garage. Our most efficient footprint, customizable to your lot.</p>
- <div class="specs-grid">
- <div class="spec"><div class="spec-label">Bedrooms</div><div class="spec-value">3</div></div>
- <div class="spec"><div class="spec-label">Bathrooms</div><div class="spec-value">2</div></div>
- <div class="spec"><div class="spec-label">Square Feet</div><div class="spec-value">1,250</div></div>
- <div class="spec"><div class="spec-label">Garage</div><div class="spec-value">Two Car</div></div>
- <div class="spec"><div class="spec-label">Stories</div><div class="spec-value">1</div></div>
- <div class="spec"><div class="spec-label">Build Type</div><div class="spec-value">Custom</div></div>
- </div>
- <div class="price-box" data-plan-sqft="1250">
- <div><div class="label">Standard Planning Range</div><div class="price" data-plan-price style="font-size:1.3rem;">Loading range…</div><div class="note">Uses the shared Central Florida Standard tier assumptions, a two car garage, and typical complexity. Exclusions and costs that depend on your lot are listed in the calculator. Last updated <span data-pricing-updated>July 18, 2026</span>. After we review the plan, scope and site, we send a formal proposal.</div></div>
- </div>
- <div class="cta-row">
- <a href="/contact" class="btn-primary">Request This Plan <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
- <a href="/calculator" class="btn-outline">Price It on My Lot</a>
- </div>
- </div>
+<main id="main">
+<section class="pd-hero" aria-labelledby="pd-title">
+  <div class="pd-hero-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">›</span><a href="/floor-plans">Floor plans</a><span aria-hidden="true">›</span><span aria-current="page">1,250 sq ft plan</span></nav>
+    <div class="pd-grid">
+      <div class="plan-image-wrap" id="planImage">
+        <div class="pd-crop"><img src="/images/plan-1250.jpg?v=2" alt="1,250 sq ft single story floor plan with 3 bedrooms, 2 baths, covered porch, and two car garage by BuilderK" width="1600" height="2267" fetchpriority="high"></div>
+        <span class="pd-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>Click to enlarge</span>
+      </div>
+      <div class="plan-info">
+        <div class="a5-hero-label">Single Story</div>
+        <h1 class="a5-h1" id="pd-title"><span class="a5-accent">1,250</span> Sq Ft Plan</h1>
+        <p class="plan-tagline">A 3 bedroom, 2 bath single story plan with an open living and dining area, covered porch, and a full two car garage. Our most efficient footprint, customizable to your lot.</p>
+        <div class="specs-grid"><div class="spec"><div class="spec-label">Bedrooms</div><div class="spec-value">3</div></div><div class="spec"><div class="spec-label">Bathrooms</div><div class="spec-value">2</div></div><div class="spec"><div class="spec-label">Square Feet</div><div class="spec-value">1,250</div></div><div class="spec"><div class="spec-label">Garage</div><div class="spec-value">Two car</div></div><div class="spec"><div class="spec-label">Stories</div><div class="spec-value">1</div></div><div class="spec"><div class="spec-label">Build Type</div><div class="spec-value">Custom</div></div></div>
+        <div class="price-box" data-plan-sqft="1250">
+          <div class="label">Standard planning range</div>
+          <div class="price" data-plan-price>Loading range…</div>
+          <p class="note">Uses the shared Central Florida Standard tier assumptions, a two car garage, and typical complexity. Exclusions and costs that depend on your lot are listed in the calculator. Last updated <span data-pricing-updated>July 18, 2026</span>. After we review the plan, scope and site, we send a formal proposal.</p>
+        </div>
+        <div class="cta-row">
+          <a href="/contact" class="a5-btn a5-btn-hero">Request this plan <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+          <a href="/calculator" class="a5-btn pd-btn-ghost">Price it on my lot</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="section" style="background: var(--gray-100);">
- <div class="section-inner">
- <h2>Included With Every BuilderK Home</h2>
- <p class="lead">Process and protections that come standard, regardless of plan, build tier, or lot.</p>
- <div class="features-grid">
- <div class="feature">
- <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
- <h3>Licensed General Contractor</h3>
- <p>Florida CGC License #1537163, with 25+ years of combined experience. A licensed general contractor runs your build from start to finish.</p>
- </div>
- <div class="feature">
- <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
- <h3>Built for Florida Storms</h3>
- <p>Built to current Florida Building Code with CBS (concrete block) construction. County permits, inspections, and code compliance are handled by us.</p>
- </div>
- <div class="feature">
- <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="6" x2="12" y2="12"/><line x1="12" y1="12" x2="16" y2="14"/></svg>
- <h3>Help With Your Construction Loan</h3>
- <p>We can introduce independent construction lenders and prepare the builder documents they request. Single close availability, rate, approval, fees, and conversion conditions are determined by the lender and program.</p>
- </div>
- <div class="feature">
- <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
- <h3>Single Contract</h3>
- <p>BuilderK coordinates design, permitting, and construction. Financing, when used, is provided and approved separately by independent lenders.</p>
- </div>
- <div class="feature">
- <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
- <h3>Progress Updates</h3>
- <p>You always know where your build stands, from foundation to final inspection.</p>
- </div>
- <div class="feature">
- <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
- <h3>Build on Your Lot</h3>
- <p>You bring the land, we build the home. Existing plans, customized plans, or your own architect's plans, we work with all three.</p>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete" aria-labelledby="pd-inc-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text" style="max-width:1000px">
+        <h2 class="a5-h2" id="pd-inc-title">Included With <span class="a5-hl">Every</span> BuilderK Home</h2>
+        <p class="a5-p">Process and protections that come standard, regardless of plan, build tier, or lot.</p>
+      </div>
+    </div>
+    <div class="pd-features">
+<div class="a5-card pd-feature"><div class="pd-feature-top"><svg width="58" height="58" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="hhk5" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#FFC266"></stop><stop offset="0.55" stop-color="#FF8A1F"></stop><stop offset="1" stop-color="#D45A00"></stop></radialGradient><linearGradient id="hbk5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9E3D"></stop><stop offset="1" stop-color="#C95200"></stop></linearGradient></defs><ellipse cx="32" cy="58" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M10 44 C10 24 20 12 32 12 C44 12 54 24 54 44 Z" fill="url(#hhk5)" stroke="#8A3A00" stroke-width="1.6" stroke-linejoin="round"></path><path d="M28 13 C27 22 27 34 28 44 H36 C37 34 37 22 36 13 C34 12.4 30 12.4 28 13 Z" fill="#FF9E3D" stroke="#8A3A00" stroke-width="1.3" stroke-linejoin="round"></path><path d="M17 34 C18 25 22 19 27 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.6"></path><rect x="4" y="43" width="56" height="8" rx="4" fill="url(#hbk5)" stroke="#8A3A00" stroke-width="1.6"></rect></svg><h3 class="a5-h3">Licensed General Contractor</h3></div><p class="a5-p">Florida CGC License #1537163, with 25+ years of combined experience. A licensed general contractor runs your build from start to finish.</p></div>
+<div class="a5-card pd-feature"><div class="pd-feature-top"><svg width="58" height="58" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg><h3 class="a5-h3">Built for Florida Storms</h3></div><p class="a5-p">Built to current Florida Building Code with CBS (concrete block) construction. County permits, inspections, and code compliance are handled by us.</p></div>
+<div class="a5-card pd-feature"><div class="pd-feature-top"><svg width="58" height="58" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="mBk3" cx="0.38" cy="0.35" r="0.75"><stop offset="0" stop-color="#F7DA8E"></stop><stop offset="0.6" stop-color="#E2B25A"></stop><stop offset="1" stop-color="#BF8733"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M32 22 C19 23 10 34 11 45 C12 54 20 58 32 58 C44 58 52 54 53 45 C54 34 45 23 32 22 Z" fill="url(#mBk3)" stroke="#8A5A1B" stroke-width="1.6" stroke-linejoin="round"></path><path d="M23 9 C26 12 38 12 41 9 C42 13 39 18 35 20 L29 20 C25 18 22 13 23 9 Z" fill="#E7BD66" stroke="#8A5A1B" stroke-width="1.5" stroke-linejoin="round"></path><rect x="25" y="18.5" width="14" height="4.5" rx="2.2" fill="#7A4A12"></rect><path d="M17 36 C18 30 22 27 26 26" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5" fill="none"></path><text x="32" y="49" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-weight="700" font-size="20" fill="#1F7A3A">$</text></svg><h3 class="a5-h3">Help With Your Construction Loan</h3></div><p class="a5-p">We can introduce independent construction lenders and prepare the builder documents they request. Single close availability, rate, approval, fees, and conversion conditions are determined by the lender and program.</p></div>
+<div class="a5-card pd-feature"><div class="pd-feature-top"><svg width="58" height="58" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="pPk4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#E9EDF2"></stop></linearGradient><radialGradient id="pSk4" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#5EE08A"></stop><stop offset="1" stop-color="#1F9D4C"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M14 6 H40 L50 16 V54 Q50 56 48 56 H14 Q12 56 12 54 V8 Q12 6 14 6 Z" fill="url(#pPk4)" stroke="#6B7785" stroke-width="1.5"></path><path d="M40 6 V14 Q40 16 42 16 H50" fill="#D5DCE4" stroke="#6B7785" stroke-width="1.5"></path><path d="M18 22 H42 M18 28 H42 M18 34 H34" stroke="#A7B2BE" stroke-width="2.2" stroke-linecap="round"></path><circle cx="42" cy="44" r="11" fill="url(#pSk4)" stroke="#146B33" stroke-width="1.5"></circle><path d="M37 44 L41 48 L48 40" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg><h3 class="a5-h3">Single Contract</h3></div><p class="a5-p">BuilderK coordinates design, permitting, and construction. Financing, when used, is provided and approved separately by independent lenders.</p></div>
+<div class="a5-card pd-feature"><div class="pd-feature-top"><svg width="58" height="58" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="pg1b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B6472"></stop><stop offset="1" stop-color="#262B33"></stop></linearGradient><linearGradient id="pg1s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAF4FF"></stop><stop offset="1" stop-color="#BFDDFB"></stop></linearGradient><linearGradient id="pg1g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5EE08A"></stop><stop offset="1" stop-color="#1F9D4C"></stop></linearGradient><linearGradient id="pg1r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="17" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="16" y="4" width="32" height="53" rx="7" fill="url(#pg1b)" stroke="#161A20" stroke-width="1.5"></rect><rect x="19.5" y="10" width="25" height="40" rx="3" fill="url(#pg1s)"></rect><rect x="28" y="6.4" width="8" height="1.8" rx="0.9" fill="#9AA3AF"></rect><path d="M24 26 L32 19 L40 26 Z" fill="url(#pg1r)" stroke="#8A2F07" stroke-width="1.1" stroke-linejoin="round"></path><rect x="26" y="26" width="12" height="9" fill="#FFF4E2" stroke="#9C6B34" stroke-width="1.1"></rect><rect x="30.3" y="29.5" width="3.4" height="5.5" fill="#8B5226"></rect><rect x="22.5" y="40" width="19" height="5" rx="2.5" fill="#FFFFFF" stroke="#8FA3B8" stroke-width="0.9"></rect><rect x="22.5" y="40" width="13" height="5" rx="2.5" fill="url(#pg1g)"></rect><path d="M20 12 L27 12" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.7"></path><circle cx="32" cy="53.4" r="1.5" fill="#9AA3AF"></circle></svg><h3 class="a5-h3">Progress Updates</h3></div><p class="a5-p">You always know where your build stands, from foundation to final inspection.</p></div>
+<div class="a5-card pd-feature"><div class="pd-feature-top"><svg width="58" height="58" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="bpSk1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D8BFD"></stop><stop offset="1" stop-color="#1F5FD1"></stop></linearGradient><linearGradient id="bpRk1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC0FF"></stop><stop offset="0.5" stop-color="#4A92F7"></stop><stop offset="1" stop-color="#2566D4"></stop></linearGradient><linearGradient id="bpPk1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFD24D"></stop><stop offset="1" stop-color="#F5A524"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="8" y="12" width="48" height="42" rx="4" fill="url(#bpSk1)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M14 18 V50 M20 18 V50 M26 18 V50 M32 18 V50 M38 18 V50 M44 18 V50 M50 18 V50 M12 22 H54 M12 28 H54 M12 34 H54 M12 40 H54 M12 46 H54" stroke="#FFFFFF" stroke-width="0.6" opacity="0.22"></path><path d="M15 21 H49 V47 H15 Z M15 35 H29 M29 21 V41 M38 35 H49" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"></path><path d="M29 41 A6 6 0 0 0 35 47" fill="none" stroke="#FFFFFF" stroke-width="1.4"></path><rect x="5" y="7" width="54" height="9" rx="4.5" fill="url(#bpRk1)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M10 9.5 H54" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.6"></path><g transform="rotate(-38 46 46)"><rect x="34" y="42" width="22" height="7" rx="1.5" fill="url(#bpPk1)" stroke="#8A5A00" stroke-width="1"></rect><path d="M56 42 L63 45.5 L56 49 Z" fill="#F6D7A7" stroke="#8A5A00" stroke-width="1"></path><path d="M60.5 44.3 L63 45.5 L60.5 46.7 Z" fill="#374151"></path><rect x="30" y="42" width="4" height="7" rx="1" fill="#F5A3C7" stroke="#8A5A00" stroke-width="1"></rect></g></svg><h3 class="a5-h3">Build on Your Lot</h3></div><p class="a5-p">You bring the land, we build the home. Existing plans, customized plans, or your own architect's plans, we work with all three.</p></div>
+    </div>
+  </div>
 </section>
 
-<section class="section">
- <div class="section-inner" style="text-align: center;">
- <h2>BuilderK Build Tiers</h2>
- <p class="lead" style="margin-left:auto; margin-right:auto;">Every plan is available in three build tiers. Tier reflects finish level, materials, and design customization. Your final price is confirmed in your custom quote.</p>
- <div class="features-grid">
- <div class="feature" style="text-align:center;">
- <h3 style="font-size:1.2rem;color:var(--dark);margin-bottom:10px;">Standard</h3>
- <p>Built to Florida code build with shingle roof and our standard curated finish package.</p>
- </div>
- <div class="feature" style="text-align:center; border-color: var(--orange);">
- <h3 style="font-size:1.2rem;color:var(--dark);margin-bottom:10px;">Midrange</h3>
- <p>Upgraded finishes and expanded design options.</p>
- </div>
- <div class="feature" style="text-align:center;">
- <h3 style="font-size:1.2rem;color:var(--dark);margin-bottom:10px;">Luxury</h3>
- <p>Premium materials, custom architectural details, and premium selections.</p>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" aria-labelledby="pd-tiers-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <h2 class="a5-h2" id="pd-tiers-title">BuilderK Build <span class="a5-hl">Tiers</span></h2>
+        <p class="a5-p">Every plan is available in three build tiers. Tier reflects finish level, materials, and design customization. Your final price is confirmed in your custom quote.</p>
+      </div>
+    </div>
+    <div class="pd-tiers">
+<div class="pd-tier"><div class="pd-tier-top"><h3 class="a5-h3">Standard</h3><span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i></span></div><p>Built to Florida code build with shingle roof and our standard curated finish package.</p></div>
+<div class="pd-tier pd-tier-pop"><div class="pd-tier-top"><h3 class="a5-h3">Midrange</h3><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span></div><p>Upgraded finishes and expanded design options.</p></div>
+<div class="pd-tier"><div class="pd-tier-top"><h3 class="a5-h3">Luxury</h3><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span></div><p>Premium materials, custom architectural details, and premium selections.</p></div>
+    </div>
+  </div>
 </section>
 
-<section class="section related">
- <div class="section-inner">
- <h2>Other Plans You Might Like</h2>
- <p class="lead">Explore more of our floor plan collection.</p>
- <div class="related-grid">
- <a href="/floor-plan-1977-sq-ft" class="related-card">
- <div class="img"><img src="/images/plan-1977.png" alt="1,977 sq ft floor plan"></div>
- <div class="body"><div><h3>1,977 Sq Ft Plan</h3><div style="color:var(--gray-600);font-size:0.85rem;margin-top:2px;">4 Bed · 2.5 Bath · 1,977 sq ft · Two Story</div></div><span class="arrow">View →</span></div>
- </a>
- <a href="/floor-plan-2377-sq-ft" class="related-card">
- <div class="img"><img src="/images/plan-2377.png" alt="2,377 sq ft floor plan"></div>
- <div class="body"><div><h3>2,377 Sq Ft Plan</h3><div style="color:var(--gray-600);font-size:0.85rem;margin-top:2px;">5 Bed · 3 Bath · 2,377 sq ft · Two Story</div></div><span class="arrow">View →</span></div>
- </a>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete" aria-labelledby="pd-related-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <h2 class="a5-h2" id="pd-related-title">Other <span class="a5-hl">Plans</span> You Might Like</h2>
+        <p class="a5-p">Explore more of our floor plan collection.</p>
+      </div>
+    </div>
+    <div class="related-grid">
+<a href="/floor-plan-1977-sq-ft" class="related-card"><div class="img"><img src="/images/home/plan-1977.webp" alt="1,977 sq ft floor plan" width="2000" height="1243" loading="lazy" decoding="async"></div><div class="body"><div><h3>1,977 Sq Ft Plan</h3><p class="meta">4 bed · 2.5 bath · 1,977 sq ft · Two story</p></div><span class="arrow">View<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span></div></a>
+<a href="/floor-plan-2377-sq-ft" class="related-card"><div class="img"><img src="/images/home/plan-2377.webp" alt="2,377 sq ft floor plan" width="2000" height="1243" loading="lazy" decoding="async"></div><div class="body"><div><h3>2,377 Sq Ft Plan</h3><p class="meta">5 bed · 3 bath · 2,377 sq ft · Two story</p></div><span class="arrow">View<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span></div></a>
+    </div>
+  </div>
 </section>
 
-<section class="cta-section">
- <h2>Want to <span>Build This Plan</span> on Your Lot?</h2>
- <p>Send us your lot details and we will respond within 1 business day. After we confirm the plan, scope, and site basics, we will outline a preliminary range and the steps required for a formal proposal.</p>
- <a href="/contact" class="btn-primary">Get my free consultation<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<section class="a5-section a5-bg-white pl-cta" aria-labelledby="pd-cta-title">
+  <div class="a5-wrap">
+    <h2 class="a5-h2" id="pd-cta-title">Want to Build This Plan on <span class="a5-hl">Your Lot</span>?</h2>
+    <p class="a5-p">Send us your lot details and we will respond within 1 business day. After we confirm the plan, scope, and site basics, we will outline a preliminary range and the steps required for a formal proposal.</p>
+    <a class="a5-btn a5-btn-dark" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
 </section>
+</main>
 
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand"><a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a><p>We build custom homes across Florida, starting with your lot and your goals.</p></div>
- <div class="footer-col"><h4>Company</h4><a href="/">Home</a><a href="/about">About Us</a><a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a><a href="/floor-plans">Floor Plans</a><a href="/facades">Facades & Styles</a></div>
- <div class="footer-col"><h4>Services</h4><a href="/">Custom Homes</a><a href="/financing">Financing</a><a href="/calculator">Pricing Calculator</a><a href="/interiors">Interior Selections</a><a href="/construction">Construction Gallery</a><a href="/interior-gallery">Interior Gallery</a><a href="/referral-program/">Referral Program</a><a href="/blog">Blog</a></div>
- <div class="footer-col"><h4>Contact</h4><a href="tel:2392304868">(239) 230 4868</a><a href="mailto:info@builderk.com">info@builderk.com</a><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a></div>
- </div>
- <div class="footer-bottom"><span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span><a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a></div>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
 <div class="lightbox" id="lightbox"><button type="button" class="close" onclick="closeLightbox()">×</button><img id="lightboxImg" src="" alt=""></div>
 
 <script>
-var navbar = document.getElementById('navbar');
-if (navbar) window.addEventListener('scroll', function() { if (window.pageYOffset > 60) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
-var hamburger = document.getElementById('hamburger');
-var navLinks = document.querySelector('.nav-links');
-if (hamburger && navLinks) {
-  hamburger.addEventListener('click', function() {
-    var isOpen = navLinks.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Open menu');
-      document.body.style.overflow = '';
-    }
-  });
-  navLinks.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', function() { navLinks.classList.remove('open'); hamburger.classList.remove('active'); }); });
-}
 // Lightbox
 function openLightbox(src) { var lb = document.getElementById('lightbox'); var img = document.getElementById('lightboxImg'); img.src = src; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
 document.getElementById('planImage').addEventListener('click', function() { openLightbox(this.querySelector('img').src); });
 document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
-// Phone click tracking
-document.querySelectorAll('a[href^="tel:"]').forEach(function(a){ a.addEventListener('click', function(){ if (typeof gtag === 'function') gtag('event', 'phone_click', { 'page_path': location.pathname }); }); });
 </script>
 <script src="/scripts/plan-detail-accessibility.js"></script>
 <script defer src="/scripts/call-bar.js"></script>

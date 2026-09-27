@@ -30,427 +30,329 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script src="/scripts/pricing-config.js"></script>
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
-:root {
-  --orange: #F77F00;
-  --orange-hover: #FF9A2E;
-  --dark: #0A0A0A;
-  --light: #FAFAF8;
-  --gray-100: #F5F5F3;
-  --gray-200: #E8E8E5;
-  --gray-600: #6B6B6B;
-  --gray-800: #2A2A2A;
+/* floor plans: hero with the filters along its bottom edge */
+.fp-hero { --hero-min: 720px; --hero-pad-bottom: 44px; --hero-photo-h: 300px; --hero-text: min(620px, calc(48.6vw - var(--a5-gutter) - 16px)); }
+.fp-hero .a5-hero-photo img { object-position: 50% 42%; }
+.fp-hero .a5-hero-photo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 300px; background: linear-gradient(180deg, rgba(12,11,10,0) 0%, rgba(12,11,10,0.95) 70%); z-index: 1; }
+.fp-filterbar { padding-top: 22px; border-top: 1px solid rgba(245,242,237,0.24); display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; }
+.filter-tabs { display: flex; flex-wrap: wrap; gap: 10px; }
+.filter-tab { height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid rgba(245,242,237,0.34); background: transparent; color: var(--a5-on-dark-soft); font-family: var(--a5-sans); font-weight: 500; font-size: 15px; line-height: 1; cursor: pointer; white-space: nowrap; transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease; }
+.filter-tab:hover { border-color: var(--a5-on-dark); color: #FFFFFF; }
+.filter-tab.active { background: var(--a5-on-dark); border-color: var(--a5-on-dark); color: var(--a5-dark); font-weight: 700; }
+.plan-count { margin: 0; flex-shrink: 0; font-size: 15px; color: var(--a5-on-dark-muted); }
+.fp-cta-phone { display: none; }
+@media (min-width: 900px) { .fp-hero .a5-h1 { text-wrap: wrap; } }
+
+/* plan cards */
+.fp-plans { padding-block: 56px 96px; }
+.catalog-note { margin: 0 0 24px; padding: 14px 18px; border-radius: 12px; background: var(--a5-white); border: 1px solid var(--a5-line); font-size: 14.5px; line-height: 1.55; color: var(--a5-muted); }
+.catalog-note a { color: var(--a5-ink); font-weight: 700; text-underline-offset: 3px; }
+.plans-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
+.plan-card { grid-column: span 2; display: flex; flex-direction: column; border: 1px solid var(--a5-line); border-radius: 16px; overflow: hidden; background: var(--a5-white); color: var(--a5-ink); text-decoration: none; transition: box-shadow 0.2s ease, transform 0.2s ease; }
+.plan-card:hover { box-shadow: 0 16px 36px rgba(12,11,10,0.08); transform: translateY(-2px); }
+.plan-card-img { height: 264px; background: #FFFFFF; }
+.plan-card-img img { width: 100%; height: 100%; object-fit: contain; }
+.plan-card-body { flex: 1; padding: 20px 24px 22px; border-top: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
+.plan-card-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 30px; line-height: 1; text-transform: uppercase; }
+.plan-card-specs { margin: 0; display: flex; flex-wrap: wrap; font-size: 15px; line-height: 1.4; color: var(--a5-body); }
+.plan-card-specs span + span::before { content: "\00B7"; margin: 0 6px; }
+.plan-card-price { padding: 12px 14px; border-radius: 12px; background: var(--a5-paper); display: flex; flex-direction: column; gap: 5px; font-family: var(--a5-cond); font-weight: 800; font-size: 27px; line-height: 1; color: var(--a5-ink); }
+.plan-card-price small { font-family: var(--a5-sans); font-size: 12px; font-weight: 700; line-height: 1.3; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
+.plan-card-price br { display: none; }
+.plan-card-footer { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--a5-line); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.plan-card-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.plan-card-story { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
+.plan-card:hover .plan-card-cta { text-decoration-color: var(--a5-orange); }
+
+/* the cards that are not plans */
+.plan-card-custom { padding: 30px 28px 28px; gap: 14px; align-items: flex-start; justify-content: center; }
+.plan-card-custom .a5-icon { width: 64px; height: 64px; }
+.plan-card-custom.plan-card-wide .a5-icon { width: 72px; height: 72px; }
+.pc-text { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.plan-card-custom h2 { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 30px; line-height: 1; text-transform: uppercase; }
+.plan-card-custom p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--a5-body); }
+.cta-arrow { margin-top: 4px; min-height: 48px; padding: 0 20px; border-radius: 12px; border: 1.5px solid var(--a5-ink); display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15.5px; }
+.plan-card-custom:hover .cta-arrow { background: var(--a5-ink); color: #FFFFFF; }
+.plan-card-wide { grid-column: span 3; flex-direction: row; justify-content: flex-start; gap: 24px; padding: 30px 30px 30px 28px; }
+.plan-card-wide .pc-text { flex: 1; min-width: 0; }
+
+/* closing call to action */
+.pl-cta { padding-block: 104px; }
+.pl-cta .a5-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.pl-cta .a5-h2 { font-size: clamp(40px, 4.6vw, 66px); text-wrap: wrap; }
+.pl-cta .a5-p { font-size: 18px; line-height: 1.55; max-width: 620px; }
+.pl-cta .a5-btn { margin-top: 8px; }
+
+@media (max-width: 1199px) {
+  .plans-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .plan-card, .plan-card-wide { grid-column: span 1; }
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'DM Sans', sans-serif; color: var(--dark); background: var(--light); -webkit-font-smoothing: antialiased; }
-h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-
-/* ===== NAV ===== */
-.navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); transition: all 0.3s; }
-.navbar.scrolled { padding: 14px 48px; background: rgba(10,10,10,0.97); }
-.nav-logo { text-decoration: none; display: flex; align-items: baseline; }
-.nav-logo .builder { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: #fff; letter-spacing: 1px; }
-.nav-logo .k { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--orange); }
-.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-.nav-links a { color: #ccc; text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--orange); }
-.nav-cta { background: var(--orange) !important; color: #fff !important; padding: 10px 22px; border-radius: 8px; font-weight: 600 !important; }
-.nav-cta:hover { background: var(--orange-hover) !important; }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1000; position: relative; }
-.nav-hamburger span { width: 26px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
-
-/* ===== HERO ===== */
-.page-hero { padding: 140px 48px 56px; background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%); text-align: center; }
-.page-hero h1 { font-size: 3.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -1px; }
-.page-hero h1 span { color: var(--orange); }
-.page-hero p { color: #aaa; font-size: 1.2rem; max-width: 700px; margin: 0 auto 32px; line-height: 1.6; }
-.filter-tabs { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
-.filter-tab { padding: 10px 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #ccc; border-radius: 999px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
-.filter-tab:hover { color: #fff; border-color: var(--orange); }
-.filter-tab.active { background: var(--orange); color: #fff; border-color: var(--orange); }
-.plan-count { margin-top: 18px; color: #aaa; font-size: 0.88rem; }
-
-/* ===== PLANS GRID ===== */
-.plans-section { padding: 28px 48px 80px; }
-.plans-inner { max-width: 1400px; margin: 0 auto; }
-.plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-.plan-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; color: inherit; display: block; }
-.plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
-.plan-card-img { aspect-ratio: 16/10; overflow: hidden; background: #FAF8F3; }
-.plan-card-img img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
-.plan-card:hover .plan-card-img img { transform: scale(1.04); }
-.plan-card-body { padding: 24px; }
-.plan-card-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 8px; }
-.plan-card-specs { display: flex; flex-wrap: wrap; gap: 14px; color: var(--gray-600); font-size: 0.88rem; margin-bottom: 14px; }
-.plan-card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--gray-200); }
-.plan-card-cta { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--orange); font-size: 1rem; }
-.plan-card-story { font-size: 0.78rem; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.5px; }
-.plan-card-price { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--dark); }
-.plan-card-price small { font-size: 0.7rem; font-weight: 500; color: var(--gray-600); }
-.plan-card-price { margin-bottom: 14px; }
-.catalog-note { max-width: 1120px; margin: 0 auto 18px; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 12px; background: #fff; color: var(--gray-600); line-height: 1.4; font-size: 0.8rem; }
-
-/* Custom card variant */
-.plan-card-custom { background: linear-gradient(135deg, #1a1a1a 0%, var(--dark) 100%); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px 24px; min-height: 380px; }
-.plan-card-custom:hover { background: linear-gradient(135deg, #222 0%, #1a1a1a 100%); }
-.plan-card-custom svg { color: var(--orange); margin-bottom: 16px; }
-.plan-card-custom h3 { font-size: 1.4rem; margin-bottom: 8px; color: #fff; }
-.plan-card-custom p { color: #aaa; font-size: 0.95rem; margin-bottom: 16px; line-height: 1.5; max-width: 280px; }
-.plan-card-custom .cta-arrow { color: var(--orange); font-weight: 700; }
-
-/* ===== CTA SECTION ===== */
-.cta-section { padding: 100px 48px; background: var(--dark); text-align: center; }
-.cta-section h2 { font-size: 2.8rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-.cta-section h2 span { color: var(--orange); }
-.cta-section p { font-size: 1.15rem; color: #aaa; max-width: 550px; margin: 0 auto 32px; line-height: 1.6; }
-.btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 16px 36px; background: var(--orange); color: #fff; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 1.05rem; transition: background 0.2s, transform 0.2s; }
-.btn-primary:hover { background: var(--orange-hover); transform: translateY(-2px); }
-
-/* ===== FOOTER ===== */
-.footer { background: var(--dark); padding: 60px 48px 30px; border-top: 1px solid rgba(255,255,255,0.06); }
-.footer-inner { max-width: 1200px; margin: 0 auto; }
-.footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
-.footer-brand { max-width: 280px; }
-.footer-brand p { color: #888; font-size: 0.9rem; margin-top: 12px; line-height: 1.5; }
-.footer-col { display: flex; flex-direction: column; gap: 10px; }
-.footer-col h4 { color: #fff; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
-.footer-col a { color: #888; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-.footer-col a:hover { color: var(--orange); }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); color: #555; font-size: 0.82rem; }
-
-/* ===== SCROLL ANIMATIONS ===== */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.stagger-1 { transition-delay: 0.1s; }
-.stagger-2 { transition-delay: 0.2s; }
-.stagger-3 { transition-delay: 0.3s; }
-.stagger-4 { transition-delay: 0.4s; }
-.stagger-5 { transition-delay: 0.5s; }
-.stagger-6 { transition-delay: 0.6s; }
-
-/* ===== NAV BREAKPOINT ===== */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex !important; }
-  .navbar { padding: 14px 20px !important; }
-}
-@media (max-width: 900px) {
-  .navbar { padding: 14px 20px !important; }
-  .page-hero { padding: 120px 20px 60px; overflow: hidden; }
-  .page-hero h1 { font-size: 2rem; line-height: 1.08; max-width: 330px; margin-left: auto; margin-right: auto; }
-  .page-hero p { font-size: 1rem; }
-  .plans-section { padding: 32px 20px 48px; }
-  .plans-grid { grid-template-columns: 1fr; gap: 20px; }
-  .cta-section { padding: 60px 24px; }
-  .cta-section h2 { font-size: 2rem; }
-  .footer { padding: 40px 20px 24px; }
-  .footer-top { flex-direction: column; gap: 32px; }
-  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-  .filter-tabs { display: flex; gap: 8px; width: 100%; max-width: 340px; margin-left: auto; margin-right: auto; }
-  .filter-tab { padding: 8px 16px; font-size: 0.85rem; }
-}
-
-/* === MOBILE MENU === */
-.nav-links.open { display: flex !important; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10, 10, 10, 0.98); z-index: 999; justify-content: flex-start; align-items: center; gap: 24px; padding: 88px 24px 32px; overflow-y: auto; }
-.nav-links.open li { list-style: none; }
-.nav-links.open li a { font-size: 1.4rem; padding: 12px 0; color: #fff; }
-.nav-links.open li a:hover { color: #F77F00; }
-.nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.nav-hamburger.active span:nth-child(2) { opacity: 0; }
-.nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-/* === FULL-SCREEN MOBILE MENU FIX === */
-@media (max-width: 1280px) {
-  body:has(.nav-links.open),
-  body:has(.nav-links.show) {
-    overflow: hidden;
-  }
-
-  .navbar:has(.nav-links.open),
-  .navbar:has(.nav-links.show),
-  nav:has(.nav-links.open),
-  nav:has(.nav-links.show) {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    padding: 18px 20px !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    overflow: hidden !important;
-    z-index: 10000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-logo,
-  .navbar:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .nav-logo,
-  nav:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .logo,
-  nav:has(.nav-links.show) .logo {
-    position: fixed !important;
-    top: 22px !important;
-    left: 20px !important;
-    z-index: 10002 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-hamburger,
-  .navbar:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .nav-hamburger,
-  nav:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .mobile-menu,
-  nav:has(.nav-links.show) .mobile-menu {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 10003 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-links.open,
-  .navbar:has(.nav-links.show) .nav-links.show,
-  nav:has(.nav-links.open) .nav-links.open,
-  nav:has(.nav-links.show) .nav-links.show {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 96px 24px 48px !important;
-    overflow-y: auto !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
+@media (max-width: 899px) {
+  .fp-hero .a5-hero-photo::after { display: none; }
+  .fp-hero .a5-hero-photo img { object-position: 50% 38%; }
+  .fp-hero .a5-hero-inner { gap: 16px; }
+  .fp-cta-desk { display: none; }
+  .fp-filterbar { flex-direction: column; align-items: flex-start; gap: 16px; padding-top: 0; border-top: 0; }
+  .filter-tabs { gap: 8px; }
+  .filter-tab { height: 40px; padding: 0 14px; font-size: 14.5px; }
+  .plan-count { font-size: 14px; }
+  .fp-cta-phone { display: flex; flex-direction: column; gap: 16px; }
+  .fp-cta-phone .a5-btn { width: 100%; }
+  .fp-plans { padding-block: 28px 48px; }
+  .catalog-note { margin-bottom: 16px; padding: 12px 14px; font-size: 13.5px; }
+  .plans-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .plan-card, .plan-card-wide { grid-column: auto; border-radius: 14px; }
+  .plan-card-img { height: 224px; }
+  .plan-card-body { padding: 16px; gap: 10px; }
+  .plan-card-title { font-size: 28px; }
+  .plan-card-specs { font-size: 14.5px; }
+  .plan-card-price { padding: 11px 13px; font-size: 25px; }
+  .plan-card-custom, .plan-card-wide { flex-direction: column; gap: 14px; padding: 24px 18px 22px; }
+  .plan-card-custom .a5-icon, .plan-card-custom.plan-card-wide .a5-icon { width: 56px; height: 56px; }
+  .plan-card-custom h2 { font-size: 28px; }
+  .plan-card-custom p { font-size: 15.5px; }
+  .pl-cta { padding-block: 56px; }
+  .pl-cta .a5-wrap { gap: 16px; }
+  .pl-cta .a5-h2 { font-size: 44px; }
+  .pl-cta .a5-p { font-size: 16px; }
+  .pl-cta .a5-btn { width: 100%; font-size: 21px; }
 }
 </style>
-<link rel="stylesheet" href="/css/site-a11y.css">
-<script src="/scripts/pricing-config.js"></script>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans" aria-current="page">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans" aria-current="page">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<!-- NAV -->
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo">
- <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
- </a>
-<ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans" style="color:var(--orange);">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
- <span></span><span></span><span></span>
- </button>
-</nav>
-
-<!-- HERO -->
-<section class="page-hero">
- <h1 class="reveal stagger-1">Find Your <span>Perfect Plan</span></h1>
- <p class="reveal stagger-2">Browse our five plans. Pick one as a starting point, and we check it against your lot, the code and your budget before we price it.</p>
- <div class="filter-tabs reveal stagger-3" role="group" aria-label="Filter floor plans">
- <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All Plans</button>
- <button type="button" class="filter-tab" data-filter="1-story" aria-pressed="false">1 Story</button>
- <button type="button" class="filter-tab" data-filter="2-story" aria-pressed="false">2 Story</button>
- <button type="button" class="filter-tab" data-filter="3-bed" aria-pressed="false">3 Bedrooms</button>
- <button type="button" class="filter-tab" data-filter="4-plus-bed" aria-pressed="false">4+ Bedrooms</button>
- <button type="button" class="filter-tab" data-filter="small" aria-pressed="false">Under 2,000 sq ft</button>
- <button type="button" class="filter-tab" data-filter="large" aria-pressed="false">2,000 sq ft and up</button>
- </div>
- <p class="plan-count" id="plan-count" aria-live="polite">5 plans shown</p>
+<main id="main">
+<section class="a5-hero fp-hero" aria-labelledby="fp-title">
+  <div class="a5-hero-photo"><img src="/images/projects/jobsite/s14.jpg" srcset="/images/projects/jobsite/strip/s14.webp 600w, /images/projects/jobsite/s14.jpg 1203w" sizes="(max-width: 899px) 100vw, 52vw" alt="Three story BuilderK home exterior in Florida" width="1203" height="1600" fetchpriority="high"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">Floor plans</div>
+      <h1 class="a5-h1" id="fp-title">Find Your Perfect <span class="a5-accent">Plan</span></h1>
+      <p class="a5-hero-sub">Browse our five plans. Pick one as a starting point, and we check it against your lot, the code and your budget before we price it.</p>
+      <a class="a5-btn a5-btn-hero fp-cta-desk" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+    </div>
+    <div class="fp-filterbar">
+      <div class="filter-tabs" role="group" aria-label="Filter floor plans">
+      <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All plans</button>
+      <button type="button" class="filter-tab" data-filter="1-story" aria-pressed="false">1 story</button>
+      <button type="button" class="filter-tab" data-filter="2-story" aria-pressed="false">2 story</button>
+      <button type="button" class="filter-tab" data-filter="3-bed" aria-pressed="false">3 bedrooms</button>
+      <button type="button" class="filter-tab" data-filter="4-plus-bed" aria-pressed="false">4+ bedrooms</button>
+      <button type="button" class="filter-tab" data-filter="small" aria-pressed="false">Under 2,000 sq ft</button>
+      <button type="button" class="filter-tab" data-filter="large" aria-pressed="false">2,000 sq ft and up</button>
+      </div>
+      <p class="plan-count" id="plan-count" aria-live="polite">5 plans shown</p>
+    </div>
+    <div class="fp-cta-phone">
+      <a class="a5-btn a5-btn-hero" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+      <a class="a5-btn a5-btn-call" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a>
+    </div>
+  </div>
 </section>
 
-<!-- PLANS GRID -->
-<section class="plans-section">
- <div class="plans-inner">
- <p class="catalog-note">Planning ranges below use the shared Central Florida Standard tier assumptions: living area, 150 square feet of covered outdoor space, a 440 square foot two car garage, and typical design complexity. They exclude the items listed in the <a href="/calculator" style="color:var(--orange);font-weight:600;">calculator</a>. Rates last updated <span data-pricing-updated>July 18, 2026</span>.</p>
- <div class="plans-grid">
-
- <!-- 1700 SQ FT -->
- <a href="/floor-plan-1700-sq-ft" class="plan-card reveal stagger-1" data-story="1-story" data-size="small" data-beds="3" data-sqft="1700">
- <div class="plan-card-img"><img src="/images/plan-1700.png" alt="1,700 sq ft single story 3 bed 2 bath floor plan, BuilderK" loading="lazy"></div>
- <div class="plan-card-body">
- <div class="plan-card-title">1,700 Sq Ft Plan</div>
- <div class="plan-card-specs">
- <span>3 Bed</span><span>2 Bath</span><span>1,700 sq ft</span><span>Two Car</span>
- </div>
- <div class="plan-card-price" data-plan-range>Standard planning range</div>
- <div class="plan-card-footer">
- <span class="plan-card-cta">View Plan →</span>
- <span class="plan-card-story">Single Story</span>
- </div>
- </div>
- </a>
-
- <!-- 1977 SQ FT -->
- <a href="/floor-plan-1977-sq-ft" class="plan-card reveal stagger-2" data-story="2-story" data-size="medium" data-beds="4" data-sqft="1977">
- <div class="plan-card-img"><img src="/images/plan-1977.png" alt="1,977 sq ft two story 4 bed 2.5 bath floor plan, BuilderK" loading="lazy"></div>
- <div class="plan-card-body">
- <div class="plan-card-title">1,977 Sq Ft Plan</div>
- <div class="plan-card-specs">
- <span>4 Bed</span><span>2.5 Bath</span><span>1,977 sq ft</span><span>Two Car</span>
- </div>
- <div class="plan-card-price" data-plan-range>Standard planning range</div>
- <div class="plan-card-footer">
- <span class="plan-card-cta">View Plan →</span>
- <span class="plan-card-story">Two Story</span>
- </div>
- </div>
- </a>
-
- <!-- 2377 SQ FT -->
- <a href="/floor-plan-2377-sq-ft" class="plan-card reveal stagger-3" data-story="2-story" data-size="large" data-beds="5" data-sqft="2377">
- <div class="plan-card-img"><img src="/images/plan-2377.png" alt="2,377 sq ft two story 5 bed 3 bath floor plan, BuilderK" loading="lazy"></div>
- <div class="plan-card-body">
- <div class="plan-card-title">2,377 Sq Ft Plan</div>
- <div class="plan-card-specs">
- <span>5 Bed</span><span>3 Bath</span><span>2,377 sq ft</span><span>Two Car</span>
- </div>
- <div class="plan-card-price" data-plan-range>Standard planning range</div>
- <div class="plan-card-footer">
- <span class="plan-card-cta">View Plan →</span>
- <span class="plan-card-story">Two Story</span>
- </div>
- </div>
- </a>
-
- <!-- 1250 SQ FT -->
- <a href="/floor-plan-1250-sq-ft" class="plan-card reveal stagger-4" data-story="1-story" data-size="small" data-beds="3" data-sqft="1250">
- <div class="plan-card-img"><img src="/images/plan-1250.jpg?v=2" alt="1,250 sq ft single story 3 bed 2 bath floor plan, BuilderK" loading="lazy"></div>
- <div class="plan-card-body">
- <div class="plan-card-title">1,250 Sq Ft Plan</div>
- <div class="plan-card-specs">
- <span>3 Bed</span><span>2 Bath</span><span>1,250 sq ft</span><span>Two Car</span>
- </div>
- <div class="plan-card-price" data-plan-range>Standard planning range</div>
- <div class="plan-card-footer">
- <span class="plan-card-cta">View Plan →</span>
- <span class="plan-card-story">Single Story</span>
- </div>
- </div>
- </a>
-
- <!-- 2385 SQ FT -->
- <a href="/floor-plan-2385-sq-ft" class="plan-card reveal stagger-5" data-story="1-story" data-size="large" data-beds="3" data-sqft="2385">
- <div class="plan-card-img"><img src="/images/plan-2385.jpg?v=2" alt="2,385 sq ft single story 3 bed 3 bath floor plan, BuilderK" loading="lazy"></div>
- <div class="plan-card-body">
- <div class="plan-card-title">2,385 Sq Ft Plan</div>
- <div class="plan-card-specs">
- <span>3 Bed</span><span>3 Bath</span><span>2,385 sq ft</span><span>Two Car</span>
- </div>
- <div class="plan-card-price" data-plan-range>Standard planning range</div>
- <div class="plan-card-footer">
- <span class="plan-card-cta">View Plan →</span>
- <span class="plan-card-story">Single Story</span>
- </div>
- </div>
- </a>
+<section class="a5-section a5-bg-concrete fp-plans" aria-label="Floor plans">
+  <div class="a5-wrap">
+    <p class="catalog-note">Planning ranges below use the shared Central Florida Standard tier assumptions: living area, 150 square feet of covered outdoor space, a 440 square foot two car garage, and typical design complexity. They exclude the items listed in the <a href="/calculator">calculator</a>. Rates last updated <span data-pricing-updated>July 18, 2026</span>.</p>
+    <div class="plans-grid">
+<a href="/floor-plan-1700-sq-ft" class="plan-card" data-story="1-story" data-size="small" data-beds="3" data-sqft="1700">
+  <div class="plan-card-img"><img src="/images/home/plan-1700.webp" alt="1,700 sq ft single story 3 bed 2 bath floor plan, BuilderK" width="2000" height="1243" loading="lazy" decoding="async"></div>
+  <div class="plan-card-body">
+    <h2 class="plan-card-title">1,700 Sq Ft Plan</h2>
+    <p class="plan-card-specs"><span>3 bed</span><span>2 bath</span><span>1,700 sq ft</span><span>Two car</span></p>
+    <div class="plan-card-price" data-plan-range><small>Standard planning range</small></div>
+    <div class="plan-card-footer"><span class="plan-card-cta">View plan<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><span class="plan-card-story">Single story</span></div>
+  </div>
+</a>
+<a href="/floor-plan-1977-sq-ft" class="plan-card" data-story="2-story" data-size="medium" data-beds="4" data-sqft="1977">
+  <div class="plan-card-img"><img src="/images/home/plan-1977.webp" alt="1,977 sq ft two story 4 bed 2.5 bath floor plan, BuilderK" width="2000" height="1243" loading="lazy" decoding="async"></div>
+  <div class="plan-card-body">
+    <h2 class="plan-card-title">1,977 Sq Ft Plan</h2>
+    <p class="plan-card-specs"><span>4 bed</span><span>2.5 bath</span><span>1,977 sq ft</span><span>Two car</span></p>
+    <div class="plan-card-price" data-plan-range><small>Standard planning range</small></div>
+    <div class="plan-card-footer"><span class="plan-card-cta">View plan<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><span class="plan-card-story">Two story</span></div>
+  </div>
+</a>
+<a href="/floor-plan-2377-sq-ft" class="plan-card" data-story="2-story" data-size="large" data-beds="5" data-sqft="2377">
+  <div class="plan-card-img"><img src="/images/home/plan-2377.webp" alt="2,377 sq ft two story 5 bed 3 bath floor plan, BuilderK" width="2000" height="1243" loading="lazy" decoding="async"></div>
+  <div class="plan-card-body">
+    <h2 class="plan-card-title">2,377 Sq Ft Plan</h2>
+    <p class="plan-card-specs"><span>5 bed</span><span>3 bath</span><span>2,377 sq ft</span><span>Two car</span></p>
+    <div class="plan-card-price" data-plan-range><small>Standard planning range</small></div>
+    <div class="plan-card-footer"><span class="plan-card-cta">View plan<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><span class="plan-card-story">Two story</span></div>
+  </div>
+</a>
+<a href="/floor-plan-1250-sq-ft" class="plan-card" data-story="1-story" data-size="small" data-beds="3" data-sqft="1250">
+  <div class="plan-card-img"><img src="/images/plan-1250.jpg?v=2" alt="1,250 sq ft single story 3 bed 2 bath floor plan, BuilderK" width="1600" height="2267" loading="lazy" decoding="async"></div>
+  <div class="plan-card-body">
+    <h2 class="plan-card-title">1,250 Sq Ft Plan</h2>
+    <p class="plan-card-specs"><span>3 bed</span><span>2 bath</span><span>1,250 sq ft</span><span>Two car</span></p>
+    <div class="plan-card-price" data-plan-range><small>Standard planning range</small></div>
+    <div class="plan-card-footer"><span class="plan-card-cta">View plan<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><span class="plan-card-story">Single story</span></div>
+  </div>
+</a>
+<a href="/floor-plan-2385-sq-ft" class="plan-card" data-story="1-story" data-size="large" data-beds="3" data-sqft="2385">
+  <div class="plan-card-img"><img src="/images/plan-2385.jpg?v=2" alt="2,385 sq ft single story 3 bed 3 bath floor plan, BuilderK" width="1600" height="2267" loading="lazy" decoding="async"></div>
+  <div class="plan-card-body">
+    <h2 class="plan-card-title">2,385 Sq Ft Plan</h2>
+    <p class="plan-card-specs"><span>3 bed</span><span>3 bath</span><span>2,385 sq ft</span><span>Two car</span></p>
+    <div class="plan-card-price" data-plan-range><small>Standard planning range</small></div>
+    <div class="plan-card-footer"><span class="plan-card-cta">View plan<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><span class="plan-card-story">Single story</span></div>
+  </div>
+</a>
 
  <!-- GENERATED PLAN CARDS START -->
  <!-- Unlisted 2026-06-10: schematic SVG diagrams pulled until real plan drawings are ready. Pages still exist (noindex). -->
  <!-- GENERATED PLAN CARDS END -->
 
- <!-- CUSTOM CTA CARD 1 -->
- <a href="/contact" class="plan-card plan-card-custom reveal stagger-4">
- <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
- <h3>Don't See Your Perfect Plan?</h3>
- <p>We design custom plans from scratch, tailored to your lot, lifestyle, and budget.</p>
- <span class="cta-arrow">Start a Custom Design →</span>
- </a>
-
- <!-- CUSTOM CTA CARD 2 -->
- <a href="/calculator" class="plan-card plan-card-custom reveal stagger-5">
- <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
- <h3>Build a Planning Range</h3>
- <p>Use the pricing calculator to model build level, complexity, garage, upgrades, and major exclusions.</p>
- <span class="cta-arrow">Run the Numbers →</span>
- </a>
-
- <!-- CUSTOM CTA CARD 3 -->
- <a href="/contact" class="plan-card plan-card-custom reveal stagger-6">
- <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
- <h3>Bring Your Own Plan</h3>
- <p>Already have plans from another architect? We can build them. Send them to us and we will review them with you.</p>
- <span class="cta-arrow">Send Your Plan →</span>
- </a>
-
- </div>
- </div>
+<a href="/contact" class="plan-card plan-card-custom">
+  <svg width="64" height="64" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg>
+  <div class="pc-text">
+    <h2>Don't See Your Perfect Plan?</h2>
+    <p>We design custom plans from scratch, tailored to your lot, lifestyle, and budget.</p>
+    <span class="cta-arrow">Start a custom design<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+  </div>
+</a>
+<a href="/calculator" class="plan-card plan-card-custom plan-card-wide">
+  <svg width="64" height="64" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="mBk3" cx="0.38" cy="0.35" r="0.75"><stop offset="0" stop-color="#F7DA8E"></stop><stop offset="0.6" stop-color="#E2B25A"></stop><stop offset="1" stop-color="#BF8733"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M32 22 C19 23 10 34 11 45 C12 54 20 58 32 58 C44 58 52 54 53 45 C54 34 45 23 32 22 Z" fill="url(#mBk3)" stroke="#8A5A1B" stroke-width="1.6" stroke-linejoin="round"></path><path d="M23 9 C26 12 38 12 41 9 C42 13 39 18 35 20 L29 20 C25 18 22 13 23 9 Z" fill="#E7BD66" stroke="#8A5A1B" stroke-width="1.5" stroke-linejoin="round"></path><rect x="25" y="18.5" width="14" height="4.5" rx="2.2" fill="#7A4A12"></rect><path d="M17 36 C18 30 22 27 26 26" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5" fill="none"></path><text x="32" y="49" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-weight="700" font-size="20" fill="#1F7A3A">$</text></svg>
+  <div class="pc-text">
+    <h2>Build a Planning Range</h2>
+    <p>Use the pricing calculator to model build level, complexity, garage, upgrades, and major exclusions.</p>
+    <span class="cta-arrow">Run the numbers<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+  </div>
+</a>
+<a href="/contact" class="plan-card plan-card-custom plan-card-wide">
+  <svg width="64" height="64" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="bpSk1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D8BFD"></stop><stop offset="1" stop-color="#1F5FD1"></stop></linearGradient><linearGradient id="bpRk1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC0FF"></stop><stop offset="0.5" stop-color="#4A92F7"></stop><stop offset="1" stop-color="#2566D4"></stop></linearGradient><linearGradient id="bpPk1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFD24D"></stop><stop offset="1" stop-color="#F5A524"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="8" y="12" width="48" height="42" rx="4" fill="url(#bpSk1)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M14 18 V50 M20 18 V50 M26 18 V50 M32 18 V50 M38 18 V50 M44 18 V50 M50 18 V50 M12 22 H54 M12 28 H54 M12 34 H54 M12 40 H54 M12 46 H54" stroke="#FFFFFF" stroke-width="0.6" opacity="0.22"></path><path d="M15 21 H49 V47 H15 Z M15 35 H29 M29 21 V41 M38 35 H49" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"></path><path d="M29 41 A6 6 0 0 0 35 47" fill="none" stroke="#FFFFFF" stroke-width="1.4"></path><rect x="5" y="7" width="54" height="9" rx="4.5" fill="url(#bpRk1)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M10 9.5 H54" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.6"></path><g transform="rotate(-38 46 46)"><rect x="34" y="42" width="22" height="7" rx="1.5" fill="url(#bpPk1)" stroke="#8A5A00" stroke-width="1"></rect><path d="M56 42 L63 45.5 L56 49 Z" fill="#F6D7A7" stroke="#8A5A00" stroke-width="1"></path><path d="M60.5 44.3 L63 45.5 L60.5 46.7 Z" fill="#374151"></path><rect x="30" y="42" width="4" height="7" rx="1" fill="#F5A3C7" stroke="#8A5A00" stroke-width="1"></rect></g></svg>
+  <div class="pc-text">
+    <h2>Bring Your Own Plan</h2>
+    <p>Already have plans from another architect? We can build them. Send them to us and we will review them with you.</p>
+    <span class="cta-arrow">Send your plan<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+  </div>
+</a>
+    </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
- <h2 class="reveal">Ready to <span>Build Your Home?</span></h2>
- <p class="reveal stagger-1">Bring your lot or the one you're considering. We coordinate design, lender documentation, permitting, and construction through one build process.</p>
- <a href="/calculator" class="btn-primary reveal stagger-2">Estimate My Build<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<section class="a5-section a5-bg-white pl-cta" aria-labelledby="fp-cta-title">
+  <div class="a5-wrap">
+    <h2 class="a5-h2" id="fp-cta-title">Ready to Build Your <span class="a5-hl">Home</span>?</h2>
+    <p class="a5-p">Bring your lot or the one you're considering. We coordinate design, lender documentation, permitting, and construction through one build process.</p>
+    <a class="a5-btn a5-btn-dark" href="/calculator">Estimate my build <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
 </section>
+</main>
 
-<!-- FOOTER -->
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand">
- <a href="/" class="nav-logo">
- <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
- </a>
- <p>We build custom homes across Florida, starting with your lot and your goals.</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/">Home</a>
- <a href="/about">About Us</a>
- <a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a>
- <a href="/floor-plans">Floor Plans</a>
- <a href="/facades">Facades & Styles</a>
- </div>
- <div class="footer-col">
- <h4>Services</h4>
- <a href="/">Custom Homes</a>
- <a href="/financing">Financing</a>
- <a href="/calculator">Pricing Calculator</a>
- <a href="/interiors">Interior Selections</a>
- <a href="/construction">Construction</a>
- <a href="/interior-gallery">Interior Gallery</a>
- <a href="/referral-program/">Referral Program</a>
- <a href="/blog">Blog</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:2392304868">(239) 230 4868</a>
- <a href="mailto:info@builderk.com">info@builderk.com</a>
- <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
- </div>
- </div>
- <div class="footer-bottom">
- <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
- <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
- </div>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
 <script>
 window.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.page-hero .reveal').forEach(function(el) { el.classList.add('visible'); });
   if (window.BuilderKPricing) {
     var fmt=function(n){return '$'+(Math.round(n/1000)*1000).toLocaleString('en-US');};
     document.querySelectorAll('[data-plan-range]').forEach(function(el){
@@ -461,19 +363,6 @@ window.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('[data-pricing-updated]').forEach(function(el){el.textContent=window.BuilderKPricing.lastUpdated;});
   }
 });
-if (typeof IntersectionObserver !== 'undefined') {
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.05 });
-  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-}
-var navbar = document.getElementById('navbar');
-if (navbar) {
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 60) navbar.classList.add('scrolled');
-    else navbar.classList.remove('scrolled');
-  });
-}
 // ===== FILTER LOGIC =====
 document.querySelectorAll('.filter-tab').forEach(function(tab) {
   tab.addEventListener('click', function() {
@@ -501,30 +390,6 @@ document.querySelectorAll('.filter-tab').forEach(function(tab) {
     document.getElementById('plan-count').textContent=visible+(visible===1?' plan shown':' plans shown');
   });
 });
-// ===== MOBILE MENU =====
-var hamburger = document.getElementById('hamburger');
-var navLinks = document.querySelector('.nav-links');
-if (hamburger && navLinks) {
-  hamburger.addEventListener('click', function() {
-    var isOpen = navLinks.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Open menu');
-      document.body.style.overflow = '';
-    }
-  });
-  navLinks.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', function() { navLinks.classList.remove('open'); hamburger.classList.remove('active'); }); });
-}
-// Click-to-call GA4 event tracking
-document.querySelectorAll('a[href^="tel:"]').forEach(function(a){ a.addEventListener('click', function(){ if (typeof gtag === 'function') gtag('event', 'phone_click', { 'page_path': location.pathname }); }); });
 </script>
 <script defer src="/scripts/call-bar.js"></script>
 </body>
