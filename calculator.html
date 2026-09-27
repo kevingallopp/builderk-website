@@ -655,7 +655,7 @@ function updateCalc(){
   document.getElementById('loan-amount').textContent=fmt(loanAmt);
   document.getElementById('mortgage-amount').textContent=fmt(monthly)+'/mo';
   var landNote=document.getElementById('land-note');
-  if(landNote){var showLand=state.ownsLot&&lotEquity>0;landNote.hidden=!showLand;if(showLand)landNote.textContent='Your land is your down payment, subject to approval. Your '+fmt(lotEquity)+' in lot equity may replace cash you would otherwise bring. The monthly payment is for building the home, so it stays the same.';}
+  if(landNote){var showLand=state.ownsLot&&lotEquity>0;landNote.hidden=!showLand;if(showLand)landNote.textContent='Your land is your down payment, subject to approval. Your '+fmt(lotEquity)+' in lot equity may replace cash you would otherwise bring.';}
   var paymentBasis=state.ownsLot?'Based on the planning midpoint, any lot balance, and your cash down payment. Lot equity may help meet lender requirements but does not directly reduce construction costs.':'Based on the planning midpoint after your cash down payment. Land purchase is not included.';
   document.getElementById('mortgage-note').textContent=paymentBasis+' '+pricing.mortgageExample.termYears+' year principal and interest at '+annualRate.toFixed(2)+'%.';
   window.BuilderKLeadContext.save(estimatePayload());
