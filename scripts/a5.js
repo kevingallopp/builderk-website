@@ -1,4 +1,4 @@
-// BuilderK A5 look: phone menu, effects that play once when they scroll into view, and lazy videos.
+// BuilderK A5 look: phone menu, effects that loop every 8 seconds while on screen (like the approved mockup), and lazy videos.
 // Everything degrades to the finished, static page when JavaScript or motion is off.
 (function () {
   'use strict';
@@ -35,19 +35,18 @@
       });
     });
 
-    // ---- effects: highlighter, tape measure, steps; each plays once ----
+    // ---- effects: highlighter, tape measure and steps loop every 8 seconds while on screen ----
     if (root.classList.contains('a5-motion')) {
-      var targets = document.querySelectorAll('.a5-hl, .a5-tape-x, .a5-tape-y, [data-a5-reveal]');
+      var groups = Array.prototype.slice.call(document.querySelectorAll('[data-a5-loop]'));
+      var singles = Array.prototype.slice.call(document.querySelectorAll('.a5-hl, .a5-tape-x, .a5-tape-y, [data-a5-reveal]'))
+        .filter(function (el) { return !el.closest('[data-a5-loop]'); });
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-in');
-          io.unobserve(entry.target);
+          entry.target.classList.toggle('is-on', entry.isIntersecting);
+          if (entry.isIntersecting) entry.target.classList.add('is-in');
         });
-      }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
-      targets.forEach(function (el) { io.observe(el); });
-      // Safety net: never leave anything hidden if the observer does not fire.
-      window.setTimeout(function () { targets.forEach(function (el) { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-in'); }); }, 2500);
+      }, { threshold: 0.2 });
+      groups.concat(singles).forEach(function (el) { io.observe(el); });
     }
 
     // ---- videos that start only when they are on screen (muted, inline) ----

@@ -78,11 +78,10 @@ button { font: inherit; }
 .a5-accent { color: var(--a5-orange); }
 @media (max-width: 899px) { .a5-p { font-size: 16px; } .a5-h3 { font-size: 24px; } }
 
-/* orange highlighter behind a key word; draws itself once when it scrolls into view */
+/* orange highlighter behind a key word; draws itself again every 8 seconds while on screen (see effects below) */
 .a5-hl { background-image: linear-gradient(180deg, transparent 58%, var(--a5-orange) 58%, var(--a5-orange) 92%, transparent 92%); background-repeat: no-repeat; background-size: 100% 100%; padding: 0 4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .a5-hl-label { background-image: linear-gradient(180deg, transparent 50%, var(--a5-orange) 50%, var(--a5-orange) 95%, transparent 95%); padding: 0 2px; color: var(--a5-ink); }
-html.a5-motion .a5-hl { background-size: 0% 100%; transition: background-size 0.9s ease-out 0.2s; }
-html.a5-motion .a5-hl.is-in { background-size: 100% 100%; }
+
 
 /* ---------- buttons and links ---------- */
 .a5-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 56px; padding: 0 26px; border: 0; border-radius: 13px; font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; cursor: pointer; white-space: nowrap; transition: filter 0.15s ease, transform 0.15s ease; }
@@ -214,10 +213,6 @@ body.a5-menu-open { overflow: hidden; }
 
 /* ---------- tape measure ---------- */
 .a5-tape { position: relative; }
-html.a5-motion .a5-tape-x { clip-path: inset(0 calc(100% - 18px) 0 0); transition: clip-path 2.6s cubic-bezier(0.25, 0.8, 0.3, 1) 0.2s; }
-html.a5-motion .a5-tape-x.is-in { clip-path: inset(0 0 0 0); }
-html.a5-motion .a5-tape-y { clip-path: inset(0 0 calc(100% - 16px) 0); transition: clip-path 2.6s cubic-bezier(0.25, 0.8, 0.3, 1) 0.2s; }
-html.a5-motion .a5-tape-y.is-in { clip-path: inset(0 0 0 0); }
 html.a5-motion [data-a5-step] { opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease; transition-delay: calc(var(--step, 0) * 0.55s + 0.3s); }
 html.a5-motion .is-in [data-a5-step], html.a5-motion [data-a5-step].is-in { opacity: 1; transform: none; }
 
@@ -276,3 +271,33 @@ html.a5-motion .is-in [data-a5-step], html.a5-motion [data-a5-step].is-in { opac
 .a5-tapebar-y .nums { position: absolute; top: 16px; left: 0; right: 0; display: flex; flex-direction: column; font-weight: 700; font-size: 12px; line-height: 1; color: #1B1A18; }
 .a5-tapebar-y .nums span { height: 32px; flex-shrink: 0; padding: 4px 5px 0 0; text-align: right; }
 .a5-tapebar-y .nums span.stud { background: linear-gradient(var(--a5-orange), var(--a5-orange)) no-repeat right 2px top 2px / 22px 14px; }
+
+/* ---------- effects: the same 8 second loops as the approved mockup ----------
+   They only run while on screen (scripts/a5.js toggles .is-on) and never run with reduced motion (no html.a5-motion).
+   Group a tape with its steps in a [data-a5-loop] container so they stay in step:
+   steps .a5-step-a/b/c/d appear as the tape reaches them, their highlights use .a5-hl-a/b/c/d. */
+@keyframes a5HlDraw { 0%, 3% { background-size: 0% 100%; } 13%, 97% { background-size: 100% 100%; } 100% { background-size: 0% 100%; } }
+@keyframes a5HlA { 0%, 6% { background-size: 0% 100%; } 13%, 97% { background-size: 100% 100%; } 100% { background-size: 0% 100%; } }
+@keyframes a5HlB { 0%, 15% { background-size: 0% 100%; } 22%, 97% { background-size: 100% 100%; } 100% { background-size: 0% 100%; } }
+@keyframes a5HlC { 0%, 24.5% { background-size: 0% 100%; } 31.5%, 97% { background-size: 100% 100%; } 100% { background-size: 0% 100%; } }
+@keyframes a5HlD { 0%, 35% { background-size: 0% 100%; } 42%, 97% { background-size: 100% 100%; } 100% { background-size: 0% 100%; } }
+@keyframes a5TapeX { 0% { clip-path: inset(0 calc(100% - 18px) 0 0); } 37.5% { clip-path: inset(0 0 0 0); } 90% { clip-path: inset(0 0 0 0); opacity: 1; } 97% { clip-path: inset(0 0 0 0); opacity: 0; } 100% { clip-path: inset(0 calc(100% - 18px) 0 0); opacity: 0; } }
+@keyframes a5TapeY { 0% { clip-path: inset(0 0 calc(100% - 16px) 0); } 37.5% { clip-path: inset(0 0 0 0); } 90% { clip-path: inset(0 0 0 0); opacity: 1; } 97% { clip-path: inset(0 0 0 0); opacity: 0; } 100% { clip-path: inset(0 0 calc(100% - 16px) 0); opacity: 0; } }
+@keyframes a5StepA { 0%, 1% { opacity: 0; transform: translateY(10px); } 6%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes a5StepB { 0%, 10% { opacity: 0; transform: translateY(10px); } 15%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes a5StepC { 0%, 19.5% { opacity: 0; transform: translateY(10px); } 24.5%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes a5StepD { 0%, 30% { opacity: 0; transform: translateY(10px); } 35%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+html.a5-motion .a5-hl { animation: a5HlDraw 8s ease-in-out infinite paused; }
+html.a5-motion .a5-hl.a5-hl-a { animation-name: a5HlA; }
+html.a5-motion .a5-hl.a5-hl-b { animation-name: a5HlB; }
+html.a5-motion .a5-hl.a5-hl-c { animation-name: a5HlC; }
+html.a5-motion .a5-hl.a5-hl-d { animation-name: a5HlD; }
+html.a5-motion .a5-tape-x { animation: a5TapeX 8s linear infinite paused; }
+html.a5-motion .a5-tape-y { animation: a5TapeY 8s linear infinite paused; }
+html.a5-motion .a5-step-a { animation: a5StepA 8s ease-out infinite paused; }
+html.a5-motion .a5-step-b { animation: a5StepB 8s ease-out infinite paused; }
+html.a5-motion .a5-step-c { animation: a5StepC 8s ease-out infinite paused; }
+html.a5-motion .a5-step-d { animation: a5StepD 8s ease-out infinite paused; }
+html.a5-motion .a5-hl.is-on, html.a5-motion .a5-tape-x.is-on, html.a5-motion .a5-tape-y.is-on,
+html.a5-motion [data-a5-loop].is-on .a5-hl, html.a5-motion [data-a5-loop].is-on .a5-tape-x, html.a5-motion [data-a5-loop].is-on .a5-tape-y,
+html.a5-motion [data-a5-loop].is-on .a5-step-a, html.a5-motion [data-a5-loop].is-on .a5-step-b, html.a5-motion [data-a5-loop].is-on .a5-step-c, html.a5-motion [data-a5-loop].is-on .a5-step-d { animation-play-state: running; }
