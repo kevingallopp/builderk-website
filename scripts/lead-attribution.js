@@ -149,7 +149,8 @@
     var policy = footer.querySelector('a[href="/privacy"], a[href="/privacy.html"]');
     if (policy) {
       policy.parentNode.insertBefore(link, policy.nextSibling);
-      policy.parentNode.insertBefore(document.createTextNode(' \u00b7 '), link);
+      // The A5 footer spaces its links itself; older footers get a dot between the two links.
+      if (!policy.parentNode.classList || !policy.parentNode.classList.contains('a5-footer-legal')) policy.parentNode.insertBefore(document.createTextNode(' \u00b7 '), link);
     } else footer.appendChild(link);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', preferences); else preferences();
