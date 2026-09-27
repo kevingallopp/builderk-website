@@ -25,479 +25,369 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<script defer src="/_vercel/insights/script.js"></script>
+<script src="/scripts/lead-submit.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"></noscript>
-<script defer src="/_vercel/insights/script.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--orange:#F77F00;--orange-light:#FF9A2E;--dark:#0A0A0A;--dark-mid:#141414;--dark-soft:#1a1a1a;--light-bg:#FAFAF8;--light-card:#FFFFFF;--text-dark:#111111;--text-muted:#666666;--text-light:#999999;--text-on-dark:#E8E8E8;--font-display:'Outfit',sans-serif;--font-body:'DM Sans',sans-serif}
-html{scroll-behavior:smooth}
-.reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1!important;transform:none!important}
-body{font-family:var(--font-body);color:var(--text-dark);background:var(--light-bg);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.reveal{opacity:0;transform:translateY(60px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-80px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(80px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.reveal-right.visible{opacity:1;transform:translateX(0)}
-.reveal-scale{opacity:0;transform:scale(.85);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.reveal-scale.visible{opacity:1;transform:scale(1)}
-.stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}.stagger-5{transition-delay:.5s}
-.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,backdrop-filter .4s,padding .4s;background:rgba(10,10,10,.75);backdrop-filter:blur(16px)}
-.navbar.scrolled{background:rgba(10,10,10,.92);backdrop-filter:blur(20px);padding:14px 48px}
-.nav-logo{display:flex;align-items:center;gap:4px;text-decoration:none;font-family:var(--font-display);font-weight:900;font-size:1.6rem;letter-spacing:-.02em}
-.nav-logo .builder{color:#fff}.nav-logo .k{color:var(--orange)}
-.nav-links{display:flex;gap:36px;list-style:none}
-.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-family:var(--font-display);font-weight:500;font-size:.9rem;letter-spacing:.02em;transition:color .3s}
-.nav-links a:hover{color:var(--orange)}.nav-links a.active{color:var(--orange)}
-.nav-cta{background:var(--orange);color:#0a0a0a!important;padding:10px 28px;border-radius:50px;font-weight:700!important;transition:background .3s,transform .3s!important}
-.nav-cta:hover{background:var(--orange-light)!important;transform:scale(1.05)}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.nav-hamburger span{width:26px;height:2px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s}
-.section-label{font-family:var(--font-display);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;color:var(--orange);margin-bottom:16px}
-.section-heading{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:-.03em;color:var(--text-dark);margin-bottom:20px}
-.section-heading.on-dark{color:#fff}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#0a0a0a;padding:16px 36px;border-radius:50px;font-family:var(--font-display);font-weight:700;font-size:1rem;text-decoration:none;transition:all .4s cubic-bezier(.16,1,.3,1);border:none;cursor:pointer}
-.btn-primary:hover{background:var(--orange-light);transform:translateY(-2px);box-shadow:0 12px 40px rgba(247,127,0,.3)}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.8);text-decoration:none;font-family:var(--font-display);font-weight:500;font-size:.95rem;transition:color .3s;background:none;border:none;cursor:pointer;padding:16px 0}
-.btn-secondary:hover{color:var(--orange)}
-.hero{position:relative;min-height:88vh;background:var(--dark);display:flex;align-items:center;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(247,127,0,.09) 0%,transparent 70%),radial-gradient(ellipse 50% 80% at 15% 80%,rgba(247,127,0,.04) 0%,transparent 60%);pointer-events:none}
-.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
-.hero-inner{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:160px 48px 100px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.hero-content{display:flex;flex-direction:column}
-.hero-image{display:flex;align-items:center;justify-content:center}
-.hero-image img{width:100%;height:auto;max-width:580px;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.4)}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(247,127,0,.1);border:1px solid rgba(247,127,0,.25);padding:8px 18px;border-radius:50px;font-family:var(--font-display);font-weight:600;font-size:.8rem;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;margin-bottom:28px}
-.hero-badge::before{content:'';width:6px;height:6px;background:var(--orange);border-radius:50%;animation:pulse-dot 2s infinite}
-@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{font-family:var(--font-display);font-weight:800;font-size:clamp(2.8rem,5.5vw,4.8rem);line-height:1.05;color:#fff;letter-spacing:-.03em;margin-bottom:24px;max-width:800px}
-.hero h1 .highlight{color:var(--orange)}
-.hero-subtitle{font-size:1.2rem;line-height:1.7;color:var(--text-on-dark);max-width:540px;margin-bottom:44px;font-weight:300}
-.hero-actions{display:flex;gap:16px;align-items:center;margin-bottom:64px;flex-wrap:wrap}
-.hero-stats{display:flex;gap:48px;flex-wrap:wrap}
-.hero-stat-number{font-family:var(--font-display);font-weight:800;font-size:2rem;color:#fff;line-height:1}
-.hero-stat-label{font-size:.85rem;color:rgba(255,255,255,.45);margin-top:4px;font-weight:400}
-.pay-section{padding:120px 48px;background:var(--light-bg)}
-.pay-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
-.pay-left{max-width:560px}
-.pay-left img{width:100%;height:auto;border-radius:20px;margin-top:32px;box-shadow:0 20px 60px rgba(0,0,0,.1)}
-.pay-milestone-cards{display:flex;flex-direction:column;gap:20px}
-.pay-card{background:#fff;border-radius:20px;padding:36px 32px;border:1px solid rgba(0,0,0,.05);position:relative;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1)}
-.pay-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.07)}
-.pay-card .card-line{position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}
-.pay-card:hover .card-line{transform:scaleX(1)}
-.pay-card-step{font-family:var(--font-display);font-weight:700;font-size:.7rem;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
-.pay-card-pct{font-family:var(--font-display);font-weight:900;font-size:3.2rem;color:var(--orange);line-height:1;margin-bottom:8px;letter-spacing:-.03em}
-.pay-card h3{font-family:var(--font-display);font-weight:700;font-size:1.2rem;color:var(--text-dark);margin-bottom:10px}
-.pay-card p{font-size:.95rem;line-height:1.7;color:var(--text-muted)}
-.pay-example{background:var(--dark);border-radius:20px;padding:36px 32px;margin-top:20px;position:relative;overflow:hidden}
-.pay-example::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 50% 0%,rgba(247,127,0,.1) 0%,transparent 60%);pointer-events:none}
-.pay-example-label{font-family:var(--font-display);font-weight:700;font-size:.7rem;color:var(--orange);text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px;position:relative;z-index:2}
-.pay-example-total{font-family:var(--font-display);font-weight:900;font-size:3rem;color:#fff;letter-spacing:-.03em;line-height:1;margin-bottom:4px;position:relative;z-index:2}
-.pay-example-subtitle{font-size:.95rem;color:rgba(255,255,255,.5);margin-bottom:20px;position:relative;z-index:2}
-.pay-example-breakdown{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:2}
-.pay-example-pill{background:rgba(247,127,0,.12);border:1px solid rgba(247,127,0,.25);border-radius:50px;padding:8px 20px;font-family:var(--font-display);font-weight:600;font-size:.85rem;color:var(--orange)}
-.stack-section{padding:120px 48px;background:var(--dark);position:relative;overflow:hidden;content-visibility:auto;contain-intrinsic-size:0 600px}
-.stack-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 50%,rgba(247,127,0,.07) 0%,transparent 70%);pointer-events:none}
-.stack-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:2}
-.stack-text .section-label{color:var(--orange)}
-.stack-visual{display:flex;flex-direction:column;gap:16px}
-.stack-row{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:20px;transition:all .4s cubic-bezier(.16,1,.3,1)}
-.stack-row:hover{background:rgba(255,255,255,.07);border-color:rgba(247,127,0,.25);transform:translateX(6px)}
-.stack-icon{width:52px;height:52px;background:rgba(247,127,0,.1);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
-.stack-icon svg{width:26px;height:26px;color:var(--orange)}
-.stack-row-label{font-family:var(--font-display);font-weight:700;font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
-.stack-row-value{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:#fff}
-.stack-row-value .orange{color:var(--orange)}
-.stack-divider{display:flex;align-items:center;gap:16px;padding:0 16px;color:rgba(255,255,255,.2);font-family:var(--font-display);font-weight:700;font-size:.8rem;letter-spacing:.1em}
-.stack-divider::before,.stack-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
-.stack-total{background:linear-gradient(135deg,rgba(247,127,0,.15) 0%,rgba(247,127,0,.05) 100%);border:1px solid rgba(247,127,0,.3);border-radius:16px;padding:28px;display:flex;align-items:center;justify-content:space-between}
-.stack-total-label{font-family:var(--font-display);font-weight:600;font-size:.85rem;color:rgba(255,255,255,.6)}
-.stack-total-value{font-family:var(--font-display);font-weight:900;font-size:2rem;color:var(--orange);letter-spacing:-.02em}
-.offers-section{padding:120px 48px;background:#fff;content-visibility:auto;contain-intrinsic-size:0 700px}
-.offers-inner{max-width:1400px;margin:0 auto}
-.offers-header{text-align:center;max-width:600px;margin:0 auto 64px}
-.offers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px}
-.offer-card{background:var(--light-bg);border-radius:20px;padding:36px 28px;border:1px solid rgba(0,0,0,.04);text-align:center;position:relative;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1)}
-.offer-card .card-line{position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}
-.offer-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.07)}
-.offer-card:hover .card-line{transform:scaleX(1)}
-.offer-icon{width:60px;height:60px;background:rgba(247,127,0,.1);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 20px}
-.offer-icon svg{width:28px;height:28px;color:var(--orange)}
-.offer-card h3{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--text-dark);margin-bottom:8px}
-.offer-card p{font-size:.88rem;line-height:1.6;color:var(--text-muted)}
-.offer-areas{background:var(--dark);border-radius:20px;padding:40px 48px;display:flex;align-items:center;gap:48px;flex-wrap:wrap;position:relative;overflow:hidden}
-.offer-areas::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(247,127,0,.07) 0%,transparent 60%);pointer-events:none}
-.offer-areas-label{font-family:var(--font-display);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:8px}
-.offer-areas h3{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:#fff;white-space:nowrap}
-.offer-areas-cities{display:flex;gap:12px;flex-wrap:wrap;flex:1;position:relative;z-index:2}
-.city-tag{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:7px 18px;font-family:var(--font-display);font-weight:500;font-size:.85rem;color:rgba(255,255,255,.7);transition:all .3s}
-.city-tag:hover{background:rgba(247,127,0,.1);border-color:rgba(247,127,0,.3);color:var(--orange)}
-.process-section{padding:120px 48px;background:var(--light-bg);content-visibility:auto;contain-intrinsic-size:0 600px}
-.process-inner{max-width:1400px;margin:0 auto}
-.process-header{text-align:center;max-width:600px;margin:0 auto 64px}
-.process-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.process-card{background:linear-gradient(160deg,#0A0A0A 0%,#1a1a1a 100%);border-radius:24px;padding:40px 32px;position:relative;overflow:hidden;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s}
-.process-card:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.15)}
-.process-card.accent{background:linear-gradient(160deg,var(--orange) 0%,#e06c00 100%)}
-.process-card-num{position:absolute;top:-20px;right:-20px;font-family:var(--font-display);font-weight:900;font-size:8rem;color:rgba(247,127,0,.06);line-height:1}
-.process-card.accent .process-card-num{color:rgba(255,255,255,.1)}
-.process-card-icon{width:64px;height:64px;background:rgba(247,127,0,.1);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:1.8rem}
-.process-card-icon svg{width:30px;height:30px;color:var(--orange)}
-.process-card.accent .process-card-icon{background:rgba(255,255,255,.2)}
-.process-card.accent .process-card-icon svg{color:#fff}
-.process-card-footer svg{width:1em;height:1em;vertical-align:-0.16em;margin-right:5px}
-.process-card-step{font-family:var(--font-display);font-weight:700;font-size:.7rem;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
-.process-card.accent .process-card-step{color:rgba(255,255,255,.8)}
-.process-card h3{font-family:var(--font-display);font-weight:800;font-size:1.25rem;color:#fff;margin-bottom:12px}
-.process-card p{font-size:.9rem;line-height:1.7;color:rgba(255,255,255,.5)}
-.process-card.accent p{color:rgba(255,255,255,.8)}
-.process-card-footer{font-family:var(--font-display);font-weight:600;font-size:.72rem;color:var(--orange);letter-spacing:.04em;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);margin-top:20px}
-.process-card.accent .process-card-footer{color:#fff;border-top-color:rgba(255,255,255,.2)}
-.rules-section{padding:120px 48px;background:var(--dark);position:relative;overflow:hidden;content-visibility:auto;contain-intrinsic-size:0 500px}
-.rules-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(247,127,0,.07) 0%,transparent 60%);pointer-events:none}
-.rules-inner{max-width:1400px;margin:0 auto;position:relative;z-index:2}
-.rules-header{text-align:center;max-width:600px;margin:0 auto 64px}
-.rules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto}
-.rule-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:28px 32px;display:flex;align-items:flex-start;gap:18px;transition:all .4s cubic-bezier(.16,1,.3,1)}
-.rule-item:hover{background:rgba(255,255,255,.06);border-color:rgba(247,127,0,.2);transform:translateY(-2px)}
-.rule-check{width:32px;height:32px;background:rgba(247,127,0,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.rule-check svg{stroke:var(--orange)}
-.rule-item h4{font-family:var(--font-display);font-weight:700;font-size:.95rem;color:#fff;margin-bottom:6px}
-.rule-item p{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.45)}
-.form-section{padding:120px 48px;background:#fff;content-visibility:auto;contain-intrinsic-size:0 700px}
-.form-inner{max-width:1000px;margin:0 auto;background:var(--dark);border-radius:32px;padding:80px 64px;position:relative;overflow:hidden;text-align:center}
-.form-inner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(247,127,0,.1) 0%,transparent 60%);pointer-events:none}
-.form-inner .section-label{color:var(--orange);position:relative;z-index:2}
-.form-inner h2{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,4vw,3rem);color:#fff;letter-spacing:-.03em;margin-bottom:16px;position:relative;z-index:2}
-.form-inner>p{color:rgba(255,255,255,.6);font-size:1.05rem;max-width:500px;margin:0 auto 40px;position:relative;z-index:2;line-height:1.7}
-.referral-form{display:flex;flex-direction:column;gap:16px;max-width:620px;margin:0 auto;position:relative;z-index:2;text-align:left}
-.form-section-heading{font-family:var(--font-display);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.35);padding-top:8px}
-.form-row{display:flex;gap:12px}
-.referral-form input,.referral-form select,.referral-form textarea{width:100%;padding:14px 20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#fff;font-family:var(--font-body);font-size:.95rem;outline:none;transition:border-color .3s,background .3s}
-.referral-form input::placeholder,.referral-form textarea::placeholder{color:rgba(255,255,255,.3)}
-.referral-form input:focus,.referral-form select:focus,.referral-form textarea:focus{border-color:var(--orange);background:rgba(255,255,255,.08)}
-.referral-form select{appearance:none;cursor:pointer}
-.referral-form select option{background:var(--dark);color:#fff}
-.referral-form textarea{resize:vertical;min-height:100px}
-.referral-form .btn-primary{width:100%;justify-content:center;padding:18px;font-size:1.05rem}
-.form-divider{border:none;border-top:1px solid rgba(255,255,255,.07);margin:8px 0}
-.faq-section{padding:120px 48px;background:var(--light-bg);content-visibility:auto;contain-intrinsic-size:0 600px}
-.faq-inner{max-width:860px;margin:0 auto}
-.faq-header{text-align:center;margin-bottom:64px}
-.faq-list{display:flex;flex-direction:column;gap:12px}
-.faq-item{background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,.05);overflow:hidden;transition:border-color .3s,box-shadow .3s}
-.faq-item.open{border-color:rgba(247,127,0,.25);box-shadow:0 8px 30px rgba(247,127,0,.06)}
-.faq-question{display:flex;align-items:center;justify-content:space-between;padding:24px 28px;cursor:pointer;user-select:none;gap:16px}
-.faq-question h4{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--text-dark);line-height:1.4}
-.faq-icon{width:32px;height:32px;background:rgba(247,127,0,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s,background .3s}
-.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--orange)}
-.faq-item.open .faq-icon svg{stroke:#fff}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
-.faq-item.open .faq-answer{max-height:300px}
-.faq-answer p{padding:0 28px 24px;font-size:.95rem;line-height:1.7;color:var(--text-muted)}
-.footer-cta-section{padding:120px 48px;background:#fff}
-.footer-cta-inner{max-width:800px;margin:0 auto;text-align:center}
-.footer-cta-inner h2{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,4vw,3rem);color:var(--text-dark);letter-spacing:-.03em;margin-bottom:20px;line-height:1.1}
-.footer-cta-inner h2 span{color:var(--orange)}
-.footer-cta-inner p{font-size:1.1rem;color:var(--text-muted);line-height:1.7;margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto}
-.footer-cta-contacts{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:32px}
-.contact-link{display:inline-flex;align-items:center;gap:10px;color:var(--text-muted);text-decoration:none;font-family:var(--font-display);font-weight:600;font-size:1rem;transition:color .3s}
-.contact-link:hover{color:var(--orange)}
-.contact-link svg{stroke:var(--orange);flex-shrink:0}
-.footer{background:var(--dark);padding:80px 48px 40px;color:rgba(255,255,255,.5)}
-.footer-inner{max-width:1400px;margin:0 auto}
-.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:60px;gap:40px}
-.footer-brand{max-width:300px}
-.footer-brand .nav-logo{font-size:1.8rem;margin-bottom:16px}
-.footer-brand p{font-size:.9rem;line-height:1.7}
-.footer-col h4{font-family:var(--font-display);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:#fff;margin-bottom:20px}
-.footer-col a{display:block;color:rgba(255,255,255,.5);text-decoration:none;font-size:.9rem;margin-bottom:12px;transition:color .3s}
-.footer-col a:hover{color:var(--orange)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;justify-content:space-between;font-size:.82rem}
-.footer-bottom a{color:rgba(255,255,255,.4);text-decoration:none}
-.footer-bottom a:hover{color:var(--orange)}
-@media (max-width: 900px){.nav-links{display:none}.nav-hamburger{display:flex!important}.navbar{padding:14px 20px!important}}
-@media(max-width:1024px){.pay-grid{grid-template-columns:1fr}.pay-left{max-width:100%}.stack-inner{grid-template-columns:1fr;gap:48px}.offers-grid{grid-template-columns:repeat(2,1fr)}.process-cards{grid-template-columns:repeat(2,1fr)}.rules-grid{grid-template-columns:1fr}}
-@media(max-width:768px){.navbar{padding:16px 24px}.hero-inner{padding:120px 24px 60px}.hero h1{font-size:2.4rem}.hero-stats{gap:28px}.hero-stat-number{font-size:1.5rem}.pay-section,.stack-section,.offers-section,.process-section,.rules-section,.form-section,.faq-section,.footer-cta-section{padding:60px 24px 80px}.form-inner{padding:48px 28px;border-radius:20px}.form-row{flex-direction:column}.pay-example-breakdown{flex-direction:column}.offer-areas{flex-direction:column;align-items:flex-start;gap:24px;padding:32px 28px}.offers-grid{grid-template-columns:1fr}.process-cards{grid-template-columns:1fr}.footer{padding:48px 24px 24px}.footer-top{flex-direction:column}.footer-bottom{flex-direction:column;gap:8px}.footer-cta-contacts{flex-direction:column;gap:20px}.hero-actions{flex-direction:column;align-items:flex-start}}
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr!important}.hero-image{order:-1;margin-bottom:24px}.hero-image img{max-width:400px}.hero h1{font-size:2rem!important}.hero-subtitle{font-size:.95rem!important}.form-row{flex-direction:column!important}.form-inner{padding:40px 20px!important;border-radius:18px!important}.footer-top{flex-direction:column!important}.footer-bottom{flex-direction:column!important;gap:8px!important}.section-heading{font-size:1.7rem!important}}
-.nav-links.open{display:flex!important;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,.98);z-index:999;justify-content: flex-start;align-items:center;gap:24px;padding: 88px 24px 32px; overflow-y: auto;animation:menuFadeIn .3s ease}
-.nav-links.open li{list-style:none}
-.nav-links.open li a{font-size:1.4rem;padding:12px 0;color:#fff;text-decoration:none}
-.nav-links.open li a:hover{color:#F77F00}
-.nav-links.open .nav-cta{display:inline-block;margin-top:16px}
-.nav-hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.nav-hamburger.active span:nth-child(2){opacity:0}
-.nav-hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.nav-hamburger{z-index:1000;position:relative}
-@keyframes menuFadeIn{from{opacity:0}to{opacity:1}}
-::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--dark)}::-webkit-scrollbar-thumb{background:var(--orange);border-radius:4px}
+/* areas group: shared pieces */
+.a5-hero-photo picture { display: block; width: 100%; height: 100%; }
+.hero-call { display: none; }
+.hero-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; padding-top: 22px; border-top: 1px solid rgba(245,242,237,0.24); }
+.hero-stat { display: flex; flex-direction: column; gap: 6px; }
+.hero-stat-num { font-family: var(--a5-cond); font-weight: 800; font-size: 44px; line-height: 1; color: var(--a5-on-dark); }
+.hero-stat-label { font-size: 15px; line-height: 1.4; color: var(--a5-on-dark-muted); }
+.hero-shade::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 300px; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(12,11,10,0) 0%, rgba(12,11,10,0.95) 70%); }
+.card-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.small-label { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
+.step-tag { margin-top: auto; padding-top: 14px; border-top: 1px solid #ECE8E1; display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.45; text-transform: uppercase; color: #3D3A36; }
+.step-tag svg { flex-shrink: 0; margin-top: 1px; }
+.step-tape { --h: 64px; }
+.step-tape .ticks { background-size: 100% calc(var(--h) * 0.4), 100% calc(var(--h) * 0.28), 100% calc(var(--h) * 0.19); }
+.step-tape .nums { top: calc(var(--h) * 0.47); display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); font-family: var(--a5-cond); font-weight: 800; font-size: calc(var(--h) * 0.34); line-height: 1; }
+.step-tape .nums span { width: auto; padding-left: 6px; display: block; }
+.step-tape .nums b { padding: 0 5px; background: var(--a5-orange); font-weight: 800; }
+.faq-layout { display: grid; grid-template-columns: 420px minmax(0, 1fr); column-gap: 64px; align-items: start; }
+.faq-intro { display: flex; flex-direction: column; gap: 14px; }
+.faq-cards { display: flex; flex-direction: column; gap: 12px; }
+.faq-cards details { border-radius: 14px; background: var(--a5-white); border: 1px solid var(--a5-line); }
+.faq-cards summary { list-style: none; cursor: pointer; padding: 20px 24px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 14px; font-weight: 700; font-size: 17px; line-height: 1.4; color: var(--a5-ink); }
+.faq-cards summary::-webkit-details-marker { display: none; }
+.faq-cards summary::after { content: "+"; width: 30px; height: 30px; flex-shrink: 0; border-radius: 999px; background: var(--a5-concrete); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; line-height: 1; }
+.faq-cards details[open] summary::after { content: "\2212"; }
+.faq-answer { padding: 0 24px 22px; font-size: 16px; line-height: 1.6; color: var(--a5-body); }
+.faq-answer a { color: var(--a5-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.faq-answer a:hover { text-decoration-color: var(--a5-orange); }
+.a5-bg-white .faq-cards summary::after { background: var(--a5-concrete); }
+@media (min-width: 900px) { .a5-hero .a5-h1 { text-wrap: wrap; } }
+@media (max-width: 1099px) { .faq-layout { grid-template-columns: minmax(0, 1fr); row-gap: 28px; } }
+@media (max-width: 899px) {
+  .hero-call { display: inline-flex; }
+  .hero-shade::after { display: none; }
+  .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; padding-top: 18px; border-top-color: rgba(245,242,237,0.16); }
+  .hero-stat { gap: 5px; }
+  .hero-stat-num { font-size: 32px; }
+  .hero-stat-label { font-size: 12.5px; line-height: 1.35; }
+  .a5-btn { white-space: normal; text-align: center; line-height: 1.08; padding-block: 8px; }
+  .br-wide { display: none; }
+  .card-title { font-size: 22px; }
+  .step-tag { font-size: 11.5px; }
+  .faq-cards { gap: 10px; }
+  .faq-cards summary { padding: 16px; font-size: 16px; }
+  .faq-answer { padding: 0 16px 18px; font-size: 15px; }
+}
 
-/* === FULL-SCREEN MOBILE MENU FIX === */
-@media (max-width: 1280px) {
-  body:has(.nav-links.open),
-  body:has(.nav-links.show) {
-    overflow: hidden;
-  }
-
-  .navbar:has(.nav-links.open),
-  .navbar:has(.nav-links.show),
-  nav:has(.nav-links.open),
-  nav:has(.nav-links.show) {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    padding: 18px 20px !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    overflow: hidden !important;
-    z-index: 10000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-logo,
-  .navbar:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .nav-logo,
-  nav:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .logo,
-  nav:has(.nav-links.show) .logo {
-    position: fixed !important;
-    top: 22px !important;
-    left: 20px !important;
-    z-index: 10002 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-hamburger,
-  .navbar:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .nav-hamburger,
-  nav:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .mobile-menu,
-  nav:has(.nav-links.show) .mobile-menu {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 10003 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-links.open,
-  .navbar:has(.nav-links.show) .nav-links.show,
-  nav:has(.nav-links.open) .nav-links.open,
-  nav:has(.nav-links.show) .nav-links.show {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 96px 24px 48px !important;
-    overflow-y: auto !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
+/* referral page */
+.ref-hero { --hero-min: 820px; --pos: 56% 50%; --hero-photo-h: 280px; }
+.ref-hero .a5-h1 { font-size: clamp(50px, 5.3vw, 76px); }
+.ref-hero .a5-hero-actions { gap: 14px 28px; }
+.hero-more { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: var(--a5-on-dark); text-decoration: none; }
+.hero-more:hover { text-decoration: underline; text-underline-offset: 4px; }
+.num-row { display: flex; align-items: center; gap: 12px; }
+.big-num { font-family: var(--a5-cond); font-weight: 800; font-size: 64px; line-height: 1; color: var(--a5-ink); }
+.pay-grid { display: grid; grid-template-columns: 540px minmax(0, 1fr); column-gap: 64px; align-items: start; }
+.pay-left { display: flex; flex-direction: column; gap: 28px; }
+.head-text { display: flex; flex-direction: column; gap: 12px; }
+.pay-photo { width: 460px; max-width: 100%; aspect-ratio: 460 / 571; }
+.pay-cards { display: flex; flex-direction: column; gap: 18px; }
+.pay-card { padding: 28px 30px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 10px; }
+.pay-card .card-title { font-size: 28px; }
+.pay-card p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--a5-body); }
+.pay-example { padding: 28px 30px; border-radius: 16px; background: var(--a5-finance); color: var(--a5-finance-ink); display: flex; flex-direction: column; gap: 10px; }
+.pay-example .small-label { color: var(--a5-finance-label); }
+.pay-example .big-num { color: var(--a5-finance-ink); }
+.pay-example p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--a5-finance-body); }
+.pills { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 10px; }
+.pill { padding: 8px 16px; border-radius: 999px; background: var(--a5-white); border: 1px solid #D5DBE0; font-size: 15px; font-weight: 700; color: var(--a5-finance-ink); }
+.stack-grid { display: grid; grid-template-columns: minmax(0, 1fr) 600px; column-gap: 72px; align-items: center; }
+.stack-text { display: flex; flex-direction: column; gap: 14px; }
+.stack-text .a5-p + .a5-p { font-size: 16px; color: var(--a5-muted); }
+.stack-visual { display: flex; flex-direction: column; gap: 14px; }
+.stack-row { padding: 22px 26px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; align-items: center; gap: 20px; }
+.stack-row .a5-icon { width: 52px; height: 52px; }
+.stack-row-text, .stack-total-text { display: flex; flex-direction: column; gap: 6px; }
+.stack-value { font-family: var(--a5-cond); font-weight: 800; font-size: 28px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.stack-divider { display: flex; align-items: center; gap: 14px; padding: 0 12px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; color: var(--a5-muted); }
+.stack-divider::before, .stack-divider::after { content: ""; flex: 1; height: 1px; background: #D9D4CC; }
+.stack-total { padding: 24px 26px; border-radius: 16px; background: var(--a5-white); border: 2px solid var(--a5-ink); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.stack-total-sub { font-size: 15px; line-height: 1.45; color: var(--a5-body); }
+.stack-total-value { flex-shrink: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 60px; line-height: 1; color: var(--a5-ink); }
+.offers-head .a5-head-text { max-width: 1180px; }
+.offer-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.offer-card { padding: 28px 26px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 14px; }
+.offer-body { display: flex; flex-direction: column; gap: 14px; }
+.offer-card .card-title { font-size: 25px; }
+.offer-card p { margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--a5-body); }
+.areas-box { margin-top: 36px; padding: 30px 34px; border-radius: 16px; background: var(--a5-concrete); border: 1px solid var(--a5-line); display: flex; align-items: center; gap: 40px; }
+.areas-box-head { flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; }
+.areas-box .card-title { font-size: 34px; }
+.city-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.city-tag { padding: 9px 18px; border-radius: 999px; background: var(--a5-white); border: 1px solid var(--a5-line); font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--a5-ink); }
+.ref-steps-loop { display: flex; flex-direction: column; gap: 22px; }
+.ref-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.ref-step { padding: 26px 24px 22px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
+.ref-step .card-title { font-size: 27px; }
+.ref-step p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--a5-body); }
+.ref-step .step-tag { align-items: center; }
+.rule-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.rule { padding: 26px 28px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; align-items: flex-start; gap: 16px; }
+.rule svg { flex-shrink: 0; margin-top: 1px; }
+.rule-body { display: flex; flex-direction: column; gap: 8px; }
+.rule .card-title { font-size: 25px; }
+.rule p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--a5-body); }
+.form-head { max-width: 900px; margin: 0 auto 36px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.form-head .a5-p { max-width: none; }
+.ref-form-card { position: relative; width: min(760px, 100%); margin: 0 auto; padding: 36px 36px 34px; border-radius: 20px; background: var(--a5-white); border: 1px solid #E8E4DD; box-shadow: 0 20px 50px rgba(27,26,24,0.08); }
+.referral-form { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.referral-form .form-section-heading { padding-top: 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--a5-muted); }
+.referral-form .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.referral-form input[type="text"], .referral-form input[type="email"], .referral-form input[type="tel"], .referral-form textarea { min-height: 52px; padding: 12px 16px; border: 1px solid #E4E0D9; border-radius: 12px; background: var(--a5-paper); font-size: 16px; }
+.referral-form textarea { min-height: 112px; }
+.referral-form input[name="_gotcha"] { min-height: 0; padding: 0; border: 0; }
+.referral-form input::placeholder, .referral-form textarea::placeholder { color: var(--a5-muted); opacity: 1; }
+.referral-form .form-divider { width: 100%; margin: 6px 0; border: 0; border-top: 1px solid #ECE8E1; }
+.referral-form .btn-primary { margin-top: 6px; width: 100%; min-height: 62px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; border: 0; border-radius: 14px; background: var(--a5-ink); color: #FFFFFF; font-family: var(--a5-cond); font-weight: 800; font-size: 24px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: filter 0.15s ease; }
+.referral-form .btn-primary:hover { filter: brightness(1.25); }
+.referral-form .btn-primary:disabled { opacity: 0.6; cursor: wait; }
+.referral-form p[role="status"]:empty { margin: -14px 0 0 !important; } /* lead-submit.js adds this live region; no gap until it has a message */
+.ref-end { padding-block: 104px; }
+.end-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.ref-end .a5-h2 { font-size: clamp(40px, 4.45vw, 64px); }
+.ref-end .a5-p { font-size: 18px; max-width: 600px; }
+.ref-end .a5-btn { margin-top: 8px; min-height: 62px; font-size: 23px; }
+.end-contacts { margin-top: 10px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 32px; }
+.end-contacts a { display: inline-flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: var(--a5-ink); text-decoration: none; }
+.end-contacts a:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 1099px) {
+  .pay-grid, .stack-grid { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+  .offer-grid, .ref-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .areas-box { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+@media (max-width: 899px) {
+  .ref-hero .a5-h1 { font-size: clamp(40px, 11.8vw, 46px); }
+  .hero-more { align-self: center; padding: 2px 0; font-size: 15px; }
+  .num-row { gap: 10px; }
+  .num-row .a5-num { width: 30px; height: 30px; font-size: 17px; }
+  .big-num { font-size: 52px; }
+  .pay-left { gap: 20px; }
+  .head-text { gap: 8px; }
+  .pay-photo { width: 100%; max-width: 460px; aspect-ratio: 358 / 444; border-radius: 14px; }
+  .pay-cards { gap: 10px; }
+  .pay-card, .pay-example { padding: 20px 18px; border-radius: 14px; gap: 8px; }
+  .pay-card .card-title { font-size: 24px; }
+  .pay-card p, .pay-example p { font-size: 15px; line-height: 1.55; }
+  .pills { margin-top: 4px; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .pill { padding: 8px 14px; font-size: 14px; }
+  .stack-text .a5-p { font-size: 15px; line-height: 1.55; }
+  .stack-text .a5-p + .a5-p { font-size: 14.5px; }
+  .stack-visual { gap: 10px; }
+  .stack-row { padding: 16px; border-radius: 14px; display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; }
+  .stack-row .a5-icon { width: 44px; height: 44px; }
+  .stack-row-text, .stack-total-text { gap: 5px; }
+  .stack-value { font-size: 22px; }
+  .stack-total { padding: 18px 16px; border-radius: 14px; gap: 12px; }
+  .stack-total-sub { font-size: 13.5px; line-height: 1.4; }
+  .stack-total-value { font-size: 44px; }
+  .offers-head .a5-h2 { font-size: 38px; }
+  .offer-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .offer-card { padding: 18px 16px; border-radius: 14px; display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 14px; align-items: start; }
+  .offer-card .a5-icon { width: 48px; height: 48px; }
+  .offer-body { gap: 6px; }
+  .offer-card p { font-size: 14.5px; line-height: 1.55; }
+  .areas-box { margin-top: 20px; padding: 20px 16px; border-radius: 14px; gap: 12px; }
+  .areas-box .card-title { font-size: 28px; }
+  .city-tags { gap: 8px; }
+  .city-tag { padding: 7px 14px; font-size: 14px; }
+  .ref-steps-loop { gap: 20px; }
+  .ref-steps-loop .step-tape { order: -1; --h: 52px; }
+  .ref-steps { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .ref-step { padding: 18px 16px 16px; border-radius: 14px; gap: 8px; }
+  .ref-step .card-title { font-size: 25px; }
+  .ref-step p { font-size: 14.5px; }
+  .ref-step .step-tag { margin-top: 4px; padding-top: 12px; }
+  .rule-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .rule { padding: 18px 16px; border-radius: 14px; gap: 12px; }
+  .rule-body { gap: 6px; }
+  .rule p { font-size: 14.5px; line-height: 1.55; }
+  .form-head { margin-bottom: 20px; align-items: flex-start; gap: 8px; text-align: left; }
+  .ref-form-card { padding: 22px 18px; border-radius: 18px; }
+  .referral-form .form-row { grid-template-columns: minmax(0, 1fr); }
+  .referral-form .btn-primary { min-height: 60px; font-size: 22px; }
+  .ref-end { padding-block: 52px; }
+  .end-inner { gap: 14px; }
+  .ref-end .a5-h2 { font-size: 40px; }
+  .ref-end .a5-p { font-size: 15.5px; line-height: 1.55; }
+  .ref-end .a5-btn { width: 100%; min-height: 58px; font-size: 21px; margin-top: 6px; }
+  .end-contacts { margin-top: 6px; flex-direction: column; gap: 14px; }
+  .end-contacts a { font-size: 16px; }
 }
 </style>
-<script src="/scripts/lead-submit.js"></script>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo">
- <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
- </a>
-<ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
- <span></span><span></span><span></span>
- </button>
-</nav>
-
-<section class="hero">
- <div class="hero-grid-lines"></div>
- <div class="hero-inner">
- <div class="hero-content">
- <div class="hero-badge reveal stagger-1">Partner Referral Program</div>
- <h1 class="reveal stagger-2">Refer a Client.<br>Earn <span class="highlight">1.5% Commission</span><br>on Every Build.</h1>
- <p class="hero-subtitle reveal stagger-3">No minimum project size. Open to real estate agents, mortgage brokers, and anyone who sends a client our way. Two clean payments tied to milestones you can track.</p>
- <div class="hero-actions reveal stagger-4">
- <a href="#referral-form" class="btn-primary">Submit a Referral <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
- <a href="#how-you-get-paid" class="btn-secondary">See How It Works <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
- </div>
- <div class="hero-stats reveal stagger-5">
- <div><div class="hero-stat-number">1.5%</div><div class="hero-stat-label">Referral Commission</div></div>
- <div><div class="hero-stat-number">$0</div><div class="hero-stat-label">Minimum Project Size</div></div>
- <div><div class="hero-stat-number">24h</div><div class="hero-stat-label">Client Follow Up</div></div>
- </div>
- </div>
- <div class="hero-image reveal-right stagger-3">
- <img src="/referral-program/referral-hero.webp" width="1600" height="893" alt="Real estate agent shaking hands with happy homeowners in front of a custom built Florida home" loading="eager">
- </div>
- </div>
+<main id="main">
+<section class="a5-hero hero-shade ref-hero" aria-labelledby="ref-title">
+  <div class="a5-hero-photo"><img src="/images/projects/completed-modern-exterior-hero.webp" alt="Modern two story stucco home with a stone accent and a paver driveway in Florida" width="1050" height="1400" fetchpriority="high"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">Partner Referral Program</div>
+      <h1 class="a5-h1" id="ref-title">Refer a Client. Earn <span class="a5-accent">1.5% Commission</span> on Every Build.</h1>
+      <p class="a5-hero-sub">No minimum project size. Open to real estate agents, mortgage brokers, and anyone who sends a client our way. Two clean payments tied to milestones you can track.</p>
+      <div class="a5-hero-actions">
+        <a class="a5-btn a5-btn-hero" href="#referral-form">Submit a Referral <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        <a class="a5-btn a5-btn-call hero-call" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a>
+        <a class="hero-more" href="#how-you-get-paid">See how it works <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a>
+      </div>
+    </div>
+    <div class="hero-stats"><div class="hero-stat"><span class="hero-stat-num">1.5%</span><span class="hero-stat-label">Referral Commission</span></div><div class="hero-stat"><span class="hero-stat-num">$0</span><span class="hero-stat-label">Minimum Project Size</span></div><div class="hero-stat"><span class="hero-stat-num">24h</span><span class="hero-stat-label">Client Follow Up</span></div></div>
+  </div>
 </section>
 
-<section class="pay-section" id="how-you-get-paid">
- <div class="pay-grid">
- <div class="pay-left">
- <div class="section-label reveal">How You Get Paid</div>
- <h2 class="section-heading reveal stagger-1">Two Payments.<br>Two Clear Milestones.</h2>
- <p style="font-size:1.05rem;line-height:1.7;color:var(--text-muted);margin-bottom:40px;max-width:480px;" class="reveal stagger-2">Your commission is split into two equal halves, each tied to a verifiable project milestone. No ambiguity. No chasing anyone down.</p>
- <img src="/referral-program/referral-payment.webp" width="900" height="1117" alt="Real estate agent receiving referral payment notification on phone with financial dashboard on laptop" class="reveal stagger-3" loading="lazy">
- </div>
- <div>
- <div class="pay-milestone-cards">
- <div class="pay-card reveal-left stagger-1">
- <div class="card-line"></div>
- <div class="pay-card-step">Payment 1</div>
- <div class="pay-card-pct">0.75%</div>
- <h3>At Construction Loan Approval</h3>
- <p>When your referred client's construction loan is approved by the lender, your first payment is triggered. This typically happens within a few weeks of the contract signing.</p>
- </div>
- <div class="pay-card reveal-left stagger-2">
- <div class="card-line"></div>
- <div class="pay-card-step">Payment 2</div>
- <div class="pay-card-pct">0.75%</div>
- <h3>At Certificate of Occupancy</h3>
- <p>Your second payment is triggered when the build is complete and the client receives their certificate of occupancy, the final milestone before move in.</p>
- </div>
- <div class="pay-example reveal-left stagger-3">
- <div class="pay-example-label">Example Calculation</div>
- <div class="pay-example-total">$5,250</div>
- <div class="pay-example-subtitle">Total earned on a $350,000 construction contract</div>
- <div class="pay-example-breakdown">
- <div class="pay-example-pill">$2,625 at loan approval</div>
- <div class="pay-example-pill">$2,625 at closing</div>
- </div>
- </div>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" id="how-you-get-paid" aria-labelledby="pay-title">
+  <div class="a5-wrap pay-grid">
+    <div class="pay-left">
+      <div class="head-text">
+        <div class="a5-label">How You Get Paid</div>
+        <h2 class="a5-h2" id="pay-title">Two Payments. <br class="br-wide">Two Clear <span class="a5-hl">Milestones</span>.</h2>
+        <p class="a5-p">Your commission is split into two equal halves, each tied to a verifiable project milestone. No ambiguity. No chasing anyone down.</p>
+      </div>
+      <div class="a5-photo pay-photo"><img src="/images/projects/jobsite/strip/aerial.webp" alt="Aerial view of a BuilderK home under construction in Florida, roof trusses set, beside a lake" width="900" height="1200" loading="lazy" decoding="async"></div>
+    </div>
+    <div class="pay-cards">
+      <div class="pay-card"><div class="num-row"><span class="a5-num" aria-hidden="true">1</span><span class="small-label">Payment 1</span></div><div class="big-num">0.75%</div><h3 class="card-title">At Construction Loan Approval</h3><p>When your referred client's construction loan is approved by the lender, your first payment is triggered. This typically happens within a few weeks of the contract signing.</p></div><div class="pay-card"><div class="num-row"><span class="a5-num a5-num-accent" aria-hidden="true">2</span><span class="small-label">Payment 2</span></div><div class="big-num">0.75%</div><h3 class="card-title">At Certificate of Occupancy</h3><p>Your second payment is triggered when the build is complete and the client receives their certificate of occupancy, the final milestone before move in.</p></div>
+      <div class="pay-example"><span class="small-label">Example Calculation</span><div class="big-num">$5,250</div><p>Total earned on a $350,000 construction contract</p><div class="pills"><span class="pill">$2,625 at loan approval</span><span class="pill">$2,625 at closing</span></div></div>
+    </div>
+  </div>
 </section>
 
-<div style="height:60px;background:linear-gradient(var(--light-bg),var(--dark))"></div>
-
-<section class="stack-section" id="stack-commission">
- <div class="stack-inner">
- <div class="stack-text">
- <div class="section-label reveal">For Real Estate Agents</div>
- <h2 class="section-heading on-dark reveal stagger-1">Stack Your Commission<br>on the Same Deal.</h2>
- <p style="font-size:1.05rem;line-height:1.7;color:rgba(255,255,255,.55);margin-bottom:32px;max-width:460px;" class="reveal stagger-2">If you're a real estate agent, there's nothing stopping you from representing the buyer on the lot purchase <em>and</em> earning the 1.5% referral fee on the construction contract. They're two separate transactions.</p>
- <p style="font-size:1rem;line-height:1.7;color:rgba(255,255,255,.4);max-width:440px;" class="reveal stagger-3">The referral commission is paid by BuilderK on the construction contract value, completely independent of any real estate commission you earn on the land sale.</p>
- </div>
- <div class="stack-visual reveal-right">
- <div class="stack-row stagger-1">
- <div class="stack-icon"><i data-lucide="house" aria-hidden="true"></i></div>
- <div>
- <div class="stack-row-label">Your Real Estate Commission</div>
- <div class="stack-row-value">3% on the <span class="orange">lot purchase</span></div>
- </div>
- </div>
- <div class="stack-divider">PLUS</div>
- <div class="stack-row stagger-2">
- <div class="stack-icon"><i data-lucide="hard-hat" aria-hidden="true"></i></div>
- <div>
- <div class="stack-row-label">BuilderK Referral Fee</div>
- <div class="stack-row-value">1.5% on the <span class="orange">construction contract</span></div>
- </div>
- </div>
- <div class="stack-divider">EQUALS</div>
- <div class="stack-total">
- <div>
- <div class="stack-row-label" style="color:rgba(255,255,255,.45)">Your Total Earnings</div>
- <div style="font-family:var(--font-display);font-weight:500;font-size:.85rem;color:rgba(255,255,255,.35);margin-top:2px">Two separate commissions, one transaction</div>
- </div>
- <div class="stack-total-value">4.5%+</div>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete" id="stack-commission" aria-labelledby="stack-title">
+  <div class="a5-wrap stack-grid">
+    <div class="stack-text">
+      <div class="a5-label">For Real Estate Agents</div>
+      <h2 class="a5-h2" id="stack-title">Stack Your Commission <br class="br-wide">on the <span class="a5-hl">Same Deal</span>.</h2>
+      <p class="a5-p">If you're a real estate agent, there's nothing stopping you from representing the buyer on the lot purchase <em>and</em> earning the 1.5% referral fee on the construction contract. They're two separate transactions.</p>
+      <p class="a5-p">The referral commission is paid by BuilderK on the construction contract value, completely independent of any real estate commission you earn on the land sale.</p>
+    </div>
+    <div class="stack-visual">
+      <div class="stack-row"><svg width="52" height="52" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2-a1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2-a1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2-a1)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2-a1)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg><div class="stack-row-text"><span class="small-label">Your Real Estate Commission</span><span class="stack-value">3% on the lot purchase</span></div></div>
+      <div class="stack-divider">PLUS</div>
+      <div class="stack-row"><svg width="52" height="52" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="hhk5-a2" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#FFC266"></stop><stop offset="0.55" stop-color="#FF8A1F"></stop><stop offset="1" stop-color="#D45A00"></stop></radialGradient><linearGradient id="hbk5-a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9E3D"></stop><stop offset="1" stop-color="#C95200"></stop></linearGradient></defs><ellipse cx="32" cy="58" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M10 44 C10 24 20 12 32 12 C44 12 54 24 54 44 Z" fill="url(#hhk5-a2)" stroke="#8A3A00" stroke-width="1.6" stroke-linejoin="round"></path><path d="M28 13 C27 22 27 34 28 44 H36 C37 34 37 22 36 13 C34 12.4 30 12.4 28 13 Z" fill="#FF9E3D" stroke="#8A3A00" stroke-width="1.3" stroke-linejoin="round"></path><path d="M17 34 C18 25 22 19 27 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.6"></path><rect x="4" y="43" width="56" height="8" rx="4" fill="url(#hbk5-a2)" stroke="#8A3A00" stroke-width="1.6"></rect></svg><div class="stack-row-text"><span class="small-label">BuilderK Referral Fee</span><span class="stack-value">1.5% on the construction contract</span></div></div>
+      <div class="stack-divider">EQUALS</div>
+      <div class="stack-total"><div class="stack-total-text"><span class="small-label">Your Total Earnings</span><span class="stack-total-sub">Two separate commissions, one transaction</span></div><div class="stack-total-value"><span class="a5-hl">4.5%+</span></div></div>
+    </div>
+  </div>
 </section>
 
-<div style="height:60px;background:linear-gradient(var(--dark),#fff)"></div>
-
-<section class="offers-section" id="what-we-offer">
- <div class="offers-inner">
- <div class="offers-header">
- <div class="section-label reveal">What Your Client Gets</div>
- <h2 class="section-heading reveal stagger-1">Everything Under One Roof.<br>Backed by 25+ Years of Combined Experience.</h2>
- <p style="font-size:1.05rem;line-height:1.7;color:var(--text-muted)" class="reveal stagger-2">When you refer a client to BuilderK, you are connecting them with a licensed GC who coordinates design, permitting, construction, and the project documents independent lenders request. The lender sets all financing terms.</p>
- </div>
- <div class="offers-grid">
- <div class="offer-card reveal stagger-1"><div class="card-line"></div><div class="offer-icon"><i data-lucide="landmark" aria-hidden="true"></i></div><h3>Licensed General Contractor</h3><p>Fully licensed and insured GC in Florida. Every project is compliant, permitted, and inspected.</p></div>
- <div class="offer-card reveal stagger-2"><div class="card-line"></div><div class="offer-icon"><i data-lucide="house" aria-hidden="true"></i></div><h3>25+ Years of Experience</h3><p>Our leadership team brings 25+ years of combined construction experience.</p></div>
- <div class="offer-card reveal stagger-3"><div class="card-line"></div><div class="offer-icon"><i data-lucide="badge-dollar-sign" aria-hidden="true"></i></div><h3>Construction Loan Coordination</h3><p>Lot equity may reduce cash required, subject to appraisal, borrower qualifications, and lender terms. Single close availability and conversion conditions vary by program.</p></div>
- <div class="offer-card reveal stagger-4"><div class="card-line"></div><div class="offer-icon"><i data-lucide="key-round" aria-hidden="true"></i></div><h3>Design to Move In</h3><p>BuilderK coordinates plans, permits, construction, and the project documents independent lenders request from the first conversation through closeout.</p></div>
- </div>
- <div class="offer-areas reveal">
- <div style="position:relative;z-index:2;flex-shrink:0"><div class="offer-areas-label">Areas We Serve</div><h3>Building Across Florida</h3></div>
- <div class="offer-areas-cities">
- <span class="city-tag">Orlando</span><span class="city-tag">Tampa</span><span class="city-tag">Space Coast</span><span class="city-tag">Miami</span><span class="city-tag">Cape Coral</span><span class="city-tag">Fort Myers</span><span class="city-tag">Jacksonville</span><span class="city-tag">Ocala</span><span class="city-tag">+ All of Florida</span>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" id="what-we-offer" aria-labelledby="offers-title">
+  <div class="a5-wrap">
+    <div class="a5-head offers-head">
+      <div class="a5-head-text">
+        <div class="a5-label">What Your Client Gets</div>
+        <h2 class="a5-h2" id="offers-title">Everything Under <span class="a5-hl">One Roof</span>. <br class="br-wide">Backed by 25+ Years of Combined Experience.</h2>
+        <p class="a5-p">When you refer a client to BuilderK, you are connecting them with a licensed GC who coordinates design, permitting, construction, and the project documents independent lenders request. The lender sets all financing terms.</p>
+      </div>
+    </div>
+    <div class="offer-grid"><article class="offer-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="pPk4-a3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#E9EDF2"></stop></linearGradient><radialGradient id="pSk4-a3" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#5EE08A"></stop><stop offset="1" stop-color="#1F9D4C"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M14 6 H40 L50 16 V54 Q50 56 48 56 H14 Q12 56 12 54 V8 Q12 6 14 6 Z" fill="url(#pPk4-a3)" stroke="#6B7785" stroke-width="1.5"></path><path d="M40 6 V14 Q40 16 42 16 H50" fill="#D5DCE4" stroke="#6B7785" stroke-width="1.5"></path><path d="M18 22 H42 M18 28 H42 M18 34 H34" stroke="#A7B2BE" stroke-width="2.2" stroke-linecap="round"></path><circle cx="42" cy="44" r="11" fill="url(#pSk4-a3)" stroke="#146B33" stroke-width="1.5"></circle><path d="M37 44 L41 48 L48 40" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg><div class="offer-body"><h3 class="card-title">Licensed General Contractor</h3><p>Fully licensed and insured GC in Florida. Every project is compliant, permitted, and inspected.</p></div></article><article class="offer-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2-a4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2-a4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2-a4)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2-a4)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg><div class="offer-body"><h3 class="card-title">25+ Years of Experience</h3><p>Our leadership team brings 25+ years of combined construction experience.</p></div></article><article class="offer-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="mBk3-a5" cx="0.38" cy="0.35" r="0.75"><stop offset="0" stop-color="#F7DA8E"></stop><stop offset="0.6" stop-color="#E2B25A"></stop><stop offset="1" stop-color="#BF8733"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M32 22 C19 23 10 34 11 45 C12 54 20 58 32 58 C44 58 52 54 53 45 C54 34 45 23 32 22 Z" fill="url(#mBk3-a5)" stroke="#8A5A1B" stroke-width="1.6" stroke-linejoin="round"></path><path d="M23 9 C26 12 38 12 41 9 C42 13 39 18 35 20 L29 20 C25 18 22 13 23 9 Z" fill="#E7BD66" stroke="#8A5A1B" stroke-width="1.5" stroke-linejoin="round"></path><rect x="25" y="18.5" width="14" height="4.5" rx="2.2" fill="#7A4A12"></rect><path d="M17 36 C18 30 22 27 26 26" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5" fill="none"></path><text x="32" y="49" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-weight="700" font-size="20" fill="#1F7A3A">$</text></svg><div class="offer-body"><h3 class="card-title">Construction Loan Coordination</h3><p>Lot equity may reduce cash required, subject to appraisal, borrower qualifications, and lender terms. Single close availability and conversion conditions vary by program.</p></div></article><article class="offer-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="bpSk1-a6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D8BFD"></stop><stop offset="1" stop-color="#1F5FD1"></stop></linearGradient><linearGradient id="bpRk1-a6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC0FF"></stop><stop offset="0.5" stop-color="#4A92F7"></stop><stop offset="1" stop-color="#2566D4"></stop></linearGradient><linearGradient id="bpPk1-a6" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFD24D"></stop><stop offset="1" stop-color="#F5A524"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="8" y="12" width="48" height="42" rx="4" fill="url(#bpSk1-a6)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M14 18 V50 M20 18 V50 M26 18 V50 M32 18 V50 M38 18 V50 M44 18 V50 M50 18 V50 M12 22 H54 M12 28 H54 M12 34 H54 M12 40 H54 M12 46 H54" stroke="#FFFFFF" stroke-width="0.6" opacity="0.22"></path><path d="M15 21 H49 V47 H15 Z M15 35 H29 M29 21 V41 M38 35 H49" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"></path><path d="M29 41 A6 6 0 0 0 35 47" fill="none" stroke="#FFFFFF" stroke-width="1.4"></path><rect x="5" y="7" width="54" height="9" rx="4.5" fill="url(#bpRk1-a6)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M10 9.5 H54" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.6"></path><g transform="rotate(-38 46 46)"><rect x="34" y="42" width="22" height="7" rx="1.5" fill="url(#bpPk1-a6)" stroke="#8A5A00" stroke-width="1"></rect><path d="M56 42 L63 45.5 L56 49 Z" fill="#F6D7A7" stroke="#8A5A00" stroke-width="1"></path><path d="M60.5 44.3 L63 45.5 L60.5 46.7 Z" fill="#374151"></path><rect x="30" y="42" width="4" height="7" rx="1" fill="#F5A3C7" stroke="#8A5A00" stroke-width="1"></rect></g></svg><div class="offer-body"><h3 class="card-title">Design to Move In</h3><p>BuilderK coordinates plans, permits, construction, and the project documents independent lenders request from the first conversation through closeout.</p></div></article></div>
+    <div class="areas-box">
+      <div class="areas-box-head">
+        <div class="a5-label">Areas We Serve</div>
+        <h3 class="card-title">Building Across Florida</h3>
+      </div>
+      <ul class="city-tags"><li class="city-tag">Orlando</li><li class="city-tag">Tampa</li><li class="city-tag">Space Coast</li><li class="city-tag">Miami</li><li class="city-tag">Cape Coral</li><li class="city-tag">Fort Myers</li><li class="city-tag">Jacksonville</li><li class="city-tag">Ocala</li><li class="city-tag">+ All of Florida</li></ul>
+    </div>
+  </div>
 </section>
 
-<section class="process-section" id="referral-process">
- <div class="process-inner">
- <div class="process-header">
- <div class="section-label reveal">The Referral Process</div>
- <h2 class="section-heading reveal stagger-1">Four Steps.<br>You're Locked In.</h2>
- <p style="font-size:1.05rem;line-height:1.7;color:var(--text-muted)" class="reveal stagger-2">Here is what happens from the referral submission through payment.</p>
- </div>
- <div class="process-cards">
- <div class="process-card reveal stagger-1"><div class="process-card-num">01</div><div class="process-card-icon"><i data-lucide="clipboard-list" aria-hidden="true"></i></div><div class="process-card-step">Step 01</div><h3>Submit the Form</h3><p>Fill out the referral form on this page with your info and your client's contact details. Takes less than two minutes.</p><div class="process-card-footer"><i data-lucide="clock-3" aria-hidden="true"></i> TAKES 2 MINUTES</div></div>
- <div class="process-card reveal stagger-2"><div class="process-card-num">02</div><div class="process-card-icon"><i data-lucide="phone" aria-hidden="true"></i></div><div class="process-card-step">Step 02</div><h3>We Contact the Client</h3><p>BuilderK reaches out to your referred client within 1 business day to schedule a consultation. You'll be notified when contact is made.</p><div class="process-card-footer"><i data-lucide="clock-3" aria-hidden="true"></i> WITHIN 1 BUSINESS DAY</div></div>
- <div class="process-card reveal stagger-3"><div class="process-card-num">03</div><div class="process-card-icon"><i data-lucide="file-pen-line" aria-hidden="true"></i></div><div class="process-card-step">Step 03</div><h3>Contract Signed</h3><p>When the client signs a construction contract with BuilderK, you're officially locked in as the referring partner on that project.</p><div class="process-card-footer"><i data-lucide="clock-3" aria-hidden="true"></i> YOU'RE LOCKED IN</div></div>
- <div class="process-card accent reveal stagger-4"><div class="process-card-num">04</div><div class="process-card-icon"><i data-lucide="badge-dollar-sign" aria-hidden="true"></i></div><div class="process-card-step">Step 04</div><h3>You Get Paid</h3><p>0.75% when the construction loan is approved. Another 0.75% at certificate of occupancy. Clear payments tied to milestones.</p><div class="process-card-footer"><i data-lucide="clock-3" aria-hidden="true"></i> TWO CLEAR PAYMENTS</div></div>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete" id="referral-process" aria-labelledby="process-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">The Referral Process</div>
+        <h2 class="a5-h2" id="process-title">Four Steps. <br class="br-wide">You're <span class="a5-hl">Locked In</span>.</h2>
+        <p class="a5-p">Here is what happens from the referral submission through payment.</p>
+      </div>
+    </div>
+    <div class="ref-steps-loop" data-a5-loop>
+      <ol class="ref-steps"><li class="ref-step a5-step-a"><div class="num-row"><span class="a5-num" aria-hidden="true">1</span><span class="small-label">Step 01</span></div><h3 class="card-title">Submit the Form</h3><p>Fill out the referral form on this page with your info and your client's contact details. Takes less than two minutes.</p><div class="step-tag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg><span>TAKES 2 MINUTES</span></div></li><li class="ref-step a5-step-b"><div class="num-row"><span class="a5-num" aria-hidden="true">2</span><span class="small-label">Step 02</span></div><h3 class="card-title">We Contact the Client</h3><p>BuilderK reaches out to your referred client within 1 business day to schedule a consultation. You'll be notified when contact is made.</p><div class="step-tag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg><span>WITHIN 1 BUSINESS DAY</span></div></li><li class="ref-step a5-step-c"><div class="num-row"><span class="a5-num" aria-hidden="true">3</span><span class="small-label">Step 03</span></div><h3 class="card-title">Contract Signed</h3><p>When the client signs a construction contract with BuilderK, you're officially locked in as the referring partner on that project.</p><div class="step-tag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg><span>YOU'RE LOCKED IN</span></div></li><li class="ref-step a5-step-d"><div class="num-row"><span class="a5-num a5-num-accent" aria-hidden="true">4</span><span class="small-label">Step 04</span></div><h3 class="card-title">You Get Paid</h3><p>0.75% when the construction loan is approved. Another 0.75% at certificate of occupancy. Clear payments tied to milestones.</p><div class="step-tag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg><span>TWO CLEAR PAYMENTS</span></div></li></ol>
+      <div class="a5-tapebar a5-tape-x step-tape" aria-hidden="true"><i class="hook"></i><i class="ticks"></i><div class="nums" style="--n:4"><span>1</span><span>2</span><span>3</span><span><b>4</b></span></div></div>
+    </div>
+  </div>
 </section>
 
-<section class="rules-section" id="referral-rules">
- <div class="rules-inner">
- <div class="rules-header">
- <div class="section-label reveal" style="color:var(--orange)">Referral Guidelines</div>
- <h2 class="section-heading on-dark reveal stagger-1">What Makes a Valid Referral</h2>
- <p style="font-size:1.05rem;line-height:1.7;color:rgba(255,255,255,.45);max-width:520px;margin:0 auto" class="reveal stagger-2">The rules below explain how the referral is tracked and when a commission is earned.</p>
- </div>
- <div class="rules-grid">
- <div class="rule-item reveal stagger-1"><div class="rule-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>New Client Only</h4><p>The client must not already be in BuilderK's pipeline. If they've had prior contact with us, the referral won't be valid.</p></div></div>
- <div class="rule-item reveal stagger-2"><div class="rule-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>Submit Before First Consultation</h4><p>Your referral must be submitted before your client has their first consultation with BuilderK. First come, first served.</p></div></div>
- <div class="rule-item reveal stagger-3"><div class="rule-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>First Referrer Wins</h4><p>If the same client is submitted by more than one person, the first verified submission gets credit, no exceptions.</p></div></div>
- <div class="rule-item reveal stagger-4"><div class="rule-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>Valid for 12 Months</h4><p>Your referral stays active for 12 months from submission date. If the client signs a contract within that window, you're paid.</p></div></div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" id="referral-rules" aria-labelledby="rules-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Referral Guidelines</div>
+        <h2 class="a5-h2" id="rules-title">What Makes a <span class="a5-hl">Valid</span> Referral</h2>
+        <p class="a5-p">The rules below explain how the referral is tracked and when a commission is earned.</p>
+      </div>
+    </div>
+    <div class="rule-grid"><div class="rule"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><div class="rule-body"><h3 class="card-title">New Client Only</h3><p>The client must not already be in BuilderK's pipeline. If they've had prior contact with us, the referral won't be valid.</p></div></div><div class="rule"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><div class="rule-body"><h3 class="card-title">Submit Before First Consultation</h3><p>Your referral must be submitted before your client has their first consultation with BuilderK. First come, first served.</p></div></div><div class="rule"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><div class="rule-body"><h3 class="card-title">First Referrer Wins</h3><p>If the same client is submitted by more than one person, the first verified submission gets credit, no exceptions.</p></div></div><div class="rule"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><div class="rule-body"><h3 class="card-title">Valid for 12 Months</h3><p>Your referral stays active for 12 months from submission date. If the client signs a contract within that window, you're paid.</p></div></div></div>
+  </div>
 </section>
 
-<div style="height:60px;background:linear-gradient(var(--dark),#fff)"></div>
-
-<section class="form-section" id="referral-form">
- <div class="form-inner reveal-scale">
- <div class="section-label">Submit a Referral</div>
- <h2>Lock In Your Commission.<br>Start Here.</h2>
- <p>Fill out the form below. We'll contact your client within 1 business day and confirm your referral by email.</p>
- <form class="referral-form" action="https://formspree.io/f/mreybpyl" method="POST">
+<section class="a5-section a5-bg-concrete" id="referral-form" aria-labelledby="form-title">
+  <div class="a5-wrap">
+    <div class="form-head">
+      <div class="a5-label">Submit a Referral</div>
+      <h2 class="a5-h2" id="form-title">Lock In Your Commission. <br class="br-wide"><span class="a5-hl">Start Here</span>.</h2>
+      <p class="a5-p">Fill out the form below. We'll contact your client within 1 business day and confirm your referral by email.</p>
+    </div>
+    <div class="ref-form-card">
+<form class="referral-form a5-form" action="https://formspree.io/f/mreybpyl" method="POST">
  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
  <input type="hidden" name="_subject" value="New Referral Submission, BuilderK Referral Program">
  <div class="form-section-heading">Your Information</div>
@@ -519,106 +409,99 @@ body{font-family:var(--font-body);color:var(--text-dark);background:var(--light-
  <textarea placeholder="Notes about the project, location, lot status, budget, timeline, anything helpful (optional)" name="project_notes"></textarea>
  <button type="submit" class="btn-primary">Submit Referral <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
  </form>
- </div>
+    </div>
+  </div>
 </section>
 
-<section class="faq-section" id="faq">
- <div class="faq-inner">
- <div class="faq-header">
- <div class="section-label reveal">FAQ</div>
- <h2 class="section-heading reveal stagger-1">Common Questions</h2>
- <p style="font-size:1.05rem;line-height:1.7;color:var(--text-muted)" class="reveal stagger-2">Everything you need to know before submitting your first referral.</p>
- </div>
- <div class="faq-list reveal">
- <div class="faq-item"><div class="faq-question"><h4>How long is my referral valid?</h4><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-answer"><p>12 months from the date you submit it. If your client signs a construction contract with BuilderK within that window, you earn the commission.</p></div></div>
- <div class="faq-item"><div class="faq-question"><h4>Can I refer multiple clients?</h4><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-answer"><p>Absolutely. There's no cap on how many clients you can refer. Each referral is tracked separately and each one qualifies for its own 1.5% commission.</p></div></div>
- <div class="faq-item"><div class="faq-question"><h4>Do I need to be a licensed real estate agent to participate?</h4><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-answer"><p>No. Anyone can refer a client and earn the commission: real estate agents, mortgage brokers, friends, family, or anyone else who connects us with a client who builds with BuilderK.</p></div></div>
- <div class="faq-item"><div class="faq-question"><h4>Can I be the buyer's agent AND earn the referral fee?</h4><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-answer"><p>Yes. Your normal real estate commission on the lot purchase is a separate transaction from the 1.5% BuilderK referral fee. Both are yours, they don't offset each other in any way.</p></div></div>
- <div class="faq-item"><div class="faq-question"><h4>How do I track my referral status?</h4><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-answer"><p>We'll keep you updated by email at each milestone. You can also reach out anytime at <a href="mailto:info@builderk.com" style="color:var(--orange)">info@builderk.com</a> or <a href="tel:2392304868" style="color:var(--orange)">(239) 230 4868</a>.</p></div></div>
- <div class="faq-item"><div class="faq-question"><h4>When exactly do I get paid?</h4><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-answer"><p>Your first payment (0.75%) is issued when the client's construction loan is approved by the lender. Your second payment (0.75%) is issued at certificate of occupancy, the moment the build is complete and ready for the client to move in.</p></div></div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" id="faq" aria-labelledby="faq-title">
+  <div class="a5-wrap faq-layout">
+    <div class="faq-intro">
+      <div class="a5-label">FAQ</div>
+      <h2 class="a5-h2" id="faq-title">Common <span class="a5-hl">Questions</span></h2>
+      <p class="a5-p">Everything you need to know before submitting your first referral.</p>
+    </div>
+    <div class="faq-cards">
+      <details open><summary>How long is my referral valid?</summary><div class="faq-answer">12 months from the date you submit it. If your client signs a construction contract with BuilderK within that window, you earn the commission.</div></details>
+      <details><summary>Can I refer multiple clients?</summary><div class="faq-answer">Absolutely. There's no cap on how many clients you can refer. Each referral is tracked separately and each one qualifies for its own 1.5% commission.</div></details>
+      <details><summary>Do I need to be a licensed real estate agent to participate?</summary><div class="faq-answer">No. Anyone can refer a client and earn the commission: real estate agents, mortgage brokers, friends, family, or anyone else who connects us with a client who builds with BuilderK.</div></details>
+      <details><summary>Can I be the buyer's agent AND earn the referral fee?</summary><div class="faq-answer">Yes. Your normal real estate commission on the lot purchase is a separate transaction from the 1.5% BuilderK referral fee. Both are yours, they don't offset each other in any way.</div></details>
+      <details><summary>How do I track my referral status?</summary><div class="faq-answer">We'll keep you updated by email at each milestone. You can also reach out anytime at <a href="mailto:info@builderk.com">info@builderk.com</a> or <a href="tel:2392304868">(239) 230 4868</a>.</div></details>
+      <details><summary>When exactly do I get paid?</summary><div class="faq-answer">Your first payment (0.75%) is issued when the client's construction loan is approved by the lender. Your second payment (0.75%) is issued at certificate of occupancy, the moment the build is complete and ready for the client to move in.</div></details>
+    </div>
+  </div>
 </section>
 
-<section class="footer-cta-section">
- <div class="footer-cta-inner reveal-scale">
- <div class="section-label" style="text-align:center">Ready to Partner?</div>
- <h2>Send Us Your First Referral<br>and <span>Start Earning Today.</span></h2>
- <p>Submit the form above or reach out directly. We respond fast and make the process simple.</p>
- <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
- <a href="#referral-form" class="btn-primary">Submit a Referral <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
- </div>
- <div class="footer-cta-contacts">
- <a href="tel:2392304868" class="contact-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 013 1.18 2 2 0 015 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L9.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>(239) 230 4868</a>
- <a href="mailto:info@builderk.com" class="contact-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@builderk.com</a>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete ref-end" aria-labelledby="end-title">
+  <div class="a5-wrap end-inner">
+    <div class="a5-label">Ready to Partner?</div>
+    <h2 class="a5-h2" id="end-title">Send Us Your First Referral <br class="br-wide">and <span class="a5-hl">Start Earning Today</span>.</h2>
+    <p class="a5-p">Submit the form above or reach out directly. We respond fast and make the process simple.</p>
+    <a class="a5-btn a5-btn-dark" href="#referral-form">Submit a Referral <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+    <div class="end-contacts">
+      <a href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>(239) 230 4868</a>
+      <a href="mailto:info@builderk.com"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@builderk.com</a>
+    </div>
+  </div>
 </section>
+</main>
 
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand">
- <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
- <p>We build custom homes across Florida, starting with your lot and your goals.</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/about">About Us</a>
- <a href="/process">How It Works</a>
- <a href="/construction">Construction Gallery</a>
- <a href="/interior-gallery">Interior Gallery</a>
- <a href="/floor-plans">Floor Plans</a>
- <a href="/blog">Blog</a>
- </div>
- <div class="footer-col">
- <h4>Services</h4>
- <a href="/">Custom Homes</a>
- <a href="/financing">Financing</a>
- <a href="/floor-plans">Floor Plans</a>
- <a href="/#services">Construction Management</a>
- <a href="/calculator">Pricing Calculator</a>
- <a href="/interiors">Interior Selections</a>
- <a href="/referral-program/">Referral Program</a>
- </div>
- <div class="footer-col">
- <h4>Areas We Serve</h4>
- <a href="/orlando">Orlando, FL</a>
- <a href="/tampa">Tampa, FL</a>
- <a href="/melbourne">Space Coast, FL</a>
- <a href="/miami">Miami, FL</a>
- <a href="/cape-coral">Cape Coral, FL</a>
- <a href="/fort-myers">Fort Myers, FL</a>
- <a href="/jacksonville">Jacksonville, FL</a>
- <a href="/ocala">Ocala, FL</a>
- <a href="/service-areas">All Service Areas</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:2392304868">(239) 230 4868</a>
- <a href="mailto:info@builderk.com">info@builderk.com</a>
- <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
- </div>
- </div>
- <div class="footer-bottom">
- <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
- <span><a href="/privacy">Privacy Policy</a> &bull; <a href="/terms">Terms &amp; Conditions</a></span>
- </div>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
 <script>
-(function(){
-var obs=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.05});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(e){obs.observe(e)});
-document.querySelectorAll('.hero .reveal,.hero .reveal-left,.hero .reveal-right,.hero .reveal-scale').forEach(function(e){e.classList.add('visible')});
-var nb=document.getElementById('navbar');
-window.addEventListener('scroll',function(){nb.classList.toggle('scrolled',window.pageYOffset>60)},{passive:true});
-document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
-var hb=document.getElementById('hamburger'),nl=document.querySelector('.nav-links');
-if(hb&&nl){hb.addEventListener('click',function(){nl.classList.toggle('open');hb.classList.toggle('active')});nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.classList.remove('open');hb.classList.remove('active')})});document.addEventListener('keydown',function(e){if(e.key==='Escape'){nl.classList.remove('open');hb.classList.remove('active')}})}
-document.querySelectorAll('.faq-question').forEach(function(q){q.addEventListener('click',function(){var i=this.closest('.faq-item'),o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(x){x.classList.remove('open')});if(!o)i.classList.add('open')})});
-})();
 document.addEventListener('DOMContentLoaded',function(){window.BuilderKLeadSubmit.bind(document.querySelector('.referral-form'),'referral');});
 </script>
 
@@ -629,22 +512,6 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 <script>
 !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};ttq.load('D6P0MRRC77UBOQFNQ5UG');ttq.page()}(window,document,'ttq');
 </script>
-
-
-<script>
-// Click-to-call GA4 event tracking
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (typeof gtag === 'function') {
-        gtag('event', 'phone_click', { 'page_path': location.pathname });
-      }
-    });
-  });
-});
-</script>
-<script src="/scripts/lucide.min.js"></script>
-<script src="/scripts/site-icons.js"></script>
 <script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>
