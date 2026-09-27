@@ -99,7 +99,9 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
 .home-hero-call { margin: 0; font-size: 15px; color: var(--a5-on-dark-muted); }
 .home-hero-call a { color: var(--a5-on-dark); font-weight: 700; text-decoration: none; }
 .home-hero-phonecall { display: none; }
-.allinone { display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); gap: 32px; align-items: center; padding: 26px 0 34px; border-top: 1px solid rgba(245,242,237,0.16); }
+/* spread across the full width: All in one lines up with the headline, Finance with the right edge of the header button */
+.allinone { display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 24px; padding: 26px 0 34px; border-top: 1px solid rgba(245,242,237,0.16); }
+.allinone > * { flex: 0 1 auto; }
 .allinone-lead { display: flex; flex-direction: column; gap: 4px; padding-right: 12px; }
 .allinone-lead strong { font-family: var(--a5-cond); font-weight: 800; font-size: 30px; line-height: 1; text-transform: uppercase; }
 .allinone-lead span { font-size: 14px; color: var(--a5-on-dark-soft); }
@@ -117,7 +119,7 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
   .home-hero-call { display: none; }
   .home-hero-phonecall { display: flex; width: 100%; }
   .home-hero-reply { margin: -4px 0 0; font-size: 14px; color: var(--a5-on-dark-muted); text-align: center; width: 100%; }
-  .allinone { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 26px 0 36px; }
+  .allinone { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 26px 0 36px; }
   .allinone-lead { grid-column: 1 / -1; flex-direction: row; align-items: baseline; gap: 12px; padding: 0 0 6px; }
   .allinone-lead strong { font-size: 26px; }
   .allinone-item { flex-direction: column; text-align: center; gap: 8px; padding: 14px 8px; border-radius: 14px; background: rgba(245,242,237,0.06); }
