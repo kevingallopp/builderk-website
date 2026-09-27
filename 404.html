@@ -9,53 +9,176 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
-:root { --orange: #F77F00; --dark: #0A0A0A; }
-* { box-sizing: border-box; }
-body { margin: 0; min-height: 100vh; background: var(--dark); color: #fff; font: 16px/1.6 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column; }
-header { padding: 20px 24px; }
-.logo { font: 800 1.5rem/1 'Outfit', system-ui, sans-serif; color: #fff; text-decoration: none; letter-spacing: -0.02em; }
-.logo span { color: var(--orange); }
-main { flex: 1; max-width: 720px; width: 100%; margin: 0 auto; padding: 48px 24px 64px; }
-h1 { font: 800 clamp(2rem, 6vw, 3rem)/1.1 'Outfit', system-ui, sans-serif; margin: 0 0 16px; text-wrap: balance; }
-p { color: rgba(255,255,255,0.75); margin: 0 0 28px; max-width: 56ch; }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 50px; font: 700 1rem/1 'Outfit', system-ui, sans-serif; text-decoration: none; }
-.btn-primary { background: var(--orange); color: var(--dark); }
-.btn-outline { border: 1.5px solid rgba(255,255,255,0.45); color: #fff; }
-h2 { font: 600 1rem/1.3 'Outfit', system-ui, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); margin: 0 0 12px; }
-.areas { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; padding: 0; margin: 0; }
-.areas a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); padding: 6px 0; display: inline-block; }
-.areas a:hover, .areas a:focus-visible { border-color: var(--orange); color: var(--orange); }
-a:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
-footer { padding: 24px; color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+/* page hero: sizes come from --hero-min (computer) and --hero-photo-h (phone photo band) on the section */
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; list-style: none; font-size: 16.5px; line-height: 1.4; color: var(--a5-on-dark-soft); }
+.hero-meta li { display: inline-flex; align-items: center; gap: 8px; }
+.hero-meta svg { flex-shrink: 0; }
+.hero-crumb { margin: 0; font-size: 15px; color: var(--a5-on-dark-muted); }
+.hero-crumb a { color: var(--a5-on-dark); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.hero-phonecall { display: none; }
+@media (min-width: 900px) { .a5-hero .a5-h1 { text-wrap: wrap; } }
+@media (max-width: 899px) {
+  .a5-hero-photo img { object-position: var(--pos-sm, var(--pos, 50% 40%)); }
+  .hero-meta { font-size: 15px; }
+  .hero-meta svg { width: 16px; height: 16px; }
+  .hero-crumb { font-size: 14px; }
+  .a5-hero-actions .hero-phonecall { display: inline-flex; }
+}
+
+/* 404: actions and the areas we serve chips */
+.nf-more { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 12px; padding-top: 2px; }
+.nf-areas { padding-block: 72px 84px; }
+.nf-areas .a5-h2 { font-size: clamp(40px, 3.62vw, 52px); margin-bottom: 28px; }
+.nf-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.nf-chip { min-height: 50px; padding: 0 22px; border-radius: 12px; border: 1.5px solid #D6D1C9; background: var(--a5-white); color: var(--a5-ink); display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 700; font-size: 16px; text-decoration: none; }
+.nf-chip:hover { border-color: var(--a5-ink); }
+.nf-chip-all { border-color: var(--a5-ink); }
+.nf-arrow { display: none; }
+@media (max-width: 899px) {
+  .a5-hero-actions .nf-more { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 0; }
+  .nf-more .a5-btn { width: 100%; }
+  .nf-areas { padding-block: 44px 48px; }
+  .nf-areas .a5-h2 { margin-bottom: 22px; }
+  .nf-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .nf-chip { justify-content: space-between; min-height: 48px; padding: 0 16px; font-size: 15.5px; }
+  .nf-arrow { display: inline-flex; }
+  .nf-list li:last-child { grid-column: 1 / -1; }
+}
 </style>
 </head>
 <body>
-<header><a href="/" class="logo">BUILDER<span>K</span></a></header>
-<main>
- <h1>We could not find that page</h1>
- <p>The link may be old or mistyped. You can still plan your custom home on your lot with a licensed Florida builder: call us, send your project details, or start from the home page.</p>
- <div class="actions">
- <a class="btn btn-primary" href="/contact">Get my free consultation</a>
- <a class="btn btn-outline" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868">Call (239) 230 4868</a>
- <a class="btn btn-outline" href="/">Home page</a>
- </div>
- <h2>Areas we serve</h2>
- <ul class="areas">
- <li><a href="/orlando">Orlando</a></li>
- <li><a href="/tampa">Tampa</a></li>
- <li><a href="/jacksonville">Jacksonville</a></li>
- <li><a href="/ocala">Ocala</a></li>
- <li><a href="/melbourne">Melbourne</a></li>
- <li><a href="/cape-coral">Cape Coral</a></li>
- <li><a href="/fort-myers">Fort Myers</a></li>
- <li><a href="/miami">Miami</a></li>
- <li><a href="/service-areas">All service areas</a></li>
- </ul>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
+
+<main id="main">
+<section class="a5-hero" aria-labelledby="nf-title" style="--hero-min:640px;--hero-photo-h:300px">
+  <div class="a5-hero-photo" style="--pos:50% 40%;--pos-sm:50% 45%"><img src="/images/projects/jobsite/strip/s14.webp" alt="Three story BuilderK home exterior in Florida" width="600" height="800" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">Page not found</div>
+      <h1 class="a5-h1" id="nf-title">We could not find that <span class="a5-accent">page</span></h1>
+      <p class="a5-hero-sub">The link may be old or mistyped. You can still plan your custom home on your lot with a licensed Florida builder: call us, send your project details, or start from the home page.</p>
+      <div class="a5-hero-actions"><a class="a5-btn a5-btn-hero" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        <div class="nf-more"><a class="a5-btn a5-btn-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a><a class="a5-btn a5-btn-call" href="/">Home page</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="a5-section a5-bg-white nf-areas" aria-labelledby="nf-areas-title">
+  <div class="a5-wrap">
+    <h2 class="a5-h2" id="nf-areas-title">Areas we <span class="a5-hl">serve</span></h2>
+    <ul class="nf-list"><li><a class="nf-chip" href="/orlando">Orlando<span class="nf-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a></li><li><a class="nf-chip" href="/tampa">Tampa<span class="nf-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a></li><li><a class="nf-chip" href="/jacksonville">Jacksonville<span class="nf-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a></li><li><a class="nf-chip" href="/ocala">Ocala<span class="nf-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a></li><li><a class="nf-chip" href="/melbourne">Melbourne<span class="nf-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a></li><li><a class="nf-chip" href="/cape-coral">Cape Coral<span class="nf-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a></li><li><a class="nf-chip" href="/fort-myers">Fort Myers<span class="nf-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a></li><li><a class="nf-chip" href="/miami">Miami<span class="nf-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a></li><li><a class="nf-chip nf-chip-all" href="/service-areas">All service areas <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li></ul>
+  </div>
+</section>
 </main>
-<footer>Licensed Florida General Contractor, CGC #1537163 · Builders Knowledge Development Inc.</footer>
+
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
+</footer>
+<!-- /a5:footer -->
+
 <script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>

@@ -35,111 +35,6 @@
  <meta name="twitter:title" content="How to Build a Custom Home in Florida: Complete 2026 Guide">
  <meta name="twitter:description" content="Everything you need to know about building a custom home in Florida in 2026.">
  <meta name="twitter:image" content="https://www.builderk.com/images/hero-house.png">
- <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet"/>
- <style>
-        :root {
-            --orange: #F77F00; --orange-light: #FF9A2E; --black: #0A0A0A;
-            --dark: #111111; --dark2: #1A1A1A; --dark3: #222222;
-            --gray: #888888; --gray-light: #BBBBBB; --white: #FFFFFF;
-            --light-bg: #FAFAF8; --article-text: #333;
-        }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'DM Sans', sans-serif; background: var(--light-bg); color: var(--article-text); }
-
-        /* NAV */
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 48px; display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; color: var(--white); text-decoration: none; }
-        .logo span { color: var(--orange); }
-        .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
-        .nav-links a { color: var(--gray-light); text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--white); }
-        .nav-cta { background: var(--orange); color: var(--black) !important; padding: 10px 24px; border-radius: 50px; font-weight: 700; }
-        .nav-cta:hover { background: var(--orange-light); }
-        .mobile-menu { display: none; background: none; border: none; cursor: pointer; }
-        .mobile-menu svg { width: 28px; height: 28px; stroke: var(--white); }
-
-        /* HERO */
-        .blog-hero { padding: 140px 48px 60px; background: linear-gradient(135deg, var(--dark) 0%, var(--black) 50%, #1a0f00 100%); }
-        .blog-hero-inner { max-width: 800px; margin: 0 auto; }
-        .blog-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(247,127,0,0.1); border: 1px solid rgba(247,127,0,0.25); padding: 6px 16px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; color: var(--orange); text-transform: uppercase; margin-bottom: 20px; }
-        .blog-hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; line-height: 1.15; color: var(--white); margin-bottom: 16px; }
-        .blog-hero h1 em { font-style: normal; color: var(--orange); }
-        .blog-meta { display: flex; gap: 24px; align-items: center; color: var(--gray); font-size: 0.9rem; }
-        .blog-meta span { display: flex; align-items: center; gap: 6px; }
-
-        /* ARTICLE */
-        .article-wrap { max-width: 800px; margin: 0 auto; padding: 60px 48px 100px; }
-        .article-wrap p { font-size: 1.05rem; line-height: 1.85; color: var(--article-text); margin-bottom: 24px; }
-        .article-wrap h2 { font-family: 'Outfit', sans-serif; font-size: 1.7rem; font-weight: 700; color: var(--dark); margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 3px solid var(--orange); display: inline-block; }
-        .article-wrap h3 { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--dark2); margin: 32px 0 12px; }
-        .article-wrap ul, .article-wrap ol { margin: 0 0 24px 24px; }
-        .article-wrap li { font-size: 1.02rem; line-height: 1.8; margin-bottom: 8px; color: #444; }
-        .article-wrap strong { color: var(--dark); }
-
-        /* CALLOUT BOX */
-        .callout { background: rgba(247,127,0,0.06); border-left: 4px solid var(--orange); padding: 24px 28px; border-radius: 0 12px 12px 0; margin: 32px 0; }
-        .callout h4 { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--orange); margin-bottom: 8px; font-size: 1rem; }
-        .callout p { margin-bottom: 0; font-size: 0.95rem; }
-        .blog-meta svg, .callout h4 svg { width: 1em; height: 1em; vertical-align: -0.14em; margin-right: 0.35em; }
-
-        /* COST TABLE */
-        .cost-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; border-radius: 12px; overflow: hidden; }
-        .cost-table th { background: var(--orange); color: var(--black); font-family: 'Outfit', sans-serif; font-weight: 700; padding: 14px 20px; text-align: left; font-size: 0.9rem; }
-        .cost-table td { padding: 14px 20px; border-bottom: 1px solid #eee; font-size: 0.95rem; }
-        .cost-table tr:nth-child(even) td { background: #f8f8f6; }
-
-        /* STEP CARDS */
-        .step-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 24px 0 32px; }
-        .step-card { background: white; border: 1px solid #eee; border-radius: 16px; padding: 24px; transition: all 0.3s; }
-        .step-card:hover { border-color: var(--orange); box-shadow: 0 8px 24px rgba(247,127,0,0.08); }
-        .step-num { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 2rem; color: var(--orange); line-height: 1; margin-bottom: 8px; }
-        .step-card h4 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1rem; color: var(--dark); margin-bottom: 6px; }
-        .step-card p { font-size: 0.9rem; color: #666; line-height: 1.6; margin-bottom: 0; }
-
-        /* CTA BOX */
-        .cta-box { background: var(--dark2); border-radius: 20px; padding: 48px 40px; text-align: center; margin: 48px 0; }
-        .cta-box h3 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 12px; }
-        .cta-box p { color: var(--gray-light); font-size: 1rem; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
-        .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: var(--black); padding: 16px 36px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; }
-        .cta-btn:hover { background: var(--orange-light); transform: translateY(-2px); }
-
-        /* TABLE OF CONTENTS */
-        .toc { background: white; border: 1px solid #eee; border-radius: 16px; padding: 28px 32px; margin: 0 0 40px; }
-        .toc h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--dark); margin-bottom: 12px; }
-        .toc ol { margin: 0 0 0 20px; }
-        .toc li { margin-bottom: 6px; }
-        .toc a { color: var(--orange); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
-        .toc a:hover { text-decoration: underline; }
-
-        /* FOOTER */
-        footer { background: var(--dark); padding: 60px 48px 30px; border-top: 1px solid rgba(255,255,255,0.06); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto; }
-        .footer-brand .logo { font-size: 1.4rem; }
-        .footer-brand p { color: var(--gray); font-size: 0.9rem; margin-top: 12px; line-height: 1.6; }
-        .footer-col h4 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 16px; color: var(--white); }
-        .footer-col a { display: block; color: var(--gray); font-size: 0.9rem; text-decoration: none; margin-bottom: 10px; transition: color 0.3s; }
-        .footer-col a:hover { color: var(--orange); }
-        .footer-bottom { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); color: var(--gray); font-size: 0.8rem; }
-
-        @media (max-width: 900px) {
-            .nav-links { display: none; }
-            .nav-hamburger { display: flex !important; }
-            .navbar { padding: 14px 20px !important; }
-        }
-        @media (max-width: 768px) {
-            nav { padding: 16px 24px; }
-            .nav-links { display: none; }
-            .mobile-menu { display: block; }
-            .blog-hero { padding: 120px 24px 48px; }
-            .article-wrap { padding: 40px 24px 80px; }
-            .cost-table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .step-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-            footer { padding: 48px 24px 24px; }
-        }
-    </style>
-
  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -166,381 +61,458 @@
   "mainEntityOfPage": "https://www.builderk.com/blog-build-custom-home-florida-2026"
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
+<style>
+/* page hero: sizes come from --hero-min (computer) and --hero-photo-h (phone photo band) on the section */
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; list-style: none; font-size: 16.5px; line-height: 1.4; color: var(--a5-on-dark-soft); }
+.hero-meta li { display: inline-flex; align-items: center; gap: 8px; }
+.hero-meta svg { flex-shrink: 0; }
+.hero-crumb { margin: 0; font-size: 15px; color: var(--a5-on-dark-muted); }
+.hero-crumb a { color: var(--a5-on-dark); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.hero-phonecall { display: none; }
+@media (min-width: 900px) { .a5-hero .a5-h1 { text-wrap: wrap; } }
+@media (max-width: 899px) {
+  .a5-hero-photo img { object-position: var(--pos-sm, var(--pos, 50% 40%)); }
+  .hero-meta { font-size: 15px; }
+  .hero-meta svg { width: 16px; height: 16px; }
+  .hero-crumb { font-size: 14px; }
+  .a5-hero-actions .hero-phonecall { display: inline-flex; }
+}
+
+/* blog post hero: long titles get a size that fits (set per post with --h1 / --h1-sm) */
+.post-hero .a5-h1 { font-size: clamp(44px, calc(var(--h1, 76) * 100vw / 1440), calc(var(--h1, 76) * 1px)); }
+@media (min-width: 900px) { .post-hero .a5-h1 { text-wrap: pretty; } }
+
+/* intro: table of contents and the opening paragraphs */
+.post-intro { padding-block: 80px 88px; }
+.post-grid { display: grid; grid-template-columns: 400px minmax(0, 1fr); column-gap: 88px; align-items: start; }
+.post-grid-end { align-items: end; }
+.post-body { max-width: 780px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+.post-body > p { margin: 0; font-size: 18px; line-height: 1.7; color: var(--a5-body); }
+.post-body > p.post-lead { font-size: 23px; line-height: 1.5; font-weight: 500; color: var(--a5-ink); }
+.post-body > p.post-note { font-size: 15px; line-height: 1.6; }
+.a5-bg-finance .post-body > p.post-note { color: var(--a5-finance-body); }
+.post-intro-solo { max-width: 900px; }
+.post-body strong { color: var(--a5-ink); }
+.post-body a { color: var(--a5-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; white-space: nowrap; }
+.post-body a:hover { text-decoration-color: var(--a5-orange); }
+.post-toc { padding: 28px 28px 30px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 18px; }
+.post-toc-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-toc ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 13px; counter-reset: toc; }
+.post-toc li { display: flex; gap: 12px; align-items: flex-start; counter-increment: toc; }
+.post-toc li::before { content: counter(toc); width: 26px; height: 26px; flex-shrink: 0; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: var(--a5-cond); font-weight: 800; font-size: 14px; }
+.post-toc a { padding-top: 2px; font-size: 16px; line-height: 1.4; font-weight: 500; color: var(--a5-ink); text-decoration: none; }
+.post-toc a:hover { text-decoration: underline; text-decoration-color: var(--a5-orange); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* one band per section */
+.post-sec { padding-block: 88px 92px; }
+.post-h2 { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: clamp(40px, 3.48vw, 50px); line-height: 0.92; text-transform: uppercase; color: var(--a5-ink); }
+.post-num { display: flex; width: 46px; height: 46px; margin-bottom: 18px; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; align-items: center; justify-content: center; font-size: 24px; line-height: 1; }
+.post-h3 { margin: 10px 0 0; font-family: var(--a5-cond); font-weight: 800; font-size: 30px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-full { margin-top: 44px; }
+.post-grid-after { margin-top: 44px; }
+
+/* lists: orange checks; the mistakes list gets a gray cross */
+.post-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.post-list li { position: relative; padding-left: 32px; font-size: 18px; line-height: 1.6; color: var(--a5-body); }
+.post-list li::before { content: ""; position: absolute; left: 0; top: 5px; width: 20px; height: 20px; background: no-repeat center / 20px 20px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+.post-list-x li::before { left: 2px; top: 7px; width: 16px; height: 16px; background-size: 16px 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A948B' stroke-width='2.6' stroke-linecap='round'%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3C/svg%3E"); }
+.post-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.post-cards li { padding: 20px 22px; border-radius: 14px; background: var(--a5-paper); border: 1px solid var(--a5-line); font-size: 16px; line-height: 1.55; color: var(--a5-body); }
+.a5-bg-concrete .post-cards li, .a5-bg-finance .post-cards li { background: var(--a5-white); }
+.post-cards strong { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-cards strong::before { content: ""; width: 20px; height: 20px; flex-shrink: 0; background: no-repeat center / 20px 20px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+
+/* callouts with the emoji style icons */
+.post-callout { padding: 26px 28px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
+.a5-bg-white .post-callout { background: var(--a5-paper); }
+.a5-bg-finance .post-callout { border-color: #D5DBE0; }
+.post-callout-head { display: flex; align-items: center; gap: 14px; }
+.post-callout .a5-icon { width: 46px; height: 46px; }
+.post-callout-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 25px; line-height: 1.02; text-transform: uppercase; color: var(--a5-ink); }
+.post-callout p { margin: 0; font-size: 17px; line-height: 1.65; color: var(--a5-body); }
+.post-callout a { color: var(--a5-ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; white-space: nowrap; }
+
+/* illustrative scenario card */
+.post-scenario { padding: 28px 30px 12px; border-radius: 16px; background: var(--a5-white); border: 1px solid #D5DBE0; }
+.post-scenario-title { margin: 0; padding-bottom: 16px; font-family: var(--a5-cond); font-weight: 800; font-size: 27px; line-height: 1.02; text-transform: uppercase; color: var(--a5-finance-ink); }
+.post-scenario .equity-row { padding: 15px 0; border-top: 1px solid #E3E8EC; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); column-gap: 24px; align-items: baseline; }
+.post-scenario .label { font-size: 16.5px; line-height: 1.45; color: var(--a5-finance-body); }
+.post-scenario .value { font-size: 17px; line-height: 1.4; font-weight: 700; color: var(--a5-finance-ink); text-align: right; }
+.post-scenario .equity-row.total { border-top: 2px solid var(--a5-finance-ink); }
+.post-scenario .total .label { font-size: 17.5px; font-weight: 700; color: var(--a5-finance-ink); }
+.post-scenario .total .value { font-size: 18px; }
+
+/* tables: dark header row; on phones they scroll sideways inside their own box */
+.post-table { border-radius: 16px; border: 1px solid var(--a5-line); background: var(--a5-white); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.post-table table { width: 100%; border-collapse: collapse; }
+.post-table th { background: var(--a5-ink); color: #FFFFFF; text-align: left; vertical-align: bottom; padding: 16px 18px; font-family: var(--a5-cond); font-weight: 800; font-size: 20px; line-height: 1.1; letter-spacing: 0.02em; text-transform: uppercase; }
+.post-table td { padding: 15px 18px; border-top: 1px solid #ECE8E1; vertical-align: top; font-size: 15.5px; line-height: 1.5; color: var(--a5-body); }
+.post-table tbody tr:nth-child(even) td { background: #F7F6F3; }
+.post-table td strong { color: var(--a5-ink); }
+.post-table .check, .post-table .cross { display: inline-flex; align-items: flex-start; gap: 9px; }
+.post-table .check::before, .post-table .cross::before { content: ""; flex-shrink: 0; background-repeat: no-repeat; background-position: center; }
+.post-table .check::before { width: 18px; height: 18px; margin-top: 2px; background-size: 18px 18px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+.post-table .cross::before { width: 16px; height: 16px; margin-top: 3px; background-size: 16px 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A948B' stroke-width='2.6' stroke-linecap='round'%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3C/svg%3E"); }
+
+/* steps with the tape measure (rows of four; the tape and its steps loop together) */
+.post-steps + .post-steps { margin-top: 40px; }
+.post-steps .a5-tapebar-y { display: none; }
+.post-steps-list { list-style: none; margin: 0 0 26px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 32px; row-gap: 28px; }
+.post-step { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+.post-step-when { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
+.post-step-num { width: 34px; height: 34px; margin-bottom: 4px; border-radius: 999px; background: var(--a5-ink); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-family: var(--a5-cond); font-weight: 800; font-size: 17px; }
+.post-step-title { display: block; margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 28px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-step-text { display: block; margin: 0; font-size: 16px; line-height: 1.55; color: var(--a5-body); }
+.post-tape .post-tape-nums { position: absolute; left: 18px; right: 0; top: 31px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; color: #1B1A18; }
+.post-tape-nums span { padding-left: 6px; }
+.post-tape-nums b { padding: 0 5px; background: var(--a5-orange); font-weight: 800; }
+
+/* closing call to action and the published line */
+.post-cta { text-align: center; padding-block: 96px 64px; }
+.post-cta.post-cta-line { border-top: 1px solid var(--a5-line); }
+.post-cta .a5-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.post-cta .a5-h2 { font-size: clamp(42px, 4.45vw, 64px); }
+.post-cta .a5-p { max-width: 640px; font-size: 18px; }
+.post-published { margin: 14px 0 0; padding-top: 22px; border-top: 1px solid #DAD5CC; max-width: 900px; font-size: 14px; line-height: 1.5; color: var(--a5-muted); }
+
+/* tablets and small laptops: the heading sits above its text, like on phones, with the computer type sizes */
+@media (max-width: 1099px) {
+  .post-grid { grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
+  .post-grid-end { align-items: start; }
+  .post-grid-after { margin-top: 24px; }
+  .post-grid-after > div:first-child { display: none; }
+  .post-toc { max-width: 780px; }
+  .post-steps-list { column-gap: 22px; }
+  .post-step-title { font-size: 24px; }
+}
+@media (max-width: 899px) {
+  .post-hero .a5-h1 { font-size: calc(var(--h1-sm, 46) * 1px); }
+  .post-intro { padding-block: 32px 44px; }
+  .post-grid { grid-template-columns: minmax(0, 1fr); row-gap: 18px; }
+  .post-grid-after { margin-top: 18px; }
+  .post-grid-after > div:first-child { display: none; }
+  .post-body { gap: 18px; }
+  .post-body > p { font-size: 16px; line-height: 1.65; }
+  .post-body > p.post-lead { font-size: 19px; line-height: 1.5; }
+  .post-body > p.post-note { font-size: 14px; }
+  .post-toc { padding: 22px 20px; }
+  .post-toc-title { font-size: 24px; }
+  .post-toc ol { gap: 12px; }
+  .post-toc a { font-size: 15.5px; }
+  .post-sec { padding-block: 48px 44px; }
+  .post-h2 { font-size: 36px; }
+  .post-num { width: 38px; height: 38px; margin-bottom: 14px; font-size: 20px; }
+  .post-h3 { margin-top: 8px; font-size: 25px; }
+  .post-full { margin-top: 24px; }
+  .post-list { gap: 10px; }
+  .post-list li { padding-left: 30px; font-size: 16px; }
+  .post-list li::before { top: 3px; }
+  .post-list-x li::before { top: 5px; }
+  .post-cards { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .post-cards li { padding: 16px 18px; font-size: 15px; }
+  .post-cards strong { font-size: 21px; }
+  .post-callout { padding: 20px 18px; }
+  .post-callout-title { font-size: 22px; }
+  .post-callout p { font-size: 15.5px; }
+  .post-scenario { padding: 20px 18px 8px; }
+  .post-scenario-title { padding-bottom: 12px; font-size: 23px; }
+  .post-scenario .equity-row { display: flex; flex-direction: column; gap: 4px; padding: 13px 0; }
+  .post-scenario .label { font-size: 14.5px; }
+  .post-scenario .value { font-size: 16px; text-align: left; }
+  .post-scenario .total .label { font-size: 14.5px; }
+  .post-scenario .total .value { font-size: 17px; }
+  .post-table table { min-width: 620px; }
+  .post-table th { padding: 13px 14px; font-size: 17px; }
+  .post-table td { padding: 12px 14px; font-size: 14.5px; }
+  .post-steps { display: grid; grid-template-columns: 58px minmax(0, 1fr); column-gap: 18px; }
+  .post-steps + .post-steps { margin-top: 30px; }
+  .post-steps .a5-tapebar-y { display: block; width: 58px; }
+  .post-steps .post-tape { display: none; }
+  .post-steps-list { grid-template-columns: minmax(0, 1fr); row-gap: 30px; margin: 0; padding: 22px 0 8px; }
+  .post-step { gap: 5px; }
+  .post-step-title { font-size: 27px; }
+  .post-step-text { font-size: 15.5px; }
+  .post-cta { padding-block: 48px 40px; }
+  .post-cta .a5-wrap { gap: 18px; }
+  .post-cta .a5-p { font-size: 15.5px; line-height: 1.55; }
+  .post-cta .a5-btn { width: 100%; }
+  .post-published { margin-top: 0; padding-top: 18px; font-size: 13px; line-height: 1.55; }
+}
+</style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<!-- NAV -->
-<nav>
- <a href="/" class="logo">BUILDER<span>K</span></a>
-<ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
-<li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
-</ul>
- <button class="mobile-menu" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
- <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
- </button>
-</nav>
-
-<!-- HERO -->
-<section class="blog-hero">
- <div class="blog-hero-inner">
- <div class="blog-badge">Building Guide</div>
- <h1>How to Build a Custom Home in <em>Florida</em>: Complete 2026 Guide</h1>
- <div class="blog-meta">
- <span><i data-lucide="calendar-days" aria-hidden="true"></i> March 7, 2026</span>
- <span>⏱ 12 min read</span>
- <span><i data-lucide="pen-line" aria-hidden="true"></i> BuilderK Team</span>
- </div>
- </div>
+<main id="main">
+<section class="a5-hero post-hero" aria-labelledby="post-title" style="--h1:70;--h1-sm:42;--hero-min:640px;--hero-photo-h:330px">
+  <div class="a5-hero-photo" style="--pos:50% 55%;--pos-sm:50% 62%"><img src="/images/projects/jobsite/strip/3586.webp" alt="Finished kitchen with an island in a BuilderK custom home" width="600" height="800" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">Building Guide</div>
+      <h1 class="a5-h1" id="post-title">How to Build a Custom Home in <span class="a5-accent">Florida</span>: Complete 2026 Guide</h1>
+      <ul class="hero-meta"><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>March 7, 2026</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><polyline points="12 7 12 12 15.5 14"/></svg>12 min read</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>BuilderK Team</li></ul>
+      <div class="a5-hero-actions"><a class="a5-btn a5-btn-hero" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        <a class="a5-btn a5-btn-call hero-phonecall" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a></div>
+    </div>
+  </div>
 </section>
 
-<!-- ARTICLE -->
-<div class="article-wrap">
+<section class="a5-section a5-bg-white post-intro">
+  <div class="a5-wrap">
+    <div class="post-grid"><nav class="post-toc" aria-labelledby="toc-title"><h2 class="post-toc-title" id="toc-title">In This Guide</h2><ol><li><a href="#why-build">Why Build a Custom Home in Florida?</a></li><li><a href="#cost">How Much Does It Cost to Build in 2026?</a></li><li><a href="#process">The Home Building Process (8 Steps)</a></li><li><a href="#financing">Financing Your Build</a></li><li><a href="#permits">Permits &amp; Florida Building Code</a></li><li><a href="#construction">Construction Methods for Florida</a></li><li><a href="#timeline">Realistic Timeline</a></li><li><a href="#mistakes">Common Mistakes to Avoid</a></li><li><a href="#why-builderk">Why BuilderK?</a></li></ol></nav><div class="post-body"><p class="post-lead">Building a custom home in Florida is exciting, but it also comes with a lot of decisions. Whether you're relocating to the Sunshine State, upgrading from your current home, or building on a lot you already own, this guide covers everything you need to know in 2026.</p>
+<p>We've built this guide based on our real world experience as a licensed Florida general contractor (CGC #1537163). This guide gives you practical information that can help you make informed decisions.</p></div></div>
+  </div>
+</section>
 
- <!-- TABLE OF CONTENTS -->
- <div class="toc">
- <h3>In This Guide</h3>
- <ol>
- <li><a href="#why-build">Why Build a Custom Home in Florida?</a></li>
- <li><a href="#cost">How Much Does It Cost to Build in 2026?</a></li>
- <li><a href="#process">The Home Building Process (8 Steps)</a></li>
- <li><a href="#financing">Financing Your Build</a></li>
- <li><a href="#permits">Permits & Florida Building Code</a></li>
- <li><a href="#construction">Construction Methods for Florida</a></li>
- <li><a href="#timeline">Realistic Timeline</a></li>
- <li><a href="#mistakes">Common Mistakes to Avoid</a></li>
- <li><a href="#why-builderk">Why BuilderK?</a></li>
- </ol>
- </div>
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="why-build">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="why-build"><span class="post-num">1<span class="a5-sr">.</span></span> Why Build a Custom Home in <span class="a5-hl">Florida</span>?</h2></div><div class="post-body"><p>Florida's population continues to grow rapidly, and housing demand has pushed existing home prices higher than ever. Building custom gives you significant advantages:</p>
+<ul class="post-cards"><li><strong>You get exactly what you want</strong> Layout, finishes, and features designed for your lifestyle, not someone else's</li><li><strong>Florida requirements</strong> Engineering for the location, a structure that meets code, and opening protection and envelope systems defined in the written scope</li><li><strong>Modern building code compliance</strong> New homes meet the applicable Florida Building Code; energy performance and insurance pricing still depend on the final design, documentation, location, and carrier</li><li><strong>Current wind mitigation features</strong> Impact windows, roofing, and built to code systems may qualify for specific to each insurer discounts, but premiums and savings vary by home, location, coverage, and insurer</li><li><strong>No bidding wars</strong> You avoid competing with other buyers in a tight resale market</li><li><strong>Warranty protection</strong> New homes come with builder warranties covering structural, mechanical, and finish issues</li></ul>
+<div class="post-callout"><div class="post-callout-head"><svg width="46" height="46" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="bpSk1-5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D8BFD"></stop><stop offset="1" stop-color="#1F5FD1"></stop></linearGradient><linearGradient id="bpRk1-5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC0FF"></stop><stop offset="0.5" stop-color="#4A92F7"></stop><stop offset="1" stop-color="#2566D4"></stop></linearGradient><linearGradient id="bpPk1-5" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFD24D"></stop><stop offset="1" stop-color="#F5A524"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="8" y="12" width="48" height="42" rx="4" fill="url(#bpSk1-5)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M14 18 V50 M20 18 V50 M26 18 V50 M32 18 V50 M38 18 V50 M44 18 V50 M50 18 V50 M12 22 H54 M12 28 H54 M12 34 H54 M12 40 H54 M12 46 H54" stroke="#FFFFFF" stroke-width="0.6" opacity="0.22"></path><path d="M15 21 H49 V47 H15 Z M15 35 H29 M29 21 V41 M38 35 H49" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"></path><path d="M29 41 A6 6 0 0 0 35 47" fill="none" stroke="#FFFFFF" stroke-width="1.4"></path><rect x="5" y="7" width="54" height="9" rx="4.5" fill="url(#bpRk1-5)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M10 9.5 H54" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.6"></path><g transform="rotate(-38 46 46)"><rect x="34" y="42" width="22" height="7" rx="1.5" fill="url(#bpPk1-5)" stroke="#8A5A00" stroke-width="1"></rect><path d="M56 42 L63 45.5 L56 49 Z" fill="#F6D7A7" stroke="#8A5A00" stroke-width="1"></path><path d="M60.5 44.3 L63 45.5 L60.5 46.7 Z" fill="#374151"></path><rect x="30" y="42" width="4" height="7" rx="1" fill="#F5A3C7" stroke="#8A5A00" stroke-width="1"></rect></g></svg><h3 class="post-callout-title">Did You Know?</h3></div><p>Building and buying have different cost profiles. Compare the complete project cost, including land, fees, financing, site work, and exclusions, with suitable resale alternatives. BuilderK's calculator provides one combined early planning range based on the selections you enter.</p></div></div></div>
+  </div>
+</section>
 
- <p>Building a custom home in Florida is exciting, but it also comes with a lot of decisions. Whether you're relocating to the Sunshine State, upgrading from your current home, or building on a lot you already own, this guide covers everything you need to know in 2026.</p>
+<section class="a5-section post-sec a5-bg-finance" aria-labelledby="cost">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="cost"><span class="post-num">2<span class="a5-sr">.</span></span> How Much Does It <span class="a5-hl">Cost</span> to Build in 2026?</h2></div><div class="post-body"><p>The cost to build a custom home in Florida varies by location, size, design complexity, structure, selections, and site conditions. BuilderK's shared Central Florida living area planning rates, last updated July 18, 2026, are:</p>
+<div class="post-table" role="region" aria-labelledby="cost" tabindex="0"><table>
+<thead>
+<tr>
+<th>Finish Level</th>
+<th>Cost per Sq Ft</th>
+<th>2,000 Sq Ft Living Area Subtotal</th>
+<th>3,000 Sq Ft Living Area Subtotal</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>Standard/Traditional</strong></td><td>$160 to $180</td><td>$320K to $360K</td><td>$480K to $540K</td></tr>
+<tr><td><strong>Midrange</strong></td><td>$180 to $220</td><td>$360K to $440K</td><td>$540K to $660K</td></tr>
+<tr><td><strong>Custom/Luxury</strong></td><td>$220 to $280+</td><td>$440K to $560K+</td><td>$660K to $840K+</td></tr>
+</tbody>
+</table></div>
+<p>These are living area examples, not total project prices. The planning calculator provides one combined early range based on the selections you enter. Coastal, flood zone, South Florida, and Southwest Florida projects may cost more. After we review the plan, scope and site, we send a formal proposal.</p>
+<h3 class="post-h3">What the Written Proposal Must Define</h3>
+<ul class="post-list"><li>Foundation and ordinary versus unusual site work assumptions</li><li>Structural system, engineering criteria, and ceiling heights</li><li>Roofing system and opening protection package</li><li>Mechanical, electrical, and plumbing scope</li><li>Interior selections and allowances</li><li>Exterior finishes, driveway, and landscape scope</li><li>Permit, engineering, and inspection coordination</li></ul>
+<h3 class="post-h3">Common Planning Range Exclusions</h3>
+<ul class="post-list"><li>Land/lot purchase</li><li>Financing costs, government permit and impact fees, and utility connections</li><li>Unusual soil or site work, clearing, fill, and elevated foundations</li><li>Additional engineering for coastal sites, flood zones, or unusual site conditions</li><li>Pool, fencing, landscaping, and upgrades not selected in the calculator</li><li>HOA review fees and changes requested by the owner</li></ul>
+<div class="post-callout"><div class="post-callout-head"><svg width="46" height="46" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2-6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2-6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2-6)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2-6)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg><h3 class="post-callout-title">BuilderK Tip</h3></div><p>Discuss an appropriate contingency with your builder and lender. The right amount depends on how complete the plans and selections are, the lot investigation, contract structure, and which risks remain unresolved.</p></div></div></div>
+  </div>
+</section>
 
- <p>We've built this guide based on our real world experience as a licensed Florida general contractor (CGC #1537163). This guide gives you practical information that can help you make informed decisions.</p>
+<section class="a5-section post-sec a5-bg-white" aria-labelledby="process">
+  <div class="a5-wrap">
+    <div class="post-grid post-grid-end"><div class="post-head"><h2 class="post-h2" id="process"><span class="post-num">3<span class="a5-sr">.</span></span> The Home Building <span class="a5-hl">Process</span> (8 Steps)</h2></div><div class="post-body"><p>A custom home schedule varies with design development, lender review, permitting, site conditions, material lead times, inspections, and change decisions. Here is how the process works:</p></div></div>
+    <div class="post-full"><div class="post-steps" data-a5-loop><div class="a5-tapebar-y a5-tape-y" aria-hidden="true"><i class="hook"></i><i class="ticks"></i><div class="nums"><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span class="stud">16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span class="stud">32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span></div></div><div class="post-steps-main"><ol class="post-steps-list"><li class="post-step a5-step-a"><span class="post-step-num">01</span> <h3 class="post-step-title">Initial Consultation</h3> <p class="post-step-text">Share your vision, budget, lot information, and timeline. We assess the basics and outline a preliminary planning range and the next feasibility checks.</p></li><li class="post-step a5-step-b"><span class="post-step-num">02</span> <h3 class="post-step-title">Design &amp; Floor Plans</h3> <p class="post-step-text">Choose from existing plans or work with our architect to create a custom design. We finalize room layouts, elevations, and specifications.</p></li><li class="post-step a5-step-c"><span class="post-step-num">03</span> <h3 class="post-step-title">Financing &amp; Early Loan Approval</h3> <p class="post-step-text">We connect you with construction loan lenders, prepare builder documentation, and help you get approved before construction.</p></li><li class="post-step a5-step-d"><span class="post-step-num">04</span> <h3 class="post-step-title">Permitting</h3> <p class="post-step-text">We handle all permit applications, engineering reviews, and county/city approvals. This typically takes 4 to 6 weeks, depending on the jurisdiction.</p></li></ol><div class="a5-tapebar a5-tape-x post-tape" aria-hidden="true" style="--h:64px"><i class="hook"></i><i class="ticks"></i><div class="post-tape-nums"><span>1</span><span>2</span><span>3</span><span>4</span></div></div></div></div>
+<div class="post-steps" data-a5-loop><div class="a5-tapebar-y a5-tape-y" aria-hidden="true"><i class="hook"></i><i class="ticks"></i><div class="nums"><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span class="stud">16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span class="stud">32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span></div></div><div class="post-steps-main"><ol class="post-steps-list" start="5"><li class="post-step a5-step-a"><span class="post-step-num">05</span> <h3 class="post-step-title">Site Work &amp; Foundation</h3> <p class="post-step-text">Clearing, grading, utility connections, and pouring the foundation. The home starts to take physical shape.</p></li><li class="post-step a5-step-b"><span class="post-step-num">06</span> <h3 class="post-step-title">Framing &amp; Weather Protection</h3> <p class="post-step-text">Walls go up, roof is installed, windows and doors are set. The structure is now protected from weather ("dried in").</p></li><li class="post-step a5-step-c"><span class="post-step-num">07</span> <h3 class="post-step-title">Interior Finishes</h3> <p class="post-step-text">Electrical, plumbing, HVAC rough installation, drywall, paint, flooring, cabinets, countertops, fixtures. This is where your home comes to life.</p></li><li class="post-step a5-step-d"><span class="post-step-num">08</span> <h3 class="post-step-title">Final Inspection &amp; Move In</h3> <p class="post-step-text">County final inspection and Certificate of Occupancy are completed. The lender verifies any conversion conditions, and you receive the keys.</p></li></ol><div class="a5-tapebar a5-tape-x post-tape" aria-hidden="true" style="--h:64px"><i class="hook"></i><i class="ticks"></i><div class="post-tape-nums"><span>5</span><span>6</span><span>7</span><span><b>8</b></span></div></div></div></div></div>
+  </div>
+</section>
 
- <!-- SECTION 1 -->
- <h2 id="why-build">1. Why Build a Custom Home in Florida?</h2>
+<section class="a5-section post-sec a5-bg-finance" aria-labelledby="financing">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="financing"><span class="post-num">4<span class="a5-sr">.</span></span> <span class="a5-hl">Financing</span> Your Build</h2></div><div class="post-body"><p>Financing a new construction home is different from buying an existing home. You'll need a <strong>construction loan</strong> a temporary loan that funds the building process and converts to a traditional mortgage once the home is complete.</p>
+<h3 class="post-h3">Single Close Construction Loan (Recommended)</h3>
+<p>A single close structure combines construction financing and a permanent mortgage in one closing. It may avoid a second set of eligible closing costs, but rate lock, conversion, appraisal, completion, and qualification conditions vary by lender and program.</p>
+<h3 class="post-h3">Requirements</h3>
+<ul class="post-list"><li><strong>Credit score:</strong> around 680 is typical (some programs accept 620 or are based on assets)</li><li><strong>Down payment:</strong> Appraised lot equity may reduce the cash required. The lender sets the final amount based on the appraisal, project, borrower, and loan program.</li><li><strong>Licensed builder:</strong> Your GC must be licensed and approved by the lender</li><li><strong>Approved plans:</strong> Complete floor plans and construction budget</li><li><strong>Income documentation:</strong> W2s, tax returns, bank statements</li></ul>
+<div class="post-callout"><div class="post-callout-head"><svg width="46" height="46" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="pPk4-7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#E9EDF2"></stop></linearGradient><radialGradient id="pSk4-7" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#5EE08A"></stop><stop offset="1" stop-color="#1F9D4C"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M14 6 H40 L50 16 V54 Q50 56 48 56 H14 Q12 56 12 54 V8 Q12 6 14 6 Z" fill="url(#pPk4-7)" stroke="#6B7785" stroke-width="1.5"></path><path d="M40 6 V14 Q40 16 42 16 H50" fill="#D5DCE4" stroke="#6B7785" stroke-width="1.5"></path><path d="M18 22 H42 M18 28 H42 M18 34 H34" stroke="#A7B2BE" stroke-width="2.2" stroke-linecap="round"></path><circle cx="42" cy="44" r="11" fill="url(#pSk4-7)" stroke="#146B33" stroke-width="1.5"></circle><path d="M37 44 L41 48 L48 40" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg><h3 class="post-callout-title">Learn More</h3></div><p>For a complete breakdown of construction financing, read our <a href="/financing">Construction Loan Florida Guide</a> including single close vs. two closings comparison, requirements, and FAQ.</p></div></div></div>
+  </div>
+</section>
 
- <p>Florida's population continues to grow rapidly, and housing demand has pushed existing home prices higher than ever. Building custom gives you significant advantages:</p>
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="permits">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="permits"><span class="post-num">5<span class="a5-sr">.</span></span> <span class="a5-hl">Permits</span> &amp; Florida Building Code</h2></div><div class="post-body"><p>Every new construction project in Florida requires building permits. The permitting process varies by county and municipality, but generally includes:</p>
+<ul class="post-list"><li><strong>Building permit:</strong> The main permit covering structural, electrical, plumbing, and mechanical work</li><li><strong>Site plan approval:</strong> Shows the home's placement on the lot, setbacks, and drainage</li><li><strong>Engineering review:</strong> Structural calculations and wind load analysis (critical in Florida)</li><li><strong>Environmental review:</strong> Wetlands, flood zone, and tree removal permits if applicable</li><li><strong>HOA approval:</strong> If building in an HOA community, architectural review is typically required before permitting</li></ul>
+<h3 class="post-h3">Florida Building Code Highlights</h3>
+<p>Florida has some of the strictest building codes in the country, and for good reason. The Florida Building Code requires:</p>
+<ul class="post-list"><li><strong>Wind resistance:</strong> Homes must be engineered for the local wind speed zone (up to 185 mph in South Florida)</li><li><strong>Impact protection:</strong> Impact rated windows/doors or approved shutters required in windborne debris regions</li><li><strong>Roof to wall connections:</strong> Hurricane straps and clips required to prevent roof uplift</li><li><strong>Flood elevation:</strong> In flood zones, the finished floor must be elevated above the Base Flood Elevation (BFE)</li><li><strong>Energy efficiency:</strong> Insulation, HVAC, and window ratings must meet energy code minimums</li></ul>
+<div class="post-callout"><div class="post-callout-head"><svg width="46" height="46" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="hhk5-8" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#FFC266"></stop><stop offset="0.55" stop-color="#FF8A1F"></stop><stop offset="1" stop-color="#D45A00"></stop></radialGradient><linearGradient id="hbk5-8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9E3D"></stop><stop offset="1" stop-color="#C95200"></stop></linearGradient></defs><ellipse cx="32" cy="58" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M10 44 C10 24 20 12 32 12 C44 12 54 24 54 44 Z" fill="url(#hhk5-8)" stroke="#8A3A00" stroke-width="1.6" stroke-linejoin="round"></path><path d="M28 13 C27 22 27 34 28 44 H36 C37 34 37 22 36 13 C34 12.4 30 12.4 28 13 Z" fill="#FF9E3D" stroke="#8A3A00" stroke-width="1.3" stroke-linejoin="round"></path><path d="M17 34 C18 25 22 19 27 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.6"></path><rect x="4" y="43" width="56" height="8" rx="4" fill="url(#hbk5-8)" stroke="#8A3A00" stroke-width="1.6"></rect></svg><h3 class="post-callout-title">BuilderK Handles This</h3></div><p>We manage the entire permitting process, from application to final inspection. Our team prepares all documents, coordinates with engineers, and works with local building departments so you don't have to.</p></div></div></div>
+  </div>
+</section>
 
- <ul>
- <li><strong>You get exactly what you want</strong> Layout, finishes, and features designed for your lifestyle, not someone else's</li>
-        <li><strong>Florida requirements</strong> Engineering for the location, a structure that meets code, and opening protection and envelope systems defined in the written scope</li>
- <li><strong>Modern building code compliance</strong> New homes meet the applicable Florida Building Code; energy performance and insurance pricing still depend on the final design, documentation, location, and carrier</li>
- <li><strong>Current wind mitigation features</strong> Impact windows, roofing, and built to code systems may qualify for specific to each insurer discounts, but premiums and savings vary by home, location, coverage, and insurer</li>
- <li><strong>No bidding wars</strong> You avoid competing with other buyers in a tight resale market</li>
- <li><strong>Warranty protection</strong> New homes come with builder warranties covering structural, mechanical, and finish issues</li>
- </ul>
+<section class="a5-section post-sec a5-bg-white" aria-labelledby="construction">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="construction"><span class="post-num">6<span class="a5-sr">.</span></span> Construction <span class="a5-hl">Methods</span> for Florida</h2></div><div class="post-body"><p>Choosing the right construction method is one of the most important decisions you'll make. Here are the three main options for Florida homes:</p>
+<h3 class="post-h3">CMU Block (Concrete Masonry Unit)</h3>
+<p>The most common construction method in Florida. Concrete block walls offer excellent hurricane resistance, fire safety, and thermal mass. They're resistant to termites and stand up well to Florida's humidity. Most lenders and insurance companies prefer block construction.</p>
+<h3 class="post-h3">Light Gauge Steel (LGS)</h3>
+<p>An emerging alternative that offers speed of construction, termite immunity, and precision engineering. LGS is lighter than block but still provides excellent structural performance. BuilderK is experienced in both CMU and LGS construction.</p>
+<h3 class="post-h3">Wood Frame</h3>
+<p>Common in other states but less popular in Florida due to termite risk and hurricane vulnerability. Wood frame can work for interior walls and second story construction when combined with a block first floor.</p>
+<div class="post-table" role="region" aria-labelledby="construction" tabindex="0"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Hurricane Rating</th>
+<th>Termite Proof</th>
+<th>Cost</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>CMU Block</strong></td><td>Excellent</td><td>Yes</td><td>$$</td><td>Most Florida homes</td></tr>
+<tr><td><strong>Light Gauge Steel</strong></td><td>Excellent</td><td>Yes</td><td>$$</td><td>Speed, precision</td></tr>
+<tr><td><strong>Wood Frame</strong></td><td>Good</td><td>No</td><td>$</td><td>Interior walls, 2nd floors</td></tr>
+</tbody>
+</table></div></div></div>
+  </div>
+</section>
 
- <div class="callout">
- <h4><i data-lucide="lightbulb" aria-hidden="true"></i> Did You Know?</h4>
- <p>Building and buying have different cost profiles. Compare the complete project cost, including land, fees, financing, site work, and exclusions, with suitable resale alternatives. BuilderK's calculator provides one combined early planning range based on the selections you enter.</p>
- </div>
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="timeline">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="timeline"><span class="post-num">7<span class="a5-sr">.</span></span> Realistic <span class="a5-hl">Timeline</span></h2></div><div class="post-body"><p>A typical custom home schedule in Florida may look like this:</p>
+<div class="post-table" role="region" aria-labelledby="timeline" tabindex="0"><table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Duration</th>
+<th>What Happens</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>Design &amp; Planning</strong></td><td>2 to 4 weeks</td><td>Floor plans, specifications, budget finalized</td></tr>
+<tr><td><strong>Financing</strong></td><td>3 to 6 weeks, alongside design</td><td>Early loan approval and closing</td></tr>
+<tr><td><strong>Permitting</strong></td><td>4 to 6 weeks</td><td>Permit applications, engineering, approvals</td></tr>
+<tr><td><strong>Construction</strong></td><td>6 to 10 months</td><td>Site work and slab, framing, roof, windows and doors, electrical, plumbing and HVAC, drywall, finishes, final inspection and CO</td></tr>
+<tr><td><strong>TOTAL</strong></td><td><strong>9 to 14 months</strong></td><td><strong>From first meeting to keys</strong></td></tr>
+</tbody>
+</table></div>
+<div class="post-callout"><div class="post-callout-head"><svg width="46" height="46" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="hhk5-9" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#FFC266"></stop><stop offset="0.55" stop-color="#FF8A1F"></stop><stop offset="1" stop-color="#D45A00"></stop></radialGradient><linearGradient id="hbk5-9" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9E3D"></stop><stop offset="1" stop-color="#C95200"></stop></linearGradient></defs><ellipse cx="32" cy="58" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M10 44 C10 24 20 12 32 12 C44 12 54 24 54 44 Z" fill="url(#hhk5-9)" stroke="#8A3A00" stroke-width="1.6" stroke-linejoin="round"></path><path d="M28 13 C27 22 27 34 28 44 H36 C37 34 37 22 36 13 C34 12.4 30 12.4 28 13 Z" fill="#FF9E3D" stroke="#8A3A00" stroke-width="1.3" stroke-linejoin="round"></path><path d="M17 34 C18 25 22 19 27 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.6"></path><rect x="4" y="43" width="56" height="8" rx="4" fill="url(#hbk5-9)" stroke="#8A3A00" stroke-width="1.6"></rect></svg><h3 class="post-callout-title">What Can Cause Delays?</h3></div><p>Florida's rainy season (June to September), permit backlogs, material supply chain issues, and inspection scheduling can all add time. Working with an experienced builder who plans for these factors is critical.</p></div></div></div>
+  </div>
+</section>
 
- <!-- SECTION 2 -->
- <h2 id="cost">2. How Much Does It Cost to Build in 2026?</h2>
+<section class="a5-section post-sec a5-bg-white" aria-labelledby="mistakes">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="mistakes"><span class="post-num">8<span class="a5-sr">.</span></span> Common <span class="a5-hl">Mistakes</span> to Avoid</h2></div><div class="post-body"><ul class="post-list post-list-x"><li><strong>Not budgeting for site work:</strong> Clearing, fill dirt, utility connections, and impact fees can add $20,000 to $50,000+ depending on the lot</li><li><strong>Choosing a builder based on price alone:</strong> The cheapest bid often leads to change orders, delays, and quality issues. Look for experience, licensing, and transparency</li><li><strong>Skipping the soil test:</strong> Florida's soil varies dramatically. A $500 soil test can prevent $50,000 in foundation problems</li><li><strong>Not understanding the construction loan process:</strong> Construction financing is complex. Work with a builder who has lender relationships and can guide you</li><li><strong>Ignoring Florida risks:</strong> Hurricane ratings, flood zones, termite protection, and humidity management aren't optional in Florida, they're essential</li><li><strong>Making too many changes during construction:</strong> Change orders after construction starts are expensive. Finalize your design before breaking ground</li><li><strong>Not getting everything in writing:</strong> Specs, allowances, timelines, and payment schedules should all be documented in your builder agreement</li></ul></div></div>
+  </div>
+</section>
 
- <p>The cost to build a custom home in Florida varies by location, size, design complexity, structure, selections, and site conditions. BuilderK's shared Central Florida living area planning rates, last updated July 18, 2026, are:</p>
+<section class="a5-section post-sec a5-bg-concrete" aria-labelledby="why-builderk">
+  <div class="a5-wrap">
+    <div class="post-grid"><div class="post-head"><h2 class="post-h2" id="why-builderk"><span class="post-num">9<span class="a5-sr">.</span></span> Why Build With <span class="a5-hl">BuilderK</span>?</h2></div><div class="post-body"><p>BuilderK coordinates design, permitting, and construction, and helps prepare the documents independent lenders request. Here is what you can expect:</p>
+<ul class="post-cards"><li><strong>Licensed Florida GC</strong> CGC License #1537163, fully insured</li><li><strong>25+ years combined experience</strong> From luxury high rise buildings to custom single family homes</li><li><strong>One point of contact</strong> You work with one team from start to finish</li><li><strong>Lender relationships</strong> We connect you with construction loan specialists</li><li><strong>Transparent planning</strong> Assumptions, allowances, and major exclusions are documented before a formal proposal</li><li><strong>Built for Florida</strong> Every home we build is engineered for hurricanes, humidity, and Florida's unique climate</li></ul>
+<p><strong>Plan your build:</strong> try our <a href="/calculator">cost calculator</a>, browse <a href="/floor-plans">floor plans</a>, or learn how <a href="/financing">construction financing</a> works.</p></div></div>
+  </div>
+</section>
 
- <table class="cost-table">
- <thead>
- <tr>
- <th>Finish Level</th>
- <th>Cost per Sq Ft</th>
- <th>2,000 Sq Ft Living Area Subtotal</th>
- <th>3,000 Sq Ft Living Area Subtotal</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Standard/Traditional</strong></td><td>$160 to $180</td><td>$320K to $360K</td><td>$480K to $540K</td></tr>
- <tr><td><strong>Midrange</strong></td><td>$180 to $220</td><td>$360K to $440K</td><td>$540K to $660K</td></tr>
- <tr><td><strong>Custom/Luxury</strong></td><td>$220 to $280+</td><td>$440K to $560K+</td><td>$660K to $840K+</td></tr>
- </tbody>
- </table>
+<section class="a5-section a5-bg-concrete post-cta post-cta-line" aria-labelledby="post-cta-title">
+  <div class="a5-wrap">
+    <h2 class="a5-h2" id="post-cta-title">Ready to Build Your <span class="a5-hl">Dream Home</span>?</h2>
+    <p class="a5-p">Whether you already have a lot or you're just starting to explore, we're here to help. Start with a free conversation and no pressure.</p>
+    <a class="a5-btn a5-btn-dark" href="/calculator">Build a Planning Range <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+    <p class="post-published">Published March 7, 2026 · BuilderK, Builders Knowledge Development Inc. · CGC #1537163 · Orlando, FL</p>
+  </div>
+</section>
+</main>
 
- <p>These are living area examples, not total project prices. The planning calculator provides one combined early range based on the selections you enter. Coastal, flood zone, South Florida, and Southwest Florida projects may cost more. After we review the plan, scope and site, we send a formal proposal.</p>
-
- <h3>What the Written Proposal Must Define</h3>
- <ul>
- <li>Foundation and ordinary versus unusual site work assumptions</li>
- <li>Structural system, engineering criteria, and ceiling heights</li>
- <li>Roofing system and opening protection package</li>
- <li>Mechanical, electrical, and plumbing scope</li>
- <li>Interior selections and allowances</li>
- <li>Exterior finishes, driveway, and landscape scope</li>
- <li>Permit, engineering, and inspection coordination</li>
- </ul>
-
- <h3>Common Planning Range Exclusions</h3>
- <ul>
- <li>Land/lot purchase</li>
- <li>Financing costs, government permit and impact fees, and utility connections</li>
- <li>Unusual soil or site work, clearing, fill, and elevated foundations</li>
-        <li>Additional engineering for coastal sites, flood zones, or unusual site conditions</li>
- <li>Pool, fencing, landscaping, and upgrades not selected in the calculator</li>
- <li>HOA review fees and changes requested by the owner</li>
- </ul>
-
- <div class="callout">
- <h4><i data-lucide="key-round" aria-hidden="true"></i> BuilderK Tip</h4>
- <p>Discuss an appropriate contingency with your builder and lender. The right amount depends on how complete the plans and selections are, the lot investigation, contract structure, and which risks remain unresolved.</p>
- </div>
-
- <!-- SECTION 3 -->
- <h2 id="process">3. The Home Building Process (8 Steps)</h2>
-
- <p>A custom home schedule varies with design development, lender review, permitting, site conditions, material lead times, inspections, and change decisions. Here is how the process works:</p>
-
- <div class="step-grid">
- <div class="step-card">
- <div class="step-num">01</div>
- <h4>Initial Consultation</h4>
- <p>Share your vision, budget, lot information, and timeline. We assess the basics and outline a preliminary planning range and the next feasibility checks.</p>
- </div>
- <div class="step-card">
- <div class="step-num">02</div>
- <h4>Design & Floor Plans</h4>
- <p>Choose from existing plans or work with our architect to create a custom design. We finalize room layouts, elevations, and specifications.</p>
- </div>
- <div class="step-card">
- <div class="step-num">03</div>
- <h4>Financing & Early Loan Approval</h4>
- <p>We connect you with construction loan lenders, prepare builder documentation, and help you get approved before construction.</p>
- </div>
- <div class="step-card">
- <div class="step-num">04</div>
- <h4>Permitting</h4>
- <p>We handle all permit applications, engineering reviews, and county/city approvals. This typically takes 4 to 6 weeks, depending on the jurisdiction.</p>
- </div>
- <div class="step-card">
- <div class="step-num">05</div>
- <h4>Site Work & Foundation</h4>
- <p>Clearing, grading, utility connections, and pouring the foundation. The home starts to take physical shape.</p>
- </div>
- <div class="step-card">
- <div class="step-num">06</div>
- <h4>Framing & Weather Protection</h4>
- <p>Walls go up, roof is installed, windows and doors are set. The structure is now protected from weather ("dried in").</p>
- </div>
- <div class="step-card">
- <div class="step-num">07</div>
- <h4>Interior Finishes</h4>
- <p>Electrical, plumbing, HVAC rough installation, drywall, paint, flooring, cabinets, countertops, fixtures. This is where your home comes to life.</p>
- </div>
- <div class="step-card">
- <div class="step-num">08</div>
- <h4>Final Inspection & Move In</h4>
- <p>County final inspection and Certificate of Occupancy are completed. The lender verifies any conversion conditions, and you receive the keys.</p>
- </div>
- </div>
-
- <!-- SECTION 4 -->
- <h2 id="financing">4. Financing Your Build</h2>
-
- <p>Financing a new construction home is different from buying an existing home. You'll need a <strong>construction loan</strong> a temporary loan that funds the building process and converts to a traditional mortgage once the home is complete.</p>
-
- <h3>Single Close Construction Loan (Recommended)</h3>
- <p>A single close structure combines construction financing and a permanent mortgage in one closing. It may avoid a second set of eligible closing costs, but rate lock, conversion, appraisal, completion, and qualification conditions vary by lender and program.</p>
-
- <h3>Requirements</h3>
- <ul>
- <li><strong>Credit score:</strong> around 680 is typical (some programs accept 620 or are based on assets)</li>
- <li><strong>Down payment:</strong> Appraised lot equity may reduce the cash required. The lender sets the final amount based on the appraisal, project, borrower, and loan program.</li>
- <li><strong>Licensed builder:</strong> Your GC must be licensed and approved by the lender</li>
- <li><strong>Approved plans:</strong> Complete floor plans and construction budget</li>
- <li><strong>Income documentation:</strong> W2s, tax returns, bank statements</li>
- </ul>
-
- <div class="callout">
- <h4><i data-lucide="file-text" aria-hidden="true"></i> Learn More</h4>
- <p>For a complete breakdown of construction financing, read our <a href="/financing" style="color: var(--orange); font-weight: 600;">Construction Loan Florida Guide</a> including single close vs. two closings comparison, requirements, and FAQ.</p>
- </div>
-
- <!-- SECTION 5 -->
- <h2 id="permits">5. Permits & Florida Building Code</h2>
-
- <p>Every new construction project in Florida requires building permits. The permitting process varies by county and municipality, but generally includes:</p>
-
- <ul>
- <li><strong>Building permit:</strong> The main permit covering structural, electrical, plumbing, and mechanical work</li>
- <li><strong>Site plan approval:</strong> Shows the home's placement on the lot, setbacks, and drainage</li>
- <li><strong>Engineering review:</strong> Structural calculations and wind load analysis (critical in Florida)</li>
- <li><strong>Environmental review:</strong> Wetlands, flood zone, and tree removal permits if applicable</li>
- <li><strong>HOA approval:</strong> If building in an HOA community, architectural review is typically required before permitting</li>
- </ul>
-
- <h3>Florida Building Code Highlights</h3>
- <p>Florida has some of the strictest building codes in the country, and for good reason. The Florida Building Code requires:</p>
-
- <ul>
- <li><strong>Wind resistance:</strong> Homes must be engineered for the local wind speed zone (up to 185 mph in South Florida)</li>
- <li><strong>Impact protection:</strong> Impact rated windows/doors or approved shutters required in windborne debris regions</li>
- <li><strong>Roof to wall connections:</strong> Hurricane straps and clips required to prevent roof uplift</li>
- <li><strong>Flood elevation:</strong> In flood zones, the finished floor must be elevated above the Base Flood Elevation (BFE)</li>
- <li><strong>Energy efficiency:</strong> Insulation, HVAC, and window ratings must meet energy code minimums</li>
- </ul>
-
- <div class="callout">
- <h4><i data-lucide="hard-hat" aria-hidden="true"></i> BuilderK Handles This</h4>
- <p>We manage the entire permitting process, from application to final inspection. Our team prepares all documents, coordinates with engineers, and works with local building departments so you don't have to.</p>
- </div>
-
- <!-- SECTION 6 -->
- <h2 id="construction">6. Construction Methods for Florida</h2>
-
- <p>Choosing the right construction method is one of the most important decisions you'll make. Here are the three main options for Florida homes:</p>
-
- <h3>CMU Block (Concrete Masonry Unit)</h3>
- <p>The most common construction method in Florida. Concrete block walls offer excellent hurricane resistance, fire safety, and thermal mass. They're resistant to termites and stand up well to Florida's humidity. Most lenders and insurance companies prefer block construction.</p>
-
- <h3>Light Gauge Steel (LGS)</h3>
- <p>An emerging alternative that offers speed of construction, termite immunity, and precision engineering. LGS is lighter than block but still provides excellent structural performance. BuilderK is experienced in both CMU and LGS construction.</p>
-
- <h3>Wood Frame</h3>
- <p>Common in other states but less popular in Florida due to termite risk and hurricane vulnerability. Wood frame can work for interior walls and second story construction when combined with a block first floor.</p>
-
- <table class="cost-table">
- <thead>
- <tr>
- <th>Method</th>
- <th>Hurricane Rating</th>
- <th>Termite Proof</th>
- <th>Cost</th>
- <th>Best For</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>CMU Block</strong></td><td>Excellent</td><td>Yes</td><td>$$</td><td>Most Florida homes</td></tr>
- <tr><td><strong>Light Gauge Steel</strong></td><td>Excellent</td><td>Yes</td><td>$$</td><td>Speed, precision</td></tr>
- <tr><td><strong>Wood Frame</strong></td><td>Good</td><td>No</td><td>$</td><td>Interior walls, 2nd floors</td></tr>
- </tbody>
- </table>
-
- <!-- SECTION 7 -->
- <h2 id="timeline">7. Realistic Timeline</h2>
-
- <p>A typical custom home schedule in Florida may look like this:</p>
-
- <table class="cost-table">
- <thead>
- <tr>
- <th>Phase</th>
- <th>Duration</th>
- <th>What Happens</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Design & Planning</strong></td><td>2 to 4 weeks</td><td>Floor plans, specifications, budget finalized</td></tr>
- <tr><td><strong>Financing</strong></td><td>3 to 6 weeks, alongside design</td><td>Early loan approval and closing</td></tr>
- <tr><td><strong>Permitting</strong></td><td>4 to 6 weeks</td><td>Permit applications, engineering, approvals</td></tr>
- <tr><td><strong>Construction</strong></td><td>6 to 10 months</td><td>Site work and slab, framing, roof, windows and doors, electrical, plumbing and HVAC, drywall, finishes, final inspection and CO</td></tr>
- <tr><td><strong>TOTAL</strong></td><td><strong>9 to 14 months</strong></td><td><strong>From first meeting to keys</strong></td></tr>
- </tbody>
- </table>
-
- <div class="callout">
- <h4><i data-lucide="triangle-alert" aria-hidden="true"></i> What Can Cause Delays?</h4>
- <p>Florida's rainy season (June to September), permit backlogs, material supply chain issues, and inspection scheduling can all add time. Working with an experienced builder who plans for these factors is critical.</p>
- </div>
-
- <!-- SECTION 8 -->
- <h2 id="mistakes">8. Common Mistakes to Avoid</h2>
-
- <ul>
- <li><strong>Not budgeting for site work:</strong> Clearing, fill dirt, utility connections, and impact fees can add $20,000 to $50,000+ depending on the lot</li>
- <li><strong>Choosing a builder based on price alone:</strong> The cheapest bid often leads to change orders, delays, and quality issues. Look for experience, licensing, and transparency</li>
- <li><strong>Skipping the soil test:</strong> Florida's soil varies dramatically. A $500 soil test can prevent $50,000 in foundation problems</li>
- <li><strong>Not understanding the construction loan process:</strong> Construction financing is complex. Work with a builder who has lender relationships and can guide you</li>
- <li><strong>Ignoring Florida risks:</strong> Hurricane ratings, flood zones, termite protection, and humidity management aren't optional in Florida, they're essential</li>
- <li><strong>Making too many changes during construction:</strong> Change orders after construction starts are expensive. Finalize your design before breaking ground</li>
- <li><strong>Not getting everything in writing:</strong> Specs, allowances, timelines, and payment schedules should all be documented in your builder agreement</li>
- </ul>
-
- <!-- SECTION 9 -->
- <h2 id="why-builderk">9. Why Build With BuilderK?</h2>
-
- <p>BuilderK coordinates design, permitting, and construction, and helps prepare the documents independent lenders request. Here is what you can expect:</p>
-
- <ul>
- <li><strong>Licensed Florida GC</strong> CGC License #1537163, fully insured</li>
- <li><strong>25+ years combined experience</strong> From luxury high rise buildings to custom single family homes</li>
- <li><strong>One point of contact</strong> You work with one team from start to finish</li>
- <li><strong>Lender relationships</strong> We connect you with construction loan specialists</li>
- <li><strong>Transparent planning</strong> Assumptions, allowances, and major exclusions are documented before a formal proposal</li>
- <li><strong>Built for Florida</strong> Every home we build is engineered for hurricanes, humidity, and Florida's unique climate</li>
- </ul>
-
- <!-- CTA -->
- <p><strong>Plan your build:</strong> try our <a href="/calculator">cost calculator</a>, browse <a href="/floor-plans">floor plans</a>, or learn how <a href="/financing">construction financing</a> works.</p>
-
- <div class="cta-box">
- <h3>Ready to Build Your Dream Home?</h3>
- <p>Whether you already have a lot or you're just starting to explore, we're here to help. Start with a free conversation and no pressure.</p>
- <a href="/calculator" class="cta-btn">Build a Planning Range →</a>
- </div>
-
- <p style="font-size: 0.85rem; color: #999; text-align: center; margin-top: 48px;">Published March 7, 2026 · BuilderK, Builders Knowledge Development Inc. · CGC #1537163 · Orlando, FL</p>
-
-</div>
-
-<!-- FOOTER -->
-<footer>
- <div class="footer-grid">
- <div class="footer-brand">
- <a href="/" class="logo">BUILDER<span>K</span></a>
- <p>A modern Florida custom home builder. You bring the lot, and we guide the project from plans through construction.</p>
- <p style="margin-top: 8px; font-size: 0.85rem;">CGC License #1537163</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/about">About Us</a>
- <a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a>
- <a href="/#services">Services</a>
- <a href="/financing">Financing</a>
- <a href="/calculator">Pricing Calculator</a>
- <a href="/interiors">Interior Selections</a>
- </div>
- <div class="footer-col">
- <h4>Build</h4>
- <a href="/floor-plans">Floor Plans</a>
- <a href="/construction">Construction Gallery</a>
- <a href="/interior-gallery">Interior Gallery</a>
- <a href="/blog">Blog</a>
- <a href="/referral-program/">Referral Program</a>
- <a href="/#styles">Styles</a>
- <a href="/contact">Free consultation</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:+12392304868">(239) 230 4868</a>
- <a href="mailto:info@builderk.com">info@builderk.com</a>
- <a>4700 Millenia Blvd, Ste 500<br>Orlando, FL 32839</a>
- </div>
- </div>
- <div class="footer-bottom">
- © 2026 Builders Knowledge Development Inc. All rights reserved. <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
-
-<script>
-// Click-to-call GA4 event tracking
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (typeof gtag === 'function') {
-        gtag('event', 'phone_click', { 'page_path': location.pathname });
-      }
-    });
-  });
-});
-</script>
-<script src="/scripts/lucide.min.js"></script>
-<script src="/scripts/site-icons.js"></script>
 <script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>

@@ -48,190 +48,236 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
-:root{--orange:#F77F00;--orange-hover:#FF9A2E;--ink:#111111;--bg:#FAFAF8;--card:#FFFFFF;--border:#ECEAE4;--muted:#6B6B6B}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:'Outfit',sans-serif}
+/* page hero: sizes come from --hero-min (computer) and --hero-photo-h (phone photo band) on the section */
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; list-style: none; font-size: 16.5px; line-height: 1.4; color: var(--a5-on-dark-soft); }
+.hero-meta li { display: inline-flex; align-items: center; gap: 8px; }
+.hero-meta svg { flex-shrink: 0; }
+.hero-crumb { margin: 0; font-size: 15px; color: var(--a5-on-dark-muted); }
+.hero-crumb a { color: var(--a5-on-dark); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.hero-phonecall { display: none; }
+@media (min-width: 900px) { .a5-hero .a5-h1 { text-wrap: wrap; } }
+@media (max-width: 899px) {
+  .a5-hero-photo img { object-position: var(--pos-sm, var(--pos, 50% 40%)); }
+  .hero-meta { font-size: 15px; }
+  .hero-meta svg { width: 16px; height: 16px; }
+  .hero-crumb { font-size: 14px; }
+  .a5-hero-actions .hero-phonecall { display: inline-flex; }
+}
 
-.navbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(250,250,248,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:padding 0.3s}
-.navbar.scrolled{padding:11px 48px}
-.nav-logo{display:flex;align-items:center}
-.nav-logo img{height:26px;display:block}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{color:#3a3a3a;text-decoration:none;font-size:0.92rem;font-weight:500;white-space:nowrap;transition:color 0.2s}
-.nav-links a:hover{color:var(--orange)}
-.nav-cta{background:var(--orange)!important;color:#fff!important;padding:10px 22px;border-radius:50px;font-weight:600!important}
-.nav-cta:hover{background:var(--orange-hover)!important}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;z-index:1000}
-.nav-hamburger span{width:26px;height:2px;background:#111;border-radius:2px;transition:transform 0.3s,opacity 0.3s}
-.nav-hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.nav-hamburger.active span:nth-child(2){opacity:0}
-.nav-hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+/* blog index: article cards */
+.blog-list { padding-block: 88px 96px; }
+.blog-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.post-card { padding: 32px 32px 24px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: var(--a5-ink); transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; }
+.post-card:hover { border-color: #CFC9BF; box-shadow: 0 16px 34px rgba(12, 11, 10, 0.08); transform: translateY(-3px); }
+.post-card-top { display: flex; align-items: center; gap: 12px; }
+.post-card .a5-icon { width: 50px; height: 50px; }
+.post-card .chip { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--a5-muted); }
+/* cards the weekly blog agent adds carry the chip without an icon: give them the blueprint icon */
+.post-card > .chip { display: flex; align-items: center; gap: 12px; }
+.post-card > .chip::before { content: ""; width: 50px; height: 50px; flex-shrink: 0; background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22 viewBox=%220 0 64 64%22%3E%3Cdefs%3E%3ClinearGradient id=%22bpSk1%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22#3D8BFD%22%3E%3C/stop%3E%3Cstop offset=%221%22 stop-color=%22#1F5FD1%22%3E%3C/stop%3E%3C/linearGradient%3E%3ClinearGradient id=%22bpRk1%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22#8CC0FF%22%3E%3C/stop%3E%3Cstop offset=%220.5%22 stop-color=%22#4A92F7%22%3E%3C/stop%3E%3Cstop offset=%221%22 stop-color=%22#2566D4%22%3E%3C/stop%3E%3C/linearGradient%3E%3ClinearGradient id=%22bpPk1%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22#FFD24D%22%3E%3C/stop%3E%3Cstop offset=%221%22 stop-color=%22#F5A524%22%3E%3C/stop%3E%3C/linearGradient%3E%3C/defs%3E%3Cellipse cx=%2232%22 cy=%2259%22 rx=%2222%22 ry=%223.2%22 fill=%22#000000%22 opacity=%220.18%22%3E%3C/ellipse%3E%3Crect x=%228%22 y=%2212%22 rx=%224%22 fill=%22url%28#bpSk1%29%22 stroke=%22#143F8F%22 stroke-width=%221.5%22%3E%3C/rect%3E%3Cpath d=%22M14 18 V50 M20 18 V50 M26 18 V50 M32 18 V50 M38 18 V50 M44 18 V50 M50 18 V50 M12 22 H54 M12 28 H54 M12 34 H54 M12 40 H54 M12 46 H54%22 stroke=%22#FFFFFF%22 stroke-width=%220.6%22 opacity=%220.22%22%3E%3C/path%3E%3Cpath d=%22M15 21 H49 V47 H15 Z M15 35 H29 M29 21 V41 M38 35 H49%22 fill=%22none%22 stroke=%22#FFFFFF%22 stroke-width=%222.2%22 stroke-linejoin=%22round%22%3E%3C/path%3E%3Cpath d=%22M29 41 A6 6 0 0 0 35 47%22 fill=%22none%22 stroke=%22#FFFFFF%22 stroke-width=%221.4%22%3E%3C/path%3E%3Crect x=%225%22 y=%227%22 rx=%224.5%22 fill=%22url%28#bpRk1%29%22 stroke=%22#143F8F%22 stroke-width=%221.5%22%3E%3C/rect%3E%3Cpath d=%22M10 9.5 H54%22 stroke=%22#FFFFFF%22 stroke-width=%221.4%22 stroke-linecap=%22round%22 opacity=%220.6%22%3E%3C/path%3E%3Cg transform=%22rotate%28-38 46 46%29%22%3E%3Crect x=%2234%22 y=%2242%22 rx=%221.5%22 fill=%22url%28#bpPk1%29%22 stroke=%22#8A5A00%22 stroke-width=%221%22%3E%3C/rect%3E%3Cpath d=%22M56 42 L63 45.5 L56 49 Z%22 fill=%22#F6D7A7%22 stroke=%22#8A5A00%22 stroke-width=%221%22%3E%3C/path%3E%3Cpath d=%22M60.5 44.3 L63 45.5 L60.5 46.7 Z%22 fill=%22#374151%22%3E%3C/path%3E%3Crect x=%2230%22 y=%2242%22 rx=%221%22 fill=%22#F5A3C7%22 stroke=%22#8A5A00%22 stroke-width=%221%22%3E%3C/rect%3E%3C/g%3E%3C/svg%3E"); }
+.post-card h2 { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 34px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.post-card p { margin: 0; font-size: 16.5px; line-height: 1.6; color: var(--a5-body); }
+.post-card .meta { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--a5-line); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.post-card .date { font-size: 14px; color: var(--a5-muted); }
+.post-card .read { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; color: var(--a5-ink); white-space: nowrap; }
+.post-card:hover .read { text-decoration: underline; text-decoration-color: var(--a5-orange); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+@media (max-width: 899px) {
+  .blog-list { padding-block: 40px 44px; }
+  .blog-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .post-card { padding: 22px 20px 18px; gap: 12px; }
+  .post-card .a5-icon { width: 40px; height: 40px; }
+  .post-card h2 { font-size: 27px; }
+  .post-card p { font-size: 15px; }
+  .post-card .meta { padding-top: 14px; }
+  .post-card .read { font-size: 15px; }
+}
 
-.page-hero{padding:140px 48px 28px;text-align:center;max-width:760px;margin:0 auto}
-.page-hero .eyebrow{font-size:0.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
-.page-hero h1{font-size:3rem;font-weight:800;line-height:1.1;margin-bottom:16px;color:var(--ink)}
-.page-hero h1 span{color:var(--orange)}
-.page-hero p{font-size:1.1rem;color:var(--muted);line-height:1.6}
-
-.blog-grid{max-width:1140px;margin:0 auto;padding:36px 48px 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px}
-.post-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px 28px;text-decoration:none;color:inherit;transition:transform 0.22s,box-shadow 0.22s,border-color 0.22s;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(17,17,17,0.04)}
-.post-card:hover{border-color:rgba(247,127,0,0.5);transform:translateY(-5px);box-shadow:0 16px 34px rgba(17,17,17,0.09)}
-.post-card .chip{display:inline-block;align-self:flex-start;font-size:0.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);background:rgba(247,127,0,0.1);padding:5px 11px;border-radius:6px;margin-bottom:16px}
-.post-card h2{font-size:1.3rem;font-weight:700;line-height:1.3;margin-bottom:10px;color:var(--ink)}
-.post-card p{font-size:0.93rem;color:var(--muted);line-height:1.6;margin-bottom:18px;flex-grow:1}
-.post-card .meta{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--border)}
-.post-card .date{font-size:0.78rem;color:#9a9a9a}
-.post-card .read{font-family:'Outfit',sans-serif;font-weight:700;font-size:0.9rem;color:var(--orange)}
-
-.cta-section{margin:0 48px 70px;padding:56px 40px;text-align:center;background:linear-gradient(135deg,#FFF3E6 0%,#FFE9D2 100%);border:1px solid #F6DEBE;border-radius:24px}
-.cta-section h2{font-size:2.1rem;font-weight:800;color:var(--ink);margin-bottom:12px}
-.cta-section h2 span{color:var(--orange)}
-.cta-section p{font-size:1.05rem;color:#7a5a36;max-width:520px;margin:0 auto 26px;line-height:1.6}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;background:var(--orange);color:#fff;text-decoration:none;border-radius:50px;font-weight:700;font-size:1.05rem;transition:all 0.2s}
-.btn-primary:hover{background:var(--orange-hover);transform:translateY(-2px)}
-
-.footer{background:#fff;padding:54px 48px 28px;border-top:1px solid var(--border)}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-top{display:flex;justify-content:space-between;gap:48px;margin-bottom:36px;flex-wrap:wrap}
-.footer-brand{max-width:280px}
-.footer-brand img{height:26px;display:block;margin-bottom:12px}
-.footer-brand p{color:var(--muted);font-size:0.9rem;line-height:1.5}
-.footer-col{display:flex;flex-direction:column;gap:10px}
-.footer-col h4{color:var(--ink);font-family:'Outfit',sans-serif;font-weight:600;font-size:0.95rem;margin-bottom:4px}
-.footer-col a{color:var(--muted);text-decoration:none;font-size:0.88rem;transition:color 0.2s}
-.footer-col a:hover{color:var(--orange)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid var(--border);color:#9a9a9a;font-size:0.82rem;flex-wrap:wrap;gap:8px}
-.footer-bottom a{color:#9a9a9a;text-decoration:none}
-.footer-bottom a:hover{color:var(--orange)}
-
-@media(max-width:1024px){
-  .navbar{padding:13px 20px!important}
-  .nav-links{display:none;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(250,250,248,0.98);z-index:999;justify-content:center;align-items:center;gap:26px;padding:80px 24px}
-  .nav-links.open{display:flex}
-  .nav-links.open a{font-size:1.3rem}
-  .nav-hamburger{display:flex}
-  .page-hero{padding:116px 24px 20px}.page-hero h1{font-size:2.2rem}
-  .blog-grid{padding:24px 20px 56px;grid-template-columns:1fr;gap:20px}
-  .cta-section{margin:0 20px 56px;padding:44px 24px}.cta-section h2{font-size:1.7rem}
-  .footer{padding:44px 22px 24px}.footer-top{flex-direction:column;gap:30px}
+/* closing call to action */
+.blog-cta { text-align: center; padding-block: 96px 100px; }
+.blog-cta .a5-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.blog-cta .a5-h2 { font-size: clamp(42px, 4.45vw, 64px); }
+.blog-cta .a5-p { max-width: 620px; font-size: 18px; }
+@media (max-width: 899px) {
+  .blog-cta { padding-block: 48px 44px; }
+  .blog-cta .a5-wrap { gap: 18px; }
+  .blog-cta .a5-p { font-size: 15.5px; line-height: 1.55; }
+  .blog-cta .a5-btn { width: 100%; }
 }
 </style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo"><img src="/images/builderk-wordmark.svg" alt="BuilderK" width="163" height="26"></a>
- <ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
-</nav>
-
-<section class="page-hero">
- <div class="eyebrow">BuilderK Blog</div>
- <h1>Building Smart in <span>Florida</span></h1>
- <p>Straight answers on building a custom home on your lot: costs, financing, permitting, hurricane code, and the build process, from a licensed Florida GC.</p>
+<main id="main">
+<section class="a5-hero" aria-labelledby="blog-title" style="--hero-min:620px;--hero-photo-h:330px">
+  <div class="a5-hero-photo" style="--pos:50% 50%;--pos-sm:50% 50%"><img src="/images/projects/jobsite/strip/aerial.webp" alt="Aerial view of a BuilderK home under construction in Florida, roof trusses set, beside a lake" width="900" height="1200" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">BuilderK Blog</div>
+      <h1 class="a5-h1" id="blog-title">Building Smart in <span class="a5-accent">Florida</span></h1>
+      <p class="a5-hero-sub">Straight answers on building a custom home on your lot: costs, financing, permitting, hurricane code, and the build process, from a licensed Florida GC.</p>
+      <div class="a5-hero-actions"><a class="a5-btn a5-btn-hero" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        <a class="a5-btn a5-btn-call hero-phonecall" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a></div>
+    </div>
+  </div>
 </section>
 
+<section class="a5-section a5-bg-white blog-list" aria-label="Articles">
+  <div class="a5-wrap">
 <div class="blog-grid">
  <!-- BLOG CARDS START (newest first; the weekly agent prepends new cards here) -->
   <a class="post-card" href="/blog-buying-a-lot-florida-what-to-check-first">
-    <span class="chip">Lot Buying</span>
+    <span class="post-card-top"><svg width="50" height="50" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2-1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2-1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2-1)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2-1)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg><span class="chip">Lot Buying</span></span>
     <h2>Buying a Lot in Florida: What to Check First</h2>
     <p>Before you buy a Florida lot to build on, check access, utilities and flood zone. Here's what to look at first, and how BuilderK helps you review it.</p>
-    <div class="meta"><span class="date">September 26, 2026</span><span class="read">Read article →</span></div>
+    <div class="meta"><span class="date">September 26, 2026</span><span class="read">Read article <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
   </a>
- <a class="post-card" href="/blog-cbs-block-vs-wood-frame-florida">
- <span class="chip">Construction</span>
- <h2>CBS Block vs Wood Frame in Florida: The Real Differences</h2>
- <p>Concrete block or wood frame for your Florida home? Learn the real differences in durability, moisture resistance, and insurance before you build.</p>
- <div class="meta"><span class="date">June 29, 2026</span><span class="read">Read article →</span></div>
- </a>
- <a class="post-card" href="/blog-florida-hurricane-building-codes-2026-custom-homes">
- <span class="chip">Florida Code</span>
- <h2>Florida Hurricane Building Codes 2026: What New Custom Homeowners Need to Know</h2>
- <p>What Florida's hurricane code asks of a new custom home: wind loads, impact protection and roof rules.</p>
- <div class="meta"><span class="date">June 13, 2026</span><span class="read">Read article →</span></div>
- </a>
- <a class="post-card" href="/blog-build-on-your-lot-vs-buy">
- <span class="chip">Build on Your Lot</span>
- <h2>Build on Your Lot vs Buy: Costs, Equity &amp; Tradeoffs</h2>
- <p>Build on your lot or buy a resale home? Costs, lot equity, financing, timelines and site risk, side by side.</p>
- <div class="meta"><span class="date">March 7, 2026</span><span class="read">Read article →</span></div>
- </a>
- <a class="post-card" href="/blog-build-custom-home-florida-2026">
- <span class="chip">Guide</span>
- <h2>How to Build a Custom Home in Florida: Complete 2026 Guide</h2>
- <p>Everything you need to know about building a custom home in Florida in 2026: costs, timelines, permits, financing, and the step by step process from a licensed GC.</p>
- <div class="meta"><span class="date">March 7, 2026</span><span class="read">Read article →</span></div>
- </a>
+  <a class="post-card" href="/blog-cbs-block-vs-wood-frame-florida">
+    <span class="post-card-top"><svg width="50" height="50" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="hhk5-2" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#FFC266"></stop><stop offset="0.55" stop-color="#FF8A1F"></stop><stop offset="1" stop-color="#D45A00"></stop></radialGradient><linearGradient id="hbk5-2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9E3D"></stop><stop offset="1" stop-color="#C95200"></stop></linearGradient></defs><ellipse cx="32" cy="58" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M10 44 C10 24 20 12 32 12 C44 12 54 24 54 44 Z" fill="url(#hhk5-2)" stroke="#8A3A00" stroke-width="1.6" stroke-linejoin="round"></path><path d="M28 13 C27 22 27 34 28 44 H36 C37 34 37 22 36 13 C34 12.4 30 12.4 28 13 Z" fill="#FF9E3D" stroke="#8A3A00" stroke-width="1.3" stroke-linejoin="round"></path><path d="M17 34 C18 25 22 19 27 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.6"></path><rect x="4" y="43" width="56" height="8" rx="4" fill="url(#hbk5-2)" stroke="#8A3A00" stroke-width="1.6"></rect></svg><span class="chip">Construction</span></span>
+    <h2>CBS Block vs Wood Frame in Florida: The Real Differences</h2>
+    <p>Concrete block or wood frame for your Florida home? Learn the real differences in durability, moisture resistance, and insurance before you build.</p>
+    <div class="meta"><span class="date">June 29, 2026</span><span class="read">Read article <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+  </a>
+  <a class="post-card" href="/blog-florida-hurricane-building-codes-2026-custom-homes">
+    <span class="post-card-top"><svg width="50" height="50" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="pPk4-3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#E9EDF2"></stop></linearGradient><radialGradient id="pSk4-3" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#5EE08A"></stop><stop offset="1" stop-color="#1F9D4C"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M14 6 H40 L50 16 V54 Q50 56 48 56 H14 Q12 56 12 54 V8 Q12 6 14 6 Z" fill="url(#pPk4-3)" stroke="#6B7785" stroke-width="1.5"></path><path d="M40 6 V14 Q40 16 42 16 H50" fill="#D5DCE4" stroke="#6B7785" stroke-width="1.5"></path><path d="M18 22 H42 M18 28 H42 M18 34 H34" stroke="#A7B2BE" stroke-width="2.2" stroke-linecap="round"></path><circle cx="42" cy="44" r="11" fill="url(#pSk4-3)" stroke="#146B33" stroke-width="1.5"></circle><path d="M37 44 L41 48 L48 40" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="chip">Florida Code</span></span>
+    <h2>Florida Hurricane Building Codes 2026: What New Custom Homeowners Need to Know</h2>
+    <p>What Florida's hurricane code asks of a new custom home: wind loads, impact protection and roof rules.</p>
+    <div class="meta"><span class="date">June 13, 2026</span><span class="read">Read article <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+  </a>
+  <a class="post-card" href="/blog-build-on-your-lot-vs-buy">
+    <span class="post-card-top"><svg width="50" height="50" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2-4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2-4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2-4)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2-4)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg><span class="chip">Build on Your Lot</span></span>
+    <h2>Build on Your Lot vs Buy: Costs, Equity &amp; Tradeoffs</h2>
+    <p>Build on your lot or buy a resale home? Costs, lot equity, financing, timelines and site risk, side by side.</p>
+    <div class="meta"><span class="date">March 7, 2026</span><span class="read">Read article <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+  </a>
+  <a class="post-card" href="/blog-build-custom-home-florida-2026">
+    <span class="post-card-top"><svg width="50" height="50" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="bpSk1-5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D8BFD"></stop><stop offset="1" stop-color="#1F5FD1"></stop></linearGradient><linearGradient id="bpRk1-5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC0FF"></stop><stop offset="0.5" stop-color="#4A92F7"></stop><stop offset="1" stop-color="#2566D4"></stop></linearGradient><linearGradient id="bpPk1-5" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFD24D"></stop><stop offset="1" stop-color="#F5A524"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="8" y="12" width="48" height="42" rx="4" fill="url(#bpSk1-5)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M14 18 V50 M20 18 V50 M26 18 V50 M32 18 V50 M38 18 V50 M44 18 V50 M50 18 V50 M12 22 H54 M12 28 H54 M12 34 H54 M12 40 H54 M12 46 H54" stroke="#FFFFFF" stroke-width="0.6" opacity="0.22"></path><path d="M15 21 H49 V47 H15 Z M15 35 H29 M29 21 V41 M38 35 H49" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"></path><path d="M29 41 A6 6 0 0 0 35 47" fill="none" stroke="#FFFFFF" stroke-width="1.4"></path><rect x="5" y="7" width="54" height="9" rx="4.5" fill="url(#bpRk1-5)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M10 9.5 H54" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.6"></path><g transform="rotate(-38 46 46)"><rect x="34" y="42" width="22" height="7" rx="1.5" fill="url(#bpPk1-5)" stroke="#8A5A00" stroke-width="1"></rect><path d="M56 42 L63 45.5 L56 49 Z" fill="#F6D7A7" stroke="#8A5A00" stroke-width="1"></path><path d="M60.5 44.3 L63 45.5 L60.5 46.7 Z" fill="#374151"></path><rect x="30" y="42" width="4" height="7" rx="1" fill="#F5A3C7" stroke="#8A5A00" stroke-width="1"></rect></g></svg><span class="chip">Guide</span></span>
+    <h2>How to Build a Custom Home in Florida: Complete 2026 Guide</h2>
+    <p>Everything you need to know about building a custom home in Florida in 2026: costs, timelines, permits, financing, and the step by step process from a licensed GC.</p>
+    <div class="meta"><span class="date">March 7, 2026</span><span class="read">Read article <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+  </a>
  <!-- BLOG CARDS END -->
 </div>
-
-<section class="cta-section">
- <h2>Ready to Build in <span>Florida?</span></h2>
- <p>BuilderK coordinates plans, permitting, and construction and prepares the documents lenders request from the builder. Tell us about your project.</p>
- <a href="/contact" class="btn-primary">Get my free consultation</a>
+  </div>
 </section>
 
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand">
- <a href="/"><img src="/images/builderk-wordmark.svg" alt="BuilderK" width="163" height="26"></a>
- <p>We build custom homes across Florida, starting with your lot and your goals.</p>
- <p style="margin-top:8px;font-size:0.8rem;color:#9a9a9a;">Licensed Florida GC, CGC #1537163</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/about">About Us</a><a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a><a href="/construction">Construction Gallery</a><a href="/blog">Blog</a><a href="/referral-program/">Referral Program</a>
- </div>
- <div class="footer-col">
- <h4>Services</h4>
- <a href="/floor-plans">Floor Plans</a><a href="/financing">Financing</a><a href="/calculator">Pricing Calculator</a><a href="/interiors">Interior Selections</a><a href="/facades">Facades &amp; Styles</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:2392304868">(239) 230 4868</a><a href="mailto:info@builderk.com">info@builderk.com</a><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
- </div>
- </div>
- <div class="footer-bottom">
- <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
- <span><a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms &amp; Conditions</a></span>
- </div>
- </div>
-</footer>
+<section class="a5-section a5-bg-concrete blog-cta" aria-labelledby="blog-cta-title">
+  <div class="a5-wrap">
+    <h2 class="a5-h2" id="blog-cta-title">Ready to Build in <span class="a5-hl">Florida</span>?</h2>
+    <p class="a5-p">BuilderK coordinates plans, permitting, and construction and prepares the documents lenders request from the builder. Tell us about your project.</p>
+    <a class="a5-btn a5-btn-dark" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
+</section>
+</main>
 
-<script>
-var navbar=document.getElementById('navbar');if(navbar){window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.pageYOffset>60);});}
-var hamburger=document.getElementById('hamburger');var navLinks=document.getElementById('nav-links');
-if(hamburger&&navLinks){
-  hamburger.addEventListener('click',function(){
-    var isOpen=navLinks.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded',isOpen?'true':'false');
-    hamburger.setAttribute('aria-label',isOpen?'Close menu':'Open menu');
-    document.body.style.overflow=isOpen?'hidden':'';
-  });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'&&navLinks.classList.contains('open')){
-      navLinks.classList.remove('open');hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded','false');hamburger.setAttribute('aria-label','Open menu');
-      document.body.style.overflow='';
-    }
-  });
-  navLinks.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){navLinks.classList.remove('open');hamburger.classList.remove('active');document.body.style.overflow='';});});
-}
-</script>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
+</footer>
+<!-- /a5:footer -->
+
 <script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>
