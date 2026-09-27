@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  // One call path on every page: on phones a bottom bar with Call and Talk to a Builder.
+  // One call path on every page: on phones a bottom bar with Call and Free consultation.
   // The home page has its own bar; the calculator keeps its own sticky range bar.
   var PHONE = '2392304868', LABEL = '(239) 230 4868';
   function track() {
@@ -36,12 +36,12 @@
     call.addEventListener('click', track);
     bar.appendChild(call);
     if (!onContact) {
-      // Realtors on the referral page go to the referral form, everyone else to the contact page.
+      // Agents on the referral page go to the referral form, everyone else to the contact page.
       var referral = document.getElementById('referral-form');
       var talk = document.createElement('a');
       talk.href = referral ? '#referral-form' : '/contact';
       talk.className = 'bk-talk';
-      talk.textContent = referral ? 'Submit a Referral' : 'Talk to a Builder';
+      talk.textContent = referral ? 'Submit a Referral' : 'Free consultation';
       bar.appendChild(talk);
     }
     document.body.appendChild(bar);

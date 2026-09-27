@@ -308,7 +308,7 @@ function navHtml() {
     <li><a href="/floor-plans" style="color:var(--orange);">Floor Plans</a></li>
     <li><a href="/financing">Financing</a></li>
     <li><a href="/calculator">Calculator</a></li>
-    <li><a href="/#contact" class="nav-cta">Talk to a Builder</a></li>
+    <li><a href="/#contact" class="nav-cta">Free consultation</a></li>
   </ul>
   <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
 </nav>`;
@@ -559,7 +559,7 @@ ${navHtml()}
       <div class="note">Every BuilderK home is priced for your lot, build tier, site conditions, and finish selections. Request a free estimate before relying on any planning budget.</div>
     </div>
     <div class="cta-row">
-      <a href="/#contact" class="btn-primary">Talk to a Builder</a>
+      <a href="/#contact" class="btn-primary">Get my free consultation</a>
       <a href="/calculator" class="btn-outline">Estimate My Build</a>
     </div>
   </div>
@@ -600,7 +600,7 @@ ${relatedCards}
 <section class="cta-section">
   <h2>Want to <span>Customize This Plan?</span></h2>
   <p>Send us your lot details and we will help you turn this concept into a buildable plan, estimate, and timeline.</p>
-  <a href="/#contact" class="btn-primary">Talk to a Builder</a>
+  <a href="/#contact" class="btn-primary">Get my free consultation</a>
 </section>
 
 ${footerHtml()}
