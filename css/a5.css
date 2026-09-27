@@ -154,6 +154,11 @@ body.a5-menu-open { overflow: hidden; }
 .a5-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
 .a5-hero-note { margin: 0; font-size: 15px; color: var(--a5-on-dark-muted); }
 .a5-hero-note a { color: var(--a5-on-dark); font-weight: 700; text-decoration: none; }
+/* narrower computers: the headline runs further into the photo, so keep the text a little narrower and fade more of the photo */
+@media (min-width: 900px) and (max-width: 1279px) {
+  .a5-hero { --hero-text: min(620px, 56vw); }
+  .a5-hero-photo::before { width: 70%; background: linear-gradient(90deg, var(--a5-dark) 0%, rgba(12, 11, 10, 0.86) 40%, rgba(12, 11, 10, 0) 100%); }
+}
 @media (max-width: 899px) {
   .a5-hero::before { display: none; }
   .a5-hero-photo { position: relative; width: 100%; height: var(--hero-photo-h, 360px); }
@@ -302,3 +307,7 @@ html.a5-motion .a5-step-d { animation: a5StepD 8s ease-out infinite paused; }
 html.a5-motion .a5-hl.is-on, html.a5-motion .a5-tape-x.is-on, html.a5-motion .a5-tape-y.is-on,
 html.a5-motion [data-a5-loop].is-on .a5-hl, html.a5-motion [data-a5-loop].is-on .a5-tape-x, html.a5-motion [data-a5-loop].is-on .a5-tape-y,
 html.a5-motion [data-a5-loop].is-on .a5-step-a, html.a5-motion [data-a5-loop].is-on .a5-step-b, html.a5-motion [data-a5-loop].is-on .a5-step-c, html.a5-motion [data-a5-loop].is-on .a5-step-d { animation-play-state: running; }
+
+/* the phone call bar from scripts/call-bar.js, in the A5 fonts */
+.bk-call-bar a { font-family: var(--a5-sans) !important; }
+.bk-call-bar .bk-talk { font-family: var(--a5-cond) !important; font-weight: 800; font-size: 19px !important; letter-spacing: 0.04em; text-transform: uppercase; }
