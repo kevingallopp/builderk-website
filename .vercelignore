@@ -8,3 +8,4 @@ templates/
 *.md
 scripts/*.mjs
 selections-image-options.html
+partials/
