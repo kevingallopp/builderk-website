@@ -30,1172 +30,751 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
 <style>
-:root {
-  --orange: #F77F00;
-  --orange-hover: #FF9A2E;
-  --dark: #0A0A0A;
-  --light: #FAFAF8;
-  --gray-100: #F5F5F3;
-  --gray-200: #E8E8E5;
-  --gray-600: #6B6B6B;
-  --gray-800: #2A2A2A;
+/* gallery pages: photo hero with filter pills */
+.gal-hero { --hero-min: 660px; }
+.gal-hero .a5-hero-photo img { object-position: var(--pos-d, 50% 40%); }
+.gal-hero .a5-hero-body { gap: 20px; }
+.gal-hero .a5-hero-photo .a5-render-tag { top: auto; left: auto; right: 16px; bottom: 16px; }
+/* on narrower computers keep the text on the dark side of the photo */
+@media (min-width: 900px) { .gal-hero .a5-hero-body { width: min(var(--hero-text, 620px), calc(48.6vw - var(--a5-gutter) + 60px), 100%); } }
+.gal-filters { margin-top: 6px; display: flex; flex-direction: column; gap: 14px; }
+.filter-tabs, .style-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-tab, .style-tab { height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(245, 242, 237, 0.32); background: transparent; color: var(--a5-on-dark-soft); font: 700 15.5px/1 var(--a5-sans); white-space: nowrap; cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+.filter-tab:hover, .style-tab:hover { border-color: rgba(245, 242, 237, 0.75); color: #FFFFFF; }
+.filter-tab.active, .style-tab.active { background: var(--a5-orange); border-color: var(--a5-orange); color: #0C0B0A; }
+.gallery-count { margin: 0; font-size: 14px; color: var(--a5-on-dark-muted); }
+.gallery-count:empty { display: none; }
+@media (max-width: 899px) {
+  .gal-hero .a5-hero-photo img { object-position: var(--pos-p, 50% 40%); }
+  .gal-hero .a5-hero-body { gap: 16px; }
+  .gal-hero .a5-hero-sub { line-height: 1.55; }
+  .gal-hero .a5-hero-photo .a5-render-tag { bottom: 22px; right: 12px; }
+  .gal-filters { margin-top: 4px; gap: 12px; }
+  .filter-tab, .style-tab { height: 40px; font-size: 14.5px; }
+  .gallery-count { font-size: 13.5px; }
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--dark);
-  background: var(--light);
-  -webkit-font-smoothing: antialiased;
+/* intro: centered on computers, left aligned on phones */
+.gal-intro { padding-block: 88px; }
+.gal-intro-text { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.gal-intro .a5-p { max-width: 760px; }
+.gal-intro .a5-h2, .gal-cta .a5-h2 { text-wrap: wrap; }  /* the boards break these lines normally, not balanced */
+@media (max-width: 899px) {
+  .gal-intro { padding-block: 48px 44px; }
+  .gal-intro-text { align-items: flex-start; text-align: left; gap: 8px; }
+  .gal-intro .a5-h2 { font-size: 42px; }
+  .gal-intro .a5-p { font-size: 15.5px; line-height: 1.55; }
 }
 
-h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+/* photo grid on concrete */
+.gal-section { padding-block: 72px 88px; }
+.gallery-item { position: relative; margin: 0; display: flex; flex-direction: column; background: var(--a5-white); border: 1px solid var(--a5-line); border-radius: 14px; overflow: hidden; cursor: pointer; transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.gallery-item:hover { box-shadow: 0 14px 34px rgba(12, 11, 10, 0.12); transform: translateY(-2px); }
+.gallery-item:focus-visible { outline: 3px solid var(--a5-orange); outline-offset: 3px; }
+.gallery-item.hidden { display: none; }
+.gallery-item .gi-media { flex-shrink: 0; border-radius: 0; }
+.gallery-item .gi-media img, .gallery-item .gi-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0C0B0A; }
+.gallery-item .gi-media img { background: #E9E6E0; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.gallery-item:hover .gi-media img { transform: scale(1.03); }
+.gi-zoom { position: absolute; top: 10px; right: 10px; z-index: 2; width: 30px; height: 30px; border-radius: 999px; background: rgba(12, 11, 10, 0.55); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.gv-badge { position: absolute; top: 10px; left: 10px; z-index: 2; background: var(--a5-orange); color: #0C0B0A; font-size: 9.6px; font-weight: 700; letter-spacing: 1px; line-height: 1.4; padding: 3px 8px; border-radius: 4px; pointer-events: none; }
+.gallery-item-overlay { flex: 1; min-height: 58px; padding: 9px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.gallery-item-overlay h3 { margin: 0; min-width: 0; font-family: var(--a5-sans); font-weight: 700; font-size: 15.5px; line-height: 1.3; color: var(--a5-ink); }
+.gallery-tag { flex-shrink: 0; padding: 4px 10px; border-radius: 999px; background: var(--a5-concrete); color: var(--a5-body); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.3; text-transform: uppercase; white-space: nowrap; }
+@media (max-width: 899px) { .gal-section { padding-block: 40px 48px; } }
+@media (hover: none) { .gallery-item:hover { transform: none; box-shadow: none; } .gallery-item:hover .gi-media img { transform: none; } }
 
-/* ===== NAV ===== */
-.navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 48px;
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(12px);
-  transition: all 0.3s;
-}
-.navbar.scrolled { padding: 14px 48px; background: rgba(10,10,10,0.97); }
-.nav-logo { text-decoration: none; display: flex; align-items: baseline; }
-.nav-logo .builder { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: #fff; letter-spacing: 1px; }
-.nav-logo .k { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--orange); }
-.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-.nav-links a { color: #ccc; text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--orange); }
-.nav-cta { background: var(--orange) !important; color: #fff !important; padding: 10px 22px; border-radius: 8px; font-weight: 600 !important; }
-.nav-cta:hover { background: var(--orange-hover) !important; }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1000; position: relative; }
-.nav-hamburger span { width: 26px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
-
-/* ===== HERO ===== */
-.page-hero {
-  padding: 160px 48px 80px;
-  background: var(--dark);
-  text-align: center;
-}
-.page-hero h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 16px;
-  line-height: 1.1;
-}
-.page-hero h1 span { color: var(--orange); }
-.page-hero p {
-  font-size: 1.2rem;
-  color: #aaa;
-  max-width: 640px;
-  margin: 0 auto 32px;
-  line-height: 1.6;
-}
-
-/* Filter tabs */
-.filter-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.filter-tab {
-  padding: 10px 24px;
-  border-radius: 50px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: transparent;
-  color: #ccc;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.filter-tab:hover { border-color: var(--orange); color: var(--orange); }
-.filter-tab.active { background: var(--orange); color: #fff; border-color: var(--orange); }
-.gallery-count { margin-top: 18px; color: #aaa; font-size: 0.85rem; }
-
-/* ===== GALLERY ===== */
-.gallery-section {
-  padding: 80px 48px;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.gallery-item {
-  border-radius: 16px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
-  cursor: pointer;
-  position: relative;
-}
-.gallery-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.14);
-}
-.gallery-item:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
-.gallery-item:focus-visible .gallery-item-overlay { opacity: 1; }
-.gallery-item img {
-  width: 100%;
-  aspect-ratio: 16/11;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.gallery-item:hover img {
-  transform: scale(1.04);
-}
-
-.gallery-item-overlay {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 24px 20px 18px;
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.gallery-item:hover .gallery-item-overlay {
-  opacity: 1;
-}
-.gallery-item-overlay h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 4px;
-}
-.gallery-item-overlay .gallery-tag {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--orange);
-  background: rgba(247, 127, 0, 0.15);
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-
-.gallery-item video { width:100%; aspect-ratio:16/11; object-fit:cover; display:block; background:#000; }
-.gallery-item.featured video { aspect-ratio:21/11; }
-.gallery-item .gv-badge { position:absolute; top:10px; left:10px; background:rgba(247,127,0,0.94); color:#fff; font-size:0.6rem; font-weight:700; letter-spacing:1px; padding:3px 8px; border-radius:4px; z-index:2; }
-.gallery-item .insp-badge { position:absolute; top:10px; left:10px; background:rgba(10,10,10,0.78); color:#fff; font-size:0.6rem; font-weight:700; letter-spacing:1px; padding:3px 8px; border-radius:4px; z-index:2; }
-
-/* Featured (span 2 cols) */
-.gallery-item.featured {
-  grid-column: span 2;
-}
-.gallery-item.featured img {
-  aspect-ratio: 21/11;
-}
-
-/* Hide items when filtered */
-.gallery-item.hidden {
-  display: none;
-}
-
-/* ===== INTRO STRIP ===== */
-.intro-strip {
-  padding: 60px 48px;
-  background: var(--gray-100);
-  text-align: center;
-}
-.intro-strip h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 12px;
-}
-.intro-strip p {
-  font-size: 1.05rem;
-  color: var(--gray-600);
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* ===== LIGHTBOX ===== */
-.lightbox {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.92);
-  z-index: 2000;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  cursor: zoom-out;
-}
+/* image viewer */
+.lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(12, 11, 10, 0.95); align-items: center; justify-content: center; padding: 72px 96px 96px; cursor: zoom-out; }
 .lightbox.active { display: flex; }
-.lightbox img {
-  max-width: 90vw;
-  max-height: 85vh;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-}
-.lightbox-close {
-  position: absolute;
-  top: 24px;
-  right: 32px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.lightbox-close:hover { background: rgba(255,255,255,0.2); }
-.lightbox-caption {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #fff;
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-align: center;
-  opacity: 0.8;
-}
-.lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  font-size: 1.3rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 168px); width: auto; height: auto; object-fit: contain; border-radius: 12px; box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45); cursor: default; }
+.lightbox-close, .lightbox-nav { position: absolute; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border-radius: 999px; border: 1.5px solid rgba(245, 242, 237, 0.3); background: rgba(245, 242, 237, 0.08); color: #FFFFFF; font-size: 28px; line-height: 1; cursor: pointer; transition: background-color 0.15s ease; }
+.lightbox-close:hover, .lightbox-nav:hover { background: rgba(245, 242, 237, 0.2); }
+.lightbox-close { top: 20px; right: 24px; }
+.lightbox-nav { top: 50%; transform: translateY(-50%); width: 52px; height: 52px; font-size: 32px; }
 .lightbox-nav.prev { left: 24px; }
 .lightbox-nav.next { right: 24px; }
-
-/* ===== CTA SECTION ===== */
-.cta-section {
-  padding: 100px 48px;
-  background: var(--dark);
-  text-align: center;
-}
-.cta-section h2 {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 16px;
-}
-.cta-section h2 span { color: var(--orange); }
-.cta-section p {
-  font-size: 1.15rem;
-  color: #aaa;
-  max-width: 550px;
-  margin: 0 auto 32px;
-  line-height: 1.6;
-}
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 36px;
-  background: var(--orange);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.05rem;
-  transition: background 0.2s, transform 0.2s;
-}
-.btn-primary:hover { background: var(--orange-hover); transform: translateY(-2px); }
-
-/* ===== FOOTER ===== */
-.footer { background: var(--dark); padding: 60px 48px 30px; border-top: 1px solid rgba(255,255,255,0.06); }
-.footer-inner { max-width: 1200px; margin: 0 auto; }
-.footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; }
-.footer-brand { max-width: 280px; }
-.footer-brand p { color: #888; font-size: 0.9rem; margin-top: 12px; line-height: 1.5; }
-.footer-col { display: flex; flex-direction: column; gap: 10px; }
-.footer-col h4 { color: #fff; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
-.footer-col a { color: #888; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-.footer-col a:hover { color: var(--orange); }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); color: #555; font-size: 0.82rem; }
-
-/* ===== SCROLL ANIMATIONS ===== */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.stagger-1 { transition-delay: 0.1s; }
-.stagger-2 { transition-delay: 0.2s; }
-.stagger-3 { transition-delay: 0.3s; }
-.stagger-4 { transition-delay: 0.4s; }
-.stagger-5 { transition-delay: 0.5s; }
-
-/* ===== NAV BREAKPOINT ===== */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex !important; }
-  .navbar { padding: 14px 20px !important; }
-}
-/* ===== MOBILE ===== */
-@media (max-width: 900px) {
-  .navbar { padding: 14px 20px !important; }
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex !important; }
-  .page-hero { padding: 120px 24px 60px; }
-  .page-hero h1 { font-size: 2.2rem; }
-  .page-hero p { font-size: 1rem; }
-  .gallery-section { padding: 48px 16px; }
-  .gallery-grid { grid-template-columns: 1fr; gap: 16px; }
-  .gallery-item.featured { grid-column: span 1; }
-  .gallery-item.featured img { aspect-ratio: 16/11; }
-  .gallery-item-overlay { opacity: 1; }
-  .intro-strip { padding: 48px 24px; }
-  .intro-strip h2 { font-size: 1.6rem; }
-  .cta-section { padding: 60px 24px; }
-  .cta-section h2 { font-size: 2rem; }
-  .footer { padding: 40px 20px 24px; }
-  .footer-top { flex-direction: column; gap: 32px; }
-  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-  .filter-tabs { gap: 8px; }
-  .filter-tab { padding: 8px 18px; font-size: 0.85rem; }
-  .lightbox { padding: 16px; }
-  .lightbox-nav.prev { left: 8px; }
-  .lightbox-nav.next { right: 8px; }
+.lightbox-caption { position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%); width: calc(100% - 48px); text-align: center; color: var(--a5-on-dark); font-family: var(--a5-cond); font-weight: 700; font-size: 22px; line-height: 1.1; letter-spacing: 0.04em; text-transform: uppercase; }
+@media (max-width: 899px) {
+  .lightbox { padding: 72px 12px 88px; }
+  .lightbox img { max-height: calc(100vh - 160px); }
+  .lightbox-close { top: 12px; right: 12px; }
+  .lightbox-nav { top: auto; bottom: 20px; transform: none; width: 48px; height: 48px; }
+  .lightbox-nav.prev { left: 12px; }
+  .lightbox-nav.next { right: 12px; }
+  .lightbox-caption { bottom: 32px; width: calc(100% - 144px); font-size: 17px; }
 }
 
-@media (min-width: 901px) and (max-width: 1100px) {
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-item.featured { grid-column: span 2; }
+/* closing call to action */
+.gal-cta { padding-block: 104px; }
+.gal-cta-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.gal-cta .a5-h2 { font-size: clamp(42px, 4.6vw, 66px); }
+.gal-cta .a5-p { max-width: 620px; font-size: 18px; line-height: 1.55; }
+.gal-cta .a5-btn { margin-top: 24px; min-height: 62px; padding: 0 28px; font-size: 23px; }
+@media (max-width: 899px) {
+  .gal-cta { padding-block: 56px; }
+  .gal-cta-inner { gap: 14px; }
+  .gal-cta .a5-p { font-size: 16px; }
+  .gal-cta .a5-btn { width: 100%; margin-top: 18px; min-height: 58px; font-size: 21px; }
 }
 
-/* === MOBILE MENU === */
-.nav-links.open {
-  display: flex !important;
-  flex-direction: column;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(10, 10, 10, 0.98);
-  z-index: 999;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 24px;
-  padding: 88px 24px 32px; overflow-y: auto;
-}
-.nav-links.open li { list-style: none; }
-.nav-links.open li a { font-size: 1.4rem; padding: 12px 0; color: #fff; }
-.nav-links.open li a:hover { color: #F77F00; }
-.nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.nav-hamburger.active span:nth-child(2) { opacity: 0; }
-.nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-/* === FULL-SCREEN MOBILE MENU FIX === */
-@media (max-width: 1280px) {
-  body:has(.nav-links.open),
-  body:has(.nav-links.show) {
-    overflow: hidden;
-  }
-
-  .navbar:has(.nav-links.open),
-  .navbar:has(.nav-links.show),
-  nav:has(.nav-links.open),
-  nav:has(.nav-links.show) {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    padding: 18px 20px !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    overflow: hidden !important;
-    z-index: 10000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-logo,
-  .navbar:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .nav-logo,
-  nav:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .logo,
-  nav:has(.nav-links.show) .logo {
-    position: fixed !important;
-    top: 22px !important;
-    left: 20px !important;
-    z-index: 10002 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-hamburger,
-  .navbar:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .nav-hamburger,
-  nav:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .mobile-menu,
-  nav:has(.nav-links.show) .mobile-menu {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 10003 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-links.open,
-  .navbar:has(.nav-links.show) .nav-links.show,
-  nav:has(.nav-links.open) .nav-links.open,
-  nav:has(.nav-links.show) .nav-links.show {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 96px 24px 48px !important;
-    overflow-y: auto !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
+/* construction: three columns of equal cards, two on phones */
+.gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.gallery-item .gi-media { aspect-ratio: 422 / 300; }
+.gallery-item.gv { cursor: default; }
+.gallery-item.gv video { cursor: pointer; }
+@media (max-width: 1099px) { .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599px) {
+  .gallery-grid { gap: 12px 10px; }
+  .gallery-item .gi-media { aspect-ratio: 172 / 190; }
+  .gallery-item-overlay { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 7px; min-height: 0; padding: 10px 10px 12px; }
+  .gallery-item-overlay h3 { font-size: 13.5px; }
 }
 </style>
-<link rel="stylesheet" href="/css/site-a11y.css">
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction" aria-current="page">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction" aria-current="page">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<!-- NAV -->
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo">
- <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
- </a>
-<ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction" style="color:var(--orange);">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
- <span></span><span></span><span></span>
- </button>
-</nav>
-
-<!-- HERO -->
-<section class="page-hero">
- <h1 class="reveal stagger-1">Built from the <span>Ground Up</span></h1>
- <p class="reveal stagger-2">Every BuilderK home starts with an idea and follows a clear path through design, permitting, and construction.</p>
- <div class="filter-tabs reveal stagger-3" role="group" aria-label="Filter construction gallery by phase">
- <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All</button>
- <button type="button" class="filter-tab" data-filter="foundation" aria-pressed="false">Foundation</button>
- <button type="button" class="filter-tab" data-filter="framing" aria-pressed="false">Framing</button>
- <button type="button" class="filter-tab" data-filter="exterior" aria-pressed="false">Exterior</button>
- <button type="button" class="filter-tab" data-filter="interior" aria-pressed="false">Interior</button>
- <button type="button" class="filter-tab" data-filter="finishes" aria-pressed="false">Finishes</button>
- </div>
- <p class="gallery-count" id="gallery-count" aria-live="polite"></p>
+<main id="main">
+<section class="a5-hero gal-hero" aria-labelledby="page-title" style="--pos-d:50% 30%;--pos-p:50% 35%">
+  <div class="a5-hero-photo"><img src="/images/projects/jobsite/s20.jpg" srcset="/images/projects/jobsite/strip/s20.webp 600w, /images/projects/jobsite/s20.jpg 1201w" sizes="(max-width: 899px) 100vw, 52vw" alt="Three story block building with open ground level bays, balconies and wood roof framing on top." width="1201" height="1600" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <h1 class="a5-h1" id="page-title">Built from the <span class="a5-accent">Ground Up</span></h1>
+      <p class="a5-hero-sub">Every BuilderK home starts with an idea and follows a clear path through design, permitting, and construction.</p>
+      <div class="gal-filters">
+        <div class="filter-tabs" role="group" aria-label="Filter construction gallery by phase">
+          <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-tab" data-filter="foundation" aria-pressed="false">Foundation</button>
+          <button type="button" class="filter-tab" data-filter="framing" aria-pressed="false">Framing</button>
+          <button type="button" class="filter-tab" data-filter="exterior" aria-pressed="false">Exterior</button>
+          <button type="button" class="filter-tab" data-filter="interior" aria-pressed="false">Interior</button>
+          <button type="button" class="filter-tab" data-filter="finishes" aria-pressed="false">Finishes</button>
+        </div>
+        <p class="gallery-count" id="gallery-count" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- INTRO -->
-<section class="intro-strip reveal">
- <h2>From Permit to Punch List</h2>
- <p>Every custom home we build goes through a careful, step by step build. These are real photos from our Florida job sites, foundation pours, steel framing, block walls, and everything in between. Photos titled Inspiration show finish ideas from other Florida homes.</p>
+<section class="a5-section a5-bg-white gal-intro" aria-labelledby="intro-title">
+  <div class="a5-wrap">
+    <div class="gal-intro-text">
+      <h2 class="a5-h2" id="intro-title">From Permit to <span class="a5-hl">Punch List</span></h2>
+      <p class="a5-p">Every custom home we build goes through a careful, step by step build. These are real photos from our Florida job sites, foundation pours, steel framing, block walls, and everything in between. Photos titled Inspiration show finish ideas from other Florida homes.</p>
+    </div>
+  </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery-section">
- <div class="gallery-grid">
+<section class="gal-section a5-bg-concrete" aria-label="Construction photos and videos">
+  <div class="a5-wrap">
+    <div class="gallery-grid">
  <!-- Construction update: September 18, 2026 -->
- <div class="gallery-item gv reveal" data-category="framing" data-title="Telehandler Lifting Steel onto Walls">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Telehandler lifting bundles of steel framing to a crew standing on top of new block walls." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/steel-framing-2026-09-18.jpg"><source src="/videos/construction/steel-framing-2026-09-18.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Telehandler Lifting Steel onto Walls</h3><span class="gallery-tag">Tap for sound</span></div>
+ <div class="gallery-item gv" data-category="framing" data-title="Telehandler Lifting Steel onto Walls">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Telehandler lifting bundles of steel framing to a crew standing on top of new block walls." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/steel-framing-2026-09-18.jpg"><source src="/videos/construction/steel-framing-2026-09-18.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Telehandler Lifting Steel onto Walls</h3><span class="gallery-tag">Tap for sound</span></div>
  </div>
- <div class="gallery-item reveal" data-category="framing" data-title="Plywood Deck over Steel Framing">
- <img src="/images/projects/jobsite/steel-framing-deck-2026-09-18.jpg" alt="Plywood decking laid over steel framing, with two workers beside a stack of steel framing members." loading="lazy">
- <div class="gallery-item-overlay"><h3>Plywood Deck over Steel Framing</h3><span class="gallery-tag">Framing</span></div>
+ <div class="gallery-item" data-category="framing" data-title="Plywood Deck over Steel Framing">
+  <div class="gi-media a5-photo"><img src="/images/projects/jobsite/steel-framing-deck-2026-09-18.jpg" alt="Plywood decking laid over steel framing, with two workers beside a stack of steel framing members." loading="lazy" width="899" height="1599" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Plywood Deck over Steel Framing</h3><span class="gallery-tag">Framing</span></div>
  </div>
- <div class="gallery-item reveal" data-category="framing" data-title="Steel Panels Staged by Block Walls">
- <img src="/images/projects/jobsite/steel-framing-site-2026-09-18.jpg" alt="Steel framing panels stacked beside block walls while a telehandler lifts material to workers on top." loading="lazy">
- <div class="gallery-item-overlay"><h3>Steel Panels Staged by Block Walls</h3><span class="gallery-tag">Framing</span></div>
+ <div class="gallery-item" data-category="framing" data-title="Steel Panels Staged by Block Walls">
+  <div class="gi-media a5-photo"><img src="/images/projects/jobsite/steel-framing-site-2026-09-18.jpg" alt="Steel framing panels stacked beside block walls while a telehandler lifts material to workers on top." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Steel Panels Staged by Block Walls</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
  <!-- Design inspiration from another Florida home (not a BuilderK project): the title of each photo says Inspiration and the intro line explains it -->
- <div class="gallery-item reveal" data-category="finishes" data-title="Kitchen Inspiration">
- <img src="/images/inspiration/winter-park-kitchen-island.webp" alt="Design inspiration from another Florida home: kitchen with a dark island, white quartz top and brass pendant lights" loading="lazy" decoding="async">
- <div class="gallery-item-overlay"><h3>Kitchen Inspiration</h3></div>
+ <div class="gallery-item" data-category="finishes" data-title="Kitchen Inspiration">
+  <div class="gi-media a5-photo"><img src="/images/inspiration/winter-park-kitchen-island.webp" alt="Design inspiration from another Florida home: kitchen with a dark island, white quartz top and brass pendant lights" loading="lazy" decoding="async" width="1200" height="825"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Kitchen Inspiration</h3></div>
  </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Kitchen Inspiration">
- <img src="/images/inspiration/winter-park-kitchen.webp" alt="Design inspiration from another Florida home: white shaker kitchen with a herringbone backsplash and wide oak floors" loading="lazy" decoding="async">
- <div class="gallery-item-overlay"><h3>Kitchen Inspiration</h3></div>
+ <div class="gallery-item" data-category="finishes" data-title="Kitchen Inspiration">
+  <div class="gi-media a5-photo"><img src="/images/inspiration/winter-park-kitchen.webp" alt="Design inspiration from another Florida home: white shaker kitchen with a herringbone backsplash and wide oak floors" loading="lazy" decoding="async" width="1200" height="825"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Kitchen Inspiration</h3></div>
  </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Living Room Inspiration">
- <img src="/images/inspiration/winter-park-living-room.webp" alt="Design inspiration from another Florida home: open living and dining room with a tray ceiling and black framed sliding doors" loading="lazy" decoding="async">
- <div class="gallery-item-overlay"><h3>Living Room Inspiration</h3></div>
+ <div class="gallery-item" data-category="finishes" data-title="Living Room Inspiration">
+  <div class="gi-media a5-photo"><img src="/images/inspiration/winter-park-living-room.webp" alt="Design inspiration from another Florida home: open living and dining room with a tray ceiling and black framed sliding doors" loading="lazy" decoding="async" width="1200" height="825"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Living Room Inspiration</h3></div>
  </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Bedroom Inspiration">
- <img src="/images/inspiration/winter-park-bedroom.webp" alt="Design inspiration from another Florida home: bedroom with blue gray walls, oak floors and a black framed window" loading="lazy" decoding="async">
- <div class="gallery-item-overlay"><h3>Bedroom Inspiration</h3></div>
+ <div class="gallery-item" data-category="finishes" data-title="Bedroom Inspiration">
+  <div class="gi-media a5-photo"><img src="/images/inspiration/winter-park-bedroom.webp" alt="Design inspiration from another Florida home: bedroom with blue gray walls, oak floors and a black framed window" loading="lazy" decoding="async" width="1200" height="825"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Bedroom Inspiration</h3></div>
  </div>
 
  <!-- ===== NEW JOBSITE MEDIA + VIDEO (interleaved 2026-06-10) ===== -->
- <div class="gallery-item reveal" data-category="foundation" data-title="Concrete Pump Truck by Job Sign">
- <img src="images/projects/jobsite/3489.jpg" alt="Concrete pump truck with its boom folded, parked on a cleared lot beside a job site sign." loading="lazy">
- <div class="gallery-item-overlay"><h3>Concrete Pump Truck by Job Sign</h3><span class="gallery-tag">Foundation</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="foundation" data-title="Pump Boom Reaching over Footings">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Concrete pump boom reaching over footing trenches with capped rebar while the crew places concrete." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3497.jpg"><source src="/videos/construction/constr-3497.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Pump Boom Reaching over Footings</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="foundation" data-title="Pool and Spa Rebar before Concrete">
- <img src="images/projects/jobsite/s01.jpg" alt="Pool and spa excavation lined with a rebar grid and plumbing pipes, framed by wood stakes." loading="lazy">
- <div class="gallery-item-overlay"><h3>Pool and Spa Rebar before Concrete</h3><span class="gallery-tag">Foundation</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="foundation" data-title="Crew Raking Concrete into a Footing">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Crew spreading concrete from a pump hose into a footing trench around rebar dowels." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3506.jpg"><source src="/videos/construction/constr-3506.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Crew Raking Concrete into a Footing</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="exterior" data-title="Pool Shell by the Water">
- <img src="images/projects/jobsite/s06.jpg" alt="Concrete pool shell beside the water and boat docks, seen from above over roof underlayment." loading="lazy">
- <div class="gallery-item-overlay"><h3>Pool Shell by the Water</h3><span class="gallery-tag">Exterior</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="foundation" data-title="Pump Hose Filling Rebar Footings">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Pump hose pouring concrete into rebar footings with orange safety caps as the crew works it in." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3508.jpg"><source src="/videos/construction/constr-3508.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Pump Hose Filling Rebar Footings</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="interior" data-title="Temporary Wood Stair at Drywall Stage">
- <img src="images/projects/jobsite/s12.jpg" alt="Temporary wood stair rising to a mezzanine in a tall room with taped drywall and scaffolding." loading="lazy">
- <div class="gallery-item-overlay"><h3>Temporary Wood Stair at Drywall Stage</h3><span class="gallery-tag">Interior</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="exterior" data-title="Pool Shell from the Roof Edge">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Concrete pool shell with built in steps, filmed from the roof edge over the backyard." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3657.jpg"><source src="/videos/construction/constr-3657.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Pool Shell from the Roof Edge</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="framing" data-title="Wood Stud Walls under Trusses">
- <img src="images/projects/jobsite/s02.jpg" alt="Wood stud walls framed under open web trusses, next to block walls lined with furring strips." loading="lazy">
- <div class="gallery-item-overlay"><h3>Wood Stud Walls under Trusses</h3><span class="gallery-tag">Framing</span></div>
- </div>
- <div class="gallery-item reveal" data-category="framing" data-title="Furring Strips on Block Walls">
- <img src="images/projects/jobsite/s03.jpg" alt="Wood furring strips fastened to block walls around a window opening, with trusses overhead." loading="lazy">
- <div class="gallery-item-overlay"><h3>Furring Strips on Block Walls</h3><span class="gallery-tag">Framing</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="framing" data-title="Stud Wall with Wiring and Pipes">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Framed room with a furred block wall, a stud wall carrying wiring and pipes, and can lights." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3627.jpg"><source src="/videos/construction/constr-3627.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Stud Wall with Wiring and Pipes</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="framing" data-title="Overhead Trusses with Ducts and Wiring">
- <img src="images/projects/jobsite/s04.jpg" alt="View up into open web trusses carrying flex ducts, wiring and can lights above stud walls." loading="lazy">
- <div class="gallery-item-overlay"><h3>Overhead Trusses with Ducts and Wiring</h3><span class="gallery-tag">Framing</span></div>
- </div>
- <div class="gallery-item reveal" data-category="framing" data-title="Covered Balcony at Sheathing Stage">
- <img src="images/projects/jobsite/s05.jpg" alt="Covered upper balcony with green wall sheathing, sliding doors and exposed trusses, overlooking the water." loading="lazy">
- <div class="gallery-item-overlay"><h3>Covered Balcony at Sheathing Stage</h3><span class="gallery-tag">Framing</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="interior" data-title="Air Handler Hung between Trusses">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Ceiling air handler with flex duct mounted between wood trusses, above framed walls and wiring." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3628.jpg"><source src="/videos/construction/constr-3628.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Air Handler Hung between Trusses</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="interior" data-title="Rough In Stage with Ducts Overhead">
- <img src="images/projects/jobsite/s08.jpg" alt="Framed rooms with flex ducts in the trusses, furred block walls, windows and an interior door." loading="lazy">
- <div class="gallery-item-overlay"><h3>Rough In Stage with Ducts Overhead</h3><span class="gallery-tag">Interior</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Kitchen Sink under Wide Window">
- <img src="images/projects/jobsite/s10.jpg" alt="Black kitchen sink and faucet on a stone counter below a wide window facing trees and a pond." loading="lazy">
- <div class="gallery-item-overlay"><h3>Kitchen Sink under Wide Window</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="framing" data-title="Balcony Sliding Door in Sheathed Wall">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="New sliding glass door set in green sheathed walls on a covered balcony overlooking the water." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3658.jpg"><source src="/videos/construction/constr-3658.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Balcony Sliding Door in Sheathed Wall</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="interior" data-title="Tall Window Wall at Drywall Stage">
- <img src="images/projects/jobsite/s13.jpg" alt="Two story window wall facing the water, with a temporary stair, scaffolding and drywall in progress." loading="lazy">
- <div class="gallery-item-overlay"><h3>Tall Window Wall at Drywall Stage</h3><span class="gallery-tag">Interior</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Crystal Chandelier in Two Story Room">
- <img src="images/projects/jobsite/s16.jpg" alt="Two story living room with a cascading crystal chandelier, glossy tile floor and glass walls facing the water." loading="lazy">
- <div class="gallery-item-overlay"><h3>Crystal Chandelier in Two Story Room</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="exterior" data-title="Roof Underlayment along Sheathed Wall">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Self adhered roof underlayment on a low roof beside green sheathed walls, then a view over nearby yards." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3660.jpg"><source src="/videos/construction/constr-3660.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Roof Underlayment along Sheathed Wall</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="exterior" data-title="Covered Porch with Wood Deck">
- <img src="images/projects/jobsite/8538.jpg" alt="Long covered porch with a stained wood deck, dark beams and board and batten siding facing pine trees." loading="lazy">
- <div class="gallery-item-overlay"><h3>Covered Porch with Wood Deck</h3><span class="gallery-tag">Exterior</span></div>
- </div>
- <div class="gallery-item reveal" data-category="exterior" data-title="Stucco Walls with New Windows">
- <img src="images/projects/jobsite/s07.jpg" alt="Two story stucco walls with new white grid windows, labels still on, and stucco trim bands." loading="lazy">
- <div class="gallery-item-overlay"><h3>Stucco Walls with New Windows</h3><span class="gallery-tag">Exterior</span></div>
- </div>
- <div class="gallery-item reveal" data-category="interior" data-title="Framed Half Wall with Plumbing Stubs">
- <img src="images/projects/jobsite/s09.jpg" alt="Framed half wall with water line stubs and outlet boxes in front of furred block walls and a window." loading="lazy">
- <div class="gallery-item-overlay"><h3>Framed Half Wall with Plumbing Stubs</h3><span class="gallery-tag">Interior</span></div>
- </div>
- <div class="gallery-item reveal" data-category="exterior" data-title="Three Story Concrete Frame with Glass">
- <img src="images/projects/jobsite/s14.jpg" alt="Three story concrete structure with wraparound balconies and new glass, a pool shell and safety fence in front." loading="lazy">
- <div class="gallery-item-overlay"><h3>Three Story Concrete Frame with Glass</h3><span class="gallery-tag">Exterior</span></div>
- </div>
- <div class="gallery-item reveal" data-category="exterior" data-title="Modern Home with Glass Garage Doors">
- <img src="images/projects/jobsite/s17.jpg" alt="Modern white two story home with glass garage doors, a tall glass entry and a wide driveway." loading="lazy">
- <div class="gallery-item-overlay"><h3>Modern Home with Glass Garage Doors</h3><span class="gallery-tag">Exterior</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Double Vanity with Scalloped Tile Wall">
- <img src="images/projects/jobsite/s19.jpg" alt="White double vanity with oval mirrors and sconces on a scalloped stone mosaic wall beside a glass shower." loading="lazy">
- <div class="gallery-item-overlay"><h3>Double Vanity with Scalloped Tile Wall</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="exterior" data-title="Block Shell with Roof Framing">
- <img src="images/projects/jobsite/s20.jpg" alt="Three story block building with open ground level bays, balconies and wood roof framing on top." loading="lazy">
- <div class="gallery-item-overlay"><h3>Block Shell with Roof Framing</h3><span class="gallery-tag">Exterior</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="White Kitchen with Island Seating">
- <img src="images/projects/jobsite/3586.jpg" alt="White kitchen with stainless appliances and an island with four upholstered stools over dark plank floors." loading="lazy">
- <div class="gallery-item-overlay"><h3>White Kitchen with Island Seating</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Kitchen Island toward the Dining Area">
- <img src="images/projects/jobsite/3587.jpg" alt="Kitchen island with a sink and upholstered stools, opening to a dining area and sliding door." loading="lazy">
- <div class="gallery-item-overlay"><h3>Kitchen Island toward the Dining Area</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Living Room with Wall Mounted TV">
- <img src="images/projects/jobsite/3588.jpg" alt="Furnished living room with a gray sofa, round coffee table and a TV above a wood console." loading="lazy">
- <div class="gallery-item-overlay"><h3>Living Room with Wall Mounted TV</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Living Room with Sheer Curtains">
- <img src="images/projects/jobsite/3589.jpg" alt="Living room with a sofa, potted plant and window with sheer curtains facing the TV console." loading="lazy">
- <div class="gallery-item-overlay"><h3>Living Room with Sheer Curtains</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Dining Area with Oval Table">
- <img src="images/projects/jobsite/3590.jpg" alt="Dining area with a black oval table, woven wood chairs and an arched mirror by a sliding door." loading="lazy">
- <div class="gallery-item-overlay"><h3>Dining Area with Oval Table</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Island Sink with Place Settings">
- <img src="images/projects/jobsite/3591.jpg" alt="Kitchen island with a double sink, place settings and white stools facing the range and refrigerator." loading="lazy">
- <div class="gallery-item-overlay"><h3>Island Sink with Place Settings</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="White Island and Shaker Cabinets">
- <img src="images/projects/jobsite/3592.jpg" alt="White kitchen island with stools in front of shaker cabinets, a microwave and an electric range." loading="lazy">
- <div class="gallery-item-overlay"><h3>White Island and Shaker Cabinets</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Dining Table Facing the Backyard">
- <img src="images/projects/jobsite/3593.jpg" alt="Black dining table with a flower centerpiece in front of a sliding door to a fenced backyard." loading="lazy">
- <div class="gallery-item-overlay"><h3>Dining Table Facing the Backyard</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Living Room from the Sectional">
- <img src="images/projects/jobsite/3594.jpg" alt="Living room seen from behind a sage sectional, with a TV, round coffee table and accent chair." loading="lazy">
- <div class="gallery-item-overlay"><h3>Living Room from the Sectional</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Home Office with Dark Desk">
- <img src="images/projects/jobsite/3595.jpg" alt="Carpeted room furnished as an office with a dark desk, two black chairs and wall art." loading="lazy">
- <div class="gallery-item-overlay"><h3>Home Office with Dark Desk</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Office with Leaning Floor Mirrors">
- <img src="images/projects/jobsite/3596.jpg" alt="Carpeted office with tall mirrors leaning on the wall, abstract art, a floor lamp and desk." loading="lazy">
- <div class="gallery-item-overlay"><h3>Office with Leaning Floor Mirrors</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Office Desk and Closet Doors">
- <img src="images/projects/jobsite/3597.jpg" alt="Dark desk with a potted plant below round wire wall art, beside green wainscoting and double closet doors." loading="lazy">
- <div class="gallery-item-overlay"><h3>Office Desk and Closet Doors</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="finishes" data-title="Bedroom with Green Accent Wall">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Furnished bedroom with a green accent wall, upholstered bed, gold lamps and carpet." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3607.jpg"><source src="/videos/construction/constr-3607.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Bedroom with Green Accent Wall</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Bedroom with Gold Dome Lamps">
- <img src="images/projects/jobsite/3599.jpg" alt="Bedroom with an upholstered bed against a green wall, gold dome lamps and two bright windows." loading="lazy">
- <div class="gallery-item-overlay"><h3>Bedroom with Gold Dome Lamps</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Upholstered Bed by Two Windows">
- <img src="images/projects/jobsite/3600.jpg" alt="Upholstered bed with green and gold pillows, a wood nightstand and two curtained windows." loading="lazy">
- <div class="gallery-item-overlay"><h3>Upholstered Bed by Two Windows</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Toilet Room with Abstract Art">
- <img src="images/projects/jobsite/3606.jpg" alt="Small toilet room with a white toilet, abstract green and white art and plank flooring." loading="lazy">
- <div class="gallery-item-overlay"><h3>Toilet Room with Abstract Art</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Sitting Room with Sectional Sofa">
- <img src="images/projects/jobsite/3608.jpg" alt="Carpeted sitting room with a taupe sectional, arc floor lamp, framed art and green accent panels." loading="lazy">
- <div class="gallery-item-overlay"><h3>Sitting Room with Sectional Sofa</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Sitting Room with Media Console">
- <img src="images/projects/jobsite/3609.jpg" alt="Carpeted room with an arc floor lamp, sofa chaise and wood media console beside a white door." loading="lazy">
- <div class="gallery-item-overlay"><h3>Sitting Room with Media Console</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Bedroom with White Panel Bed">
- <img src="images/projects/jobsite/3610.jpg" alt="Bedroom with a white panel bed, dark green accent wall, black lamp and curtained window." loading="lazy">
- <div class="gallery-item-overlay"><h3>Bedroom with White Panel Bed</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Bedroom with Black Frame Bed">
- <img src="images/projects/jobsite/3611.jpg" alt="Bedroom with a black and cream bed, patterned bedding, abstract prints and a curtained window." loading="lazy">
- <div class="gallery-item-overlay"><h3>Bedroom with Black Frame Bed</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Bedroom Seen from the Doorway">
- <img src="images/projects/jobsite/3612.jpg" alt="Bedroom seen from the doorway, with a gold lamp on a dresser in front of the bed." loading="lazy">
- <div class="gallery-item-overlay"><h3>Bedroom Seen from the Doorway</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Bedroom with Wood Dresser and Mirror">
- <img src="images/projects/jobsite/3613.jpg" alt="Bedroom with a black frame bed, green throw, wood dresser and a mirror above it." loading="lazy">
- <div class="gallery-item-overlay"><h3>Bedroom with Wood Dresser and Mirror</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Bedroom Dresser with Gold Lamp">
- <img src="images/projects/jobsite/3614.jpg" alt="Bedroom corner with a wood dresser, gold lamp and vases across from a bed with a green throw." loading="lazy">
- <div class="gallery-item-overlay"><h3>Bedroom Dresser with Gold Lamp</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Sitting Room toward the Hallway">
- <img src="images/projects/jobsite/3618.jpg" alt="Carpeted sitting room with a sofa, arc lamp and media console, opening to a hallway." loading="lazy">
- <div class="gallery-item-overlay"><h3>Sitting Room toward the Hallway</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Bedroom with Oval Wall Mirrors">
- <img src="images/projects/jobsite/3619.jpg" alt="Bedroom with a white panel bed, green accent wall, two black lamps and oval mirrors." loading="lazy">
- <div class="gallery-item-overlay"><h3>Bedroom with Oval Wall Mirrors</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item gv reveal" data-category="foundation" data-title="Concrete Mixer Trucks Lined Up">
- <span class="gv-badge">&#9654; VIDEO</span>
- <video aria-label="Concrete mixer trucks lined up along the street beside a cleared lot and a portable toilet." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-e54.jpg"><source src="/videos/construction/constr-e54.mp4" type="video/mp4"></video>
- <div class="gallery-item-overlay"><h3>Concrete Mixer Trucks Lined Up</h3><span class="gallery-tag">Tap for sound</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Kitchen Island with Cooktop and Hood">
- <img src="images/projects/jobsite/s11.jpg" alt="Kitchen island with a stone top, built in cooktop and stainless hood, near French doors to a deck." loading="lazy">
- <div class="gallery-item-overlay"><h3>Kitchen Island with Cooktop and Hood</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Bathroom with Tub and Shower Curtain">
- <img src="images/projects/jobsite/3598.jpg" alt="Bathroom with a tiled tub and shower, white curtain, toilet and white vanity with an orchid." loading="lazy">
- <div class="gallery-item-overlay"><h3>Bathroom with Tub and Shower Curtain</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Toilet Room beside the Shower">
- <img src="images/projects/jobsite/3601.jpg" alt="Open door to a toilet room with abstract art, next to a tiled walk in shower." loading="lazy">
- <div class="gallery-item-overlay"><h3>Toilet Room beside the Shower</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Walk In Shower and Closet Door">
- <img src="images/projects/jobsite/3602.jpg" alt="Tiled walk in shower with a low threshold, beside a doorway into a walk in closet." loading="lazy">
- <div class="gallery-item-overlay"><h3>Walk In Shower and Closet Door</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Double Sink Vanity with Wide Mirror">
- <img src="images/projects/jobsite/3603.jpg" alt="Double sink vanity with a wide mirror, gray accessories and orchids, beside an open door." loading="lazy">
- <div class="gallery-item-overlay"><h3>Double Sink Vanity with Wide Mirror</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Walk In Closet with Robes">
- <img src="images/projects/jobsite/3604.jpg" alt="Walk in closet with wire shelving, wood hangers and two white robes hanging on the rod." loading="lazy">
- <div class="gallery-item-overlay"><h3>Walk In Closet with Robes</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Closet Corner with Wire Shelving">
- <img src="images/projects/jobsite/3605.jpg" alt="Corner of a carpeted walk in closet with wire shelves, wood hangers and a laundry hamper." loading="lazy">
- <div class="gallery-item-overlay"><h3>Closet Corner with Wire Shelving</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Two Sink Vanity beside Wall Art">
- <img src="images/projects/jobsite/3615.jpg" alt="White two sink vanity with a mirror and orchid, seen from the doorway beside framed abstract art." loading="lazy">
- <div class="gallery-item-overlay"><h3>Two Sink Vanity beside Wall Art</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Tiled Tub and Shower Combo">
- <img src="images/projects/jobsite/3616.jpg" alt="White tiled tub and shower combination next to a toilet with a basket on the tank." loading="lazy">
- <div class="gallery-item-overlay"><h3>Tiled Tub and Shower Combo</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Shaker Vanity with Two Sinks">
- <img src="images/projects/jobsite/3617.jpg" alt="White shaker vanity with two sinks, a wide mirror and an orchid, lit by two ceiling lights." loading="lazy">
- <div class="gallery-item-overlay"><h3>Shaker Vanity with Two Sinks</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Tray Ceiling over Glossy Tile Floor">
- <img src="images/projects/jobsite/8600.jpg" alt="Empty room with a stepped tray ceiling, glossy large tile floor and black framed window." loading="lazy">
- <div class="gallery-item-overlay"><h3>Tray Ceiling over Glossy Tile Floor</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Two Story Living Room from Above">
- <img src="images/projects/jobsite/s15.jpg" alt="Two story living room seen through a glass railing, with a stone slab wall, chandelier and water views." loading="lazy">
- <div class="gallery-item-overlay"><h3>Two Story Living Room from Above</h3><span class="gallery-tag">Finishes</span></div>
- </div>
- <div class="gallery-item reveal" data-category="finishes" data-title="Glass Wet Room with Freestanding Tub">
- <img src="images/projects/jobsite/s18.jpg" alt="Glass enclosed wet room with a freestanding tub, blue stone walls, pebble tile floor and brass fixtures." loading="lazy">
- <div class="gallery-item-overlay"><h3>Glass Wet Room with Freestanding Tub</h3><span class="gallery-tag">Finishes</span></div>
+ <div class="gallery-item" data-category="foundation" data-title="Concrete Pump Truck by Job Sign">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3489.jpg" alt="Concrete pump truck with its boom folded, parked on a cleared lot beside a job site sign." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Concrete Pump Truck by Job Sign</h3><span class="gallery-tag">Foundation</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="foundation" data-title="Pump Boom Reaching over Footings">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Concrete pump boom reaching over footing trenches with capped rebar while the crew places concrete." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3497.jpg"><source src="/videos/construction/constr-3497.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Pump Boom Reaching over Footings</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="foundation" data-title="Pool and Spa Rebar before Concrete">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s01.jpg" alt="Pool and spa excavation lined with a rebar grid and plumbing pipes, framed by wood stakes." loading="lazy" width="1206" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Pool and Spa Rebar before Concrete</h3><span class="gallery-tag">Foundation</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="foundation" data-title="Crew Raking Concrete into a Footing">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Crew spreading concrete from a pump hose into a footing trench around rebar dowels." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3506.jpg"><source src="/videos/construction/constr-3506.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Crew Raking Concrete into a Footing</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="exterior" data-title="Pool Shell by the Water">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s06.jpg" alt="Concrete pool shell beside the water and boat docks, seen from above over roof underlayment." loading="lazy" width="1192" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Pool Shell by the Water</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="foundation" data-title="Pump Hose Filling Rebar Footings">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Pump hose pouring concrete into rebar footings with orange safety caps as the crew works it in." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3508.jpg"><source src="/videos/construction/constr-3508.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Pump Hose Filling Rebar Footings</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="interior" data-title="Temporary Wood Stair at Drywall Stage">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s12.jpg" alt="Temporary wood stair rising to a mezzanine in a tall room with taped drywall and scaffolding." loading="lazy" width="1202" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Temporary Wood Stair at Drywall Stage</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="exterior" data-title="Pool Shell from the Roof Edge">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Concrete pool shell with built in steps, filmed from the roof edge over the backyard." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3657.jpg"><source src="/videos/construction/constr-3657.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Pool Shell from the Roof Edge</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="framing" data-title="Wood Stud Walls under Trusses">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s02.jpg" alt="Wood stud walls framed under open web trusses, next to block walls lined with furring strips." loading="lazy" width="1194" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Wood Stud Walls under Trusses</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item" data-category="framing" data-title="Furring Strips on Block Walls">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s03.jpg" alt="Wood furring strips fastened to block walls around a window opening, with trusses overhead." loading="lazy" width="1197" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Furring Strips on Block Walls</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="framing" data-title="Stud Wall with Wiring and Pipes">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Framed room with a furred block wall, a stud wall carrying wiring and pipes, and can lights." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3627.jpg"><source src="/videos/construction/constr-3627.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Stud Wall with Wiring and Pipes</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="framing" data-title="Overhead Trusses with Ducts and Wiring">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s04.jpg" alt="View up into open web trusses carrying flex ducts, wiring and can lights above stud walls." loading="lazy" width="1203" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Overhead Trusses with Ducts and Wiring</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item" data-category="framing" data-title="Covered Balcony at Sheathing Stage">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s05.jpg" alt="Covered upper balcony with green wall sheathing, sliding doors and exposed trusses, overlooking the water." loading="lazy" width="1196" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Covered Balcony at Sheathing Stage</h3><span class="gallery-tag">Framing</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="interior" data-title="Air Handler Hung between Trusses">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Ceiling air handler with flex duct mounted between wood trusses, above framed walls and wiring." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3628.jpg"><source src="/videos/construction/constr-3628.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Air Handler Hung between Trusses</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="interior" data-title="Rough In Stage with Ducts Overhead">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s08.jpg" alt="Framed rooms with flex ducts in the trusses, furred block walls, windows and an interior door." loading="lazy" width="1199" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Rough In Stage with Ducts Overhead</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Kitchen Sink under Wide Window">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s10.jpg" alt="Black kitchen sink and faucet on a stone counter below a wide window facing trees and a pond." loading="lazy" width="1203" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Kitchen Sink under Wide Window</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="framing" data-title="Balcony Sliding Door in Sheathed Wall">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="New sliding glass door set in green sheathed walls on a covered balcony overlooking the water." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3658.jpg"><source src="/videos/construction/constr-3658.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Balcony Sliding Door in Sheathed Wall</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="interior" data-title="Tall Window Wall at Drywall Stage">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s13.jpg" srcset="/images/projects/jobsite/strip/s13.webp 900w, images/projects/jobsite/s13.jpg 1200w" sizes="(max-width: 1099px) 50vw, 424px" alt="Two story window wall facing the water, with a temporary stair, scaffolding and drywall in progress." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Tall Window Wall at Drywall Stage</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Crystal Chandelier in Two Story Room">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s16.jpg" alt="Two story living room with a cascading crystal chandelier, glossy tile floor and glass walls facing the water." loading="lazy" width="1202" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Crystal Chandelier in Two Story Room</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="exterior" data-title="Roof Underlayment along Sheathed Wall">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Self adhered roof underlayment on a low roof beside green sheathed walls, then a view over nearby yards." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3660.jpg"><source src="/videos/construction/constr-3660.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Roof Underlayment along Sheathed Wall</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="exterior" data-title="Covered Porch with Wood Deck">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/8538.jpg" alt="Long covered porch with a stained wood deck, dark beams and board and batten siding facing pine trees." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Covered Porch with Wood Deck</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item" data-category="exterior" data-title="Stucco Walls with New Windows">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s07.jpg" alt="Two story stucco walls with new white grid windows, labels still on, and stucco trim bands." loading="lazy" width="1202" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Stucco Walls with New Windows</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item" data-category="interior" data-title="Framed Half Wall with Plumbing Stubs">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s09.jpg" alt="Framed half wall with water line stubs and outlet boxes in front of furred block walls and a window." loading="lazy" width="1203" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Framed Half Wall with Plumbing Stubs</h3><span class="gallery-tag">Interior</span></div>
+ </div>
+ <div class="gallery-item" data-category="exterior" data-title="Three Story Concrete Frame with Glass">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s14.jpg" srcset="/images/projects/jobsite/strip/s14.webp 600w, images/projects/jobsite/s14.jpg 1203w" sizes="(max-width: 1099px) 50vw, 424px" alt="Three story concrete structure with wraparound balconies and new glass, a pool shell and safety fence in front." loading="lazy" width="1203" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Three Story Concrete Frame with Glass</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item" data-category="exterior" data-title="Modern Home with Glass Garage Doors">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s17.jpg" alt="Modern white two story home with glass garage doors, a tall glass entry and a wide driveway." loading="lazy" width="1204" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Modern Home with Glass Garage Doors</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Double Vanity with Scalloped Tile Wall">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s19.jpg" srcset="/images/projects/jobsite/strip/s19.webp 600w, images/projects/jobsite/s19.jpg 1200w" sizes="(max-width: 1099px) 50vw, 424px" alt="White double vanity with oval mirrors and sconces on a scalloped stone mosaic wall beside a glass shower." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Double Vanity with Scalloped Tile Wall</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="exterior" data-title="Block Shell with Roof Framing">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s20.jpg" srcset="/images/projects/jobsite/strip/s20.webp 600w, images/projects/jobsite/s20.jpg 1201w" sizes="(max-width: 1099px) 50vw, 424px" alt="Three story block building with open ground level bays, balconies and wood roof framing on top." loading="lazy" width="1201" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Block Shell with Roof Framing</h3><span class="gallery-tag">Exterior</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="White Kitchen with Island Seating">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3586.jpg" srcset="/images/projects/jobsite/strip/3586.webp 600w, images/projects/jobsite/3586.jpg 1200w" sizes="(max-width: 1099px) 50vw, 424px" alt="White kitchen with stainless appliances and an island with four upholstered stools over dark plank floors." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>White Kitchen with Island Seating</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Kitchen Island toward the Dining Area">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3587.jpg" alt="Kitchen island with a sink and upholstered stools, opening to a dining area and sliding door." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Kitchen Island toward the Dining Area</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Living Room with Wall Mounted TV">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3588.jpg" alt="Furnished living room with a gray sofa, round coffee table and a TV above a wood console." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Living Room with Wall Mounted TV</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Living Room with Sheer Curtains">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3589.jpg" alt="Living room with a sofa, potted plant and window with sheer curtains facing the TV console." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Living Room with Sheer Curtains</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Dining Area with Oval Table">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3590.jpg" alt="Dining area with a black oval table, woven wood chairs and an arched mirror by a sliding door." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Dining Area with Oval Table</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Island Sink with Place Settings">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3591.jpg" alt="Kitchen island with a double sink, place settings and white stools facing the range and refrigerator." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Island Sink with Place Settings</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="White Island and Shaker Cabinets">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3592.jpg" alt="White kitchen island with stools in front of shaker cabinets, a microwave and an electric range." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>White Island and Shaker Cabinets</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Dining Table Facing the Backyard">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3593.jpg" alt="Black dining table with a flower centerpiece in front of a sliding door to a fenced backyard." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Dining Table Facing the Backyard</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Living Room from the Sectional">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3594.jpg" alt="Living room seen from behind a sage sectional, with a TV, round coffee table and accent chair." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Living Room from the Sectional</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Home Office with Dark Desk">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3595.jpg" alt="Carpeted room furnished as an office with a dark desk, two black chairs and wall art." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Home Office with Dark Desk</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Office with Leaning Floor Mirrors">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3596.jpg" alt="Carpeted office with tall mirrors leaning on the wall, abstract art, a floor lamp and desk." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Office with Leaning Floor Mirrors</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Office Desk and Closet Doors">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3597.jpg" alt="Dark desk with a potted plant below round wire wall art, beside green wainscoting and double closet doors." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Office Desk and Closet Doors</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="finishes" data-title="Bedroom with Green Accent Wall">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Furnished bedroom with a green accent wall, upholstered bed, gold lamps and carpet." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-3607.jpg"><source src="/videos/construction/constr-3607.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Bedroom with Green Accent Wall</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Bedroom with Gold Dome Lamps">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3599.jpg" alt="Bedroom with an upholstered bed against a green wall, gold dome lamps and two bright windows." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Bedroom with Gold Dome Lamps</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Upholstered Bed by Two Windows">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3600.jpg" alt="Upholstered bed with green and gold pillows, a wood nightstand and two curtained windows." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Upholstered Bed by Two Windows</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Toilet Room with Abstract Art">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3606.jpg" alt="Small toilet room with a white toilet, abstract green and white art and plank flooring." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Toilet Room with Abstract Art</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Sitting Room with Sectional Sofa">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3608.jpg" alt="Carpeted sitting room with a taupe sectional, arc floor lamp, framed art and green accent panels." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Sitting Room with Sectional Sofa</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Sitting Room with Media Console">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3609.jpg" alt="Carpeted room with an arc floor lamp, sofa chaise and wood media console beside a white door." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Sitting Room with Media Console</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Bedroom with White Panel Bed">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3610.jpg" alt="Bedroom with a white panel bed, dark green accent wall, black lamp and curtained window." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Bedroom with White Panel Bed</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Bedroom with Black Frame Bed">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3611.jpg" alt="Bedroom with a black and cream bed, patterned bedding, abstract prints and a curtained window." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Bedroom with Black Frame Bed</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Bedroom Seen from the Doorway">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3612.jpg" alt="Bedroom seen from the doorway, with a gold lamp on a dresser in front of the bed." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Bedroom Seen from the Doorway</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Bedroom with Wood Dresser and Mirror">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3613.jpg" alt="Bedroom with a black frame bed, green throw, wood dresser and a mirror above it." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Bedroom with Wood Dresser and Mirror</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Bedroom Dresser with Gold Lamp">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3614.jpg" alt="Bedroom corner with a wood dresser, gold lamp and vases across from a bed with a green throw." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Bedroom Dresser with Gold Lamp</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Sitting Room toward the Hallway">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3618.jpg" alt="Carpeted sitting room with a sofa, arc lamp and media console, opening to a hallway." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Sitting Room toward the Hallway</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Bedroom with Oval Wall Mirrors">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3619.jpg" alt="Bedroom with a white panel bed, green accent wall, two black lamps and oval mirrors." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Bedroom with Oval Wall Mirrors</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item gv" data-category="foundation" data-title="Concrete Mixer Trucks Lined Up">
+  <div class="gi-media a5-photo"><span class="gv-badge">&#9654; VIDEO</span><video aria-label="Concrete mixer trucks lined up along the street beside a cleared lot and a portable toilet." class="gv-video" muted loop playsinline preload="none" poster="/videos/construction/constr-e54.jpg"><source src="/videos/construction/constr-e54.mp4" type="video/mp4"></video></div>
+  <div class="gallery-item-overlay"><h3>Concrete Mixer Trucks Lined Up</h3><span class="gallery-tag">Tap for sound</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Kitchen Island with Cooktop and Hood">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s11.jpg" alt="Kitchen island with a stone top, built in cooktop and stainless hood, near French doors to a deck." loading="lazy" width="1600" height="1199" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Kitchen Island with Cooktop and Hood</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Bathroom with Tub and Shower Curtain">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3598.jpg" alt="Bathroom with a tiled tub and shower, white curtain, toilet and white vanity with an orchid." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Bathroom with Tub and Shower Curtain</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Toilet Room beside the Shower">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3601.jpg" alt="Open door to a toilet room with abstract art, next to a tiled walk in shower." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Toilet Room beside the Shower</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Walk In Shower and Closet Door">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3602.jpg" alt="Tiled walk in shower with a low threshold, beside a doorway into a walk in closet." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Walk In Shower and Closet Door</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Double Sink Vanity with Wide Mirror">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3603.jpg" alt="Double sink vanity with a wide mirror, gray accessories and orchids, beside an open door." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Double Sink Vanity with Wide Mirror</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Walk In Closet with Robes">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3604.jpg" alt="Walk in closet with wire shelving, wood hangers and two white robes hanging on the rod." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Walk In Closet with Robes</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Closet Corner with Wire Shelving">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3605.jpg" alt="Corner of a carpeted walk in closet with wire shelves, wood hangers and a laundry hamper." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Closet Corner with Wire Shelving</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Two Sink Vanity beside Wall Art">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3615.jpg" alt="White two sink vanity with a mirror and orchid, seen from the doorway beside framed abstract art." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Two Sink Vanity beside Wall Art</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Tiled Tub and Shower Combo">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3616.jpg" alt="White tiled tub and shower combination next to a toilet with a basket on the tank." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Tiled Tub and Shower Combo</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Shaker Vanity with Two Sinks">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/3617.jpg" alt="White shaker vanity with two sinks, a wide mirror and an orchid, lit by two ceiling lights." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Shaker Vanity with Two Sinks</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Tray Ceiling over Glossy Tile Floor">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/8600.jpg" alt="Empty room with a stepped tray ceiling, glossy large tile floor and black framed window." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Tray Ceiling over Glossy Tile Floor</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Two Story Living Room from Above">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s15.jpg" alt="Two story living room seen through a glass railing, with a stone slab wall, chandelier and water views." loading="lazy" width="1204" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Two Story Living Room from Above</h3><span class="gallery-tag">Finishes</span></div>
+ </div>
+ <div class="gallery-item" data-category="finishes" data-title="Glass Wet Room with Freestanding Tub">
+  <div class="gi-media a5-photo"><img src="images/projects/jobsite/s18.jpg" alt="Glass enclosed wet room with a freestanding tub, blue stone walls, pebble tile floor and brass fixtures." loading="lazy" width="1203" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Glass Wet Room with Freestanding Tub</h3><span class="gallery-tag">Finishes</span></div>
  </div>
 
  <!-- ===== FOUNDATION ===== -->
 
- <div class="gallery-item featured reveal stagger-1" data-category="foundation" data-title="Mixer Chute Pouring the Slab">
- <img src="images/projects/foundation-concrete-pour.jpg" alt="Concrete mixer truck chute pouring onto a slab over black vapor barrier while workers spread it." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Mixer Chute Pouring the Slab</h3>
- <span class="gallery-tag">Foundation</span>
- </div>
+ <div class="gallery-item featured" data-category="foundation" data-title="Mixer Chute Pouring the Slab">
+  <div class="gi-media a5-photo"><img src="images/projects/foundation-concrete-pour.jpg" alt="Concrete mixer truck chute pouring onto a slab over black vapor barrier while workers spread it." loading="lazy" width="1320" height="2868" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Mixer Chute Pouring the Slab</h3><span class="gallery-tag">Foundation</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="foundation" data-title="Crew Spreading Slab Concrete">
- <img src="images/projects/foundation-pour-crew.jpg" alt="Workers spreading fresh concrete across the vapor barrier as a mixer truck unloads at the edge." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Crew Spreading Slab Concrete</h3>
- <span class="gallery-tag">Foundation</span>
- </div>
+ <div class="gallery-item" data-category="foundation" data-title="Crew Spreading Slab Concrete">
+  <div class="gi-media a5-photo"><img src="images/projects/foundation-pour-crew.jpg" alt="Workers spreading fresh concrete across the vapor barrier as a mixer truck unloads at the edge." loading="lazy" width="1320" height="2868" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Crew Spreading Slab Concrete</h3><span class="gallery-tag">Foundation</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="framing" data-title="Steel Stud Walls with Two Workers">
- <img src="images/projects/slab-rebar-layout.jpg" alt="Two men standing among steel stud walls, one checking a tablet, with ducts and wiring overhead." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Steel Stud Walls with Two Workers</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item" data-category="framing" data-title="Steel Stud Walls with Two Workers">
+  <div class="gi-media a5-photo"><img src="images/projects/slab-rebar-layout.jpg" alt="Two men standing among steel stud walls, one checking a tablet, with ducts and wiring overhead." loading="lazy" width="1536" height="2048" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Steel Stud Walls with Two Workers</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-1" data-category="interior" data-title="Drywall Going Up on Steel Studs">
- <img src="images/projects/concrete-slab-finished.jpg" alt="Two men talking beside drywall on steel studs, with an orange ladder, tools and ducts overhead." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Drywall Going Up on Steel Studs</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Drywall Going Up on Steel Studs">
+  <div class="gi-media a5-photo"><img src="images/projects/concrete-slab-finished.jpg" alt="Two men talking beside drywall on steel studs, with an orange ladder, tools and ducts overhead." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Drywall Going Up on Steel Studs</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Subfloor Going Down on Steel Joists">
- <img src="images/projects/concrete-footer-forms.jpg" alt="Workers laying subfloor panels across steel floor joists, with steel trusses and a metal building behind." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Subfloor Going Down on Steel Joists</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item" data-category="framing" data-title="Subfloor Going Down on Steel Joists">
+  <div class="gi-media a5-photo"><img src="images/projects/concrete-footer-forms.jpg" alt="Workers laying subfloor panels across steel floor joists, with steel trusses and a metal building behind." loading="lazy" width="900" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Subfloor Going Down on Steel Joists</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="interior" data-title="Drywall Hung around a Window">
- <img src="images/projects/site-prep-excavation.jpg" alt="Freshly hung drywall with screw marks around a window, with outlet boxes cut in near the floor." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Drywall Hung around a Window</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Drywall Hung around a Window">
+  <div class="gi-media a5-photo"><img src="images/projects/site-prep-excavation.jpg" alt="Freshly hung drywall with screw marks around a window, with outlet boxes cut in near the floor." loading="lazy" width="1200" height="1600" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Drywall Hung around a Window</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
  <!-- ===== FRAMING ===== -->
 
- <div class="gallery-item featured reveal stagger-1" data-category="framing" data-title="Steel Roof Trusses Being Set">
- <img src="images/projects/steel-framing-crane.jpg" alt="Telehandler lifting steel trusses to a worker on top of steel wall framing set on a slab." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Steel Roof Trusses Being Set</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item featured" data-category="framing" data-title="Steel Roof Trusses Being Set">
+  <div class="gi-media a5-photo"><img src="images/projects/steel-framing-crane.jpg" alt="Telehandler lifting steel trusses to a worker on top of steel wall framing set on a slab." loading="lazy" width="3840" height="5120" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Steel Roof Trusses Being Set</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Steel Trusses Stacked on Site">
- <img src="images/projects/steel-trusses-delivery.jpg" alt="Stacks of steel roof trusses resting on the ground at a wooded lot, with a telehandler nearby." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Steel Trusses Stacked on Site</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item" data-category="framing" data-title="Steel Trusses Stacked on Site">
+  <div class="gi-media a5-photo"><img src="images/projects/steel-trusses-delivery.jpg" alt="Stacks of steel roof trusses resting on the ground at a wooded lot, with a telehandler nearby." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Steel Trusses Stacked on Site</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="framing" data-title="Steel Wall Panels Laid on Slab">
- <img src="images/projects/crew-steel-framing.jpg" alt="Steel wall panels laid flat on a new concrete slab while three workers stand by stacks of steel framing." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Steel Wall Panels Laid on Slab</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item" data-category="framing" data-title="Steel Wall Panels Laid on Slab">
+  <div class="gi-media a5-photo"><img src="images/projects/crew-steel-framing.jpg" alt="Steel wall panels laid flat on a new concrete slab while three workers stand by stacks of steel framing." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Steel Wall Panels Laid on Slab</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-1" data-category="framing" data-title="Steel Framing with Drywall Staged">
- <img src="images/projects/steel-framing-drywall-staging.jpg" alt="Steel trusses and stud walls with two stacks of drywall staged on the slab behind a wood half wall." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Steel Framing with Drywall Staged</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item" data-category="framing" data-title="Steel Framing with Drywall Staged">
+  <div class="gi-media a5-photo"><img src="images/projects/steel-framing-drywall-staging.jpg" alt="Steel trusses and stud walls with two stacks of drywall staged on the slab behind a wood half wall." loading="lazy" width="3840" height="5120" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Steel Framing with Drywall Staged</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="foundation" data-title="Cleared Lot with Survey Flags">
- <img src="images/projects/steel-framing-interior-wide.jpg" alt="Cleared and graded sandy lot with survey flags and tire tracks, with tall buildings in the distance." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Cleared Lot with Survey Flags</h3>
- <span class="gallery-tag">Foundation</span>
- </div>
+ <div class="gallery-item" data-category="foundation" data-title="Cleared Lot with Survey Flags">
+  <div class="gi-media a5-photo"><img src="images/projects/steel-framing-interior-wide.jpg" alt="Cleared and graded sandy lot with survey flags and tire tracks, with tall buildings in the distance." loading="lazy" width="3840" height="5120" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Cleared Lot with Survey Flags</h3><span class="gallery-tag">Foundation</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="finishes" data-title="Paint Sprayer and Buckets Ready">
- <img src="images/projects/cmu-block-walls-rising.jpg" alt="Airless paint sprayer and paint buckets in a primed room with windows and doors masked in plastic." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Paint Sprayer and Buckets Ready</h3>
- <span class="gallery-tag">Finishes</span>
- </div>
+ <div class="gallery-item" data-category="finishes" data-title="Paint Sprayer and Buckets Ready">
+  <div class="gi-media a5-photo"><img src="images/projects/cmu-block-walls-rising.jpg" alt="Airless paint sprayer and paint buckets in a primed room with windows and doors masked in plastic." loading="lazy" width="3840" height="5120" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Paint Sprayer and Buckets Ready</h3><span class="gallery-tag">Finishes</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-1" data-category="exterior" data-title="Underlayment Covering a Sloped Roof">
- <img src="images/projects/cmu-window-openings.jpg" alt="Self adhered roof underlayment covering a sloped roof, with bare wood sheathing along the edge." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Underlayment Covering a Sloped Roof</h3>
- <span class="gallery-tag">Exterior</span>
- </div>
+ <div class="gallery-item" data-category="exterior" data-title="Underlayment Covering a Sloped Roof">
+  <div class="gi-media a5-photo"><img src="images/projects/cmu-window-openings.jpg" alt="Self adhered roof underlayment covering a sloped roof, with bare wood sheathing along the edge." loading="lazy" width="1080" height="1920" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Underlayment Covering a Sloped Roof</h3><span class="gallery-tag">Exterior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="foundation" data-title="Slab Prep under Long Span Trusses">
- <img src="images/projects/cmu-walls-progress.jpg" alt="Vapor barrier and wire mesh laid for a slab inside block walls under wood trusses with foam insulation." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Slab Prep under Long Span Trusses</h3>
- <span class="gallery-tag">Foundation</span>
- </div>
+ <div class="gallery-item" data-category="foundation" data-title="Slab Prep under Long Span Trusses">
+  <div class="gi-media a5-photo"><img src="images/projects/cmu-walls-progress.jpg" alt="Vapor barrier and wire mesh laid for a slab inside block walls under wood trusses with foam insulation." loading="lazy" width="2048" height="2048" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Slab Prep under Long Span Trusses</h3><span class="gallery-tag">Foundation</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="foundation" data-title="Scaffolding on Block Walls">
- <img src="images/projects/cmu-walls-scaffolding.jpg" alt="Three story block walls wrapped in scaffolding, with pallets of block and a dumpster in front." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Scaffolding on Block Walls</h3>
- <span class="gallery-tag">Foundation</span>
- </div>
+ <div class="gallery-item" data-category="foundation" data-title="Scaffolding on Block Walls">
+  <div class="gi-media a5-photo"><img src="images/projects/cmu-walls-scaffolding.jpg" alt="Three story block walls wrapped in scaffolding, with pallets of block and a dumpster in front." loading="lazy" width="3024" height="4032" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Scaffolding on Block Walls</h3><span class="gallery-tag">Foundation</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-1" data-category="framing" data-title="Steel Wall Framing and Telehandler">
- <img src="images/projects/roof-trusses-installed.jpg" alt="Steel wall framing standing on a slab as a telehandler lifts steel to a worker on top." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Steel Wall Framing and Telehandler</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item" data-category="framing" data-title="Steel Wall Framing and Telehandler">
+  <div class="gi-media a5-photo"><img src="images/projects/roof-trusses-installed.jpg" alt="Steel wall framing standing on a slab as a telehandler lifts steel to a worker on top." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Steel Wall Framing and Telehandler</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="interior" data-title="Taped Drywall and Glass Panel Door">
- <img src="images/projects/staircase-framing.jpg" alt="Taped and mudded drywall walls and ceiling around a glass panel door and window, with supplies on the floor." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Taped Drywall and Glass Panel Door</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Taped Drywall and Glass Panel Door">
+  <div class="gi-media a5-photo"><img src="images/projects/staircase-framing.jpg" alt="Taped and mudded drywall walls and ceiling around a glass panel door and window, with supplies on the floor." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Taped Drywall and Glass Panel Door</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
  <!-- ===== EXTERIOR ===== -->
 
- <div class="gallery-item featured reveal stagger-1" data-category="exterior" data-title="Modern Stucco Home with Stone Accent">
- <img src="images/projects/completed-modern-exterior.jpg" alt="Modern two story stucco home with dark roof overhangs, a stone accent, paver driveway and palm tree." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Modern Stucco Home with Stone Accent</h3>
- <span class="gallery-tag">Exterior</span>
- </div>
+ <div class="gallery-item featured" data-category="exterior" data-title="Modern Stucco Home with Stone Accent">
+  <div class="gi-media a5-photo"><img src="images/projects/completed-modern-exterior.jpg" alt="Modern two story stucco home with dark roof overhangs, a stone accent, paver driveway and palm tree." loading="lazy" width="4032" height="3024" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Modern Stucco Home with Stone Accent</h3><span class="gallery-tag">Exterior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="interior" data-title="Pink Batt Insulation in Steel Walls">
- <img src="images/projects/exterior-modern-complete.jpg" alt="Pink batt insulation between steel studs around a window and door, with lumber on the slab." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Pink Batt Insulation in Steel Walls</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Pink Batt Insulation in Steel Walls">
+  <div class="gi-media a5-photo"><img src="images/projects/exterior-modern-complete.jpg" alt="Pink batt insulation between steel studs around a window and door, with lumber on the slab." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Pink Batt Insulation in Steel Walls</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="interior" data-title="Flex Duct in an Insulated Chase">
- <img src="images/projects/exterior-stone-detail.jpg" alt="Insulated flex duct running up a steel framed chase lined with pink insulation, with compound buckets nearby." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Flex Duct in an Insulated Chase</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Flex Duct in an Insulated Chase">
+  <div class="gi-media a5-photo"><img src="images/projects/exterior-stone-detail.jpg" alt="Insulated flex duct running up a steel framed chase lined with pink insulation, with compound buckets nearby." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Flex Duct in an Insulated Chase</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-1" data-category="exterior" data-title="Concrete Facade behind Safety Fence">
- <img src="images/projects/two-story-concrete-build.jpg" alt="Modern three story building with smooth concrete panels and black window awnings behind a chain link fence." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Concrete Facade behind Safety Fence</h3>
- <span class="gallery-tag">Exterior</span>
- </div>
+ <div class="gallery-item" data-category="exterior" data-title="Concrete Facade behind Safety Fence">
+  <div class="gi-media a5-photo"><img src="images/projects/two-story-concrete-build.jpg" alt="Modern three story building with smooth concrete panels and black window awnings behind a chain link fence." loading="lazy" width="4032" height="3024" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Concrete Facade behind Safety Fence</h3><span class="gallery-tag">Exterior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="exterior" data-title="Concrete Facade with Window Awnings">
- <img src="images/projects/two-story-windows-installed.jpg" alt="Concrete panel facade with new windows and black metal awnings, seen from the street behind a fence." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Concrete Facade with Window Awnings</h3>
- <span class="gallery-tag">Exterior</span>
- </div>
+ <div class="gallery-item" data-category="exterior" data-title="Concrete Facade with Window Awnings">
+  <div class="gi-media a5-photo"><img src="images/projects/two-story-windows-installed.jpg" alt="Concrete panel facade with new windows and black metal awnings, seen from the street behind a fence." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Concrete Facade with Window Awnings</h3><span class="gallery-tag">Exterior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="finishes" data-title="Blue Stone Shower before the Glass">
- <img src="images/projects/concrete-exterior-progress.jpg" alt="Shower with blue stone look slab walls, brass fixtures, hexagon mosaic floor and a lit niche, tools still inside." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Blue Stone Shower before the Glass</h3>
- <span class="gallery-tag">Finishes</span>
- </div>
+ <div class="gallery-item" data-category="finishes" data-title="Blue Stone Shower before the Glass">
+  <div class="gi-media a5-photo"><img src="images/projects/concrete-exterior-progress.jpg" alt="Shower with blue stone look slab walls, brass fixtures, hexagon mosaic floor and a lit niche, tools still inside." loading="lazy" width="4032" height="3024" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Blue Stone Shower before the Glass</h3><span class="gallery-tag">Finishes</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-1" data-category="exterior" data-title="Modern Home with Black Garage Doors">
- <img src="images/projects/luxury-home-exterior.png" alt="Modern white home with a dark tile roof, black garage doors, paver driveway, palm trees and a parked truck." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Modern Home with Black Garage Doors</h3>
- <span class="gallery-tag">Exterior</span>
- </div>
+ <div class="gallery-item" data-category="exterior" data-title="Modern Home with Black Garage Doors">
+  <div class="gi-media a5-photo"><img src="images/projects/luxury-home-exterior.png" alt="Modern white home with a dark tile roof, black garage doors, paver driveway, palm trees and a parked truck." loading="lazy" width="1536" height="1024" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Modern Home with Black Garage Doors</h3><span class="gallery-tag">Exterior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="foundation" data-title="Track Loader Grading the Lot">
- <img src="images/projects/aerial-site-view.png" alt="Orange compact track loader leveling sandy soil on a lot, with trees and a building behind." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Track Loader Grading the Lot</h3>
- <span class="gallery-tag">Foundation</span>
- </div>
+ <div class="gallery-item" data-category="foundation" data-title="Track Loader Grading the Lot">
+  <div class="gi-media a5-photo"><img src="images/projects/aerial-site-view.png" alt="Orange compact track loader leveling sandy soil on a lot, with trees and a building behind." loading="lazy" width="1290" height="2121" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Track Loader Grading the Lot</h3><span class="gallery-tag">Foundation</span></div>
  </div>
 
  <!-- ===== INTERIOR ===== -->
 
- <div class="gallery-item featured reveal stagger-1" data-category="framing" data-title="Steel Framed Rooms with Flex Duct">
- <img src="images/projects/interior-steel-hvac.jpg" alt="Steel stud walls and trusses with flex duct overhead and glass doors at the far end." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Steel Framed Rooms with Flex Duct</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item featured" data-category="framing" data-title="Steel Framed Rooms with Flex Duct">
+  <div class="gi-media a5-photo"><img src="images/projects/interior-steel-hvac.jpg" alt="Steel stud walls and trusses with flex duct overhead and glass doors at the far end." loading="lazy" width="4032" height="3024" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Steel Framed Rooms with Flex Duct</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="framing" data-title="Drywall Pallet under Steel Trusses">
- <img src="images/projects/interior-steel-insulation.jpg" alt="Large stack of drywall in an open room under steel trusses, with French doors along the far wall." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Drywall Pallet under Steel Trusses</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item" data-category="framing" data-title="Drywall Pallet under Steel Trusses">
+  <div class="gi-media a5-photo"><img src="images/projects/interior-steel-insulation.jpg" alt="Large stack of drywall in an open room under steel trusses, with French doors along the far wall." loading="lazy" width="4032" height="3024" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Drywall Pallet under Steel Trusses</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="framing" data-title="Steel Stud Walls and Window Openings">
- <img src="images/projects/interior-rough-plumbing.jpg" alt="Steel stud walls under steel trusses, with French doors, a window and a plumbing pipe in the slab." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Steel Stud Walls and Window Openings</h3>
- <span class="gallery-tag">Framing</span>
- </div>
+ <div class="gallery-item" data-category="framing" data-title="Steel Stud Walls and Window Openings">
+  <div class="gi-media a5-photo"><img src="images/projects/interior-rough-plumbing.jpg" alt="Steel stud walls under steel trusses, with French doors, a window and a plumbing pipe in the slab." loading="lazy" width="4032" height="3024" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Steel Stud Walls and Window Openings</h3><span class="gallery-tag">Framing</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-1" data-category="interior" data-title="Insulated Steel Walls and Drywall Stack">
- <img src="images/projects/interior-framing-drywall-prep.jpg" alt="Pink insulation in steel stud walls beside a drywall stack topped with insulation bags and supplies." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Insulated Steel Walls and Drywall Stack</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Insulated Steel Walls and Drywall Stack">
+  <div class="gi-media a5-photo"><img src="images/projects/interior-framing-drywall-prep.jpg" alt="Pink insulation in steel stud walls beside a drywall stack topped with insulation bags and supplies." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Insulated Steel Walls and Drywall Stack</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="interior" data-title="Taped Drywall by Open Doorway">
- <img src="images/projects/drywall-stage.jpg" alt="Taped drywall around a window and an open doorway to the yard, with a bucket on the slab." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Taped Drywall by Open Doorway</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Taped Drywall by Open Doorway">
+  <div class="gi-media a5-photo"><img src="images/projects/drywall-stage.jpg" alt="Taped drywall around a window and an open doorway to the yard, with a bucket on the slab." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Taped Drywall by Open Doorway</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="interior" data-title="Drywall Mudding and Taping">
- <img src="images/projects/drywall-finishing.jpg" alt="Large room with taped and mudded drywall, French doors and boxes of light fixtures on the floor." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Drywall Mudding and Taping</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Drywall Mudding and Taping">
+  <div class="gi-media a5-photo"><img src="images/projects/drywall-finishing.jpg" alt="Large room with taped and mudded drywall, French doors and boxes of light fixtures on the floor." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Drywall Mudding and Taping</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-1" data-category="interior" data-title="Joint Compound Bags by Taped Walls">
- <img src="images/projects/interior-paint-primer.jpg" alt="Bags of joint compound and buckets stacked in a taped drywall room with a window and open door." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Joint Compound Bags by Taped Walls</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Joint Compound Bags by Taped Walls">
+  <div class="gi-media a5-photo"><img src="images/projects/interior-paint-primer.jpg" alt="Bags of joint compound and buckets stacked in a taped drywall room with a window and open door." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Joint Compound Bags by Taped Walls</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Painter in Protective Suit">
- <img src="images/projects/painter-stairwell.jpg" alt="Painter in a white protective suit and respirator standing in a room with freshly sprayed white walls." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Painter in Protective Suit</h3>
- <span class="gallery-tag">Finishes</span>
- </div>
+ <div class="gallery-item" data-category="finishes" data-title="Painter in Protective Suit">
+  <div class="gi-media a5-photo"><img src="images/projects/painter-stairwell.jpg" alt="Painter in a white protective suit and respirator standing in a room with freshly sprayed white walls." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Painter in Protective Suit</h3><span class="gallery-tag">Finishes</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-3" data-category="interior" data-title="Air Handler Installed in Closet">
- <img src="images/projects/hvac-system-installed.jpg" alt="Air conditioning air handler in a closet with insulated supply duct, return plenum and drain line." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Air Handler Installed in Closet</h3>
- <span class="gallery-tag">Interior</span>
- </div>
+ <div class="gallery-item" data-category="interior" data-title="Air Handler Installed in Closet">
+  <div class="gi-media a5-photo"><img src="images/projects/hvac-system-installed.jpg" alt="Air conditioning air handler in a closet with insulated supply duct, return plenum and drain line." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Air Handler Installed in Closet</h3><span class="gallery-tag">Interior</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Black Framed Sliding Glass Doors">
- <img src="images/projects/finished-impact-windows.jpg" alt="Three panel black framed sliding glass door opening to a screened patio, with new light plank floors." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Black Framed Sliding Glass Doors</h3>
- <span class="gallery-tag">Finishes</span>
- </div>
+ <div class="gallery-item" data-category="finishes" data-title="Black Framed Sliding Glass Doors">
+  <div class="gi-media a5-photo"><img src="images/projects/finished-impact-windows.jpg" alt="Three panel black framed sliding glass door opening to a screened patio, with new light plank floors." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Black Framed Sliding Glass Doors</h3><span class="gallery-tag">Finishes</span></div>
  </div>
 
- <div class="gallery-item reveal stagger-2" data-category="finishes" data-title="Two Workers in a Primed Room">
- <img src="images/projects/tile-flooring-install.jpg" alt="Painter in a protective suit and a man in a black shirt in a room with freshly sprayed walls." loading="lazy">
- <div class="gallery-item-overlay">
- <h3>Two Workers in a Primed Room</h3>
- <span class="gallery-tag">Finishes</span>
- </div>
+ <div class="gallery-item" data-category="finishes" data-title="Two Workers in a Primed Room">
+  <div class="gi-media a5-photo"><img src="images/projects/tile-flooring-install.jpg" alt="Painter in a protective suit and a man in a black shirt in a room with freshly sprayed walls." loading="lazy" width="5712" height="4284" decoding="async"><span class="gi-zoom" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></span></div>
+  <div class="gallery-item-overlay"><h3>Two Workers in a Primed Room</h3><span class="gallery-tag">Finishes</span></div>
  </div>
 
  </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
- <h2 class="reveal">Seen enough? <span>Let's build yours.</span></h2>
- <p class="reveal stagger-1">From foundation to finishes, we manage every phase of your custom home build. Start with a transparent planning range.</p>
- <a href="/calculator" class="btn-primary reveal stagger-2">Get Your Estimate <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<section class="a5-section a5-bg-white gal-cta" aria-labelledby="cta-title">
+  <div class="a5-wrap gal-cta-inner">
+    <h2 class="a5-h2" id="cta-title">Seen enough? Let's build <span class="a5-hl">yours</span>.</h2>
+    <p class="a5-p">From foundation to finishes, we manage every phase of your custom home build. Start with a transparent planning range.</p>
+    <a class="a5-btn a5-btn-dark" href="/calculator">Get Your Estimate <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
 </section>
+</main>
 
-<!-- FOOTER -->
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand">
- <a href="/" class="nav-logo">
- <span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span>
- </a>
- <p>We build custom homes across Florida, starting with your lot and your goals.</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/">Home</a>
- <a href="/about">About Us</a>
- <a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a>
- <a href="/facades">Facades & Styles</a>
- <a href="/floor-plans">Floor Plans</a>
- </div>
- <div class="footer-col">
- <h4>Services</h4>
- <a href="/">Custom Homes</a>
- <a href="/financing">Financing</a>
- <a href="/#services">Construction Management</a>
- <a href="/blog">Blog</a>
- <a href="/calculator">Pricing Calculator</a>
- <a href="/interiors">Interior Selections</a>
- <a href="/construction">Construction Gallery</a>
- <a href="/interior-gallery">Interior Gallery</a>
- <a href="/referral-program/">Referral Program</a>
- <a href="/privacy">Privacy Policy</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:2392304868">(239) 230 4868</a>
- <a href="mailto:info@builderk.com">info@builderk.com</a>
- <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
- </div>
- </div>
- <div class="footer-bottom">
- <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
- <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
- </div>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
@@ -1207,37 +786,6 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
 </div>
 
 <script>
-// ===== SCROLL REVEAL =====
-window.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.page-hero .reveal').forEach(function(el) {
-    el.classList.add('visible');
-  });
-});
-
-var observer = null;
-if (typeof IntersectionObserver !== 'undefined') {
-  observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.05 });
-  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-}
-
-// ===== NAVBAR SCROLL =====
-var navbar = document.getElementById('navbar');
-if (navbar) {
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
-}
-
 // ===== FILTER TABS =====
 var filterTabs = document.querySelectorAll('.filter-tab');
 var galleryItems = document.querySelectorAll('.gallery-item');
@@ -1340,47 +888,6 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeLightbox();
   if (e.key === 'ArrowLeft') lightboxPrev.click();
   if (e.key === 'ArrowRight') lightboxNext.click();
-});
-
-// ===== MOBILE MENU =====
-var hamburger = document.getElementById('hamburger');
-var navLinks = document.querySelector('.nav-links');
-if (hamburger && navLinks) {
-  hamburger.addEventListener('click', function() {
-    var isOpen = navLinks.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Open menu');
-      document.body.style.overflow = '';
-    }
-  });
-  navLinks.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-    });
-  });
-}
-</script>
-
-<script>
-// Click-to-call GA4 event tracking
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (typeof gtag === 'function') {
-        gtag('event', 'phone_click', { 'page_path': location.pathname });
-      }
-    });
-  });
 });
 </script>
 <script>
