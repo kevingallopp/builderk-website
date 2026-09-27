@@ -34,261 +34,6 @@
  <meta name="twitter:title" content="Construction Loan Florida | Single Close Financing | BuilderK">
  <meta name="twitter:description" content="A clear guide to Florida construction loans, dependent on the lender terms, and lot equity.">
  <meta name="twitter:image" content="https://www.builderk.com/images/hero-house.png">
- <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet"/>
- <style>
-        :root {
-            --orange: #F77F00; --orange-light: #FF9A2E; --black: #0A0A0A;
-            --dark: #111111; --dark2: #1A1A1A; --dark3: #222222;
-            --gray: #888888; --gray-light: #BBBBBB; --white: #FFFFFF;
-            --light-bg: #FAFAF8;
-        }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--white); }
-
-        /* ===== NAV ===== */
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 48px; display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,10,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; color: var(--white); text-decoration: none; }
-        .logo span { color: var(--orange); }
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a { color: var(--gray-light); text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--white); }
-        .nav-cta { background: var(--orange); color: var(--white); padding: 10px 24px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: background 0.3s; }
-        .nav-cta:hover { background: var(--orange-light); }
-        .mobile-menu { display: none; background: none; border: none; cursor: pointer; }
-        .mobile-menu svg { width: 28px; height: 28px; stroke: var(--white); }
-
-        /* ===== HERO ===== */
-        .hero { padding: 160px 48px 100px; background: linear-gradient(135deg, var(--dark) 0%, var(--black) 50%, #1a0f00 100%); position: relative; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(247,127,0,0.08) 0%, transparent 70%); border-radius: 50%; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(247,127,0,0.1); border: 1px solid rgba(247,127,0,0.25); padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; color: var(--orange); text-transform: uppercase; margin-bottom: 24px; }
-        .hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
-        .hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; max-width: 700px; }
-        .hero h1 em { font-style: normal; color: var(--orange); }
-        .hero p { font-size: 1.15rem; color: var(--gray-light); max-width: 560px; line-height: 1.7; margin-bottom: 40px; }
-        .hero-stats { display: flex; gap: 48px; margin-top: 48px; }
-        .hero-stat .number { font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--orange); }
-        .hero-stat .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-top: 4px; }
-        .hero-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: var(--white); padding: 16px 36px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; }
-        .hero-cta:hover { background: var(--orange-light); transform: translateY(-2px); }
-
-        /* ===== SECTIONS ===== */
-        .section { padding: 100px 48px; }
-        .section-light { background: var(--light-bg); color: var(--dark); }
-        .section-dark { background: var(--dark2); }
-        .section-black { background: var(--black); }
-        .section-title { font-family: 'Outfit', sans-serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 16px; }
-        .section-title em { font-style: normal; color: var(--orange); }
-        .section-sub { font-size: 1.05rem; color: var(--gray); max-width: 600px; line-height: 1.7; margin-bottom: 48px; }
-        .section-sub-dark { color: #666; }
-        .max-w { max-width: 1200px; margin: 0 auto; }
-
-        /* ===== WHAT IS SECTION ===== */
-        .what-is-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .what-is-text h3 { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 12px; color: var(--dark); }
-        .what-is-text p { color: #555; line-height: 1.8; margin-bottom: 20px; font-size: 1rem; }
-        .what-is-visual { background: var(--dark2); border-radius: 20px; padding: 40px; }
-        .loan-flow { display: flex; flex-direction: column; gap: 0; }
-        .flow-step { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; position: relative; }
-        .flow-step:not(:last-child)::after { content: ''; position: absolute; left: 20px; top: 56px; bottom: 0; width: 2px; background: rgba(247,127,0,0.3); }
-        .flow-num { width: 40px; height: 40px; border-radius: 50%; background: var(--orange); color: var(--white); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .flow-content h4 { font-family: 'Outfit', sans-serif; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-        .flow-content p { font-size: 0.9rem; color: var(--gray-light); line-height: 1.5; }
-
-        /* ===== COMPARISON TABLE ===== */
-        .compare-table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
-        .compare-table thead th { background: var(--orange); color: var(--dark); font-family: 'Outfit', sans-serif; font-weight: 700; padding: 16px 24px; text-align: left; font-size: 0.95rem; }
-        .compare-table td { padding: 16px 24px; border-bottom: 1px solid #eee; font-size: 0.95rem; color: #444; }
-        .compare-table tbody th { padding:16px 24px;border-bottom:1px solid #eee;background:#fff;color:#333;text-align:left;font:600 0.92rem 'DM Sans',sans-serif; }
-        .compare-table tr:nth-child(even) td { background: #f8f8f6; }
-        .compare-table tr:nth-child(even) th { background:#f8f8f6; }
-        .compare-scroll{overflow-x:auto;border-radius:16px}
-        .compare-scroll .compare-table{min-width:720px}
-        .compare-table .check { color: #22c55e; font-weight: 700; font-size: 1.2rem; }
-        .compare-table .cross { color: #ef4444; font-weight: 700; font-size: 1.2rem; }
-
-        /* ===== REQUIREMENTS CARDS ===== */
-        .req-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-        .req-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px 24px; text-align: center; transition: all 0.3s; }
-        .req-card:hover { border-color: var(--orange); transform: translateY(-4px); }
-        .req-icon { font-size: 2.5rem; margin-bottom: 16px; }
-        .req-card h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.6rem; color: var(--orange); margin-bottom: 8px; }
-        .req-card p { font-size: 0.9rem; color: var(--gray-light); line-height: 1.5; }
-
-        /* ===== PROCESS TIMELINE ===== */
-        .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; position: relative; }
-        .timeline::before { content: ''; position: absolute; top: 28px; left: 10%; right: 10%; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange-light)); z-index: 0; }
-        .tl-step { text-align: center; position: relative; z-index: 1; }
-        .tl-dot { width: 56px; height: 56px; border-radius: 50%; background: var(--dark2); border: 3px solid var(--orange); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--orange); font-size: 1.1rem; }
-        .tl-step h4 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 6px; color: var(--dark3); }
-        .tl-step p { font-size: 0.82rem; color: #777; line-height: 1.5; padding: 0 8px; }
-
-        /* ===== FAQ ===== */
-        .faq-list { max-width: 800px; margin: 0 auto; }
-        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
-        .faq-q { width:100%; padding: 24px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1.05rem; color: var(--white); background:none; border:0; text-align:left; }
-        .faq-q:hover { color: var(--orange); }
-        .faq-q span { font-size: 1.5rem; color: var(--orange); transition: transform 0.3s; }
-        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-        .faq-a-inner { padding: 0 0 24px; color: var(--gray-light); line-height: 1.8; font-size: 0.95rem; }
-        .faq-item.open .faq-a { max-height: 300px; }
-        .faq-item.open .faq-q span { transform: rotate(45deg); }
-        .req-icon svg,.why-card .icon svg{width:28px;height:28px;stroke:currentColor}
-        .finance-disclaimer{margin-top:30px;max-width:760px;padding:18px 20px;border:1px solid rgba(247,127,0,0.25);border-radius:12px;background:rgba(247,127,0,0.06);color:#ccc;font-size:0.86rem;line-height:1.65}
-        .finance-disclaimer a{color:var(--orange)}
-
-        /* ===== CTA ===== */
-        .cta-section { padding: 100px 48px; background: linear-gradient(135deg, #1a0f00 0%, var(--dark) 50%, var(--black) 100%); text-align: center; }
-        .cta-section h2 { font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 16px; }
-        .cta-section h2 em { font-style: normal; color: var(--orange); }
-        .cta-section p { color: var(--gray-light); font-size: 1.1rem; max-width: 500px; margin: 0 auto 36px; line-height: 1.7; }
-        .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: var(--white); padding: 18px 40px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; text-decoration: none; transition: all 0.3s; }
-        .cta-btn:hover { background: var(--orange-light); transform: translateY(-2px); }
-
-        /* ===== FOOTER ===== */
-        footer { background: var(--dark); padding: 60px 48px 30px; border-top: 1px solid rgba(255,255,255,0.06); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto; }
-        .footer-brand .logo { font-size: 1.4rem; }
-        .footer-brand p { color: var(--gray); font-size: 0.9rem; margin-top: 12px; line-height: 1.6; }
-        .footer-col h4 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 16px; color: var(--white); }
-        .footer-col a { display: block; color: var(--gray); font-size: 0.9rem; text-decoration: none; margin-bottom: 10px; transition: color 0.3s; }
-        .footer-col a:hover { color: var(--orange); }
-        .footer-bottom { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); color: var(--gray); font-size: 0.8rem; }
-
-        /* ===== WHY BUILDERK ===== */
-        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .why-card { background: var(--white); border-radius: 16px; padding: 32px; border: 1px solid #eee; transition: all 0.3s; }
-        .why-card:hover { border-color: var(--orange); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(247,127,0,0.08); }
-        .why-card .icon { width: 48px; height: 48px; background: rgba(247,127,0,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px; }
-        .why-card h3 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1.1rem; margin-bottom: 8px; color: var(--dark); }
-        .why-card p { font-size: 0.9rem; color: #666; line-height: 1.6; }
-
-        /* ===== MOBILE MENU OPEN STATE ===== */
-        .nav-links.show {
-            display: flex !important;
-            flex-direction: column;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(10, 10, 10, 0.98);
-            z-index: 999;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 18px;
-            padding: 88px 24px 32px;
-            overflow-y: auto;
-        }
-        .nav-links.show a { font-size: 1.3rem; color: #fff; padding: 10px 0; }
-        .nav-links.show a:hover, .nav-links.show a.active { color: var(--orange); }
-        .nav-links.show .nav-cta { margin-top: 12px; background: var(--orange); color: #fff !important; padding: 14px 28px; border-radius: 8px; }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
-            .nav-links { display: none; }
-            .mobile-menu { display: block; }
-            nav { padding: 14px 20px; }
-        }
-        @media (max-width: 1024px) {
-            .req-grid { grid-template-columns: repeat(2, 1fr); }
-            .timeline { grid-template-columns: repeat(3, 1fr); }
-            .timeline::before { display: none; }
-            .why-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 768px) {
-            nav { padding: 16px 24px; }
-            .nav-links { display: none; }
-            .mobile-menu { display: block; }
-            .hero { padding: 120px 24px 80px; }
-            .hero-stats { flex-wrap: wrap; gap: 32px; }
-            .section { padding: 72px 24px; }
-            .what-is-grid { grid-template-columns: 1fr; gap: 40px; }
-            .req-grid { grid-template-columns: 1fr; }
-            .timeline { grid-template-columns: 1fr; gap: 24px; }
-            .why-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-            .cta-section { padding: 72px 24px; }
-            footer { padding: 48px 24px 24px; }
-        }
-
-/* === FULL-SCREEN MOBILE MENU FIX === */
-@media (max-width: 1280px) {
-  body:has(.nav-links.open),
-  body:has(.nav-links.show) {
-    overflow: hidden;
-  }
-
-  .navbar:has(.nav-links.open),
-  .navbar:has(.nav-links.show),
-  nav:has(.nav-links.open),
-  nav:has(.nav-links.show) {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    padding: 18px 20px !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    overflow: hidden !important;
-    z-index: 10000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-logo,
-  .navbar:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .nav-logo,
-  nav:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .logo,
-  nav:has(.nav-links.show) .logo {
-    position: fixed !important;
-    top: 22px !important;
-    left: 20px !important;
-    z-index: 10002 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-hamburger,
-  .navbar:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .nav-hamburger,
-  nav:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .mobile-menu,
-  nav:has(.nav-links.show) .mobile-menu {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 10003 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-links.open,
-  .navbar:has(.nav-links.show) .nav-links.show,
-  nav:has(.nav-links.open) .nav-links.open,
-  nav:has(.nav-links.show) .nav-links.show {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 96px 24px 48px !important;
-    overflow-y: auto !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
-}
-</style>
- <link rel="stylesheet" href="/css/site-a11y.css">
- <script defer src="/scripts/lucide.min.js"></script>
 
  <script type="application/ld+json">
 {
@@ -330,371 +75,427 @@
   ]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
+<style>
+/* hero */
+.fin-hero { --hero-min: 840px; }
+.fin-hero.a5-hero-noimg { --hero-min: 0px; }
+.fin-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 340px; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(12, 11, 10, 0) 0%, rgba(12, 11, 10, 0.95) 70%); }
+.fin-hero .a5-hero-inner { --hero-pad-bottom: 44px; gap: 56px; }
+.fin-hero-call { display: none; }
+.fin-hero-foot { display: flex; flex-direction: column; gap: 18px; }
+.fin-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; padding-top: 22px; border-top: 1px solid rgba(245, 242, 237, 0.24); }
+.fin-stat { display: flex; flex-direction: column; gap: 6px; }
+.fin-stat-num { font-family: var(--a5-cond); font-weight: 800; font-size: 40px; line-height: 1; color: var(--a5-on-dark); }
+.fin-stat-label { font-size: 14px; line-height: 1.4; color: var(--a5-on-dark-muted); }
+.finance-disclaimer { margin: 0; max-width: 900px; font-size: 13px; line-height: 1.55; color: #A8A298; }
+.finance-disclaimer a { color: var(--a5-on-dark); }
+
+/* what is a construction loan, and how draws work */
+.what-cards { margin-bottom: 40px; }
+.what-card { padding: 28px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
+.what-card .a5-p { font-size: 16px; }
+.draws { display: flex; flex-direction: column; gap: 18px; }
+.draws-title { margin: 0; }
+.draws-wrap .a5-tapebar-y { display: none; }
+.draws-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 28px; }
+.draw { display: flex; flex-direction: column; gap: 6px; }
+.draw-num { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
+.draw-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 24px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.draw p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--a5-body); }
+.draws-tape .draw-marks { position: absolute; left: 18px; right: 0; top: 30px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; color: var(--a5-ink); }
+.draws-tape .draw-marks span { padding-left: 6px; }
+.draws-tape .draw-marks b { padding: 0 5px; font-weight: inherit; background: var(--a5-orange); }
+.draws-note { margin: 0; font-size: 14px; line-height: 1.5; color: var(--a5-muted); }
+/* the five draws appear as the tape reaches them (same 8 second loop as the shared a5-step-a..d, one step longer) */
+@keyframes finStepA { 0%, 1% { opacity: 0; transform: translateY(10px); } 6%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes finStepB { 0%, 8% { opacity: 0; transform: translateY(10px); } 13%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes finStepC { 0%, 15.5% { opacity: 0; transform: translateY(10px); } 20.5%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes finStepD { 0%, 23% { opacity: 0; transform: translateY(10px); } 28%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes finStepE { 0%, 30.5% { opacity: 0; transform: translateY(10px); } 35.5%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+html.a5-motion .fin-step-a { animation: finStepA 8s ease-out infinite paused; }
+html.a5-motion .fin-step-b { animation: finStepB 8s ease-out infinite paused; }
+html.a5-motion .fin-step-c { animation: finStepC 8s ease-out infinite paused; }
+html.a5-motion .fin-step-d { animation: finStepD 8s ease-out infinite paused; }
+html.a5-motion .fin-step-e { animation: finStepE 8s ease-out infinite paused; }
+html.a5-motion [data-a5-loop].is-on .fin-step-a, html.a5-motion [data-a5-loop].is-on .fin-step-b, html.a5-motion [data-a5-loop].is-on .fin-step-c,
+html.a5-motion [data-a5-loop].is-on .fin-step-d, html.a5-motion [data-a5-loop].is-on .fin-step-e { animation-play-state: running; }
+
+/* single close vs two closings */
+.compare-table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--a5-white); border: 1px solid #D5DBE0; border-radius: 16px; }
+.compare-table caption { caption-side: bottom; padding-top: 18px; text-align: left; font-size: 13.5px; line-height: 1.55; color: #56646E; }
+.compare-table thead th { padding: 16px 22px; background: var(--a5-finance-ink); color: #FFFFFF; font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1.1; text-transform: uppercase; text-align: left; }
+.compare-table thead th:first-child { width: 300px; border-top-left-radius: 15px; }
+.compare-table thead th:last-child { border-top-right-radius: 15px; }
+.compare-table tbody th, .compare-table tbody td { padding: 16px 22px; border-top: 1px solid #E3E8EC; font-size: 16px; line-height: 1.5; text-align: left; vertical-align: top; }
+.compare-table tbody th { font-weight: 700; color: var(--a5-finance-ink); }
+.compare-table tbody td { color: var(--a5-finance-body); }
+.compare-table tbody td strong { color: var(--a5-finance-ink); }
+.compare-table tbody tr:nth-child(even) > * { background: #F7F9FA; }
+.compare-table tbody tr.compare-how > * { background: #FFF8EF; }
+.compare-table tbody tr:last-child > th { border-bottom-left-radius: 15px; }
+.compare-table tbody tr:last-child > td:last-child { border-bottom-right-radius: 15px; }
+
+/* what you need to qualify */
+.req-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.req-card { padding: 26px 24px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 14px; }
+.req-card > div { display: flex; flex-direction: column; gap: 14px; }
+.req-card .a5-h3 { font-size: 24px; }
+.req-card p, .why-card p, .tl-step p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--a5-body); }
+
+/* the financing process */
+.tl { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.tl-step { padding: 24px 22px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
+.tl-step > div { display: flex; flex-direction: column; gap: 12px; }
+.tl-step .a5-num { width: 38px; height: 38px; font-size: 20px; }
+.tl-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 23px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.tl-step p { font-size: 15px; }
+
+/* why BuilderK */
+.why-head { display: grid; grid-template-columns: minmax(0, 1fr) 360px; column-gap: 48px; align-items: end; }
+.why-icons { display: flex; align-items: center; justify-content: flex-end; gap: 16px; padding-bottom: 40px; }
+.why-icons .a5-icon { width: 72px; height: 72px; }
+.why-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.why-card { padding: 26px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 10px; }
+.why-card .a5-h3 { font-size: 24px; }
+
+/* FAQ */
+.faq-layout { display: grid; grid-template-columns: 420px minmax(0, 1fr); column-gap: 64px; align-items: start; }
+.faq-layout .a5-head { margin-bottom: 0; }
+.fin-faq { border-top: 0; gap: 12px; }
+.fin-faq details { border: 1px solid #D5DBE0; border-radius: 14px; background: var(--a5-white); }
+.fin-faq summary { padding: 20px 24px; font-size: 17px; color: var(--a5-finance-ink); }
+.fin-faq summary::after { background: var(--a5-finance); color: var(--a5-finance-ink); }
+.fin-faq .a5-faq-a { padding: 0 24px 22px; font-size: 16px; line-height: 1.6; color: var(--a5-finance-body); max-width: none; }
+
+/* final call */
+.fin-cta { padding-block: 104px; }
+.fin-cta .cta-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.fin-cta .a5-h2 { font-size: clamp(44px, 4.6vw, 66px); }
+.fin-cta .a5-p { max-width: 620px; font-size: 18px; line-height: 1.55; }
+.fin-cta .a5-btn { margin-top: 8px; }
+
+@media (max-width: 1099px) {
+  .req-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tl { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .why-head { grid-template-columns: minmax(0, 1fr) auto; }
+  .faq-layout { grid-template-columns: 320px minmax(0, 1fr); column-gap: 40px; }
+  .draws-steps { column-gap: 18px; }
+  .draw-title { font-size: 21px; }
+}
+@media (max-width: 899px) {
+  .fin-hero { --hero-photo-h: 330px; }
+  .fin-hero::after { display: none; }
+  .fin-hero .a5-h1 { font-size: clamp(42px, 13.3vw, 52px); }
+  .fin-hero .a5-hero-inner { gap: 8px; }
+  .fin-hero-call { display: inline-flex; }
+  .fin-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; padding-top: 18px; border-top-color: rgba(245, 242, 237, 0.2); }
+  .fin-stat { gap: 5px; }
+  .fin-stat-num { font-size: 32px; }
+  .fin-stat-label { font-size: 13px; }
+  .finance-disclaimer { font-size: 12.5px; }
+  .fin-hero-foot { gap: 16px; }
+  .what-cards { margin-bottom: 18px; }
+  .what-card { padding: 20px 18px; gap: 10px; }
+  .what-card .a5-h3 { font-size: 22px; }
+  .what-card .a5-p { font-size: 15px; line-height: 1.55; }
+  .draws { gap: 0; }
+  .draws-title { margin-bottom: 18px; }
+  .draws-wrap { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 16px; }
+  .draws-wrap .a5-tapebar-y { display: block; width: 44px; }
+  .draws-steps { grid-template-columns: minmax(0, 1fr); row-gap: 22px; padding: 20px 0 4px; }
+  .draw { gap: 4px; }
+  .draw-num { font-size: 12px; }
+  .draw-title { font-size: 22px; }
+  .draw p { font-size: 14.5px; }
+  .draws-tape { display: none; }
+  .draws-note { margin-top: 16px; font-size: 13px; }
+  .compare-table { display: flex; flex-direction: column; gap: 12px; border: 0; border-radius: 0; background: transparent; }
+  .compare-table caption { order: 3; padding-top: 0; font-size: 12.5px; line-height: 1.6; }
+  .compare-table thead, .compare-table thead tr, .compare-table thead th { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+  .compare-table tbody { display: flex; flex-direction: column; gap: 12px; }
+  .compare-table tbody tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; border-radius: 14px; background: var(--a5-white); border: 1px solid #D5DBE0; }
+  .compare-table tbody tr > *, .compare-table tbody tr:nth-child(even) > * { display: block; border: 0; border-radius: 0 !important; background: transparent; }
+  .compare-table tbody th { grid-column: 1 / -1; padding: 12px 16px; background: var(--a5-finance-ink) !important; color: #FFFFFF; font-family: var(--a5-cond); font-weight: 800; font-size: 19px; line-height: 1.1; text-transform: uppercase; }
+  .compare-table tbody td { padding: 12px 16px; font-size: 14.5px; line-height: 1.45; }
+  .compare-table tbody td + td { border-left: 1px solid #E3E8EC; }
+  .compare-table tbody td::before { content: attr(data-label); display: block; margin-bottom: 4px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #56646E; }
+  .compare-table tbody tr.compare-how { display: block; padding: 14px 16px; background: #FFF8EF; border-color: #F1E2CD; }
+  .compare-table tbody tr.compare-how > th { padding: 0; background: transparent !important; color: var(--a5-finance-ink); font-family: var(--a5-sans); font-size: 15px; line-height: 1.4; text-transform: none; }
+  .compare-table tbody tr.compare-how > td { padding: 4px 0 0; }
+  .req-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .req-card { display: grid; grid-template-columns: 52px minmax(0, 1fr); column-gap: 14px; align-items: start; padding: 18px; }
+  .req-card .a5-icon { width: 52px; height: 52px; }
+  .req-card > div { gap: 6px; }
+  .req-card .a5-h3, .why-card .a5-h3 { font-size: 21px; }
+  .req-card p, .why-card p, .tl-step p { font-size: 14.5px; line-height: 1.5; }
+  .tl { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .tl-step { display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 14px; align-items: start; padding: 16px 18px; border-radius: 14px; }
+  .tl-step > div { gap: 5px; }
+  .tl-step .a5-num { width: 36px; height: 36px; font-size: 19px; }
+  .tl-title { font-size: 21px; }
+  .why-head { grid-template-columns: minmax(0, 1fr); }
+  .why-icons { display: none; }
+  .why-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .why-card { padding: 18px; border-radius: 14px; gap: 6px; }
+  .faq-layout { grid-template-columns: minmax(0, 1fr); row-gap: 18px; }
+  .fin-faq { gap: 10px; }
+  .fin-faq summary { padding: 16px 18px; font-size: 16px; line-height: 1.35; }
+  .fin-faq summary::after { width: 28px; height: 28px; font-size: 19px; }
+  .fin-faq .a5-faq-a { padding: 0 18px 18px; font-size: 15px; }
+  .fin-cta { padding-block: 48px 44px; }
+  .fin-cta .cta-inner { gap: 16px; }
+  .fin-cta .a5-h2 { font-size: clamp(40px, 11.8vw, 46px); }
+  .fin-cta .a5-p { font-size: 16px; line-height: 1.6; }
+  .fin-cta .a5-btn { width: 100%; min-height: 58px; margin-top: 0; font-size: 20px; }
+}
+</style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing" aria-current="page">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing" aria-current="page">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<!-- NAV -->
-<nav id="navbar">
- <a href="/" class="logo">BUILDER<span>K</span></a>
- <div class="nav-links" id="nav-links">
- <a href="/process">How It Works</a>
- <a href="/floor-plans">Floor Plans</a>
- <a href="/construction">Construction</a>
- <a href="/financing" class="active">Financing</a>
- <a href="/calculator">Calculator</a>
- <a href="/contact" class="nav-cta">Free consultation</a>
- </div>
- <button class="mobile-menu" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
- <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
- </button>
-</nav>
-
-<script>
-    var fHam = document.getElementById('hamburger');
-    var fLinks = document.getElementById('nav-links');
-    if (fHam && fLinks) {
-        fHam.addEventListener('click', function() {
-            var isOpen = fLinks.classList.toggle('show');
-            fHam.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            fHam.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && fLinks.classList.contains('show')) {
-                fLinks.classList.remove('show');
-                fHam.setAttribute('aria-expanded', 'false');
-                fHam.setAttribute('aria-label', 'Open menu');
-                document.body.style.overflow = '';
-            }
-        });
-    }
-</script>
-
-<!-- HERO -->
-<section class="hero">
- <div class="max-w">
- <div class="hero-badge">Construction Loan Guide, Florida</div>
- <h1>Don't Let the Loan<br>Stop Your <em>Dream</em></h1>
- <p>We explain how construction financing connects to the build, introduce independent lenders, prepare the project documents they request, and manage construction from plans to keys.</p>
- <a href="/contact" class="hero-cta">Get my free consultation →</a>
- <div class="hero-stats">
- <div class="hero-stat">
- <div class="number">Varies</div>
- <div class="label">Credit and Qualification Guidelines</div>
- </div>
- <div class="hero-stat">
- <div class="number">Lot</div>
- <div class="label">Equity May Reduce Cash Required</div>
- </div>
- <div class="hero-stat">
- <div class="number">1</div>
- <div class="label">Possible With Construction to Permanent</div>
- </div>
- <div class="hero-stat">
- <div class="number">Land</div>
- <div class="label">Appraised by the Lender</div>
- </div>
- </div>
- <div class="finance-disclaimer">BuilderK is not a lender or mortgage broker. Loan approval, rates, fees, conversion, and qualification requirements are determined by the independent lender and loan program. For neutral background, see the <a href="https://www.consumerfinance.gov/ask-cfpb/what-is-a-construction-loan-en-108/" target="_blank" rel="noopener">Consumer Financial Protection Bureau's construction loan guide</a>.</div>
- </div>
+<main id="main">
+<section class="a5-hero fin-hero" aria-labelledby="fin-title">
+  <div class="a5-hero-photo"><img src="/images/projects/jobsite/strip/s14.webp" alt="Three story BuilderK home exterior in Florida" width="600" height="800" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">Construction loan guide, Florida</div>
+      <h1 class="a5-h1" id="fin-title">Don't let the loan stop your <span class="a5-accent">dream</span></h1>
+      <p class="a5-hero-sub">We explain how construction financing connects to the build, introduce independent lenders, prepare the project documents they request, and manage construction from plans to keys.</p>
+      <div class="a5-hero-actions">
+        <a class="a5-btn a5-btn-hero" href="/contact">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        <a class="a5-btn a5-btn-call fin-hero-call" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a>
+      </div>
+    </div>
+    <div class="fin-hero-foot">
+      <div class="fin-stats"><div class="fin-stat"><span class="fin-stat-num">Varies</span><span class="fin-stat-label">Credit and qualification guidelines</span></div><div class="fin-stat"><span class="fin-stat-num">Lot</span><span class="fin-stat-label">Equity may reduce cash required</span></div><div class="fin-stat"><span class="fin-stat-num">1</span><span class="fin-stat-label">Possible with construction to permanent</span></div><div class="fin-stat"><span class="fin-stat-num">Land</span><span class="fin-stat-label">Appraised by the lender</span></div></div>
+      <p class="finance-disclaimer">BuilderK is not a lender or mortgage broker. Loan approval, rates, fees, conversion, and qualification requirements are determined by the independent lender and loan program. For neutral background, see the <a href="https://www.consumerfinance.gov/ask-cfpb/what-is-a-construction-loan-en-108/" target="_blank" rel="noopener">Consumer Financial Protection Bureau's construction loan guide</a>.</p>
+    </div>
+  </div>
 </section>
 
-<!-- WHAT IS A CONSTRUCTION LOAN -->
-<section class="section section-light">
- <div class="max-w">
- <h2 class="section-title">What Is a <em>Construction Loan?</em></h2>
- <p class="section-sub section-sub-dark">Unlike a traditional mortgage where you buy an existing home, a construction loan finances the building of a new home from the ground up.</p>
- <div class="what-is-grid">
- <div class="what-is-text">
- <h3>Temporary Financing, Long Term Home</h3>
- <p>A construction loan is temporary financing that typically lasts 12 to 18 months. The lender releases funds in stages, called draws, as construction reaches specific milestones.</p>
- <p>During construction, many programs charge interest on the amount already drawn. With an approved <strong>construction to permanent</strong> or <strong>single close</strong> structure, the loan is designed to convert after the lender's completion conditions are met. Other construction loans require separate permanent financing.</p>
- <h3>Compare the Complete Project</h3>
- <p>A custom build can be designed around your lot, priorities, and Florida requirements. Compare its complete project cost, financing, schedule, and appraisal with suitable resale alternatives in the same market.</p>
- </div>
- <div class="what-is-visual">
- <h3 style="font-family:'Outfit',sans-serif; font-weight:700; color:var(--orange); margin-bottom:24px; font-size:1.2rem;">How Draws Work</h3>
- <div class="loan-flow">
- <div class="flow-step">
- <div class="flow-num">1</div>
- <div class="flow-content">
- <h4>Loan Approved & Closed</h4>
- <p>Funds held in escrow by lender</p>
- </div>
- </div>
- <div class="flow-step">
- <div class="flow-num">2</div>
- <div class="flow-content">
- <h4>Foundation Draw</h4>
- <p>Site work, slab, and foundation poured</p>
- </div>
- </div>
- <div class="flow-step">
- <div class="flow-num">3</div>
- <div class="flow-content">
- <h4>Framing Draw</h4>
- <p>Structure, roof, windows installed</p>
- </div>
- </div>
- <div class="flow-step">
- <div class="flow-num">4</div>
- <div class="flow-content">
- <h4>Interior Draw</h4>
- <p>MEP rough installation, drywall, finishes</p>
- </div>
- </div>
- <div class="flow-step">
- <div class="flow-num">5</div>
- <div class="flow-content">
- <h4>Final Draw → Mortgage</h4>
- <p>CO received; lender verifies conversion conditions</p>
- </div>
- </div>
- </div>
- <p style="margin:18px 0 0;font-size:0.9rem;line-height:1.5;color:var(--gray-light);">Example schedule. Your lender sets the real draws.</p>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" aria-labelledby="what-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Construction loans</div>
+        <h2 class="a5-h2" id="what-title">What is a construction <span class="a5-hl">loan</span>?</h2>
+        <p class="a5-p">Unlike a traditional mortgage where you buy an existing home, a construction loan finances the building of a new home from the ground up.</p>
+      </div>
+    </div>
+    <div class="a5-grid a5-cols-2 what-cards">
+      <article class="what-card"><h3 class="a5-h3">Temporary financing, long term home</h3><p class="a5-p">A construction loan is temporary financing that typically lasts 12 to 18 months. The lender releases funds in stages, called draws, as construction reaches specific milestones.</p><p class="a5-p">During construction, many programs charge interest on the amount already drawn. With an approved <strong>construction to permanent</strong> or <strong>single close</strong> structure, the loan is designed to convert after the lender's completion conditions are met. Other construction loans require separate permanent financing.</p></article>
+      <article class="what-card"><h3 class="a5-h3">Compare the complete project</h3><p class="a5-p">A custom build can be designed around your lot, priorities, and Florida requirements. Compare its complete project cost, financing, schedule, and appraisal with suitable resale alternatives in the same market.</p></article>
+    </div>
+    <div class="draws" data-a5-loop>
+      <h3 class="a5-label draws-title">How draws <span class="a5-hl a5-hl-label">work</span></h3>
+      <div class="draws-wrap">
+        <div class="a5-tapebar-y a5-tape-y" aria-hidden="true"><i class="hook"></i><i class="ticks"></i></div>
+        <ol class="draws-steps"><li class="draw fin-step-a"><span class="draw-num">Draw 1</span><h4 class="draw-title">Loan approved and closed</h4><p>Funds held in escrow by lender</p></li><li class="draw fin-step-b"><span class="draw-num">Draw 2</span><h4 class="draw-title">Foundation draw</h4><p>Site work, slab, and foundation poured</p></li><li class="draw fin-step-c"><span class="draw-num">Draw 3</span><h4 class="draw-title">Framing draw</h4><p>Structure, roof, windows installed</p></li><li class="draw fin-step-d"><span class="draw-num">Draw 4</span><h4 class="draw-title">Interior draw</h4><p>MEP rough installation, drywall, finishes</p></li><li class="draw fin-step-e"><span class="draw-num">Draw 5</span><h4 class="draw-title">Final draw to mortgage</h4><p>CO received; lender verifies conversion conditions</p></li></ol>
+      </div>
+      <div class="a5-tapebar a5-tape-x draws-tape" aria-hidden="true" style="--h:64px"><i class="hook"></i><i class="ticks"></i><div class="draw-marks"><span>1</span><span>2</span><span>3</span><span>4</span><span><b>5</b></span></div></div>
+      <p class="draws-note">Example schedule. Your lender sets the real draws.</p>
+    </div>
+  </div>
 </section>
 
-<!-- ONE-TIME vs TWO-TIME CLOSE -->
-<section class="section section-dark">
- <div class="max-w">
- <h2 class="section-title">Single Close vs. <em>Two Closings</em></h2>
- <p class="section-sub">A single close can reduce repeated steps for some buyers, while two separate closings may offer different lender or rate options. Compare the actual Loan Estimates before choosing.</p>
- <div class="compare-scroll" tabindex="0" aria-label="Scrollable construction loan comparison">
- <table class="compare-table">
- <caption style="position:absolute;left:-9999px;">General comparison of single close and two closings construction financing; actual terms vary by lender.</caption>
- <thead>
- <tr>
- <th scope="col">Feature</th>
- <th scope="col">Single Close</th>
- <th scope="col">Two Closings</th>
- </tr>
- </thead>
- <tbody>
- <tr><th scope="row">Number of closings</th><td><strong>Usually 1</strong></td><td>Usually 2</td></tr>
- <tr><th scope="row">Closing costs</th><td>May avoid a second eligible set</td><td>Two closings can create additional costs</td></tr>
- <tr><th scope="row">Rate treatment</th><td>Lock structure varies by program</td><td>Permanent rate is set at the second loan</td></tr>
- <tr><th scope="row">Qualification after construction</th><td>Reduced, but lender conditions still apply</td><td>New approval is generally required</td></tr>
- <tr><th scope="row">Flexibility</th><td>One coordinated loan structure</td><td>Can shop permanent financing later</td></tr>
- <tr><th scope="row">How to compare</th><td colspan="2">Review each lender's Loan Estimate, fees, lock terms, and conversion conditions</td></tr>
- </tbody>
- </table>
- </div>
- </div>
+<section class="a5-section a5-bg-finance" aria-labelledby="compare-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Compare your options</div>
+        <h2 class="a5-h2" id="compare-title">Single close vs. two <span class="a5-hl">closings</span></h2>
+        <p class="a5-p">A single close can reduce repeated steps for some buyers, while two separate closings may offer different lender or rate options. Compare the actual Loan Estimates before choosing.</p>
+      </div>
+    </div>
+    <table class="compare-table" role="table" aria-labelledby="compare-caption">
+      <caption id="compare-caption">General comparison of single close and two closings construction financing; actual terms vary by lender.</caption>
+      <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Feature</th><th scope="col" role="columnheader">Single close</th><th scope="col" role="columnheader">Two closings</th></tr></thead>
+      <tbody role="rowgroup">
+        <tr role="row"><th scope="row" role="rowheader">Number of closings</th><td role="cell" data-label="Single close"><strong>Usually 1</strong></td><td role="cell" data-label="Two closings">Usually 2</td></tr>
+        <tr role="row"><th scope="row" role="rowheader">Closing costs</th><td role="cell" data-label="Single close">May avoid a second eligible set</td><td role="cell" data-label="Two closings">Two closings can create additional costs</td></tr>
+        <tr role="row"><th scope="row" role="rowheader">Rate treatment</th><td role="cell" data-label="Single close">Lock structure varies by program</td><td role="cell" data-label="Two closings">Permanent rate is set at the second loan</td></tr>
+        <tr role="row"><th scope="row" role="rowheader">Qualification after construction</th><td role="cell" data-label="Single close">Reduced, but lender conditions still apply</td><td role="cell" data-label="Two closings">New approval is generally required</td></tr>
+        <tr role="row"><th scope="row" role="rowheader">Flexibility</th><td role="cell" data-label="Single close">One coordinated loan structure</td><td role="cell" data-label="Two closings">Can shop permanent financing later</td></tr>
+        <tr role="row" class="compare-how"><th scope="row" role="rowheader">How to compare</th><td colspan="2" role="cell">Review each lender's Loan Estimate, fees, lock terms, and conversion conditions</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
-<!-- REQUIREMENTS -->
-<section class="section section-black">
- <div class="max-w">
- <h2 class="section-title">What You <em>Need to Qualify</em></h2>
- <p class="section-sub">Construction loan requirements vary, but lenders commonly review the following items in Florida.</p>
- <div class="req-grid">
- <div class="req-card">
- <div class="req-icon"><i data-lucide="chart-no-axes-column-increasing" aria-hidden="true"></i></div>
- <h3>Credit, Income and Savings</h3>
- <p>Lenders may consider credit, income, debt, reserves, down payment, appraisal, and project feasibility.</p>
- </div>
- <div class="req-card">
- <div class="req-icon"><i data-lucide="land-plot" aria-hidden="true"></i></div>
- <h3>Lot Equity</h3>
- <p>Appraised land equity may reduce or replace cash required, depending on total project cost, borrower qualifications, and program rules.</p>
- </div>
- <div class="req-card">
- <div class="req-icon"><i data-lucide="files" aria-hidden="true"></i></div>
- <h3>Plans</h3>
- <p>Approved floor plans and construction budget from a licensed builder (that's us).</p>
- </div>
- <div class="req-card">
- <div class="req-icon"><i data-lucide="badge-check" aria-hidden="true"></i></div>
- <h3>Licensed GC</h3>
- <p>A licensed general contractor. BuilderK is CGC #1537163; each lender independently reviews builder eligibility and project documents.</p>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" aria-labelledby="qualify-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Qualifying</div>
+        <h2 class="a5-h2" id="qualify-title">What you need to <span class="a5-hl">qualify</span></h2>
+        <p class="a5-p">Construction loan requirements vary, but lenders commonly review the following items in Florida.</p>
+      </div>
+    </div>
+    <div class="req-grid"><article class="req-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="pPk4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#E9EDF2"></stop></linearGradient><radialGradient id="pSk4" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#5EE08A"></stop><stop offset="1" stop-color="#1F9D4C"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M14 6 H40 L50 16 V54 Q50 56 48 56 H14 Q12 56 12 54 V8 Q12 6 14 6 Z" fill="url(#pPk4)" stroke="#6B7785" stroke-width="1.5"></path><path d="M40 6 V14 Q40 16 42 16 H50" fill="#D5DCE4" stroke="#6B7785" stroke-width="1.5"></path><path d="M18 22 H42 M18 28 H42 M18 34 H34" stroke="#A7B2BE" stroke-width="2.2" stroke-linecap="round"></path><circle cx="42" cy="44" r="11" fill="url(#pSk4)" stroke="#146B33" stroke-width="1.5"></circle><path d="M37 44 L41 48 L48 40" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg><div><h3 class="a5-h3">Credit, income and savings</h3><p>Lenders may consider credit, income, debt, reserves, down payment, appraisal, and project feasibility.</p></div></article><article class="req-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg><div><h3 class="a5-h3">Lot equity</h3><p>Appraised land equity may reduce or replace cash required, depending on total project cost, borrower qualifications, and program rules.</p></div></article><article class="req-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="bpSk1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D8BFD"></stop><stop offset="1" stop-color="#1F5FD1"></stop></linearGradient><linearGradient id="bpRk1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC0FF"></stop><stop offset="0.5" stop-color="#4A92F7"></stop><stop offset="1" stop-color="#2566D4"></stop></linearGradient><linearGradient id="bpPk1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFD24D"></stop><stop offset="1" stop-color="#F5A524"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="8" y="12" width="48" height="42" rx="4" fill="url(#bpSk1)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M14 18 V50 M20 18 V50 M26 18 V50 M32 18 V50 M38 18 V50 M44 18 V50 M50 18 V50 M12 22 H54 M12 28 H54 M12 34 H54 M12 40 H54 M12 46 H54" stroke="#FFFFFF" stroke-width="0.6" opacity="0.22"></path><path d="M15 21 H49 V47 H15 Z M15 35 H29 M29 21 V41 M38 35 H49" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"></path><path d="M29 41 A6 6 0 0 0 35 47" fill="none" stroke="#FFFFFF" stroke-width="1.4"></path><rect x="5" y="7" width="54" height="9" rx="4.5" fill="url(#bpRk1)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M10 9.5 H54" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.6"></path><g transform="rotate(-38 46 46)"><rect x="34" y="42" width="22" height="7" rx="1.5" fill="url(#bpPk1)" stroke="#8A5A00" stroke-width="1"></rect><path d="M56 42 L63 45.5 L56 49 Z" fill="#F6D7A7" stroke="#8A5A00" stroke-width="1"></path><path d="M60.5 44.3 L63 45.5 L60.5 46.7 Z" fill="#374151"></path><rect x="30" y="42" width="4" height="7" rx="1" fill="#F5A3C7" stroke="#8A5A00" stroke-width="1"></rect></g></svg><div><h3 class="a5-h3">Plans</h3><p>Approved floor plans and construction budget from a licensed builder (that's us).</p></div></article><article class="req-card"><svg width="56" height="56" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="hhk5" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#FFC266"></stop><stop offset="0.55" stop-color="#FF8A1F"></stop><stop offset="1" stop-color="#D45A00"></stop></radialGradient><linearGradient id="hbk5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9E3D"></stop><stop offset="1" stop-color="#C95200"></stop></linearGradient></defs><ellipse cx="32" cy="58" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M10 44 C10 24 20 12 32 12 C44 12 54 24 54 44 Z" fill="url(#hhk5)" stroke="#8A3A00" stroke-width="1.6" stroke-linejoin="round"></path><path d="M28 13 C27 22 27 34 28 44 H36 C37 34 37 22 36 13 C34 12.4 30 12.4 28 13 Z" fill="#FF9E3D" stroke="#8A3A00" stroke-width="1.3" stroke-linejoin="round"></path><path d="M17 34 C18 25 22 19 27 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.6"></path><rect x="4" y="43" width="56" height="8" rx="4" fill="url(#hbk5)" stroke="#8A3A00" stroke-width="1.6"></rect></svg><div><h3 class="a5-h3">Licensed GC</h3><p>A licensed general contractor. BuilderK is CGC #1537163; each lender independently reviews builder eligibility and project documents.</p></div></article></div>
+  </div>
 </section>
 
-<!-- PROCESS TIMELINE -->
-<section class="section section-light">
- <div class="max-w">
- <h2 class="section-title">The <em>Financing Process</em></h2>
- <p class="section-sub section-sub-dark">Here is how financing fits into the BuilderK process from the first conversation through move in.</p>
- <div class="timeline">
- <div class="tl-step">
- <div class="tl-dot">1</div>
- <h4>Free Consultation</h4>
- <p>We assess your budget, lot, and goals. No commitment.</p>
- </div>
- <div class="tl-step">
- <div class="tl-dot">2</div>
- <h4>Lender Match</h4>
- <p>We connect you with lenders who specialize in construction loans.</p>
- </div>
- <div class="tl-step">
- <div class="tl-dot">3</div>
- <h4>Early Loan Approval</h4>
- <p>Get approved before construction with your plans and budget in hand.</p>
- </div>
- <div class="tl-step">
- <div class="tl-dot">4</div>
- <h4>Close & Build</h4>
- <p>One closing. Construction begins. Draws released as we build.</p>
- </div>
- <div class="tl-step">
- <div class="tl-dot">5</div>
- <h4>Move In</h4>
- <p>Home complete. The lender verifies completion and any conversion conditions. Keys in hand.</p>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete" aria-labelledby="process-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Step by step</div>
+        <h2 class="a5-h2" id="process-title">The financing <span class="a5-hl">process</span></h2>
+        <p class="a5-p">Here is how financing fits into the BuilderK process from the first conversation through move in.</p>
+      </div>
+    </div>
+    <ol class="tl"><li class="tl-step"><span class="a5-num">1</span><div><h3 class="tl-title">Free consultation</h3><p>We assess your budget, lot, and goals. No commitment.</p></div></li><li class="tl-step"><span class="a5-num">2</span><div><h3 class="tl-title">Lender match</h3><p>We connect you with lenders who specialize in construction loans.</p></div></li><li class="tl-step"><span class="a5-num">3</span><div><h3 class="tl-title">Early loan approval</h3><p>Get approved before construction with your plans and budget in hand.</p></div></li><li class="tl-step"><span class="a5-num">4</span><div><h3 class="tl-title">Close and build</h3><p>One closing. Construction begins. Draws released as we build.</p></div></li><li class="tl-step"><span class="a5-num a5-num-accent">5</span><div><h3 class="tl-title">Move in</h3><p>Home complete. The lender verifies completion and any conversion conditions. Keys in hand.</p></div></li></ol>
+  </div>
 </section>
 
-<!-- WHY BUILDERK -->
-<section class="section section-light" style="padding-top: 0;">
- <div class="max-w">
- <h2 class="section-title">Why Coordinate Financing <em>With BuilderK?</em></h2>
- <p class="section-sub section-sub-dark">BuilderK is not a lender. We prepare the project information your chosen lender needs from the builder.</p>
- <div class="why-grid">
- <div class="why-card">
- <div class="icon"><i data-lucide="handshake" aria-hidden="true"></i></div>
- <h3>Lender Relationships</h3>
- <p>We can introduce independent construction loan lenders across Florida. You compare programs and choose the lender that fits your situation.</p>
- </div>
- <div class="why-card">
- <div class="icon"><i data-lucide="clipboard-check" aria-hidden="true"></i></div>
- <h3>Documents Ready for Lender Review</h3>
- <p>We organize the plans, budget, and builder documents so the lender can review a complete project package.</p>
- </div>
- <div class="why-card">
- <div class="icon"><i data-lucide="hard-hat" aria-hidden="true"></i></div>
- <h3>Licensed and Ready for Review</h3>
- <p>CGC License #1537163. Our license and project documents support lender review; builder approval remains specific to each lender.</p>
- </div>
- <div class="why-card">
- <div class="icon"><i data-lucide="land-plot" aria-hidden="true"></i></div>
- <h3>How Lot Equity Can Help</h3>
- <p>Own your lot? Appraised land equity may reduce or replace cash required, subject to lender, appraisal, and program terms.</p>
- </div>
- <div class="why-card">
- <div class="icon"><i data-lucide="phone" aria-hidden="true"></i></div>
- <h3>One Point of Contact</h3>
- <p>BuilderK coordinates the design, permits, construction, and project documents while your lender manages the loan.</p>
- </div>
- <div class="why-card">
- <div class="icon"><i data-lucide="list-checks" aria-hidden="true"></i></div>
- <h3>Transparent Process</h3>
- <p>We document the project budget, allowances, and known exclusions. Site conditions, selections, and approved changes can still affect final cost.</p>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-white" aria-labelledby="why-title">
+  <div class="a5-wrap">
+    <div class="why-head">
+      <div class="a5-head">
+        <div class="a5-head-text">
+          <div class="a5-label">Why BuilderK</div>
+          <h2 class="a5-h2" id="why-title">Why coordinate financing with <span class="a5-hl">BuilderK</span>?</h2>
+          <p class="a5-p">BuilderK is not a lender. We prepare the project information your chosen lender needs from the builder.</p>
+        </div>
+      </div>
+      <div class="why-icons" aria-hidden="true"><svg width="72" height="72" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="mBk3" cx="0.38" cy="0.35" r="0.75"><stop offset="0" stop-color="#F7DA8E"></stop><stop offset="0.6" stop-color="#E2B25A"></stop><stop offset="1" stop-color="#BF8733"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M32 22 C19 23 10 34 11 45 C12 54 20 58 32 58 C44 58 52 54 53 45 C54 34 45 23 32 22 Z" fill="url(#mBk3)" stroke="#8A5A1B" stroke-width="1.6" stroke-linejoin="round"></path><path d="M23 9 C26 12 38 12 41 9 C42 13 39 18 35 20 L29 20 C25 18 22 13 23 9 Z" fill="#E7BD66" stroke="#8A5A1B" stroke-width="1.5" stroke-linejoin="round"></path><rect x="25" y="18.5" width="14" height="4.5" rx="2.2" fill="#7A4A12"></rect><path d="M17 36 C18 30 22 27 26 26" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5" fill="none"></path><text x="32" y="49" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-weight="700" font-size="20" fill="#1F7A3A">$</text></svg><svg width="72" height="72" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="hRk2-why" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3C"></stop><stop offset="1" stop-color="#E0570F"></stop></linearGradient><linearGradient id="hWk2-why" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4E2"></stop><stop offset="1" stop-color="#F3D9B1"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="24" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="6" y="52" width="52" height="5" rx="2.5" fill="#46B35A"></rect><rect x="42" y="12" width="7" height="14" rx="1" fill="#B8541B" stroke="#6E2E0C" stroke-width="1.2"></rect><rect x="13" y="28" width="38" height="25" rx="2" fill="url(#hWk2-why)" stroke="#9C6B34" stroke-width="1.5"></rect><path d="M6 31 L32 9 L58 31 Z" fill="url(#hRk2-why)" stroke="#8A2F07" stroke-width="1.6" stroke-linejoin="round"></path><path d="M14 26 L32 11.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.55"></path><rect x="27" y="37" width="10" height="16" rx="1.5" fill="#8B5226" stroke="#5A3212" stroke-width="1.2"></rect><circle cx="34.5" cy="45.5" r="0.9" fill="#FFD27A"></circle><rect x="17" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M20.5 35 V42 M17 38.5 H24" stroke="#FFFFFF" stroke-width="1"></path><rect x="40" y="35" width="7" height="7" rx="1" fill="#8FD0FF" stroke="#2F6C99" stroke-width="1.1"></rect><path d="M43.5 35 V42 M40 38.5 H47" stroke="#FFFFFF" stroke-width="1"></path></svg></div>
+    </div>
+    <div class="why-grid"><article class="why-card"><h3 class="a5-h3">Lender relationships</h3><p>We can introduce independent construction loan lenders across Florida. You compare programs and choose the lender that fits your situation.</p></article><article class="why-card"><h3 class="a5-h3">Documents ready for lender review</h3><p>We organize the plans, budget, and builder documents so the lender can review a complete project package.</p></article><article class="why-card"><h3 class="a5-h3">Licensed and ready for review</h3><p>CGC License #1537163. Our license and project documents support lender review; builder approval remains specific to each lender.</p></article><article class="why-card"><h3 class="a5-h3">How lot equity can help</h3><p>Own your lot? Appraised land equity may reduce or replace cash required, subject to lender, appraisal, and program terms.</p></article><article class="why-card"><h3 class="a5-h3">One point of contact</h3><p>BuilderK coordinates the design, permits, construction, and project documents while your lender manages the loan.</p></article><article class="why-card"><h3 class="a5-h3">Transparent process</h3><p>We document the project budget, allowances, and known exclusions. Site conditions, selections, and approved changes can still affect final cost.</p></article></div>
+  </div>
 </section>
 
-<!-- FAQ -->
-<section class="section section-dark">
- <div class="max-w">
- <h2 class="section-title" style="text-align:center;">Frequently Asked <em>Questions</em></h2>
- <p class="section-sub" style="text-align:center; margin: 0 auto 48px;">Everything you need to know about construction financing in Florida.</p>
- <div class="faq-list">
- <div class="faq-item">
- <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-1">What is a construction loan? <span aria-hidden="true">+</span></button>
- <div class="faq-a" id="faq-a-1"><div class="faq-a-inner">A construction loan is temporary financing that covers the cost of building a new home. Funds are released in stages (draws) as construction progresses. During building, many programs charge interest on funds already drawn. Permanent financing depends on whether you chose a construction to permanent structure or a separate loan.</div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-2">What credit score do I need? <span aria-hidden="true">+</span></button>
- <div class="faq-a" id="faq-a-2"><div class="faq-a-inner">Requirements vary by lender and program. Some programs use credit score guidelines alongside income, debt, reserves, down payment, appraisal, and project feasibility. Ask each lender which criteria apply to the specific program you are comparing.</div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-3">What is a single close loan? <span aria-hidden="true">+</span></button>
- <div class="faq-a" id="faq-a-3"><div class="faq-a-inner">A single close (construction to permanent) loan combines construction financing and a permanent mortgage in one closing. It may avoid a second set of eligible closing costs, but conversion, rate lock, appraisal, completion, and qualification conditions vary by lender and program.</div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-4">Can I use my land as a down payment? <span aria-hidden="true">+</span></button>
- <div class="faq-a" id="faq-a-4"><div class="faq-a-inner">If you own your lot, its appraised equity may count toward the lender's equity requirement and may reduce or replace cash required. The result depends on appraised value, total project cost, borrower qualifications, and the selected loan program.</div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-5">How long does it take to get approved? <span aria-hidden="true">+</span></button>
- <div class="faq-a" id="faq-a-5"><div class="faq-a-inner">Timing varies by lender, borrower documents, appraisal, builder review, plans, budget, title work, and program. BuilderK prepares the project documents promptly, but only the lender can provide an approval and closing timeline.</div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-6">How much does it cost to build in Florida? <span aria-hidden="true">+</span></button>
- <div class="faq-a" id="faq-a-6"><div class="faq-a-inner">BuilderK's calculator provides one combined early planning range based on the home and feature selections you enter. Location, lot conditions, plan complexity, selections, and fees can materially change the range.</div></div>
- </div>
- <div class="faq-item">
- <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-7">Do I need to own the lot before applying? <span aria-hidden="true">+</span></button>
- <div class="faq-a" id="faq-a-7"><div class="faq-a-inner">Not necessarily. Some construction loan programs can include land acquisition, while others require different timing or equity. Ask the lender how the lot purchase, appraisal, and closing must be structured before signing a land contract.</div></div>
- </div>
- </div>
- </div>
+<section class="a5-section a5-bg-finance" aria-labelledby="faq-title">
+  <div class="a5-wrap faq-layout">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">FAQ</div>
+        <h2 class="a5-h2" id="faq-title">Frequently asked <span class="a5-hl">questions</span></h2>
+        <p class="a5-p">Everything you need to know about construction financing in Florida.</p>
+      </div>
+    </div>
+    <div class="a5-faq fin-faq"><details open><summary>What is a construction loan?</summary><div class="a5-faq-a" id="faq-a-1">A construction loan is temporary financing that covers the cost of building a new home. Funds are released in stages (draws) as construction progresses. During building, many programs charge interest on funds already drawn. Permanent financing depends on whether you chose a construction to permanent structure or a separate loan.</div></details><details><summary>What credit score do I need?</summary><div class="a5-faq-a" id="faq-a-2">Requirements vary by lender and program. Some programs use credit score guidelines alongside income, debt, reserves, down payment, appraisal, and project feasibility. Ask each lender which criteria apply to the specific program you are comparing.</div></details><details><summary>What is a single close loan?</summary><div class="a5-faq-a" id="faq-a-3">A single close (construction to permanent) loan combines construction financing and a permanent mortgage in one closing. It may avoid a second set of eligible closing costs, but conversion, rate lock, appraisal, completion, and qualification conditions vary by lender and program.</div></details><details><summary>Can I use my land as a down payment?</summary><div class="a5-faq-a" id="faq-a-4">If you own your lot, its appraised equity may count toward the lender's equity requirement and may reduce or replace cash required. The result depends on appraised value, total project cost, borrower qualifications, and the selected loan program.</div></details><details><summary>How long does it take to get approved?</summary><div class="a5-faq-a" id="faq-a-5">Timing varies by lender, borrower documents, appraisal, builder review, plans, budget, title work, and program. BuilderK prepares the project documents promptly, but only the lender can provide an approval and closing timeline.</div></details><details><summary>How much does it cost to build in Florida?</summary><div class="a5-faq-a" id="faq-a-6">BuilderK's calculator provides one combined early planning range based on the home and feature selections you enter. Location, lot conditions, plan complexity, selections, and fees can materially change the range.</div></details><details><summary>Do I need to own the lot before applying?</summary><div class="a5-faq-a" id="faq-a-7">Not necessarily. Some construction loan programs can include land acquisition, while others require different timing or equity. Ask the lender how the lot purchase, appraisal, and closing must be structured before signing a land contract.</div></details></div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
- <h2>Ready to <em>Get Started?</em></h2>
- <p>Talk with us about your project, budget, and financing questions. There is no commitment or pressure.</p>
- <a href="/contact" class="cta-btn">Get my free consultation →</a>
+<section class="a5-section a5-bg-white fin-cta" aria-labelledby="cta-title">
+  <div class="a5-wrap cta-inner">
+    <h2 class="a5-h2" id="cta-title">Ready to get <span class="a5-hl">started</span>?</h2>
+    <p class="a5-p">Talk with us about your project, budget, and financing questions. There is no commitment or pressure.</p>
+    <a href="/contact" class="a5-btn a5-btn-dark">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
 </section>
+</main>
 
-<!-- FOOTER -->
-<footer>
- <div class="footer-grid">
- <div class="footer-brand">
- <a href="/" class="logo">BUILDER<span>K</span></a>
- <p>A modern Florida custom home builder. You bring the lot, and we guide the project from plans through construction.</p>
- <p style="margin-top: 8px; font-size: 0.85rem;">CGC License #1537163</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/about">About Us</a>
- <a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a>
- <a href="/#services">Services</a>
- <a href="/financing">Financing</a>
- <a href="/calculator">Pricing Calculator</a>
- <a href="/interiors">Interior Selections</a>
- <a href="/construction">Construction Gallery</a>
- </div>
- <div class="footer-col">
- <h4>Build</h4>
- <a href="/floor-plans">Floor Plans</a>
- <a href="/interior-gallery">Interior Gallery</a>
- <a href="/blog">Blog</a>
- <a href="/referral-program/">Referral Program</a>
- <a href="/#styles">Styles</a>
- <a href="/contact">Free consultation</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:+12392304868">(239) 230 4868</a>
- <a href="mailto:info@builderk.com">info@builderk.com</a>
- <a>4700 Millenia Blvd, Ste 500<br>Orlando, FL 32839</a>
- </div>
- </div>
- <div class="footer-bottom">
- © 2026 Builders Knowledge Development Inc. All rights reserved. <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms & Conditions</a>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
-
-<script>
-// Click-to-call GA4 event tracking
-document.addEventListener('DOMContentLoaded', function(){
-  if(window.lucide)window.lucide.createIcons();
-  document.querySelectorAll('.faq-q').forEach(function(button){
-    button.addEventListener('click',function(){
-      var item=button.closest('.faq-item');var open=!item.classList.contains('open');
-      item.classList.toggle('open',open);button.setAttribute('aria-expanded',open?'true':'false');
-    });
-  });
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (typeof gtag === 'function') {
-        gtag('event', 'phone_click', { 'page_path': location.pathname });
-      }
-    });
-  });
-});
-</script>
 <script defer src="/scripts/call-bar.js"></script>
 </body>
 </html>

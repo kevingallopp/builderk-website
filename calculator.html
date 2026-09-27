@@ -39,583 +39,577 @@
   }
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--orange:#F77F00;--orange-hover:#FF9A2E;--orange-glow:rgba(247,127,0,0.15);--dark:#0A0A0A;--dark-card:#111111;--dark-border:#1E1E1E;--light:#FAFAF8;--gray-600:#6B6B6B;--green:#22C55E}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;color:#fff;background:var(--dark);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:'Outfit',sans-serif}
-.navbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);transition:all 0.3s}
-.navbar.scrolled{padding:14px 48px;background:rgba(10,10,10,0.97)}
-.nav-logo{text-decoration:none;display:flex;align-items:baseline}
-.nav-logo .builder{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;letter-spacing:1px}
-.nav-logo .k{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.6rem;color:var(--orange)}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{color:#ccc;text-decoration:none;font-size:0.92rem;font-weight:500;transition:color 0.2s}
-.nav-links a:hover{color:var(--orange)}
-.nav-cta{background:var(--orange)!important;color:#fff!important;padding:10px 22px;border-radius:8px;font-weight:600!important}
-.nav-cta:hover{background:var(--orange-hover)!important}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;z-index:1000;position:relative}
-.nav-hamburger span{width:26px;height:2px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s}
-
-/* HERO with house background */
-.calc-hero{padding:140px 48px 60px;text-align:center;position:relative;background:linear-gradient(180deg, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.85) 100%), url(images/hero-house.png) center/cover no-repeat}
-.calc-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(247,127,0,0.3),transparent)}
-.calc-badge{display:inline-block;padding:6px 16px;border:1px solid var(--orange);border-radius:50px;color:var(--orange);font-size:0.8rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px}
-.calc-hero h1{font-size:3.2rem;font-weight:800;line-height:1.1;margin-bottom:16px}
-.calc-hero h1 span{color:var(--orange)}
-.calc-hero p{font-size:1.15rem;color:#aaa;max-width:580px;margin:0 auto;line-height:1.6}
-
-/* CALCULATOR with blueprint grid */
-.calc-container{width:100%;max-width:1200px;margin:0 auto;padding:60px 48px 80px;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,400px);gap:48px;align-items:start;position:relative;background-image:linear-gradient(rgba(247,127,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(247,127,0,0.03) 1px, transparent 1px);background-size:40px 40px}
-/* Orange glow */
-.calc-container::before{content:'';position:absolute;top:-100px;right:0;width:600px;height:600px;background:radial-gradient(circle,rgba(247,127,0,0.06) 0%,transparent 70%);pointer-events:none;z-index:0}
-
-.calc-controls{display:flex;flex-direction:column;gap:36px;position:relative;z-index:1;min-width:0}
-.calc-group{background:var(--dark-card);border:1px solid var(--dark-border);border-radius:16px;padding:28px 32px;min-width:0}
-.calc-group-label{display:flex;align-items:center;gap:10px;font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:6px}
-.calc-group-label .icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--orange-glow);border-radius:8px;color:var(--orange);font-size:1.1rem}
-.calc-group-sub{font-size:0.85rem;color:#666;margin-bottom:20px}
-.slider-value{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
-.slider-value .num{font-family:'Outfit',sans-serif;font-size:2rem;font-weight:700;color:var(--orange)}
-.slider-value .unit{font-size:0.9rem;color:#666}
-input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:var(--dark-border);outline:none;cursor:pointer}
-input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:var(--orange);cursor:pointer;box-shadow:0 0 12px rgba(247,127,0,0.4);transition:transform 0.2s}
-input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
-.slider-labels{display:flex;justify-content:space-between;font-size:0.78rem;color:#555;margin-top:6px}
-.finish-options{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.finish-card{width:100%;padding:16px 12px;border:2px solid var(--dark-border);border-radius:12px;text-align:center;cursor:pointer;transition:all 0.25s;background:transparent;font-family:'DM Sans',sans-serif;color:inherit}
-.finish-card:hover{border-color:#333}
-.finish-card.active{border-color:var(--orange);background:var(--orange-glow);box-shadow:inset 0 0 0 1px var(--orange)}
-.finish-card .tier-icon{font-size:1.5rem;margin-bottom:6px;color:#888}
-.finish-card .tier-icon svg,.calc-group-label .icon svg,.custom-banner-icon svg{width:24px;height:24px;display:block;margin:0 auto}
-.extra-name{display:flex;align-items:center;gap:8px}
-.extra-name svg,.mortgage-box h4 svg{width:17px;height:17px;flex:0 0 auto}
-.mortgage-box h4{display:flex;align-items:center;gap:8px}
-.finish-card.active .tier-icon{color:var(--orange)}
-.finish-card .label{font-family:'Outfit',sans-serif;font-weight:600;font-size:0.9rem;color:#fff;margin-bottom:2px}
-.finish-card .price{font-size:0.75rem;color:#666}
-.finish-card.active .price{color:var(--orange)}
-.extras-grid{display:flex;flex-direction:column;gap:10px}
-.extra-item{display:flex;width:100%;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--dark-border);border-radius:10px;cursor:pointer;transition:all 0.2s;user-select:none;background:transparent;text-align:left;font-family:'DM Sans',sans-serif}
-.extra-item:hover{border-color:#333}
-.extra-item.active{border-color:var(--orange);background:var(--orange-glow);box-shadow:inset 0 0 0 1px var(--orange)}
-.extra-check{width:20px;height:20px;border:2px solid #333;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;font-size:0.75rem;font-weight:700;color:transparent}
-.extra-item.active .extra-check{border-color:var(--orange);background:var(--orange);color:#fff}
-.extra-info .extra-name{font-size:0.92rem;font-weight:500;color:#ddd}
-.extra-info .extra-cost{font-size:0.78rem;color:#555}
-.extra-item.active .extra-info .extra-cost{color:var(--orange)}
-
-/* RESULT PANEL */
-.calc-result{position:sticky;top:100px;z-index:1;min-width:0}
-.result-card{background:var(--dark-card);border:1px solid var(--dark-border);border-radius:20px;padding:36px 32px;text-align:center}
-.result-label{font-size:0.85rem;color:#666;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:8px}
-.result-price{font-family:'Outfit',sans-serif;font-size:3.2rem;font-weight:800;color:var(--orange);line-height:1;margin-bottom:4px}
-.result-range{font-size:0.9rem;color:#888;margin-bottom:28px}
-.result-cta{display:block;width:100%;padding:16px 24px;background:var(--orange);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:1.05rem;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none;text-align:center;margin-bottom:12px}
-.result-cta:hover{background:var(--orange-hover);transform:translateY(-2px)}
-.result-note{font-size:0.75rem;color:#555;line-height:1.5}
-.equity-box{margin-top:20px;padding:20px;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2);border-radius:12px;text-align:left}
-.equity-box h4{font-family:'Outfit',sans-serif;color:var(--green);font-size:0.9rem;font-weight:700;margin-bottom:6px}
-.equity-box p{font-size:0.82rem;color:#888;line-height:1.5}
-.equity-box .equity-amount{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:700;color:var(--green);margin-top:6px}
-.mortgage-box{margin-top:16px;padding:20px;background:rgba(247,127,0,0.06);border:1px solid rgba(247,127,0,0.2);border-radius:12px;text-align:left}
-.mortgage-box h4{font-family:'Outfit',sans-serif;color:var(--orange);font-size:0.9rem;font-weight:700;margin-bottom:12px}
-.mortgage-down-label{font-size:0.82rem;color:#aaa}
-.mortgage-lot-q{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.down-options{display:flex;gap:6px}
-.down-btn,.down-pct-btn{padding:5px 14px;border:1px solid var(--dark-border);border-radius:6px;background:transparent;color:#888;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s}
-.down-btn:hover,.down-pct-btn:hover{border-color:#555;color:#ccc}
-.down-btn.active,.down-pct-btn.active{border-color:var(--orange);background:var(--orange-glow);color:var(--orange)}
-.lot-value-section{margin-bottom:14px}
-.lot-value-section label{display:block;margin-bottom:6px}
-.mortgage-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.mortgage-field{min-width:0}
-.cash-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
-.cash-heading label{margin-bottom:0}
-.lot-input-wrap{display:flex;align-items:center;background:var(--dark);border:1px solid var(--dark-border);border-radius:8px;overflow:hidden;transition:border-color 0.2s}
-.lot-input-wrap:focus-within{border-color:var(--orange)}
-.lot-dollar{padding:0 0 0 12px;color:#666;font-weight:600;font-size:0.95rem}
-.lot-input{background:transparent;border:none;outline:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.95rem;padding:10px 12px;width:100%}
-.lot-input::placeholder{color:#444}
-.lot-hint{font-size:0.73rem;color:var(--green);margin-top:5px}
-.mortgage-fields .lot-hint{grid-column:1/-1}
-.cash-hint{font-size:0.72rem;color:#888;line-height:1.4;margin-top:5px}
-.financing-summary{display:grid;gap:7px;margin:14px 0;padding:12px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.06);border-radius:8px}
-.financing-summary-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:0.76rem;color:#999}
-.financing-summary-row strong{font-family:'Outfit',sans-serif;color:#fff;font-size:0.82rem}
-.financing-summary-row.total{padding-top:7px;border-top:1px solid rgba(255,255,255,0.08);color:#bbb}
-.financing-summary-row.total strong{color:var(--orange)}
-.mortgage-amount{font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:800;color:var(--orange);margin-bottom:4px}
-.mortgage-note{font-size:0.75rem;color:#999;line-height:1.4}
-.mortgage-construction-note{font-size:0.75rem;color:#888;line-height:1.4;margin-top:8px;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:6px}
-.mortgage-disclaimer{font-size:0.7rem;color:#555;line-height:1.4;margin-top:8px;padding-top:8px;border-top:1px solid var(--dark-border)}
-.rate-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 14px}
-.rate-input{width:92px;background:var(--dark);border:1px solid var(--dark-border);border-radius:8px;color:#fff;padding:9px 10px;font:600 0.9rem 'DM Sans',sans-serif;text-align:right}
-.rate-source{font-size:0.72rem;color:#aaa;line-height:1.45;margin-top:6px}
-.rate-source a{color:var(--orange)}
-
-/* VISUAL BANNER */
-.visual-banner{max-width:1200px;margin:0 auto;padding:0 48px 60px}
-.visual-banner-inner{background:linear-gradient(135deg, rgba(10,10,10,0.75), rgba(10,10,10,0.85)), url(images/style-modern.png) center/cover no-repeat;border-radius:20px;padding:60px 48px;text-align:center;border:1px solid rgba(247,127,0,0.15)}
-.visual-banner-inner h2{font-size:2rem;font-weight:800;color:#fff;margin-bottom:12px}
-.visual-banner-inner h2 span{color:var(--orange)}
-.visual-banner-inner p{color:#888;font-size:1rem;max-width:500px;margin:0 auto;line-height:1.6}
-
-/* CUSTOM INTERIORS BANNER */
-.custom-banner{max-width:1200px;margin:0 auto;padding:0 48px 60px}
-.custom-banner-inner{background:linear-gradient(135deg,rgba(247,127,0,0.08),rgba(247,127,0,0.03));border:1px solid rgba(247,127,0,0.2);border-radius:16px;padding:32px 40px;display:flex;align-items:center;gap:24px}
-.custom-banner-icon{font-size:1.8rem;flex-shrink:0;width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:var(--orange-glow);border-radius:12px;color:var(--orange);font-weight:700}
-.custom-banner-text h3{font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:6px}
-.custom-banner-text p{font-size:0.9rem;color:#999;line-height:1.6}
-
-/* INCLUDED SECTION */
-.included-section{padding:60px 48px;max-width:1100px;margin:0 auto;background:linear-gradient(180deg, transparent, rgba(247,127,0,0.02), transparent)}
-.included-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.included-item{padding:14px 18px;background:var(--dark-card);border:1px solid var(--dark-border);border-radius:10px;font-size:0.85rem;color:#aaa;padding-left:30px;position:relative}
-.included-item::before{content:'';position:absolute;left:12px;top:18px;width:8px;height:8px;border-radius:50%;background:var(--orange)}
-
-/* CTA */
-.cta-section{padding:100px 48px;background:var(--dark);text-align:center;position:relative}
-.cta-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:2px;background:linear-gradient(90deg,transparent,#F77F00,transparent)}
-.cta-section h2{font-size:2.8rem;font-weight:800;color:#fff;margin-bottom:16px}
-.cta-section h2 span{color:var(--orange)}
-.cta-section p{font-size:1.15rem;color:#aaa;max-width:550px;margin:0 auto 32px;line-height:1.6}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;background:var(--orange);color:#fff;text-decoration:none;border-radius:12px;font-weight:600;font-size:1.05rem;transition:background 0.2s,transform 0.2s}
-.btn-primary:hover{background:var(--orange-hover);transform:translateY(-2px)}
-
-/* FOOTER */
-.footer{background:var(--dark);padding:60px 48px 30px;border-top:1px solid rgba(255,255,255,0.06)}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-top{display:flex;justify-content:space-between;gap:48px;margin-bottom:40px}
-.footer-brand{max-width:280px}
-.footer-brand p{color:#888;font-size:0.9rem;margin-top:12px;line-height:1.5}
-.footer-col{display:flex;flex-direction:column;gap:10px}
-.footer-col h4{color:#fff;font-family:'Outfit',sans-serif;font-weight:600;font-size:0.95rem;margin-bottom:4px}
-.footer-col a{color:#888;text-decoration:none;font-size:0.88rem;transition:color 0.2s}
-.footer-col a:hover{color:var(--orange)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);color:#555;font-size:0.82rem}
-
-/* ANIMATIONS */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.stagger-1{transition-delay:0.1s}.stagger-2{transition-delay:0.2s}.stagger-3{transition-delay:0.3s}
-
-/* NAV BREAKPOINT */
-@media (max-width: 900px){
-  .nav-links{display:none}.nav-hamburger{display:flex!important}.navbar{padding:14px 20px!important}
-}
-/* MOBILE */
-@media(max-width:900px){
-  .navbar{padding:14px 20px!important}.nav-links{display:none}.nav-hamburger{display:flex!important}
-  .calc-hero{padding:120px 24px 48px}.calc-hero h1{font-size:2.2rem}.calc-hero p{font-size:1rem}
-  .calc-container{grid-template-columns:1fr;padding:40px 20px 60px;gap:32px}
-  .calc-result{position:static}.result-price{font-size:2.6rem}
-  .calc-group{padding:24px 20px}
-  .finish-options{grid-template-columns:repeat(3,1fr);gap:8px}
-  .finish-card{padding:10px 6px}.finish-card .tier-icon{font-size:1.1rem}.finish-card .label{font-size:0.72rem}.finish-card .price{font-size:0.6rem}
-  .visual-banner{padding:0 20px 40px}.visual-banner-inner{padding:40px 24px}.visual-banner-inner h2{font-size:1.5rem}
-  .custom-banner{padding:0 20px 40px}.custom-banner-inner{flex-direction:column;text-align:center;padding:24px 20px}
-  .included-section{padding:40px 20px}
-  .cta-section{padding:60px 24px}.cta-section h2{font-size:2rem}
-  .footer{padding:40px 20px 24px}.footer-top{flex-direction:column;gap:32px}.footer-bottom{flex-direction:column;gap:8px;text-align:center}
-  .slider-value .num{font-size:1.6rem}
-  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-  .calc-sticky-cta.is-visible{display:flex!important}
-}
-@media(max-width:520px){
-  .mortgage-fields{grid-template-columns:1fr}
-  .cash-heading{align-items:flex-start;flex-direction:column}
-}
-.calc-sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid rgba(247,127,0,0.3)}
-.calc-sticky-cta a{flex:1;text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.95rem;padding:14px;border-radius:10px;text-decoration:none;transition:all 0.2s}
-.calc-sticky-cta .sticky-primary{background:var(--orange);color:#fff}
-.calc-sticky-cta .sticky-primary:hover{background:var(--orange-hover)}
-@media(max-width:900px){
-  html,body{max-width:100%;overflow-x:hidden}
-  .navbar,.calc-sticky-cta{left:0!important;right:0!important;width:100%!important;max-width:100%!important}
-  .calc-container{overflow:hidden}
-  .calc-container::before{display:none}
-}
-.nav-links.open{display:flex!important;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:999;justify-content: flex-start;align-items:center;gap:24px;padding:80px 24px}
-.nav-links.open li{list-style:none}
-.nav-links.open li a{font-size:1.4rem;padding:12px 0;color:#fff}
-.nav-links.open li a:hover{color:#F77F00}
-.nav-hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.nav-hamburger.active span:nth-child(2){opacity:0}
-.nav-hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-
-/* === FULL-SCREEN MOBILE MENU FIX === */
-@media (max-width: 1280px) {
-  body:has(.nav-links.open),
-  body:has(.nav-links.show) {
-    overflow: hidden;
-  }
-
-  .navbar:has(.nav-links.open),
-  .navbar:has(.nav-links.show),
-  nav:has(.nav-links.open),
-  nav:has(.nav-links.show) {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    padding: 18px 20px !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    overflow: hidden !important;
-    z-index: 10000 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-logo,
-  .navbar:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .nav-logo,
-  nav:has(.nav-links.show) .nav-logo,
-  nav:has(.nav-links.open) .logo,
-  nav:has(.nav-links.show) .logo {
-    position: fixed !important;
-    top: 22px !important;
-    left: 20px !important;
-    z-index: 10002 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-hamburger,
-  .navbar:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .nav-hamburger,
-  nav:has(.nav-links.show) .nav-hamburger,
-  nav:has(.nav-links.open) .mobile-menu,
-  nav:has(.nav-links.show) .mobile-menu {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 10003 !important;
-  }
-
-  .navbar:has(.nav-links.open) .nav-links.open,
-  .navbar:has(.nav-links.show) .nav-links.show,
-  nav:has(.nav-links.open) .nav-links.open,
-  nav:has(.nav-links.show) .nav-links.show {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 96px 24px 48px !important;
-    overflow-y: auto !important;
-    background: rgba(10, 10, 10, 0.98) !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
-}
-@media (max-width: 768px) { input, select, textarea { font-size: 16px !important; } }
-</style>
-<link rel="stylesheet" href="/css/site-a11y.css">
 <script src="/scripts/pricing-config.js"></script>
-<script defer src="/scripts/lucide.min.js"></script>
 <script src="/scripts/lead-context.js"></script>
 <script src="/scripts/lead-submit.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
+<script defer src="/scripts/a5.js?v=3"></script>
+<style>
+/* the calculator paints its slider fill with var(--orange) */
+:root { --orange: var(--a5-orange); }
+
+/* hero */
+.calc-hero .a5-hero-photo .a5-render-tag { top: auto; left: auto; bottom: 16px; right: 16px; }
+
+/* calculator */
+.calc-section { background: var(--a5-concrete); }
+.calc-grid { display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 40px; align-items: start; padding-top: 72px; padding-bottom: 80px; }
+.calc-controls { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.plan-context { margin: 0; padding: 14px 18px; border-radius: 14px; background: #FFF8EF; border: 1px solid #F1E2CD; font-size: 15px; line-height: 1.6; color: var(--a5-ink); }
+.calc-group { background: var(--a5-white); border: 1px solid var(--a5-line); border-radius: 16px; padding: 26px 28px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.calc-group-head { display: flex; gap: 14px; align-items: flex-start; }
+.calc-group-head .a5-num { width: 34px; height: 34px; font-size: 18px; }
+.calc-group-label { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.calc-group-sub { margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: var(--a5-body); }
+.slider-value { display: flex; align-items: baseline; gap: 10px; }
+.slider-value .num { font-family: var(--a5-cond); font-weight: 800; font-size: 56px; line-height: 1; color: var(--a5-ink); }
+.slider-value .unit { font-size: 16px; font-weight: 700; color: var(--a5-muted); }
+.covered-value .num { font-size: 48px; }
+.tape-hint { margin-left: auto; font-size: 13px; color: var(--a5-muted); }
+.slider-labels { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--a5-muted); }
+.tape-labels { padding-left: 44px; }
+.beds-baths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.beds-baths > div { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.beds-baths .num { font-size: 40px; }
+.beds-baths .unit { font-size: 15px; }
+
+/* sliders: orange thumb; the calculator paints the orange fill on the track itself */
+.calc-group input[type="range"] { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 6px; margin: 10px 0; border-radius: 999px; background: #3A3733; cursor: pointer; }
+.calc-group input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--a5-orange); border: 0; box-shadow: 0 1px 3px rgba(12, 11, 10, 0.35); }
+.calc-group input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--a5-orange); border: 0; box-shadow: 0 1px 3px rgba(12, 11, 10, 0.35); }
+.calc-group input[type="range"]::-moz-range-track { background: transparent; }
+
+/* living area: a tape measure pulled out of its K case; the real slider sits on top, invisible, so dragging the tape moves it */
+.tape-slider { position: relative; height: 58px; }
+.tape-slider input[type="range"] { position: absolute; z-index: 3; left: 44px; top: 12px; width: calc(100% - 44px); height: 34px; margin: 0; opacity: 0; cursor: ew-resize; }
+.tape-case { position: absolute; z-index: 2; left: 0; top: 6px; width: 46px; height: 46px; border-radius: 12px; background: linear-gradient(145deg, #2A2825 0%, #0C0B0A 100%); box-shadow: inset 0 0 0 2px #3A3733; display: flex; align-items: center; justify-content: center; color: var(--a5-orange); font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; }
+.tape-blade { position: absolute; z-index: 1; left: 44px; top: 14px; height: 30px; width: calc((100% - 60px) * var(--frac, 0.2105)); min-width: 26px; overflow: hidden; border-radius: 0 3px 3px 0; background: linear-gradient(180deg, #BFA02B 0%, #EDCD45 14%, #F6DD63 50%, #E8C53E 86%, #B39320 100%); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12); }
+.tape-blade::before { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(90deg, #1B1A18 0, #1B1A18 1.4px, transparent 1.4px, transparent 20px), repeating-linear-gradient(90deg, rgba(27, 26, 24, 0.75) 0, rgba(27, 26, 24, 0.75) 1px, transparent 1px, transparent 5px); background-size: 100% 12px, 100% 7px; background-repeat: no-repeat; }
+.tape-blade::after { content: ""; position: absolute; right: 0; top: 0; width: 8px; height: 100%; background: linear-gradient(90deg, #7F858B 0%, #D3D7DA 45%, #8A9095 100%); }
+.tape-rail { position: absolute; left: 44px; right: 0; top: 10px; height: 38px; border-radius: 8px; pointer-events: none; }
+.tape-slider input:focus-visible ~ .tape-rail { outline: 3px solid var(--a5-orange); outline-offset: 2px; }
+
+/* option cards */
+.finish-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.finish-card { position: relative; min-height: 86px; padding: 16px 16px 14px; border-radius: 14px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 6px; text-align: left; cursor: pointer; color: var(--a5-ink); font: inherit; }
+.finish-card:hover { border-color: #C9C3BA; }
+.finish-card .label { font-family: var(--a5-cond); font-weight: 800; font-size: 22px; line-height: 1; text-transform: uppercase; padding-right: 14px; }
+.finish-card .price { font-size: 14px; line-height: 1.35; color: var(--a5-muted); }
+.finish-card::after { content: ""; position: absolute; top: 12px; right: 12px; width: 12px; height: 12px; border-radius: 999px; }
+.finish-card.active { background: #FFF8EF; border-color: var(--a5-ink); box-shadow: inset 0 0 0 1px var(--a5-ink); }
+.finish-card.active::after { background: var(--a5-orange); }
+.extras-grid { display: flex; flex-direction: column; gap: 10px; }
+.extra-item { width: 100%; min-height: 64px; padding: 12px 16px; border-radius: 12px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; align-items: center; gap: 14px; text-align: left; cursor: pointer; color: var(--a5-ink); font: inherit; }
+.extra-item:hover { border-color: #C9C3BA; }
+.extra-check { width: 24px; height: 24px; flex-shrink: 0; border-radius: 6px; border: 2px solid var(--a5-ink); background: var(--a5-white) no-repeat center / 16px 16px; font-size: 0; color: transparent; }
+.extra-info { display: flex; flex-direction: column; gap: 2px; }
+.extra-name { font-weight: 700; font-size: 16px; }
+.extra-cost { font-size: 13.5px; color: var(--a5-muted); }
+.extra-item.active { background: #FFF8EF; border-color: var(--a5-ink); box-shadow: inset 0 0 0 1px var(--a5-ink); }
+.extra-item.active .extra-check { background-color: var(--a5-ink); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+
+/* result card */
+.calc-result { position: sticky; top: 24px; min-width: 0; }
+.result-card { padding: 30px; border-radius: 20px; background: var(--a5-dark); color: var(--a5-on-dark); display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px rgba(12, 11, 10, 0.18); }
+.result-label { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--a5-on-dark-muted); }
+.result-price { font-family: var(--a5-cond); font-weight: 800; font-size: 72px; line-height: 0.95; color: var(--a5-on-dark); }
+.result-price .a5-hl { background-image: linear-gradient(180deg, transparent 62%, var(--a5-orange) 62%, var(--a5-orange) 90%, transparent 90%); }
+.result-range { font-size: 16px; color: #D6D0C7; }
+.result-cta { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 0 18px; border-radius: 12px; background: var(--a5-on-dark); color: var(--a5-dark); font-family: var(--a5-cond); font-weight: 800; font-size: 21px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; }
+.result-cta:hover { background: #FFFFFF; }
+.estimate-capture { padding: 16px; border-radius: 14px; background: rgba(245, 242, 237, 0.06); border: 1px solid rgba(245, 242, 237, 0.14); display: flex; flex-direction: column; gap: 10px; }
+.estimate-title { font-weight: 700; font-size: 15px; }
+.estimate-row { display: flex; gap: 8px; }
+#est-email { flex: 1; min-width: 0; height: 46px; padding: 0 14px; border-radius: 10px; border: 1px solid rgba(245, 242, 237, 0.22); background: #1B1A18; color: var(--a5-on-dark); font: 15px/1.2 var(--a5-sans); }
+#est-email::placeholder { color: #8E887F; }
+#est-email:disabled { opacity: 0.7; }
+#est-send { height: 46px; padding: 0 18px; border: 0; border-radius: 10px; background: var(--a5-on-dark); color: var(--a5-dark); font-weight: 700; font-size: 15px; cursor: pointer; }
+#est-send:disabled { opacity: 0.75; cursor: default; }
+.est-msg { margin: 0; font-size: 13px; line-height: 1.45; color: var(--a5-on-dark-muted); }
+.result-note { margin: 0; font-size: 13px; line-height: 1.6; color: #A8A298; }
+
+/* equity and monthly payment */
+.pay-grid { display: grid; grid-template-columns: minmax(0, 1fr) 520px; gap: 32px; align-items: start; }
+.pay-inputs { padding: 28px; border-radius: 16px; background: var(--a5-paper); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.mortgage-lot-q { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.mortgage-lot-q > .mortgage-down-label { font-weight: 700; font-size: 16px; color: var(--a5-ink); }
+.down-options { display: flex; gap: 8px; }
+.down-btn { height: 40px; padding: 0 18px; border-radius: 10px; border: 1px solid #C9C3BA; background: var(--a5-white); color: var(--a5-ink); font-weight: 700; font-size: 15px; cursor: pointer; }
+.down-btn.active { border-color: var(--a5-ink); background: var(--a5-ink); color: #FFFFFF; }
+.mortgage-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.mortgage-field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.mortgage-field label, .cash-heading label { font-size: 13.5px; font-weight: 700; color: #3D3A36; }
+.lot-input-wrap { display: flex; align-items: center; height: 50px; border: 1px solid #E4E0D9; border-radius: 12px; background: var(--a5-white); overflow: hidden; }
+.lot-input-wrap:focus-within { border-color: var(--a5-ink); box-shadow: 0 0 0 3px rgba(247, 127, 0, 0.3); }
+.lot-dollar { padding-left: 14px; font-size: 16px; color: var(--a5-muted); }
+.lot-input { flex: 1; min-width: 0; height: 100%; padding: 0 14px 0 6px; border: 0; outline: none; background: transparent; color: var(--a5-ink); font: 16px/1.2 var(--a5-sans); }
+.lot-input::placeholder { color: #9A958E; }
+.lot-input:focus-visible { outline: none; }
+.lot-hint, .cash-hint { grid-column: 1 / -1; margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--a5-muted); }
+.cash-heading { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.cash-hint { margin-top: 8px; }
+.down-pct-btn { height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--a5-ink); background: var(--a5-white); color: var(--a5-ink); font-weight: 700; font-size: 13px; cursor: pointer; }
+.down-pct-btn.active { background: var(--a5-ink); color: #FFFFFF; }
+.pay-summary { padding: 28px; border-radius: 16px; background: var(--a5-finance); color: var(--a5-finance-ink); display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.financing-summary { display: flex; flex-direction: column; gap: 14px; }
+.financing-summary-row { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.financing-summary-row.total { font-size: 16px; padding-top: 12px; border-top: 1px solid rgba(30, 42, 51, 0.18); }
+.financing-summary-row.total span { font-weight: 700; }
+.rate-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.rate-row label { font-size: 15px; }
+.rate-input { width: 96px; height: 42px; padding: 0 10px; border: 1px solid #C9D3DA; border-radius: 10px; background: var(--a5-white); color: var(--a5-finance-ink); font: 700 16px/1.2 var(--a5-sans); text-align: right; }
+.mortgage-amount { font-family: var(--a5-cond); font-weight: 800; font-size: 56px; line-height: 1; color: var(--a5-finance-ink); }
+.mortgage-amount .per { font-size: 26px; }
+.mortgage-note { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--a5-finance-body); }
+.rate-source { margin: 0; font-size: 12.5px; line-height: 1.55; color: var(--a5-finance-body); }
+.rate-source a { color: var(--a5-finance-ink); font-weight: 700; }
+.mortgage-construction-note { margin: 0; padding: 10px 12px; border-radius: 10px; background: rgba(255, 255, 255, 0.6); font-size: 12.5px; line-height: 1.5; color: var(--a5-finance-body); }
+.mortgage-disclaimer { margin: 0; font-size: 12px; line-height: 1.5; color: #56646E; }
+
+/* banner */
+.calc-banner { position: relative; isolation: isolate; overflow: hidden; min-height: 460px; display: flex; align-items: center; background: var(--a5-dark); color: var(--a5-on-dark); }
+.calc-banner-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: 0.55; }
+.calc-banner::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(12, 11, 10, 0.9) 0%, rgba(12, 11, 10, 0.55) 60%, rgba(12, 11, 10, 0.25) 100%); }
+.calc-banner .a5-render-tag { top: auto; left: auto; bottom: 16px; right: 16px; }
+.calc-banner-inner { padding-block: 96px; }
+.calc-banner-text { max-width: 760px; display: flex; flex-direction: column; gap: 16px; }
+.calc-banner .a5-h2 { color: var(--a5-on-dark); font-size: clamp(44px, 4.45vw, 64px); }
+.calc-banner .a5-p { max-width: 560px; font-size: 18px; line-height: 1.55; color: var(--a5-on-dark-soft); }
+
+/* interiors and what every build includes */
+.custom-banner { display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: 22px; align-items: center; padding: 28px 32px; margin-bottom: 40px; border-radius: 18px; background: var(--a5-white); border: 1px solid var(--a5-line); }
+.custom-banner .a5-icon { width: 64px; height: 64px; }
+.custom-banner .a5-h3 { font-size: 28px; }
+.custom-banner .a5-p { max-width: none; margin-top: 6px; font-size: 16px; }
+.included-title { margin-bottom: 22px; font-size: clamp(40px, 3.4vw, 48px); }
+.included-grid { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.included-grid li { padding: 18px; border-radius: 14px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; line-height: 1.45; font-weight: 500; color: var(--a5-ink); }
+.included-grid li::before { content: ""; flex-shrink: 0; width: 22px; height: 22px; background: no-repeat center / 22px 22px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F77F00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E"); }
+.included-note { margin: 0; font-size: 14px; line-height: 1.6; color: var(--a5-muted); }
+.included-note + .included-note { margin-top: 14px; }
+
+/* final call */
+.calc-cta .cta-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.calc-cta .a5-h2 { font-size: clamp(40px, 4.45vw, 64px); }
+.calc-cta .a5-p { max-width: 620px; font-size: 18px; line-height: 1.55; }
+.calc-cta .a5-btn { margin-top: 8px; min-height: 62px; padding: 0 30px; font-size: 23px; }
+
+/* phones: the calculator keeps its own sticky range bar (scripts/call-bar.js is not used on this page) */
+.calc-sticky-cta { display: none; }
+
+@media (max-width: 1099px) {
+  /* small laptops and tablets: keep the range beside the options, with the compact phone sizes for the cards */
+  .calc-grid { grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; }
+  .calc-group { padding: 22px 20px; }
+  .finish-options { gap: 8px; }
+  .finish-card { min-height: 84px; padding: 12px 10px 10px; border-radius: 12px; gap: 5px; }
+  .finish-card .label { font-size: 19px; padding-right: 12px; }
+  .finish-card .price { font-size: 12.5px; line-height: 1.3; }
+  .finish-card::after { top: 9px; right: 9px; width: 10px; height: 10px; }
+  .beds-baths { gap: 18px; }
+  .beds-baths .num { font-size: 36px; }
+  .result-card { padding: 24px 22px; gap: 16px; }
+  .result-price { font-size: 56px; }
+  .result-cta { font-size: 19px; }
+  .pay-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .mortgage-fields { grid-template-columns: minmax(0, 1fr); }
+  .included-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 899px) {
+  /* no bottom padding for the range bar: it only shows while the calculator is on screen, never over the footer */
+  .calc-hero { --hero-photo-h: 330px; }
+  .calc-hero .a5-h1 { font-size: clamp(40px, 11.8vw, 46px); }
+  .calc-hero .a5-hero-photo .a5-render-tag { bottom: 10px; right: 10px; }
+  .calc-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: 48px; padding-bottom: 44px; }
+  .calc-controls { gap: 14px; }
+  .calc-result { position: static; }
+  .calc-group { padding: 20px 18px; gap: 14px; }
+  .calc-group-head { gap: 12px; }
+  .calc-group-head .a5-num { width: 30px; height: 30px; font-size: 16px; }
+  .calc-group-label { font-size: 22px; }
+  .calc-group-sub { font-size: 14px; }
+  .slider-value { gap: 8px; }
+  .slider-value .num { font-size: 48px; }
+  .slider-value .unit { font-size: 15px; }
+  .covered-value .num { font-size: 42px; }
+  .tape-hint, .slider-labels { font-size: 12.5px; }
+  .tape-slider { height: 52px; }
+  .tape-slider input[type="range"] { left: 40px; top: 8px; width: calc(100% - 40px); height: 36px; }
+  .tape-case { top: 5px; width: 42px; height: 42px; border-radius: 11px; font-size: 20px; }
+  .tape-blade { left: 40px; top: 12px; height: 28px; width: calc((100% - 52px) * var(--frac, 0.2105)); min-width: 24px; }
+  .tape-blade::after { width: 7px; }
+  .tape-rail { left: 40px; top: 8px; height: 36px; }
+  .tape-labels { padding-left: 40px; }
+  .beds-baths { gap: 18px; }
+  .beds-baths > div { gap: 6px; }
+  .beds-baths .num { font-size: 36px; }
+  .beds-baths .unit { font-size: 14px; }
+  .calc-group input[type="range"] { margin: 13px 0; }
+  .finish-options { gap: 8px; }
+  .finish-card { min-height: 84px; padding: 12px 10px 10px; border-radius: 12px; gap: 5px; }
+  .finish-card .label { font-size: 19px; padding-right: 10px; }
+  .finish-card .price { font-size: 12.5px; line-height: 1.3; }
+  .finish-card::after { top: 9px; right: 9px; width: 10px; height: 10px; }
+  .extras-grid { gap: 8px; }
+  .extra-item { min-height: 60px; padding: 10px 14px; gap: 12px; }
+  .extra-name { font-size: 15.5px; }
+  .extra-cost { font-size: 13px; }
+  .result-card { padding: 24px 20px; border-radius: 18px; gap: 14px; }
+  .result-label { font-size: 12.5px; }
+  .result-price { font-size: 60px; }
+  .result-range { font-size: 15px; }
+  .result-cta { min-height: 56px; font-size: 20px; }
+  .estimate-capture { padding: 14px; }
+  #est-email { padding: 0 12px; font-size: 16px; }
+  #est-send { padding: 0 16px; }
+  .est-msg, .result-note { font-size: 12.5px; }
+  .pay-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .pay-inputs, .pay-summary { padding: 20px 18px; gap: 16px; }
+  .pay-summary { gap: 12px; }
+  .mortgage-lot-q { justify-content: space-between; gap: 12px; }
+  .mortgage-lot-q > .mortgage-down-label { font-size: 15.5px; }
+  .down-btn { height: 44px; }
+  .mortgage-fields { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .lot-hint, .cash-hint { font-size: 13px; }
+  .cash-heading { gap: 8px; }
+  .down-pct-btn { height: 36px; }
+  .rate-input { height: 44px; }
+  .mortgage-amount { font-size: 50px; }
+  .mortgage-amount .per { font-size: 24px; }
+  .mortgage-note { font-size: 13px; }
+  .calc-banner { min-height: 340px; align-items: flex-end; }
+  .calc-banner-img { opacity: 0.5; }
+  .calc-banner::before { background: linear-gradient(180deg, rgba(12, 11, 10, 0.35) 0%, rgba(12, 11, 10, 0.9) 100%); }
+  .calc-banner .a5-render-tag { top: 10px; right: 10px; bottom: auto; }
+  .calc-banner-inner { padding-block: 72px 28px; }
+  .calc-banner-text { gap: 12px; }
+  .calc-banner .a5-h2 { font-size: clamp(38px, 11.3vw, 44px); }
+  .calc-banner .a5-p { font-size: 15px; }
+  .custom-banner { grid-template-columns: minmax(0, 1fr); row-gap: 12px; padding: 20px 18px; margin-bottom: 28px; border-radius: 16px; }
+  .custom-banner .a5-icon { width: 56px; height: 56px; }
+  .custom-banner .a5-h3 { font-size: 24px; }
+  .custom-banner .a5-p { font-size: 15px; }
+  .included-title { font-size: 40px; margin-bottom: 16px; }
+  .included-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; margin-bottom: 16px; }
+  .included-grid li { padding: 14px 16px; border-radius: 12px; font-size: 15px; }
+  .included-note { font-size: 13px; }
+  .calc-cta .cta-inner { gap: 16px; }
+  .calc-cta .a5-h2 { font-size: clamp(38px, 11.3vw, 44px); }
+  .calc-cta .a5-p { font-size: 16px; line-height: 1.6; }
+  .calc-cta .a5-btn { width: 100%; min-height: 58px; margin-top: 0; font-size: 20px; }
+  .calc-sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; gap: 10px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: rgba(12, 11, 10, 0.95); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+  .calc-sticky-cta.is-visible { display: flex; }
+  .calc-sticky-cta a { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 12px; border-radius: 10px; background: var(--a5-orange); color: #0C0B0A; font-family: var(--a5-cond); font-weight: 800; font-size: 19px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; text-align: center; }
+}
+@media print { .calc-sticky-cta { display: none !important; } }
+</style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator" aria-current="page">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="/contact" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator" aria-current="page">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="/contact" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
-<ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
-<li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
-</nav>
-
-<section class="calc-hero">
- <div class="calc-badge reveal">Free Planning Calculator</div>
- <h1 class="reveal stagger-1">How Much Does It Cost to<br><span>Build a Home in Florida?</span></h1>
- <p class="reveal stagger-2">Reference market: Central Florida (Orlando metro). Build a planning range from your living area, garage, covered outdoor space, build level, layout, and upgrades. This is an early budgeting tool, not a quote.</p>
+<main id="main">
+<section class="a5-hero calc-hero" aria-labelledby="calc-title">
+  <div class="a5-hero-photo"><img src="/images/projects/jobsite/strip/s14.webp" alt="Three story BuilderK home exterior in Florida" width="600" height="800" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">Free planning calculator</div>
+      <h1 class="a5-h1" id="calc-title">How much does it cost to build a home in <span class="a5-accent">Florida</span>?</h1>
+      <p class="a5-hero-sub">Reference market: Central Florida (Orlando metro). Build a planning range from your living area, garage, covered outdoor space, build level, layout, and upgrades. This is an early budgeting tool, not a quote.</p>
+    </div>
+  </div>
 </section>
 
 <div class="calc-container">
- <div class="calc-controls">
- <p id="plan-context" style="line-height:1.6" hidden></p>
+<section class="calc-section" aria-label="Planning calculator">
+  <div class="a5-wrap calc-grid">
+  <div class="calc-controls">
+    <p id="plan-context" class="plan-context" hidden></p>
 
- <div class="calc-group reveal">
- <div class="calc-group-label"><div class="icon"><i data-lucide="ruler" aria-hidden="true"></i></div> Home Size</div>
- <p class="calc-group-sub">Total living area in square feet</p>
- <div class="slider-value">
- <span class="num" id="sqft-display">2,000</span>
- <span class="unit">sq ft</span>
- </div>
- <input type="range" id="sqft-slider" min="1200" max="5000" value="2000" step="1" aria-label="Living area in square feet" oninput="updateCalc()">
- <div class="slider-labels"><span>1,200</span><span>3,000</span><span>5,000</span></div>
- </div>
+    <div class="calc-group">
+      <div class="calc-group-head"><span class="a5-num">1</span><div><h2 class="calc-group-label">Home size</h2><p class="calc-group-sub">Total living area in square feet</p></div></div>
+      <div class="slider-value"><span class="num" id="sqft-display">2,000</span><span class="unit">sq ft</span><span class="tape-hint" aria-hidden="true">Drag the tape</span></div>
+      <div class="tape-slider" style="--frac:0.2105"><input type="range" id="sqft-slider" min="1200" max="5000" value="2000" step="1" aria-label="Living area in square feet" oninput="updateCalc()"><span class="tape-case" aria-hidden="true">K</span><span class="tape-blade" aria-hidden="true"></span><span class="tape-rail" aria-hidden="true"></span></div>
+      <div class="slider-labels tape-labels"><span>1,200</span><span>3,000</span><span>5,000</span></div>
+    </div>
 
- <div class="calc-group reveal stagger-1">
- <div class="calc-group-label"><div class="icon"><i data-lucide="house" aria-hidden="true"></i></div> Build Level</div>
- <p class="calc-group-sub">This choice sets the structural systems, roof, and exterior. You can customize the interior at every level.</p>
- <div class="finish-options">
- <button type="button" class="finish-card active" data-finish="standard" aria-pressed="true" onclick="setFinish('standard')">
- <div class="tier-icon"><i data-lucide="hammer" aria-hidden="true"></i></div>
- <div class="label">Standard</div>
- <div class="price">Practical essentials</div>
- </button>
- <button type="button" class="finish-card" data-finish="midrange" aria-pressed="false" onclick="setFinish('midrange')">
- <div class="tier-icon"><i data-lucide="star" aria-hidden="true"></i></div>
- <div class="label">Midrange</div>
- <div class="price">Elevated selections</div>
- </button>
- <button type="button" class="finish-card" data-finish="luxury" aria-pressed="false" onclick="setFinish('luxury')">
- <div class="tier-icon"><i data-lucide="gem" aria-hidden="true"></i></div>
- <div class="label">Luxury</div>
- <div class="price">Fully tailored</div>
- </button>
- </div>
- </div>
+    <div class="calc-group">
+      <div class="calc-group-head"><span class="a5-num">2</span><div><h2 class="calc-group-label">Build level</h2><p class="calc-group-sub">This choice sets the structural systems, roof, and exterior. You can customize the interior at every level.</p></div></div>
+      <div class="finish-options">
+      <button type="button" class="finish-card active" data-finish="standard" aria-pressed="true" onclick="setFinish('standard')"><span class="label">Standard</span><span class="price">Practical essentials</span></button>
+      <button type="button" class="finish-card" data-finish="midrange" aria-pressed="false" onclick="setFinish('midrange')"><span class="label">Midrange</span><span class="price">Elevated selections</span></button>
+      <button type="button" class="finish-card" data-finish="luxury" aria-pressed="false" onclick="setFinish('luxury')"><span class="label">Luxury</span><span class="price">Fully tailored</span></button>
+      </div>
+    </div>
 
- <div class="calc-group reveal stagger-2">
- <div class="calc-group-label"><div class="icon"><i data-lucide="bed-double" aria-hidden="true"></i></div> Bedrooms &amp; Bathrooms</div>
- <p class="calc-group-sub">Bedrooms and baths help us understand your plan. They don't change the range.</p>
- <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
- <div>
- <div class="slider-value" style="margin-bottom:8px;">
- <span class="num" id="beds-display" style="font-size:1.4rem;">3</span>
- <span class="unit">beds</span>
- </div>
- <input type="range" id="beds-slider" min="2" max="6" value="3" step="1" aria-label="Number of bedrooms" oninput="updateCalc()">
- </div>
- <div>
- <div class="slider-value" style="margin-bottom:8px;">
- <span class="num" id="baths-display" style="font-size:1.4rem;">2</span>
- <span class="unit">baths</span>
- </div>
- <input type="range" id="baths-slider" min="1" max="5" value="2" step="0.5" aria-label="Number of bathrooms" oninput="updateCalc()">
- </div>
- </div>
- </div>
+    <div class="calc-group">
+      <div class="calc-group-head"><span class="a5-num">3</span><div><h2 class="calc-group-label">Bedrooms and bathrooms</h2><p class="calc-group-sub">Bedrooms and baths help us understand your plan. They don't change the range.</p></div></div>
+      <div class="beds-baths">
+      <div><div class="slider-value"><span class="num" id="beds-display">3</span><span class="unit">beds</span></div><input type="range" id="beds-slider" min="2" max="6" value="3" step="1" aria-label="Number of bedrooms" oninput="updateCalc()"></div>
+      <div><div class="slider-value"><span class="num" id="baths-display">2</span><span class="unit">baths</span></div><input type="range" id="baths-slider" min="1" max="5" value="2" step="0.5" aria-label="Number of bathrooms" oninput="updateCalc()"></div>
+      </div>
+    </div>
 
- <div class="calc-group reveal stagger-2">
- <div class="calc-group-label"><div class="icon">CX</div> Design Complexity</div>
- <p class="calc-group-sub">Choose the option that best matches the rooflines, structural spans, and layout you have in mind.</p>
- <div class="finish-options">
- <button type="button" class="finish-card" data-complexity="simple" aria-pressed="false" onclick="setComplexity('simple')"><div class="label">Simple</div><div class="price">Clean and efficient</div></button>
- <button type="button" class="finish-card active" data-complexity="typical" aria-pressed="true" onclick="setComplexity('typical')"><div class="label">Typical</div><div class="price">Some custom details</div></button>
- <button type="button" class="finish-card" data-complexity="complex" aria-pressed="false" onclick="setComplexity('complex')"><div class="label">Complex</div><div class="price">Highly customized</div></button>
- </div>
- </div>
+    <div class="calc-group">
+      <div class="calc-group-head"><span class="a5-num">4</span><div><h2 class="calc-group-label">Design complexity</h2><p class="calc-group-sub">Choose the option that best matches the rooflines, structural spans, and layout you have in mind.</p></div></div>
+      <div class="finish-options">
+      <button type="button" class="finish-card" data-complexity="simple" aria-pressed="false" onclick="setComplexity('simple')"><span class="label">Simple</span><span class="price">Clean and efficient</span></button>
+      <button type="button" class="finish-card active" data-complexity="typical" aria-pressed="true" onclick="setComplexity('typical')"><span class="label">Typical</span><span class="price">Some custom details</span></button>
+      <button type="button" class="finish-card" data-complexity="complex" aria-pressed="false" onclick="setComplexity('complex')"><span class="label">Complex</span><span class="price">Highly customized</span></button>
+      </div>
+    </div>
 
- <div class="calc-group reveal stagger-3">
- <div class="calc-group-label"><div class="icon"><i data-lucide="car-front" aria-hidden="true"></i></div> Garage</div>
- <p class="calc-group-sub">Choose the garage size you want included. Garage area is calculated separately from living area.</p>
- <div class="finish-options">
- <button type="button" class="finish-card" data-garage="0" aria-pressed="false" onclick="setGarage(0)"><div class="label">None</div><div class="price">No garage</div></button>
- <button type="button" class="finish-card active" data-garage="2" aria-pressed="true" onclick="setGarage(2)"><div class="label">Two Car</div><div class="price">About 440 sq ft</div></button>
- <button type="button" class="finish-card" data-garage="3" aria-pressed="false" onclick="setGarage(3)"><div class="label">Three Car</div><div class="price">About 640 sq ft</div></button>
- </div>
- </div>
+    <div class="calc-group">
+      <div class="calc-group-head"><span class="a5-num">5</span><div><h2 class="calc-group-label">Garage</h2><p class="calc-group-sub">Choose the garage size you want included. Garage area is calculated separately from living area.</p></div></div>
+      <div class="finish-options">
+      <button type="button" class="finish-card" data-garage="0" aria-pressed="false" onclick="setGarage(0)"><span class="label">None</span><span class="price">No garage</span></button>
+      <button type="button" class="finish-card active" data-garage="2" aria-pressed="true" onclick="setGarage(2)"><span class="label">Two car</span><span class="price">About 440 sq ft</span></button>
+      <button type="button" class="finish-card" data-garage="3" aria-pressed="false" onclick="setGarage(3)"><span class="label">Three car</span><span class="price">About 640 sq ft</span></button>
+      </div>
+    </div>
 
- <div class="calc-group reveal stagger-3">
- <div class="calc-group-label"><div class="icon"><i data-lucide="sun" aria-hidden="true"></i></div> Covered Outdoor Space</div>
- <p class="calc-group-sub">Add the approximate covered lanai or rear patio area. This is calculated separately from living area and paver finishes.</p>
- <div class="slider-value">
- <span class="num" id="covered-display">150</span>
- <span class="unit">sq ft</span>
- </div>
- <input type="range" id="covered-slider" min="0" max="600" value="150" step="50" aria-label="Covered outdoor area in square feet" oninput="updateCalc()">
- <div class="slider-labels"><span>None</span><span>300</span><span>600</span></div>
- </div>
+    <div class="calc-group">
+      <div class="calc-group-head"><span class="a5-num">6</span><div><h2 class="calc-group-label">Covered outdoor space</h2><p class="calc-group-sub">Add the approximate covered lanai or rear patio area. This is calculated separately from living area and paver finishes.</p></div></div>
+      <div class="slider-value covered-value"><span class="num" id="covered-display">150</span><span class="unit">sq ft</span></div>
+      <input type="range" id="covered-slider" min="0" max="600" value="150" step="50" aria-label="Covered outdoor area in square feet" oninput="updateCalc()">
+      <div class="slider-labels"><span>None</span><span>300</span><span>600</span></div>
+    </div>
 
- <div class="calc-group reveal">
- <div class="calc-group-label"><div class="icon"><i data-lucide="sparkles" aria-hidden="true"></i></div> Additional Features</div>
- <p class="calc-group-sub">Select any upgrades you would like included in your planning range.</p>
- <div class="extras-grid">
- <button type="button" class="extra-item" data-extra="pool" aria-pressed="false" onclick="toggleExtra(this)">
- <div class="extra-check" aria-hidden="true">+</div>
- <div class="extra-info"><div class="extra-name"><i data-lucide="waves" aria-hidden="true"></i> Pool</div><div class="extra-cost">Optional upgrade</div></div>
- </button>
- <button type="button" class="extra-item" data-extra="pavers" aria-pressed="false" onclick="toggleExtra(this)">
- <div class="extra-check" aria-hidden="true">+</div>
- <div class="extra-info"><div class="extra-name"><i data-lucide="grid-3x3" aria-hidden="true"></i> Paver Finish</div><div class="extra-cost">For driveway or patio areas</div></div>
- </button>
- <button type="button" class="extra-item" data-extra="metalRoof" aria-pressed="false" onclick="toggleExtra(this)">
- <div class="extra-check" aria-hidden="true">+</div>
- <div class="extra-info"><div class="extra-name"><i data-lucide="panels-top-left" aria-hidden="true"></i> Metal Roof Upgrade</div><div class="extra-cost">Optional upgrade</div></div>
- </button>
- </div>
- </div>
- </div>
+    <div class="calc-group">
+      <div class="calc-group-head"><span class="a5-num">7</span><div><h2 class="calc-group-label">Additional features</h2><p class="calc-group-sub">Select any upgrades you would like included in your planning range.</p></div></div>
+      <div class="extras-grid">
+      <button type="button" class="extra-item" data-extra="pool" aria-pressed="false" onclick="toggleExtra(this)"><span class="extra-check" aria-hidden="true">+</span><span class="extra-info"><span class="extra-name">Pool</span><span class="extra-cost">Optional upgrade</span></span></button>
+      <button type="button" class="extra-item" data-extra="pavers" aria-pressed="false" onclick="toggleExtra(this)"><span class="extra-check" aria-hidden="true">+</span><span class="extra-info"><span class="extra-name">Paver finish</span><span class="extra-cost">For driveway or patio areas</span></span></button>
+      <button type="button" class="extra-item" data-extra="metalRoof" aria-pressed="false" onclick="toggleExtra(this)"><span class="extra-check" aria-hidden="true">+</span><span class="extra-info"><span class="extra-name">Metal roof upgrade</span><span class="extra-cost">Optional upgrade</span></span></button>
+      </div>
+    </div>
+  </div>
 
- <div class="calc-result reveal stagger-2">
- <div class="result-card">
- <div class="result-label">Central Florida Planning Midpoint</div>
- <div class="result-price" id="result-total">$427,800</div>
- <div class="result-range" id="result-range">$406,800 to $448,800</div>
- <a href="/contact" class="result-cta">Get my free consultation</a>
- <div id="estimate-capture" style="margin-top:4px;margin-bottom:12px;padding:16px;background:rgba(255,255,255,0.03);border:1px solid var(--dark-border);border-radius:12px;text-align:left;">
- <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;margin-bottom:8px;">Want a builder to review this estimate?</div>
- <div style="display:flex;gap:8px;">
- <input type="email" id="est-email" placeholder="you@email.com" aria-label="Your email address" style="flex:1;min-width:0;background:var(--dark);border:1px solid var(--dark-border);border-radius:8px;padding:10px 12px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;">
- <button type="button" id="est-send" onclick="sendEstimate()" style="background:var(--orange);color:#fff;border:none;border-radius:8px;padding:10px 16px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">Send</button>
- </div>
- <p role="status" aria-live="polite" id="est-msg" style="font-size:0.72rem;color:#666;margin-top:8px;line-height:1.4;">We'll review your configuration and follow up within 1 business day.</p>
- </div>
- <p class="result-note">This is an early Central Florida planning range, not a quote. Land, financing, permits, utilities, unusual site conditions, and owner changes are not included. Coastal and flood zone projects typically cost more. A formal proposal follows plan and site review.</p>
- <div class="equity-box">
- <h4>Land Equity &amp; Appraisal</h4>
- <p>If you own your lot, its appraised equity may reduce or replace the cash down payment required by a lender. The amount depends on the appraisal, total project cost, borrower qualifications, and loan program; it is not guaranteed.</p>
- </div>
- <div class="mortgage-box">
- <h4><i data-lucide="clipboard-list" aria-hidden="true"></i> Estimated Monthly Payment</h4>
- <div class="mortgage-lot-q">
- <span class="mortgage-down-label">Do you own a lot?</span>
- <div class="down-options">
- <button type="button" class="down-btn active" aria-pressed="true" onclick="setLotOwner(true)">Yes</button>
- <button type="button" class="down-btn" aria-pressed="false" onclick="setLotOwner(false)">No</button>
- </div>
- </div>
- <div id="lot-value-section" class="lot-value-section">
- <div class="mortgage-fields">
- <div class="mortgage-field">
- <label class="mortgage-down-label" for="lot-value-input">Estimated lot value</label>
- <div class="lot-input-wrap">
- <span class="lot-dollar" aria-hidden="true">$</span>
- <input type="text" id="lot-value-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="80,000" aria-describedby="lot-equity-hint" oninput="updateCalc()" onblur="formatMoneyInput(this)">
- </div>
- </div>
- <div class="mortgage-field">
- <label class="mortgage-down-label" for="lot-balance-input">Amount still owed on lot</label>
- <div class="lot-input-wrap">
- <span class="lot-dollar" aria-hidden="true">$</span>
- <input type="text" id="lot-balance-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="0" aria-describedby="lot-equity-hint" oninput="updateCalc()" onblur="formatMoneyInput(this)">
- </div>
- </div>
- <p class="lot-hint" id="lot-equity-hint">We use the difference as estimated lot equity. Your lender will confirm it after appraisal.</p>
- </div>
- </div>
- <div class="lot-value-section">
- <div class="cash-heading">
- <label class="mortgage-down-label" for="cash-down-input">Cash down payment</label>
- <div class="down-options" aria-label="Cash down payment shortcuts">
- <button type="button" class="down-pct-btn" aria-pressed="false" onclick="setDown(10)">10%</button>
- <button type="button" class="down-pct-btn" aria-pressed="false" onclick="setDown(20)">20%</button>
- </div>
- </div>
- <div class="lot-input-wrap">
- <span class="lot-dollar" aria-hidden="true">$</span>
- <input type="text" id="cash-down-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="Enter cash amount" aria-describedby="cash-down-hint" oninput="setCashAmount()" onblur="formatMoneyInput(this)">
- </div>
- <p class="cash-hint" id="cash-down-hint">Enter a dollar amount, or use 10% or 20% as a quick starting point.</p>
- </div>
- <div class="financing-summary" aria-live="polite">
- <div class="financing-summary-row" id="lot-equity-row"><span>Estimated lot equity</span><strong id="lot-equity-amount">$0</strong></div>
- <div class="financing-summary-row"><span>Cash down payment</span><strong id="cash-down-amount">$0</strong></div>
- <div class="financing-summary-row"><span>Combined cash and equity</span><strong id="total-contribution-amount">$0</strong></div>
- <div class="financing-summary-row total"><span>Estimated loan amount</span><strong id="loan-amount">$427,800</strong></div>
- </div>
- <div class="rate-row">
- <label class="mortgage-down-label" for="interest-rate">Example interest rate</label>
- <input class="rate-input" type="number" id="interest-rate" min="1" max="20" step="0.01" value="7.03" aria-describedby="rate-source" oninput="updateCalc()">
- </div>
- <div class="mortgage-amount" id="mortgage-amount">$2,855/mo</div>
- <p class="mortgage-note" id="mortgage-note">Based on the planning midpoint and your cash down payment. Lot equity may help meet lender requirements.</p>
- <p class="rate-source" id="rate-source">Default example rate: <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">Freddie Mac PMMS</a>, September 24, 2026. Edit the rate to model another scenario.</p>
- <p class="mortgage-construction-note">During construction, many programs charge interest only on funds already disbursed. Timing and payment structure vary by lender and loan terms.</p>
- <p class="mortgage-disclaimer">*Estimate for illustrative purposes only. Does not include property taxes, homeowners insurance, or HOA fees. Contact a lender for exact rates and qualification.</p>
- </div>
- </div>
- </div>
-</div>
-
-<!-- Visual Banner -->
-<div class="visual-banner reveal">
- <div class="visual-banner-inner">
- <h2>Your Dream Home. <span>Your Budget.</span></h2>
- <p>Every detail customized to your vision. Use the calculator above to see what's possible, then let's make it real.</p>
- </div>
-</div>
-
-<!-- Custom Interiors Banner -->
-<div class="custom-banner reveal">
- <div class="custom-banner-inner">
- <div class="custom-banner-icon"><i data-lucide="palette" aria-hidden="true"></i></div>
- <div class="custom-banner-text">
- <h3>Every BuilderK Home Comes With Fully Customizable Interiors</h3>
- <p>At every price level, you select the cabinets, countertops, flooring, fixtures, appliances, paint, and layout. Our design team helps you make each choice so the home feels like yours.</p>
- </div>
- </div>
-</div>
-
-<!-- Included -->
-<section class="included-section">
- <h3 class="reveal" style="text-align:center;font-size:1.4rem;font-weight:700;margin-bottom:24px;color:#fff;">Included in <span style="color:var(--orange);">Every Build</span></h3>
- <div class="included-grid reveal stagger-1">
- <div class="included-item">Permit processing &amp; engineering coordination</div>
- <div class="included-item">Full construction management</div>
- <div class="included-item">Standard slab foundation</div>
- <div class="included-item">All inspections</div>
- <div class="included-item">Final walkthrough</div>
- <div class="included-item">one year builder warranty</div>
- <div class="included-item">Licensed GC (CGC #1537163)</div>
- <div class="included-item">Design team guidance</div>
- </div>
- <p class="reveal stagger-2" style="text-align:center;font-size:0.8rem;color:#555;margin-top:20px;">Not included: Land/lot cost, government permit and impact fees (billed at cost), well/septic (if not on city utilities), land clearing, fill, or tree removal, stem wall or elevated foundations, pool, fencing, window treatments.</p>
- <p class="reveal stagger-2" style="text-align:center;font-size:0.8rem;color:#777;max-width:680px;margin:14px auto 0;">Every BuilderK home includes a one year builder warranty covering workmanship and materials, in addition to the structural protections Florida law provides. Full terms are provided in your construction agreement.</p>
+  <div class="calc-result">
+    <div class="result-card">
+      <div class="result-label">Central Florida planning midpoint</div>
+      <div class="result-price"><span class="a5-hl" id="result-total">$427,800</span></div>
+      <div class="result-range" id="result-range">$406,800 to $448,800</div>
+      <a href="/contact" class="result-cta">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+      <div id="estimate-capture" class="estimate-capture">
+        <div class="estimate-title">Want a builder to review this estimate?</div>
+        <div class="estimate-row"><input type="email" id="est-email" placeholder="you@email.com" aria-label="Your email address"><button type="button" id="est-send" onclick="sendEstimate()">Send</button></div>
+        <p role="status" aria-live="polite" id="est-msg" class="est-msg">We'll review your configuration and follow up within 1 business day.</p>
+      </div>
+      <p class="result-note">This is an early Central Florida planning range, not a quote. Land, financing, permits, utilities, unusual site conditions, and owner changes are not included. Coastal and flood zone projects typically cost more. A formal proposal follows plan and site review.</p>
+    </div>
+  </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
- <h2 class="reveal">Ready to Build? <span>Let's Talk Numbers.</span></h2>
- <p class="reveal stagger-1">Get a detailed, personalized quote based on your lot, your plans, and your vision. No obligation.</p>
- <a href="/contact" class="btn-primary reveal stagger-2">Get my free consultation</a>
+<section class="a5-section a5-bg-white pay-section" aria-labelledby="pay-title">
+  <div class="a5-wrap">
+    <div class="a5-head">
+      <div class="a5-head-text">
+        <div class="a5-label">Land equity and appraisal</div>
+        <h2 class="a5-h2" id="pay-title">Estimated monthly <span class="a5-hl">payment</span></h2>
+        <p class="a5-p">If you own your lot, its appraised equity may reduce or replace the cash down payment required by a lender. The amount depends on the appraisal, total project cost, borrower qualifications, and loan program; it is not guaranteed.</p>
+      </div>
+    </div>
+    <div class="pay-grid">
+      <div class="pay-inputs">
+        <div class="mortgage-lot-q">
+        <span class="mortgage-down-label">Do you own a lot?</span>
+        <div class="down-options">
+        <button type="button" class="down-btn active" aria-pressed="true" onclick="setLotOwner(true)">Yes</button>
+        <button type="button" class="down-btn" aria-pressed="false" onclick="setLotOwner(false)">No</button>
+        </div>
+        </div>
+        <div id="lot-value-section" class="lot-value-section">
+        <div class="mortgage-fields">
+        <div class="mortgage-field">
+        <label class="mortgage-down-label" for="lot-value-input">Estimated lot value</label>
+        <div class="lot-input-wrap">
+        <span class="lot-dollar" aria-hidden="true">$</span>
+        <input type="text" id="lot-value-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="80,000" aria-describedby="lot-equity-hint" oninput="updateCalc()" onblur="formatMoneyInput(this)">
+        </div>
+        </div>
+        <div class="mortgage-field">
+        <label class="mortgage-down-label" for="lot-balance-input">Amount still owed on lot</label>
+        <div class="lot-input-wrap">
+        <span class="lot-dollar" aria-hidden="true">$</span>
+        <input type="text" id="lot-balance-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="0" aria-describedby="lot-equity-hint" oninput="updateCalc()" onblur="formatMoneyInput(this)">
+        </div>
+        </div>
+        <p class="lot-hint" id="lot-equity-hint">We use the difference as estimated lot equity. Your lender will confirm it after appraisal.</p>
+        </div>
+        </div>
+        <div class="lot-value-section">
+        <div class="cash-heading">
+        <label class="mortgage-down-label" for="cash-down-input">Cash down payment</label>
+        <div class="down-options" role="group" aria-label="Cash down payment shortcuts">
+        <button type="button" class="down-pct-btn" aria-pressed="false" onclick="setDown(10)">10%</button>
+        <button type="button" class="down-pct-btn" aria-pressed="false" onclick="setDown(20)">20%</button>
+        </div>
+        </div>
+        <div class="lot-input-wrap">
+        <span class="lot-dollar" aria-hidden="true">$</span>
+        <input type="text" id="cash-down-input" class="lot-input" inputmode="numeric" autocomplete="off" placeholder="Enter cash amount" aria-describedby="cash-down-hint" oninput="setCashAmount()" onblur="formatMoneyInput(this)">
+        </div>
+        <p class="cash-hint" id="cash-down-hint">Enter a dollar amount, or use 10% or 20% as a quick starting point.</p>
+        </div>
+      </div>
+      <div class="pay-summary">
+        <div class="financing-summary" aria-live="polite">
+        <div class="financing-summary-row" id="lot-equity-row"><span>Estimated lot equity</span><strong id="lot-equity-amount">$0</strong></div>
+        <div class="financing-summary-row"><span>Cash down payment</span><strong id="cash-down-amount">$0</strong></div>
+        <div class="financing-summary-row"><span>Combined cash and equity</span><strong id="total-contribution-amount">$0</strong></div>
+        <div class="financing-summary-row total"><span>Estimated loan amount</span><strong id="loan-amount">$427,800</strong></div>
+        </div>
+        <div class="rate-row">
+        <label class="mortgage-down-label" for="interest-rate">Example interest rate</label>
+        <input class="rate-input" type="number" id="interest-rate" min="1" max="20" step="0.01" value="7.03" aria-describedby="rate-source" oninput="updateCalc()">
+        </div>
+        <div class="mortgage-amount" id="mortgage-amount">$2,855/mo</div>
+        <p class="mortgage-note" id="mortgage-note">Based on the planning midpoint and your cash down payment. Lot equity may help meet lender requirements.</p>
+        <p class="rate-source" id="rate-source">Default example rate: <a href="https://www.freddiemac.com/pmms" target="_blank" rel="noopener">Freddie Mac PMMS</a>, September 24, 2026. Edit the rate to model another scenario.</p>
+        <p class="mortgage-construction-note">During construction, many programs charge interest only on funds already disbursed. Timing and payment structure vary by lender and loan terms.</p>
+        <p class="mortgage-disclaimer">*Estimate for illustrative purposes only. Does not include property taxes, homeowners insurance, or HOA fees. Contact a lender for exact rates and qualification.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="calc-banner" aria-labelledby="banner-title">
+  <img class="calc-banner-img" src="/images/projects/jobsite/strip/aerial.webp" alt="" width="900" height="1200" loading="lazy" decoding="async">
+  <div class="a5-wrap calc-banner-inner">
+    <div class="calc-banner-text">
+      <h2 class="a5-h2" id="banner-title">Your dream home. <span class="a5-accent">Your budget.</span></h2>
+      <p class="a5-p">Every detail customized to your vision. Use the calculator above to see what's possible, then let's make it real.</p>
+    </div>
+  </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand">
- <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
- <p>Custom home builders in Florida. You bring the lot. We build your home from the ground up.</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/">Home</a><a href="/about">About Us</a><a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a><a href="/facades">Facades &amp; Styles</a><a href="/calculator">Pricing Calculator</a>
- <a href="/interiors">Interior Selections</a>
- </div>
- <div class="footer-col">
- <h4>Services</h4>
- <a href="/">Custom Homes</a><a href="/floor-plans">Floor Plans</a><a href="/financing">Financing</a><a href="/construction">Construction Gallery</a><a href="/interior-gallery">Interior Gallery</a><a href="/blog">Blog</a><a href="/referral-program/">Referral Program</a>
- <a href="/calculator">Pricing Calculator</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:2392304868">(239) 230 4868</a><a href="mailto:info@builderk.com">info@builderk.com</a><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
- </div>
- </div>
- <div class="footer-bottom">
- <span>2026 Builders Knowledge Development Inc. All rights reserved.</span>
- <a href="/privacy">Privacy Policy</a>
- </div>
- </div>
+<section class="a5-section a5-bg-concrete" aria-labelledby="included-title">
+  <div class="a5-wrap">
+    <div class="custom-banner"><svg width="64" height="64" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><ellipse cx="32" cy="58" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><g transform="rotate(-24 22 52)"><rect x="14" y="10" width="16" height="44" rx="3" fill="#FFFFFF" stroke="#6B7785" stroke-width="1.3"></rect><rect x="16" y="12" width="12" height="12" rx="2" fill="#3E8ED0"></rect><rect x="16" y="26" width="12" height="12" rx="2" fill="#7FB8E6"></rect><rect x="16" y="40" width="12" height="8" rx="2" fill="#C9E2F6"></rect></g><g transform="rotate(-6 30 54)"><rect x="24" y="8" width="16" height="46" rx="3" fill="#FFFFFF" stroke="#6B7785" stroke-width="1.3"></rect><rect x="26" y="10" width="12" height="12" rx="2" fill="#2FA36B"></rect><rect x="26" y="24" width="12" height="12" rx="2" fill="#7FD1A5"></rect><rect x="26" y="38" width="12" height="10" rx="2" fill="#CDEEDB"></rect></g><g transform="rotate(14 38 56)"><rect x="34" y="8" width="16" height="46" rx="3" fill="#FFFFFF" stroke="#6B7785" stroke-width="1.3"></rect><rect x="36" y="10" width="12" height="12" rx="2" fill="#F77F00"></rect><rect x="36" y="24" width="12" height="12" rx="2" fill="#FFB266"></rect><rect x="36" y="38" width="12" height="10" rx="2" fill="#FFE0BF"></rect></g><circle cx="27" cy="52" r="2.4" fill="#6B7785"></circle></svg><div><h3 class="a5-h3">Every BuilderK home comes with fully customizable interiors</h3><p class="a5-p">At every price level, you select the cabinets, countertops, flooring, fixtures, appliances, paint, and layout. Our design team helps you make each choice so the home feels like yours.</p></div></div>
+    <h2 class="a5-h2 included-title" id="included-title">Included in every <span class="a5-hl">build</span></h2>
+    <ul class="included-grid"><li>Permit processing and engineering coordination</li><li>Full construction management</li><li>Standard slab foundation</li><li>All inspections</li><li>Final walkthrough</li><li>One year builder warranty</li><li>Licensed GC (CGC #1537163)</li><li>Design team guidance</li></ul>
+    <p class="included-note">Not included: Land/lot cost, government permit and impact fees (billed at cost), well/septic (if not on city utilities), land clearing, fill, or tree removal, stem wall or elevated foundations, pool, fencing, window treatments.</p>
+    <p class="included-note">Every BuilderK home includes a one year builder warranty covering workmanship and materials, in addition to the structural protections Florida law provides. Full terms are provided in your construction agreement.</p>
+  </div>
+</section>
+
+<section class="a5-section a5-bg-white calc-cta" aria-labelledby="cta-title">
+  <div class="a5-wrap cta-inner">
+    <h2 class="a5-h2" id="cta-title">Ready to build? Let's talk <span class="a5-hl">numbers</span>.</h2>
+    <p class="a5-p">Get a detailed, personalized quote based on your lot, your plans, and your vision. No obligation.</p>
+    <a href="/contact" class="a5-btn a5-btn-dark">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
+</section>
+</main>
+
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
 <script>
 // ===== CALCULATOR =====
@@ -772,22 +766,42 @@ if(hamburger&&navLinks){hamburger.addEventListener('click', function() {
   });navLinks.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){navLinks.classList.remove('open');hamburger.classList.remove('active');});});}
 </script>
 
+<script>
+(function () {
+  'use strict';
+  var slider = document.getElementById('sqft-slider');
+  var tape = document.querySelector('.tape-slider');
+  var display = document.getElementById('sqft-display');
+  var monthly = document.getElementById('mortgage-amount');
+  function syncTape() {
+    if (!slider || !tape) return;
+    var min = Number(slider.min), max = Number(slider.max);
+    var frac = Math.max(0, Math.min(1, (Number(slider.value) - min) / (max - min)));
+    tape.style.setProperty('--frac', frac.toFixed(4));
+  }
+  function smallPerMonth() {
+    if (!monthly || monthly.children.length) return;
+    var text = monthly.textContent, i = text.lastIndexOf('/mo');
+    if (i < 1) return;
+    monthly.textContent = text.slice(0, i);
+    var per = document.createElement('span');
+    per.className = 'per';
+    per.textContent = '/mo';
+    monthly.appendChild(per);
+  }
+  if (slider) slider.addEventListener('input', syncTape);
+  if ('MutationObserver' in window) {
+    if (display) new MutationObserver(syncTape).observe(display, { childList: true, characterData: true, subtree: true });
+    if (monthly) new MutationObserver(smallPerMonth).observe(monthly, { childList: true, characterData: true, subtree: true });
+  }
+  syncTape();
+  smallPerMonth();
+})();
+</script>
+
 <!-- Sticky Mobile CTA -->
 <div class="calc-sticky-cta">
- <a href="/contact" class="sticky-primary">Have a Builder Review My Range</a>
+ <a href="/contact" class="sticky-primary">Have a builder review my range</a>
 </div>
-
-<script>
-// Click-to-call GA4 event tracking
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (typeof gtag === 'function') {
-        gtag('event', 'phone_click', { 'page_path': location.pathname });
-      }
-    });
-  });
-});
-</script>
 </body>
 </html>
