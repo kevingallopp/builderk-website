@@ -29,121 +29,181 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--orange:#F77F00;--orange-hover:#FF9A2E;--dark:#0A0A0A;--dark-card:#111111;--dark-border:#1E1E1E;--gray-600:#6B6B6B;--green:#22C55E}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;color:#fff;background:var(--dark);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:'Outfit',sans-serif}
-.navbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);transition:all 0.3s}
-.navbar.scrolled{padding:14px 48px;background:rgba(10,10,10,0.97)}
-.nav-logo{text-decoration:none;display:flex;align-items:baseline}
-.nav-logo .builder{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;letter-spacing:1px}
-.nav-logo .k{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.6rem;color:var(--orange)}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{color:#ccc;text-decoration:none;font-size:0.92rem;font-weight:500;transition:color 0.2s}
-.nav-links a:hover{color:var(--orange)}
-.nav-cta{background:var(--orange)!important;color:#fff!important;padding:10px 22px;border-radius:8px;font-weight:600!important}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;z-index:1000;position:relative}
-.nav-hamburger span{width:26px;height:2px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s}
-.nav-hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.nav-hamburger.active span:nth-child(2){opacity:0}
-.nav-hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.nav-links.open{display:flex!important;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:999;justify-content:flex-start;align-items:center;gap:24px;padding:80px 24px}
-.nav-links.open li{list-style:none}
-.nav-links.open li a{font-size:1.4rem;padding:12px 0;color:#fff}
-
-.page-hero{padding:150px 48px 40px;text-align:center}
-.page-hero h1{font-size:3rem;font-weight:800;line-height:1.1;margin-bottom:14px}
-.page-hero h1 span{color:var(--orange)}
-.page-hero p{font-size:1.1rem;color:#aaa;max-width:560px;margin:0 auto;line-height:1.6}
-
-.contact-wrap{max-width:1100px;margin:0 auto;padding:40px 48px 90px;display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start}
-.form-card{background:var(--dark-card);border:1px solid var(--dark-border);border-radius:20px;padding:36px}
-.form-field{margin-bottom:18px}
-.form-field label{display:block;font-size:0.85rem;font-weight:600;color:#ccc;margin-bottom:6px}
-.form-field input,.form-field select,.form-field textarea{width:100%;background:var(--dark);border:1px solid var(--dark-border);border-radius:10px;padding:12px 14px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.2s}
-.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(247,127,0,0.25)}
-.form-field textarea{min-height:90px;resize:vertical}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px 24px;background:var(--orange);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:1.05rem;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none}
-.btn-primary:hover{background:var(--orange-hover)}
-.form-note{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:14px;line-height:1.5}
-.side-card{background:var(--dark-card);border:1px solid var(--dark-border);border-radius:20px;padding:28px;margin-bottom:20px}
-.side-card h3{font-size:1rem;font-weight:700;color:var(--orange);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
-.side-card ol{margin:0;padding-left:20px;font-size:0.92rem;line-height:1.8;color:rgba(255,255,255,0.75)}
-.side-card p{font-size:0.92rem;line-height:1.7;color:rgba(255,255,255,0.75)}
-.side-card a{color:var(--orange);text-decoration:none;font-weight:600}
-.contact-line{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:0.95rem}
-.contact-line span{color:#888;font-size:0.8rem;min-width:54px}
-
-.footer{background:var(--dark);padding:60px 48px 30px;border-top:1px solid rgba(255,255,255,0.06)}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-top{display:flex;justify-content:space-between;gap:48px;margin-bottom:40px;flex-wrap:wrap}
-.footer-brand{max-width:280px}
-.footer-brand p{color:#888;font-size:0.9rem;margin-top:12px;line-height:1.5}
-.footer-col{display:flex;flex-direction:column;gap:10px}
-.footer-col h4{color:#fff;font-family:'Outfit',sans-serif;font-weight:600;font-size:0.95rem;margin-bottom:4px}
-.footer-col a{color:#888;text-decoration:none;font-size:0.88rem;transition:color 0.2s}
-.footer-col a:hover{color:var(--orange)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);color:#555;font-size:0.82rem;flex-wrap:wrap;gap:8px}
-
-@media(max-width:900px){
-  .navbar{padding:14px 20px!important}.nav-links{display:none}.nav-hamburger{display:flex!important}
-  .page-hero{padding:120px 24px 30px}.page-hero h1{font-size:2.2rem}
-  .contact-wrap{grid-template-columns:1fr;padding:24px 20px 60px;gap:24px}
-  .form-row{grid-template-columns:1fr}
-  .footer{padding:40px 20px 24px}.footer-top{flex-direction:column;gap:32px}
-}
-#cf-location-help { color: rgba(255,255,255,0.62); }
-.form-more { margin: 2px 0 16px; }
-.form-more summary { cursor: pointer; color: var(--orange); font-weight: 600; padding: 10px 0; }
-.form-more[open] summary { margin-bottom: 8px; }
-</style>
-<link rel="stylesheet" href="/css/site-a11y.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/a5.css?v=3">
 <script src="/scripts/lead-context.js"></script>
 <script src="/scripts/lead-submit.js"></script>
+<script defer src="/scripts/a5.js?v=3"></script>
+<style>
+/* hero: the call button only on phones (computers have the number in the header) */
+.hero-phonecall { display: none; }
+@media (max-width: 899px) { .hero-phonecall { display: inline-flex; } }
+.a5-hero-photo picture { display: block; width: 100%; height: 100%; }
+/* narrower computers: the text runs further into the photo, so keep it a little narrower and fade more of the photo (like the home hero) */
+@media (min-width: 900px) and (max-width: 1279px) {
+  .a5-hero { --hero-text: min(620px, 56vw); }
+  .a5-hero-photo::before { width: 70%; background: linear-gradient(90deg, var(--a5-dark) 0%, rgba(12, 11, 10, 0.86) 40%, rgba(12, 11, 10, 0) 100%); }
+}
+/* the phone call bar from scripts/call-bar.js, in the A5 fonts */
+.bk-call-bar a { font-family: var(--a5-sans) !important; }
+.bk-call-bar .bk-talk { font-family: var(--a5-cond) !important; font-weight: 800; font-size: 19px !important; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* contact: form and side cards */
+.contact-sec { padding-block: 88px 104px; }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 40px; align-items: start; }
+.contact-card { padding: 36px; border-radius: 20px; border-color: #E8E4DD; box-shadow: 0 20px 50px rgba(27, 26, 24, 0.08); }
+#contact-form { display: flex; flex-direction: column; gap: 18px; }
+#contact-form .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 16px; align-items: start; }
+#contact-form .form-field { display: flex; flex-direction: column; gap: 7px; }
+#contact-form label { font-size: 13.5px; color: #3D3A36; }
+#contact-form .req { color: #B35C00; }
+#contact-form .form-more { border-top: 1px solid #ECE8E1; border-bottom: 1px solid #ECE8E1; }
+#contact-form .form-more summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; font-weight: 700; font-size: 15px; color: var(--a5-ink); }
+#contact-form .form-more summary::-webkit-details-marker { display: none; }
+#contact-form .form-more summary::after { content: "+"; flex-shrink: 0; width: 28px; height: 28px; border-radius: 999px; background: var(--a5-concrete); display: flex; align-items: center; justify-content: center; font-size: 19px; line-height: 1; }
+#contact-form .form-more[open] summary::after { content: "\2212"; }
+#contact-form .form-more[open] { padding-bottom: 18px; }
+#contact-form .form-more .form-field + .form-field { margin-top: 16px; }
+#contact-form .form-more summary + .form-field { margin-top: 4px; }
+#contact-form .btn-primary { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 62px; padding: 0 20px; border: 0; border-radius: 14px; background: var(--a5-ink); color: #FFFFFF; font-family: var(--a5-cond); font-weight: 800; font-size: 24px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; }
+#contact-form .btn-primary::after { content: ""; flex-shrink: 0; width: 20px; height: 20px; background: no-repeat center / 20px 20px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E"); }
+#contact-form .btn-primary:hover { filter: brightness(1.15); }
+#contact-form .btn-primary:disabled { opacity: 0.6; cursor: wait; }
+#contact-form .btn-primary:disabled::after { display: none; }
+#contact-form .form-note { margin: 0; font-size: 13px; line-height: 1.55; color: var(--a5-muted); text-align: center; }
+/* the status line lead-submit.js adds under the form: no empty gap before a message is shown */
+#contact-form > p[role="status"] { margin-bottom: 0; text-align: center; }
+#contact-form > p[role="status"]:empty { display: none; }
+.contact-side { display: flex; flex-direction: column; gap: 20px; }
+.side-card { padding: 28px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 18px; }
+.side-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
+.next-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.next-list li { display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 14px; align-items: start; font-size: 16px; line-height: 1.5; color: var(--a5-ink); }
+.next-list .a5-num { width: 36px; height: 36px; }
+.next-list li > span:last-child { padding-top: 6px; }
+.side-talk { gap: 12px; }
+.contact-lines { display: flex; flex-direction: column; }
+.contact-line { display: grid; grid-template-columns: 74px minmax(0, 1fr); column-gap: 12px; align-items: baseline; padding: 12px 0; border-top: 1px solid #ECE8E1; }
+.contact-line span { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
+.contact-line a, .side-card p a { font-weight: 700; color: var(--a5-ink); text-decoration: underline; text-underline-offset: 3px; }
+.contact-line a { font-size: 17px; overflow-wrap: anywhere; }
+.contact-line a:hover, .side-card p a:hover { text-decoration-color: var(--a5-orange); }
+.side-ready { gap: 14px; }
+.side-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.side-icons { display: flex; gap: 8px; }
+.side-icons .a5-icon { width: 44px; height: 44px; }
+.side-card p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--a5-body); }
+.side-card p a { white-space: nowrap; }
+@media (max-width: 1199px) { .contact-grid { grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; } }
+@media (max-width: 1023px) { .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+@media (max-width: 899px) {
+  .contact-sec { padding-block: 32px 48px; }
+  .contact-card { padding: 22px 18px; border-radius: 18px; box-shadow: 0 16px 40px rgba(27, 26, 24, 0.08); }
+  #contact-form { gap: 16px; }
+  #contact-form .form-row { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  #contact-form .btn-primary { min-height: 60px; font-size: 21px; }
+  #contact-form .form-note { font-size: 12.5px; }
+  .contact-side { gap: 16px; }
+  .side-card { padding: 22px 18px; }
+  .side-title { font-size: 24px; }
+  .next-list { gap: 14px; }
+  .next-list li { grid-template-columns: 32px minmax(0, 1fr); font-size: 15px; }
+  .next-list .a5-num { width: 32px; height: 32px; font-size: 17px; }
+  .next-list li > span:last-child { padding-top: 5px; }
+  .contact-line a { font-size: 16px; }
+  .side-icons .a5-icon { width: 40px; height: 40px; }
+  .side-card p { font-size: 15px; }
+}
+</style>
 </head>
 <body>
+<!-- a5:header -->
+<a class="a5-skip" href="#main">Skip to content</a>
+<header class="a5-header">
+  <div class="a5-header-bar">
+    <a class="a5-logo" href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="138" height="22"></a>
+    <nav class="a5-nav" aria-label="Main">
+      <a href="/process">How it works</a>
+      <a href="/floor-plans">Floor plans</a>
+      <a href="/construction">Construction</a>
+      <a href="/financing">Financing</a>
+      <a href="/calculator">Calculator</a>
+    </nav>
+    <div class="a5-header-actions">
+      <a class="a5-header-phone" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(239) 230 4868</a>
+      <a class="a5-header-cta" href="#contact-form" data-a5-cta>Free consultation</a>
+      <a class="a5-header-call" href="tel:2392304868" aria-label="Call BuilderK at (239) 230 4868"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+      <button class="a5-menu-btn" type="button" aria-expanded="false" aria-controls="a5-menu" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="a5-menu" id="a5-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
+  <div class="a5-menu-top">
+    <img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="113" height="18">
+    <button class="a5-menu-close" type="button" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  </div>
+  <nav class="a5-menu-main" aria-label="Menu">
+    <a href="/">Home</a>
+    <a href="/process">How it works</a>
+    <a href="/floor-plans">Floor plans</a>
+    <a href="/construction">Construction</a>
+    <a href="/financing">Financing</a>
+    <a href="/calculator">Calculator</a>
+  </nav>
+  <div class="a5-menu-more">
+    <a href="/facades">Home styles</a>
+    <a href="/interior-gallery">Interior gallery</a>
+    <a href="/interiors">Interior selections</a>
+    <a href="/about">About us</a>
+    <a href="/service-areas">Service areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/referral-program">Referral program</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="a5-menu-actions">
+    <a class="a5-btn a5-btn-hero" href="#contact-form" data-a5-cta>Get my free consultation</a>
+    <a class="a5-btn a5-btn-call" href="tel:2392304868">Call (239) 230 4868</a>
+  </div>
+</div>
+<!-- /a5:header -->
 
-<nav class="navbar" id="navbar">
- <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
- <ul class="nav-links" id="nav-links">
- <li><a href="/process">How It Works</a></li>
- <li><a href="/floor-plans">Floor Plans</a></li>
- <li><a href="/construction">Construction</a></li>
- <li><a href="/financing">Financing</a></li>
- <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Free consultation</a></li>
- </ul>
- <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
-</nav>
-
-<section class="page-hero">
- <h1>Let's Talk About <span>Your Build</span></h1>
- <p>Tell us about your lot and the home you have in mind. A BuilderK team member responds within 1 business day.</p>
+<main id="main">
+<section class="a5-hero contact-hero" aria-labelledby="contact-title">
+  <div class="a5-hero-photo" style="--pos:50% 50%"><img src="/images/projects/jobsite/strip/aerial.webp" alt="Drone view of a BuilderK home under construction beside a lake" width="900" height="1200" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-inner">
+    <div class="a5-hero-body">
+      <div class="a5-hero-label">Contact BuilderK</div>
+      <h1 class="a5-h1" id="contact-title">Let's Talk About <span class="a5-accent">Your Build</span></h1>
+      <p class="a5-hero-sub">Tell us about your lot and the home you have in mind. A BuilderK team member responds within 1 business day.</p>
+      <div class="a5-hero-actions">
+        <a class="a5-btn a5-btn-hero" href="#contact-form">Get my free consultation <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        <a class="a5-btn a5-btn-call hero-phonecall" href="tel:2392304868"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call (239) 230 4868</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="contact-wrap">
- <div class="form-card">
- <form action="https://formspree.io/f/mreybpyl" method="POST" id="contact-form">
+<section class="a5-bg-concrete contact-sec">
+  <div class="a5-wrap contact-grid">
+    <div class="a5-form-card contact-card">
+ <form action="https://formspree.io/f/mreybpyl" method="POST" id="contact-form" class="a5-form">
  <div class="form-row">
  <div class="form-field">
- <label for="cf-name">Full name <span style="color:var(--orange);">*</span></label>
+ <label for="cf-name">Full name <span class="req" aria-hidden="true">*</span></label>
  <input type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Your name">
  </div>
  <div class="form-field">
- <label for="cf-phone">Phone <span style="color:var(--orange);">*</span></label>
+ <label for="cf-phone">Phone <span class="req" aria-hidden="true">*</span></label>
  <input type="tel" id="cf-phone" name="phone" required autocomplete="tel" placeholder="(555) 555 5555">
  </div>
  </div>
  <div class="form-field">
- <label for="cf-email">Email <span style="color:var(--orange);">*</span></label>
+ <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
  <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="you@email.com">
  </div>
  <div class="form-row">
  <div class="form-field">
- <label for="cf-lot">Do you own a lot? <span style="color:var(--orange);">*</span></label>
+ <label for="cf-lot">Do you own a lot? <span class="req" aria-hidden="true">*</span></label>
  <select id="cf-lot" name="lot_ownership" required>
  <option value="" disabled selected>Select one</option>
  <option>Yes, I own a lot</option>
@@ -152,7 +212,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
  </select>
  </div>
  <div class="form-field">
- <label for="cf-budget">Total project budget <span style="color:var(--orange);">*</span></label>
+ <label for="cf-budget">Total project budget <span class="req" aria-hidden="true">*</span></label>
  <select id="cf-budget" name="budget" required>
  <option value="" disabled selected>Select one</option>
  <option>$200K to $400K</option>
@@ -180,7 +240,7 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
  </div>
  </div>
  <div class="form-field">
- <label for="cf-timeline">When do you want to start? <span style="color:var(--orange);">*</span></label>
+ <label for="cf-timeline">When do you want to start? <span class="req" aria-hidden="true">*</span></label>
  <select id="cf-timeline" name="timeline" required>
  <option value="" disabled selected>Select one</option>
  <option value="ASAP">As soon as possible</option>
@@ -216,81 +276,83 @@ h1,h2,h3,h4{font-family:'Outfit',sans-serif}
  <button type="submit" class="btn-primary" id="cf-submit">Get my free consultation</button>
  <p class="form-note">Licensed Florida GC, CGC #1537163. We respond within 1 business day. We never sell your info. It goes to the BuilderK team and the services that run our forms and CRM. We share it with a lender only if you ask.</p>
  </form>
- </div>
+    </div>
 
- <div>
- <div class="side-card">
- <h3>What happens next</h3>
- <ol>
- <li>A BuilderK team member reaches out within 1 business day</li>
- <li>We schedule a 15 minute discovery call about your lot and goals</li>
- <li>After we confirm the lot, size, and budget basics, we outline a preliminary planning range</li>
- <li>After we review the plan, scope and site, we send a formal proposal</li>
- </ol>
- </div>
- <div class="side-card">
- <h3>Prefer to talk now?</h3>
- <div class="contact-line"><span>Call</span><a href="tel:2392304868">(239) 230 4868</a></div>
- <div class="contact-line"><span>Email</span><a href="mailto:info@builderk.com">info@builderk.com</a></div>
- <div class="contact-line"><span>Office</span><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a></div>
- </div>
- <div class="side-card">
- <h3>Not ready yet?</h3>
- <p>Get a number first with our <a href="/calculator">build cost calculator</a>, browse <a href="/floor-plans">floor plans</a>, or see <a href="/construction">real jobsite photos</a>.</p>
- </div>
- </div>
-</div>
+    <div class="contact-side">
+      <div class="side-card">
+        <h2 class="side-title">What happens next</h2>
+        <ol class="next-list"><li><span class="a5-num" aria-hidden="true">1</span><span>A BuilderK team member reaches out within 1 business day</span></li><li><span class="a5-num" aria-hidden="true">2</span><span>We schedule a 15 minute discovery call about your lot and goals</span></li><li><span class="a5-num" aria-hidden="true">3</span><span>After we confirm the lot, size, and budget basics, we outline a preliminary planning range</span></li><li><span class="a5-num a5-num-accent" aria-hidden="true">4</span><span>After we review the plan, scope and site, we send a formal proposal</span></li></ol>
+      </div>
+      <div class="side-card side-talk">
+        <h2 class="side-title">Prefer to talk now?</h2>
+        <div class="contact-lines"><div class="contact-line"><span>Call</span><a href="tel:2392304868">(239) 230 4868</a></div><div class="contact-line"><span>Email</span><a href="mailto:info@builderk.com">info@builderk.com</a></div><div class="contact-line"><span>Office</span><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a></div></div>
+      </div>
+      <div class="side-card side-ready">
+        <div class="side-head"><h2 class="side-title">Not ready yet?</h2><span class="side-icons" aria-hidden="true"><svg width="44" height="44" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><radialGradient id="mBk3c1" cx="0.38" cy="0.35" r="0.75"><stop offset="0" stop-color="#F7DA8E"></stop><stop offset="0.6" stop-color="#E2B25A"></stop><stop offset="1" stop-color="#BF8733"></stop></radialGradient></defs><ellipse cx="32" cy="59" rx="20" ry="3.2" fill="#000000" opacity="0.18"></ellipse><path d="M32 22 C19 23 10 34 11 45 C12 54 20 58 32 58 C44 58 52 54 53 45 C54 34 45 23 32 22 Z" fill="url(#mBk3c1)" stroke="#8A5A1B" stroke-width="1.6" stroke-linejoin="round"></path><path d="M23 9 C26 12 38 12 41 9 C42 13 39 18 35 20 L29 20 C25 18 22 13 23 9 Z" fill="#E7BD66" stroke="#8A5A1B" stroke-width="1.5" stroke-linejoin="round"></path><rect x="25" y="18.5" width="14" height="4.5" rx="2.2" fill="#7A4A12"></rect><path d="M17 36 C18 30 22 27 26 26" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5" fill="none"></path><text x="32" y="49" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-weight="700" font-size="20" fill="#1F7A3A">$</text></svg><svg width="44" height="44" class="a5-icon" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><defs><linearGradient id="bpSk1c2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D8BFD"></stop><stop offset="1" stop-color="#1F5FD1"></stop></linearGradient><linearGradient id="bpRk1c2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC0FF"></stop><stop offset="0.5" stop-color="#4A92F7"></stop><stop offset="1" stop-color="#2566D4"></stop></linearGradient><linearGradient id="bpPk1c2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFD24D"></stop><stop offset="1" stop-color="#F5A524"></stop></linearGradient></defs><ellipse cx="32" cy="59" rx="22" ry="3.2" fill="#000000" opacity="0.18"></ellipse><rect x="8" y="12" width="48" height="42" rx="4" fill="url(#bpSk1c2)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M14 18 V50 M20 18 V50 M26 18 V50 M32 18 V50 M38 18 V50 M44 18 V50 M50 18 V50 M12 22 H54 M12 28 H54 M12 34 H54 M12 40 H54 M12 46 H54" stroke="#FFFFFF" stroke-width="0.6" opacity="0.22"></path><path d="M15 21 H49 V47 H15 Z M15 35 H29 M29 21 V41 M38 35 H49" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"></path><path d="M29 41 A6 6 0 0 0 35 47" fill="none" stroke="#FFFFFF" stroke-width="1.4"></path><rect x="5" y="7" width="54" height="9" rx="4.5" fill="url(#bpRk1c2)" stroke="#143F8F" stroke-width="1.5"></rect><path d="M10 9.5 H54" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.6"></path><g transform="rotate(-38 46 46)"><rect x="34" y="42" width="22" height="7" rx="1.5" fill="url(#bpPk1c2)" stroke="#8A5A00" stroke-width="1"></rect><path d="M56 42 L63 45.5 L56 49 Z" fill="#F6D7A7" stroke="#8A5A00" stroke-width="1"></path><path d="M60.5 44.3 L63 45.5 L60.5 46.7 Z" fill="#374151"></path><rect x="30" y="42" width="4" height="7" rx="1" fill="#F5A3C7" stroke="#8A5A00" stroke-width="1"></rect></g></svg></span></div>
+        <p>Get a number first with our <a href="/calculator">build cost calculator</a>, browse <a href="/floor-plans">floor plans</a>, or see <a href="/construction">real jobsite photos</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 
-<footer class="footer">
- <div class="footer-inner">
- <div class="footer-top">
- <div class="footer-brand">
- <a href="/" class="nav-logo"><span class="builder">BUILDER</span><span class="k" style="margin-left:-3px;">K</span></a>
- <p>We build custom homes across Florida, starting with your lot and your goals.</p>
- <p style="margin-top:8px;font-size:0.8rem;color:#666;">Licensed Florida GC, CGC #1537163</p>
- </div>
- <div class="footer-col">
- <h4>Company</h4>
- <a href="/about">About Us</a><a href="/process">How It Works</a>
- <a href="/service-areas">Service Areas</a><a href="/construction">Construction Gallery</a><a href="/interior-gallery">Interior Gallery</a><a href="/floor-plans">Floor Plans</a><a href="/blog">Blog</a><a href="/referral-program/">Referral Program</a>
- </div>
- <div class="footer-col">
- <h4>Services</h4>
- <a href="/">Custom Homes</a><a href="/financing">Financing</a><a href="/calculator">Pricing Calculator</a><a href="/interiors">Interior Selections</a><a href="/facades">Facades &amp; Styles</a>
- </div>
- <div class="footer-col">
- <h4>Contact</h4>
- <a href="tel:2392304868">(239) 230 4868</a><a href="mailto:info@builderk.com">info@builderk.com</a><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
- </div>
- </div>
- <div class="footer-bottom">
- <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
- <span><a href="/privacy" style="color:#888;text-decoration:none;">Privacy Policy</a> &middot; <a href="/terms" style="color:#888;text-decoration:none;">Terms &amp; Conditions</a></span>
- </div>
- </div>
+<!-- a5:footer -->
+<footer class="a5-footer">
+  <div class="a5-footer-inner">
+    <div class="a5-footer-cols">
+      <div class="a5-footer-brand">
+        <a href="/" aria-label="BuilderK home"><img src="/images/brand/builderk-logo-white.svg" alt="BuilderK" width="150" height="24" loading="lazy"></a>
+        <p>We build custom homes across Florida, starting with your lot and your goals.</p>
+        <p class="a5-footer-license">Licensed Florida GC, CGC #1537163</p>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Company</h2>
+        <a href="/about">About us</a>
+        <a href="/process">How it works</a>
+        <a href="/construction">Construction gallery</a>
+        <a href="/interior-gallery">Interior gallery</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/blog">Blog</a>
+        <a href="/referral-program">Referral program</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Services</h2>
+        <a href="/">Custom homes</a>
+        <a href="/financing">Financing</a>
+        <a href="/floor-plans">Floor plans</a>
+        <a href="/process">Construction management</a>
+        <a href="/calculator">Pricing calculator</a>
+        <a href="/interiors">Interior selections</a>
+        <a href="/facades">Home styles</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Areas we serve</h2>
+        <a href="/orlando">Orlando, FL</a>
+        <a href="/tampa">Tampa, FL</a>
+        <a href="/melbourne">Melbourne, FL</a>
+        <a href="/miami">Miami, FL</a>
+        <a href="/cape-coral">Cape Coral, FL</a>
+        <a href="/fort-myers">Fort Myers, FL</a>
+        <a href="/jacksonville">Jacksonville, FL</a>
+        <a href="/ocala">Ocala, FL</a>
+        <a href="/service-areas">All service areas</a>
+      </div>
+      <div class="a5-footer-col">
+        <h2>Contact</h2>
+        <a href="tel:2392304868">(239) 230 4868</a>
+        <a href="mailto:info@builderk.com">info@builderk.com</a>
+        <a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">Orlando, FL</a>
+      </div>
+    </div>
+    <div class="a5-footer-bottom">
+      <span>&copy; 2026 Builders Knowledge Development Inc. All rights reserved.</span>
+      <span class="a5-footer-legal"><a href="/privacy">Privacy policy</a><a href="/terms">Terms and conditions</a></span>
+    </div>
+  </div>
 </footer>
+<!-- /a5:footer -->
 
 <script>
-var navbar=document.getElementById('navbar');if(navbar){window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.pageYOffset>60);});}
-var hamburger=document.getElementById('hamburger');var navLinks=document.querySelector('.nav-links');
-if(hamburger&&navLinks){
-  hamburger.addEventListener('click',function(){
-    var isOpen=navLinks.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded',isOpen?'true':'false');
-    hamburger.setAttribute('aria-label',isOpen?'Close menu':'Open menu');
-    document.body.style.overflow=isOpen?'hidden':'';
-  });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'&&navLinks.classList.contains('open')){
-      navLinks.classList.remove('open');hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded','false');hamburger.setAttribute('aria-label','Open menu');
-      document.body.style.overflow='';
-    }
-  });
-  navLinks.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){navLinks.classList.remove('open');hamburger.classList.remove('active');});});
-}
-
 // Lead context + consolidated submit (mirrors the homepage form)
 document.addEventListener('DOMContentLoaded',function(){
   try{
