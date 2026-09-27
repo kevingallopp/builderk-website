@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
     garage: 2,
     extras: {}
   });
-  var fmt = function (value) { return '$' + Math.round(value).toLocaleString('en-US'); };
+  var fmt = function (value) { return '$' + (Math.round(value / 1000) * 1000).toLocaleString('en-US'); };
   var output = box.querySelector('[data-plan-price]');
-  if (output) output.textContent = fmt(range.totalLow) + ' to ' + fmt(range.totalHigh);
+  if (output) output.textContent = 'About ' + fmt(range.totalLow) + ' to ' + fmt(range.totalHigh);
 
   document.querySelectorAll('[data-pricing-updated]').forEach(function (el) {
     el.textContent = window.BuilderKPricing.lastUpdated;

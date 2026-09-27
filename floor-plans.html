@@ -256,7 +256,7 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
  <li><a href="/construction">Construction</a></li>
  <li><a href="/financing">Financing</a></li>
  <li><a href="/calculator">Calculator</a></li>
- <li><a href="/contact" class="nav-cta">Talk to a Builder</a></li>
+ <li><a href="/contact" class="nav-cta">Free consultation</a></li>
  </ul>
  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">
  <span></span><span></span><span></span>
@@ -266,15 +266,15 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
 <!-- HERO -->
 <section class="page-hero">
  <h1 class="reveal stagger-1">Find Your <span>Perfect Plan</span></h1>
- <p class="reveal stagger-2">Browse the five plan drawings currently published in our catalog. Every plan still requires fit for the lot, code, engineering, scope, and pricing review before it becomes a buildable proposal.</p>
+ <p class="reveal stagger-2">Browse our five plans. Pick one as a starting point, and we check it against your lot, the code and your budget before we price it.</p>
  <div class="filter-tabs reveal stagger-3" role="group" aria-label="Filter floor plans">
  <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All Plans</button>
  <button type="button" class="filter-tab" data-filter="1-story" aria-pressed="false">1 Story</button>
  <button type="button" class="filter-tab" data-filter="2-story" aria-pressed="false">2 Story</button>
  <button type="button" class="filter-tab" data-filter="3-bed" aria-pressed="false">3 Bedrooms</button>
  <button type="button" class="filter-tab" data-filter="4-plus-bed" aria-pressed="false">4+ Bedrooms</button>
- <button type="button" class="filter-tab" data-filter="small" aria-pressed="false">Under 1,800 sq ft</button>
- <button type="button" class="filter-tab" data-filter="large" aria-pressed="false">Over 2,000 sq ft</button>
+ <button type="button" class="filter-tab" data-filter="small" aria-pressed="false">Under 2,000 sq ft</button>
+ <button type="button" class="filter-tab" data-filter="large" aria-pressed="false">2,000 sq ft and up</button>
  </div>
  <p class="plan-count" id="plan-count" aria-live="polite">5 plans shown</p>
 </section>
@@ -452,11 +452,11 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
 window.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.page-hero .reveal').forEach(function(el) { el.classList.add('visible'); });
   if (window.BuilderKPricing) {
-    var fmt=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+    var fmt=function(n){return '$'+(Math.round(n/1000)*1000).toLocaleString('en-US');};
     document.querySelectorAll('[data-plan-range]').forEach(function(el){
       var card=el.closest('.plan-card');var sqft=parseInt(card.dataset.sqft);
       var range=window.BuilderKPricing.calculate({sqft:sqft,tier:'standard',complexity:'typical',garage:2,extras:{}});
-      el.innerHTML='<small>Standard planning range</small><br>'+fmt(range.totalLow)+' to '+fmt(range.totalHigh);
+      el.innerHTML='<small>Standard planning range</small><br>About '+fmt(range.totalLow)+' to '+fmt(range.totalHigh);
     });
     document.querySelectorAll('[data-pricing-updated]').forEach(function(el){el.textContent=window.BuilderKPricing.lastUpdated;});
   }
@@ -493,8 +493,8 @@ document.querySelectorAll('.filter-tab').forEach(function(tab) {
       else if (filter === '2-story') matches = card.getAttribute('data-story') === '2-story';
       else if (filter === '3-bed') matches = parseInt(card.getAttribute('data-beds')) === 3;
       else if (filter === '4-plus-bed') matches = parseInt(card.getAttribute('data-beds')) >= 4;
-      else if (filter === 'small') matches = card.getAttribute('data-size') === 'small';
-      else if (filter === 'large') matches = card.getAttribute('data-size') === 'large';
+      else if (filter === 'small') matches = parseInt(card.getAttribute('data-sqft'), 10) < 2000;
+      else if (filter === 'large') matches = parseInt(card.getAttribute('data-sqft'), 10) >= 2000;
       card.style.display = matches ? '' : 'none';
     });
     var visible=document.querySelectorAll('.plan-card:not(.plan-card-custom):not([style*="display: none"])').length;
