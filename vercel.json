@@ -1,6 +1,10 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/vision", "destination": "/api/vision?asset=process-interactive.html" },
+    { "source": "/vision/:asset", "destination": "/api/vision?asset=:asset" }
+  ],
   "redirects": [
     { "source": "/privacy-policy", "destination": "/privacy", "permanent": true },
     { "source": "/resources", "destination": "/blog", "permanent": true },
