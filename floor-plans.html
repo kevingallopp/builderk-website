@@ -31,9 +31,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/a5.css?v=4">
+<link rel="stylesheet" href="/css/a5.css?v=5">
 <script src="/scripts/pricing-config.js"></script>
-<script defer src="/scripts/a5.js?v=4"></script>
+<script defer src="/scripts/a5.js?v=5"></script>
 <style>
 /* floor plans: hero with the filters along its bottom edge */
 .fp-hero { --hero-min: 720px; --hero-pad-bottom: 44px; --hero-photo-h: 300px; --hero-text: min(620px, calc(48.6vw - var(--a5-gutter) - 16px)); }
@@ -54,7 +54,7 @@
 .catalog-note a { color: var(--a5-ink); font-weight: 700; text-underline-offset: 3px; }
 .plans-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
 .plan-card { grid-column: span 2; display: flex; flex-direction: column; border: 1px solid var(--a5-line); border-radius: 16px; overflow: hidden; background: var(--a5-white); color: var(--a5-ink); text-decoration: none; transition: box-shadow 0.2s ease, transform 0.2s ease; }
-.plan-card:hover { box-shadow: 0 16px 36px rgba(12,11,10,0.08); transform: translateY(-2px); }
+@media (hover: hover) and (pointer: fine) { .plan-card:hover { box-shadow: 0 16px 36px rgba(12,11,10,0.08); transform: translateY(-2px); } }
 .plan-card-img { height: 264px; background: #FFFFFF; }
 .plan-card-img img { width: 100%; height: 100%; object-fit: contain; }
 .plan-card-body { flex: 1; padding: 20px 24px 22px; border-top: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 12px; }
@@ -98,8 +98,9 @@
   .fp-hero .a5-hero-inner { gap: 16px; }
   .fp-cta-desk { display: none; }
   .fp-filterbar { flex-direction: column; align-items: flex-start; gap: 16px; padding-top: 0; border-top: 0; }
-  .filter-tabs { gap: 8px; }
-  .filter-tab { height: 40px; padding: 0 14px; font-size: 14.5px; }
+  .filter-tabs { gap: 8px; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity; margin-inline: -16px; padding-inline: 16px; scrollbar-width: none; }
+  .filter-tabs::-webkit-scrollbar { display: none; }
+  .filter-tab { flex: 0 0 auto; scroll-snap-align: start; height: 44px; padding: 0 14px; font-size: 14.5px; }
   .plan-count { font-size: 14px; }
   .fp-cta-phone { display: flex; flex-direction: column; gap: 16px; }
   .fp-cta-phone .a5-btn { width: 100%; }
@@ -370,6 +371,10 @@ document.querySelectorAll('.filter-tab').forEach(function(tab) {
     tab.classList.add('active');
     tab.setAttribute('aria-pressed','true');
     var filter = tab.getAttribute('data-filter');
+    if (window.matchMedia('(max-width: 899px)').matches) {
+      var grid = document.querySelector('.plans-grid');
+      if (grid) setTimeout(function () { grid.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }, 0);
+    }
     document.querySelectorAll('.plan-card').forEach(function(card) {
       // skip custom CTA cards from filtering
       if (card.classList.contains('plan-card-custom')) {

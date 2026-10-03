@@ -76,26 +76,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/a5.css?v=4">
+<link rel="stylesheet" href="/css/a5.css?v=5">
 <link rel="preload" href="/images/home/drone-hero-end.webp" as="image" type="image/webp" media="(min-width: 900px)">
 <link rel="preload" href="/images/home/drone-hero-end-vertical.webp" as="image" type="image/webp" media="(max-width: 899px)">
 <script defer src="/scripts/pricing-config.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/scripts/lead-context.js"></script>
 <script defer src="/scripts/lead-submit.js"></script>
-<script defer src="/scripts/a5.js?v=4"></script>
+<script defer src="/scripts/a5.js?v=5"></script>
 <style>
 /* home: hero with the drone video */
 .home-hero { position: relative; background: var(--a5-dark); color: var(--a5-on-dark); overflow: hidden; isolation: isolate; }
 .home-hero-media { position: absolute; inset: 0; z-index: 0; }
 .home-hero-media video { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; background: #0C0B0A; }
-.home-hero-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(12,11,10,0.94) 0%, rgba(12,11,10,0.8) 36%, rgba(12,11,10,0.3) 56%, rgba(12,11,10,0) 70%), linear-gradient(180deg, rgba(12,11,10,0.7) 0%, rgba(12,11,10,0) 22%, rgba(12,11,10,0) 70%, rgba(12,11,10,0.85) 100%); }
+.home-hero-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(12,11,10,0.94) 0%, rgba(12,11,10,0.8) 36%, rgba(12,11,10,0.3) 56%, rgba(12,11,10,0) 70%), linear-gradient(180deg, rgba(12,11,10,0.8) 0%, rgba(12,11,10,0) 24%, rgba(12,11,10,0) 70%, rgba(12,11,10,0.85) 100%); }
 .home-hero-inner { position: relative; z-index: 2; max-width: var(--a5-max); margin: 0 auto; min-height: min(900px, 100vh); padding: 150px var(--a5-gutter) 0; display: flex; flex-direction: column; justify-content: space-between; gap: 44px; }
 .home-hero-body { width: min(640px, 100%); display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
 .home-hero .a5-h1 { font-size: clamp(56px, 6.4vw, 92px); color: var(--a5-on-dark); }
 .home-hero .w { display: inline-block; }
-html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animation: homeWord 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; animation-delay: calc(var(--i) * 0.09s + 0.15s); }
-@keyframes homeWord { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero .w { animation: homeWord 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--i) * 0.09s + 0.15s); }
+}
+@keyframes homeWord { from { opacity: 0; transform: translateY(0.35em); } }
 .home-hero-call { margin: 0; font-size: 15px; color: var(--a5-on-dark-muted); }
 .home-hero-call a { color: var(--a5-on-dark); font-weight: 700; text-decoration: none; }
 .home-hero-phonecall { display: none; }
@@ -111,7 +113,7 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
 .allinone-item span { font-size: 14px; color: var(--a5-on-dark-soft); }
 @media (max-width: 899px) {
   .home-hero-media { position: relative; height: clamp(380px, 124vw, 540px); }
-  .home-hero-shade { background: linear-gradient(180deg, rgba(12,11,10,0.62) 0%, rgba(12,11,10,0) 24%, rgba(12,11,10,0) 55%, #0C0B0A 100%); bottom: auto; height: clamp(380px, 124vw, 540px); }
+  .home-hero-shade { background: linear-gradient(180deg, rgba(12,11,10,0.62) 0%, rgba(12,11,10,0) 24%, rgba(12,11,10,0) 40%, rgba(12,11,10,0.55) 66%, #0C0B0A 100%); bottom: auto; height: clamp(380px, 124vw, 540px); }
   .home-hero-inner { min-height: 0; padding: 0 16px; margin-top: -120px; gap: 32px; }
   .home-hero .a5-h1 { font-size: clamp(44px, 13vw, 54px); line-height: 0.92; }
   .home-hero-body { gap: 16px; width: 100%; }
@@ -124,12 +126,12 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
   .allinone-lead strong { font-size: 26px; }
   .allinone-item { flex-direction: column; text-align: center; gap: 8px; padding: 14px 8px; border-radius: 14px; background: rgba(245,242,237,0.06); }
   .allinone-item strong { font-size: 19px; }
-  .allinone-item span { font-size: 12.5px; line-height: 1.35; }
+  .allinone-item span { display: block; font-size: 13.5px; line-height: 1.35; }
 }
 @media (min-width: 900px) { .home-hero-reply { display: none; } }
 /* on narrower computers the headline runs further right, over brighter parts of the video: darken more of it */
 @media (min-width: 900px) and (max-width: 1279px) {
-  .home-hero-shade { background: linear-gradient(90deg, rgba(12,11,10,0.95) 0%, rgba(12,11,10,0.86) 45%, rgba(12,11,10,0.5) 68%, rgba(12,11,10,0.12) 86%), linear-gradient(180deg, rgba(12,11,10,0.7) 0%, rgba(12,11,10,0) 22%, rgba(12,11,10,0) 70%, rgba(12,11,10,0.85) 100%); }
+  .home-hero-shade { background: linear-gradient(90deg, rgba(12,11,10,0.95) 0%, rgba(12,11,10,0.86) 45%, rgba(12,11,10,0.5) 68%, rgba(12,11,10,0.12) 86%), linear-gradient(180deg, rgba(12,11,10,0.8) 0%, rgba(12,11,10,0) 24%, rgba(12,11,10,0) 70%, rgba(12,11,10,0.85) 100%); }
 }
 
 /* jobsites strip */
@@ -158,7 +160,15 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
 .svc-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
 .svc-grid .svc { flex: 0 1 calc((100% - 48px) / 3); min-width: 280px; }
 .svc .a5-link { margin-top: auto; }
-@media (max-width: 899px) { .svc-grid { gap: 14px; } .svc-grid .svc { flex-basis: 100%; min-width: 0; } }
+@media (max-width: 899px) {
+  .svc-grid { gap: 14px; }
+  .svc-grid .svc { flex-basis: 100%; min-width: 0; display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; row-gap: 10px; padding: 20px 18px; align-items: center; }
+  .svc .a5-icon { width: 44px; height: 44px; }
+  .svc .a5-h3 { font-size: 22px; }
+  .svc .a5-p, .svc .a5-link { grid-column: 1 / -1; }
+  .svc .a5-p { font-size: 15px; line-height: 1.55; }
+}
+#services-title { font-size: clamp(34px, 3.6vw, 50px); }
 
 /* styles */
 .style-card { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--a5-ink); }
@@ -175,7 +185,9 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
 
 /* cost */
 .tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.tier { border: 1px solid var(--a5-line); border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.tier { border: 1px solid var(--a5-line); border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; color: inherit; text-decoration: none; transition: border-color 160ms ease, transform 160ms var(--a5-ease-out); }
+.tier:active { transform: scale(.98); }
+@media (hover: hover) and (pointer: fine) { .tier:hover { border-color: var(--a5-ink); } }
 .tier-pop { border: 2px solid var(--a5-ink); }
 .tier-top { display: flex; justify-content: space-between; width: 100%; align-items: center; }
 .tier p { margin: 0; font-size: 15px; color: var(--a5-body); }
@@ -195,6 +207,7 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
 .fin-stat { background: #FFFFFF; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 10px; }
 .fin-stat .a5-stat-num { color: var(--a5-finance-ink); font-size: 38px; }
 .fin-stat .a5-stat-label { margin: 0; }
+.fin-actions .a5-btn { min-height: 56px; }
 @media (max-width: 899px) { .fin { grid-template-columns: minmax(0, 1fr); gap: 28px; } .fin-stats { gap: 12px; } .fin-stat { padding: 18px 16px; } .fin-stat .a5-stat-num { font-size: 32px; } .fin-actions .a5-btn { width: 100%; } }
 
 /* contact */
@@ -207,26 +220,28 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
 .talk { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; color: var(--a5-ink); text-decoration: none; }
 .form-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px 20px; flex-wrap: wrap; margin-bottom: 18px; }
 .form-card-head h3 { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 28px; line-height: 1; text-transform: uppercase; }
-.form-card-head small { font-size: 13px; color: var(--a5-muted); }
-.req { color: var(--a5-orange); }
+.form-card-head small { font-size: 14px; color: var(--a5-muted); }
 .cta-form { display: flex; flex-direction: column; gap: 16px; }
 .cta-form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .cta-form-field { display: flex; flex-direction: column; gap: 7px; }
 .form-more { border-top: 1px solid var(--a5-line); border-bottom: 1px solid var(--a5-line); padding: 12px 0; }
-.form-more summary { cursor: pointer; font-weight: 700; font-size: 15px; }
+.form-more summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 700; font-size: 15px; }
+.form-more summary::-webkit-details-marker { display: none; }
+.form-more summary::after { content: "+"; flex-shrink: 0; width: 28px; height: 28px; border-radius: 999px; background: var(--a5-concrete); display: flex; align-items: center; justify-content: center; font-size: 19px; line-height: 1; }
+.form-more[open] summary::after { content: "\2212"; }
 .form-more[open] summary { margin-bottom: 14px; }
 .form-more .cta-form-field + .cta-form-field { margin-top: 14px; }
 .cta-form .btn-primary { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 60px; border: 0; border-radius: 14px; background: var(--a5-ink); color: #FFFFFF; font-family: var(--a5-cond); font-weight: 800; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; }
 .cta-form .btn-primary:disabled { opacity: 0.6; cursor: wait; }
-.form-note { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--a5-muted); text-align: center; }
+.form-note { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--a5-muted); text-align: center; }
 @media (max-width: 899px) { .contact { grid-template-columns: minmax(0, 1fr); gap: 28px; } .cta-form-row { grid-template-columns: minmax(0, 1fr); } .a5-form-card { padding: 20px 16px; border-radius: 18px; } }
 
 /* phone bar: Call and Free consultation, shown after the hero, hidden near the form */
 .mobile-cta-bar { display: none; }
 @media (max-width: 899px) {
-  body { padding-bottom: 78px; }
-  .mobile-cta-bar { display: flex; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: rgba(12,11,10,0.95); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); transform: translateY(110%); transition: transform 0.25s ease; }
-  .mobile-cta-bar.is-visible { transform: none; }
+  .a5-footer { padding-bottom: 78px; }
+  .mobile-cta-bar { display: flex; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: rgba(12,11,10,0.95); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); transform: translateY(110%); transition: transform 200ms var(--a5-ease-out); }
+  .mobile-cta-bar.is-visible { transform: none; transition-duration: 320ms; }
   .mobile-cta-bar a { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; }
   .mobile-cta-bar .mcta-call { flex: 0 0 auto; padding: 0 22px; color: #FFFFFF; border: 1.5px solid rgba(255,255,255,0.45); }
   .mobile-cta-bar .mcta-estimate { background: var(--a5-orange); color: #0C0B0A; font-family: var(--a5-cond); font-weight: 800; font-size: 19px; letter-spacing: 0.04em; text-transform: uppercase; }
@@ -406,7 +421,7 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
         <p class="a5-p">Use our calculator to build a transparent planning range from living area, build level, garage, layout complexity, and selected upgrades.</p>
       </div>
     </div>
-    <div class="tiers"><div class="tier tier-pop"><div class="tier-top"><h3 class="a5-h3">Standard</h3><span class="bars" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i></span></div><p>Practical essentials</p><span class="a5-tag a5-tag-accent">Most popular</span></div><div class="tier"><div class="tier-top"><h3 class="a5-h3">Midrange</h3><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class=""></i></span></div><p>Elevated selections</p></div><div class="tier"><div class="tier-top"><h3 class="a5-h3">Luxury</h3><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span></div><p>Fully tailored</p></div></div>
+    <div class="tiers"><a class="tier tier-pop" href="/calculator?level=standard"><div class="tier-top"><h3 class="a5-h3">Standard</h3><span class="bars" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i></span></div><p>Practical essentials</p><span class="a5-tag a5-tag-accent">Most popular</span></a><a class="tier" href="/calculator?level=midrange"><div class="tier-top"><h3 class="a5-h3">Midrange</h3><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class=""></i></span></div><p>Elevated selections</p></a><a class="tier" href="/calculator?level=luxury"><div class="tier-top"><h3 class="a5-h3">Luxury</h3><span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span></div><p>Fully tailored</p></a></div>
     <div class="cost-foot">
       <div class="cost-foot-text">
         <strong>Custom interiors included at every level. You choose your cabinets, countertops, flooring, and fixtures.</strong>
@@ -425,7 +440,7 @@ html.a5-motion .home-hero .w { opacity: 0; transform: translateY(0.35em); animat
       <p class="fin-lead">Your land is your down payment, subject to approval.</p>
       <p class="a5-p">We can introduce independent lenders that offer construction financing. Depending on the program, a <strong>single close construction loan</strong> may combine construction and permanent financing in one closing; approval and terms remain specific to each lender.</p>
       <p class="a5-p">We prepare the plans, specifications, and budget package the lender requests from the builder. The lender handles your application, underwriting, approval, rate, and final loan terms.</p>
-      <div class="a5-row fin-actions" style="--gap:12px"><a class="a5-btn a5-btn-dark" href="#contact" style="font-family:var(--a5-sans);font-weight:700;font-size:16px;letter-spacing:0;text-transform:none;min-height:52px;border-radius:12px">Get my free consultation</a><a class="a5-btn a5-btn-outline" href="/financing">Learn about financing</a></div>
+      <div class="a5-row fin-actions" style="--gap:12px"><a class="a5-btn a5-btn-dark" href="#contact">Get my free consultation</a><a class="a5-btn a5-btn-outline" href="/financing">Learn about financing</a></div>
     </div>
     <div class="fin-stats"><div class="fin-stat"><div class="a5-stat-num">680</div><p class="a5-stat-label">Typical credit guideline with our preferred lender (varies by program)</p></div><div class="fin-stat"><div class="a5-stat-num">Lot equity</div><p class="a5-stat-label">May reduce cash required, subject to appraisal and lender terms</p></div><div class="fin-stat"><div class="a5-stat-num">1 close</div><p class="a5-stat-label">Possible with construction to permanent</p></div><div class="fin-stat"><div class="a5-stat-num">Lender terms</div><p class="a5-stat-label">Approval, rate, and conversion requirements vary by program</p></div></div>
   </div>

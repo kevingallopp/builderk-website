@@ -45,8 +45,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/a5.css?v=4">
-<script defer src="/scripts/a5.js?v=4"></script>
+<link rel="stylesheet" href="/css/a5.css?v=5">
+<script defer src="/scripts/a5.js?v=5"></script>
 <style>
 /* the calculator paints its slider fill with var(--orange) */
 :root { --orange: var(--a5-orange); }
@@ -115,7 +115,7 @@
 .calc-result { position: sticky; top: 24px; min-width: 0; }
 .result-card { padding: 30px; border-radius: 20px; background: var(--a5-dark); color: var(--a5-on-dark); display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px rgba(12, 11, 10, 0.18); }
 .result-label { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--a5-on-dark-muted); }
-.result-price { font-family: var(--a5-cond); font-weight: 800; font-size: 72px; line-height: 0.95; color: var(--a5-on-dark); }
+.result-price { font-family: var(--a5-cond); font-weight: 800; font-size: 72px; line-height: 0.95; color: var(--a5-on-dark); font-variant-numeric: tabular-nums; }
 .result-price .a5-hl { background-image: linear-gradient(180deg, transparent 62%, var(--a5-orange) 62%, var(--a5-orange) 90%, transparent 90%); }
 .result-range { font-size: 16px; color: #D6D0C7; }
 .result-cta { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 0 18px; border-radius: 12px; background: var(--a5-on-dark); color: var(--a5-dark); font-family: var(--a5-cond); font-weight: 800; font-size: 21px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; }
@@ -146,7 +146,7 @@
 .lot-input-wrap:focus-within { border-color: var(--a5-ink); box-shadow: 0 0 0 3px rgba(247, 127, 0, 0.3); }
 .lot-dollar { padding-left: 14px; font-size: 16px; color: var(--a5-muted); }
 .lot-input { flex: 1; min-width: 0; height: 100%; padding: 0 14px 0 6px; border: 0; outline: none; background: transparent; color: var(--a5-ink); font: 16px/1.2 var(--a5-sans); }
-.lot-input::placeholder { color: #9A958E; }
+.lot-input::placeholder { color: var(--a5-muted); opacity: 1; }
 .lot-input:focus-visible { outline: none; }
 .lot-hint, .cash-hint { grid-column: 1 / -1; margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--a5-muted); }
 .cash-heading { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
@@ -307,6 +307,10 @@
   .calc-sticky-cta.is-visible { display: flex; }
   .calc-sticky-cta a { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 12px; border-radius: 10px; background: var(--a5-orange); color: #0C0B0A; font-family: var(--a5-cond); font-weight: 800; font-size: 19px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; text-align: center; }
 }
+.calc-sticky-cta .sticky-total { flex: 0 0 auto; align-self: center; font: 800 24px/1 var(--a5-cond); color: var(--a5-on-dark); font-variant-numeric: tabular-nums; }
+.calc-sticky-cta .sticky-total:empty { display: none; }
+/* with the total beside it, the button label still fits on one line from 360 px */
+@media (max-width: 899px) { .calc-sticky-cta a { font-size: 16px; letter-spacing: 0; padding: 0 8px; } }
 @media print { .calc-sticky-cta { display: none !important; } }
 </style>
 </head>
@@ -636,6 +640,7 @@ function updateCalc(){
   var estimate=pricing.calculate({sqft:state.sqft,tier:state.finish,complexity:state.complexity,garage:state.garage,coveredExteriorSqft:state.coveredExteriorSqft,extras:state.extras});
   var totalLow=estimate.totalLow;var totalHigh=estimate.totalHigh;var totalMid=(totalLow+totalHigh)/2;
   document.getElementById('result-total').textContent=fmt(totalMid);
+  var stickyTotal=document.getElementById('sticky-total');if(stickyTotal)stickyTotal.textContent=fmt(totalMid);
   document.getElementById('result-range').textContent=fmtRange(totalLow,totalHigh);
   state.lotValue=moneyValue('lot-value-input');state.lotBalance=moneyValue('lot-balance-input');
   var lotEquity=state.ownsLot?Math.max(state.lotValue-state.lotBalance,0):0;
@@ -721,6 +726,7 @@ window.addEventListener('DOMContentLoaded',function(){
     planContext.textContent='Starting plan: '+plan.replace('floor-plan-','').replace('-sq-ft',' sq ft')+'. Adjust the options below for your project.';
   }
   if(saved.calc_tier&&pricing.tiers[saved.calc_tier])state.finish=saved.calc_tier;
+  var level=params.get('level');if(level&&pricing.tiers[level])state.finish=level;
   if(saved.calc_complexity&&pricing.complexity[saved.calc_complexity])state.complexity=saved.calc_complexity;
   if(saved.calc_garage){var g=parseInt(saved.calc_garage);if(pricing.garages[g])state.garage=g;}
   if(saved.calc_extras) saved.calc_extras.split(', ').forEach(function(k){if(pricing.extras[k])state.extras[k]=true;});
@@ -807,6 +813,7 @@ if(hamburger&&navLinks){hamburger.addEventListener('click', function() {
 
 <!-- Sticky Mobile CTA -->
 <div class="calc-sticky-cta">
+ <b class="sticky-total" id="sticky-total" aria-hidden="true"></b>
  <a href="/contact" class="sticky-primary">Have a builder review my range</a>
 </div>
 </body>

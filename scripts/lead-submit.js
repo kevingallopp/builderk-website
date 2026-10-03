@@ -94,16 +94,19 @@
       var button = form.querySelector('button[type="submit"], .btn-primary');
       button.disabled = true;
       message.textContent = 'Sending your request…';
+      message.dataset.state = 'sending';
       var data = Object.fromEntries(new FormData(form));
       data.form_type = kind;
       var receipt;
       try { receipt = await submit(data, form.action); } catch (error) { receipt = {received: false}; }
       if (receipt.received) {
         message.textContent = 'Thank you. Your request has been received by the BuilderK team.';
+        message.dataset.state = 'ok';
         button.textContent = 'Request Received';
         if (window.BuilderKLeadContext) window.BuilderKLeadContext.clear();
       } else {
         message.textContent = 'We could not confirm receipt. Your details are still here. Please call ';
+        message.dataset.state = 'error';
         var call = document.createElement('a'); call.href = 'tel:2392304868'; call.textContent = '(239) 230 4868';
         call.style.cssText = 'color:inherit;font-weight:700';
         message.appendChild(call);
