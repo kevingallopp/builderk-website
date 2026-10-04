@@ -24,6 +24,14 @@
       if (close) close.addEventListener('click', function () { setOpen(false); });
       menu.addEventListener('click', function (e) { if (e.target.closest('a')) { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); document.body.classList.remove('a5-menu-open'); } });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) setOpen(false); });
+      menu.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab' || menu.hidden) return;
+        var items = Array.prototype.filter.call(menu.querySelectorAll('a[href], button:not([disabled])'), function (el) { return el.offsetParent !== null; });
+        if (!items.length) return;
+        var first = items[0], last = items[items.length - 1];
+        if (e.shiftKey && (document.activeElement === first || document.activeElement === menu)) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
     }
 
     // ---- click to call tracking (same event the rest of the site sends) ----

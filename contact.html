@@ -30,15 +30,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/a5.css?v=4">
+<link rel="stylesheet" href="/css/a5.css?v=5">
 <script src="/scripts/lead-context.js"></script>
 <script src="/scripts/lead-submit.js"></script>
-<script defer src="/scripts/a5.js?v=4"></script>
+<script defer src="/scripts/a5.js?v=5"></script>
 <style>
 /* hero: the call button only on phones (computers have the number in the header) */
 .hero-phonecall { display: none; }
 @media (max-width: 899px) { .hero-phonecall { display: inline-flex; } }
 .a5-hero-photo picture { display: block; width: 100%; height: 100%; }
+.contact-hero { --hero-min: 520px; }
+@media (max-width: 899px) { .contact-hero { --hero-photo-h: 220px; } }
 
 /* contact: form and side cards */
 .contact-sec { padding-block: 88px 104px; }
@@ -63,9 +65,6 @@
 #contact-form .btn-primary:disabled { opacity: 0.6; cursor: wait; }
 #contact-form .btn-primary:disabled::after { display: none; }
 #contact-form .form-note { margin: 0; font-size: 13px; line-height: 1.55; color: var(--a5-muted); text-align: center; }
-/* the status line lead-submit.js adds under the form: no empty gap before a message is shown */
-#contact-form > p[role="status"] { margin-bottom: 0; text-align: center; }
-#contact-form > p[role="status"]:empty { display: none; }
 .contact-side { display: flex; flex-direction: column; gap: 20px; }
 .side-card { padding: 28px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; flex-direction: column; gap: 18px; }
 .side-title { margin: 0; font-family: var(--a5-cond); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; color: var(--a5-ink); }
