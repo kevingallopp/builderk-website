@@ -154,9 +154,11 @@ test('commercial page copy keeps the site rules', () => {
 test('commercial page leads with the client and keeps past work in one section', () => {
   const html = read('commercial.html');
   const doc = new JSDOM(html).window.document;
-  // Kevin, 5 Oct 2026: no "storefront", no door photo with the paper sign
+  // Kevin, 5 Oct 2026: no "storefront", no door photo with the paper sign, and never promise a site walk:
+  // the first step is a call that qualifies the lead (page copy, meta description and structured data alike)
   assert.ok(!/storefront/i.test(html), 'no storefront wording');
   assert.ok(!html.includes('clermont-sign'), 'no paper sign photo');
+  assert.ok(!/site walk|walk the space|site visit|first visit/i.test(html), 'no site walk promise');
   // the client's needs come right after the hero, past jobs live only in Recent commercial jobs
   const sections = [...doc.querySelectorAll('main > section')].map(s => s.id || s.className);
   assert.equal(sections[1], 'needs');
