@@ -291,7 +291,8 @@ function estimateValue(data) {
       'Under $50K': 35000,
       '$50K to $150K': 100000,
       '$150K to $500K': 300000,
-      'Over $500K': 750000,
+      '$500K to $1M': 750000,
+      'Over $1M': 1250000,
     };
     return commercial[String(data.budget)] || 0;
   }
@@ -460,7 +461,7 @@ async function saveWebsiteFields(contactId, submitted, data, delivery, headers) 
 }
 
 function buildLeadNote(data) {
-  const fields = ['submission_id','form_type','name','company','email','phone','contact_role','project_type','space_size','plans_status','message','project_notes',
+  const fields = ['submission_id','form_type','name','company','email','phone','contact_role','project_type','space_size','plans_status','space_open','bid_due','files_link','message','project_notes',
     'budget','budget_basis','financing_status','home_size','timeline','zip_code','project_location','lot_ownership','source_page','city_interest','plan_interest',
     'calc_sqft','calc_beds','calc_baths','calc_tier','calc_garage','calc_garage_sqft','calc_covered_exterior_sqft',
     'calc_complexity','calc_extras','estimate_total','estimate_range','pricing_market','pricing_updated',

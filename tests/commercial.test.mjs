@@ -9,6 +9,7 @@ const request = {
   form_type: 'website-commercial', name: 'Test Manager', company: 'Example Logistics', email: 'qa@example.test',
   phone: '(407) 555 0123', project_type: 'Office build out', project_location: 'Orlando, FL', budget: '$50K to $150K',
   timeline: '1-3 months', space_size: '1,500 to 5,000 sq ft', plans_status: 'No plans yet',
+  space_open: 'Yes, it stays open', bid_due: '2026-11-02', files_link: 'https://drive.example.test/plans',
   contact_role: 'Facility or operations manager', message: 'Two offices and a break room',
   source_page: '/commercial', submission_id: '11111111-2222-4333-8444-555555555555',
 };
@@ -52,7 +53,7 @@ test('commercial request is tagged, named and valued as commercial, with every d
   assert.equal(opp.monetaryValue, 100000);
   const note = calls.find(x => x.url.endsWith('/notes')).payload.body;
   for (const line of ['company: Example Logistics', 'project_type: Office build out', 'space_size: 1,500 to 5,000 sq ft',
-    'plans_status: No plans yet', 'contact_role: Facility or operations manager', 'project_location: Orlando, FL', 'budget: $50K to $150K'])
+    'plans_status: No plans yet', 'space_open: Yes, it stays open', 'bid_due: 2026-11-02', 'files_link: https://drive.example.test/plans', 'contact_role: Facility or operations manager', 'project_location: Orlando, FL', 'budget: $50K to $150K'])
     assert.ok(note.includes(line), line);
 });
 
@@ -65,9 +66,14 @@ test('commercial budgets never go into the home budget field', async () => {
   assert.ok(put.payload.customFields.some(f => f.field_value === 'Orlando, FL'), 'project location saved');
 });
 
-test('"Not sure yet" budget is welcome and starts at zero value', async () => {
+test('"Not sure yet" budget is welcome and starts at zero value; large ranges carry their value', async () => {
   const {calls} = await webhook({...request, budget: 'Not sure yet'});
   assert.equal(calls.find(x => x.url.endsWith('/opportunities/')).payload.monetaryValue, 0);
+  for (const [budget, value, tag] of [['$500K to $1M', 750000, 'commercial-budget-500k-to-1m'], ['Over $1M', 1250000, 'commercial-budget-over-1m']]) {
+    const big = await webhook({...request, budget});
+    assert.equal(big.calls.find(x => x.url.endsWith('/opportunities/')).payload.monetaryValue, value);
+    assert.ok(big.calls.find(x => x.url.endsWith('/contacts/')).payload.tags.includes(tag), tag);
+  }
 });
 
 test('incomplete commercial requests are rejected before anything is written', async () => {
@@ -85,7 +91,7 @@ test('commercial page form matches what the CRM requires and the call bar points
   const form = w.document.getElementById('commercial-form');
   for (const name of ['name', 'company', 'phone', 'email', 'project_type', 'project_location', 'budget', 'timeline'])
     assert.equal(form.elements[name].required, true, name);
-  for (const name of ['space_size', 'plans_status', 'contact_role', 'message', '_gotcha'])
+  for (const name of ['space_size', 'plans_status', 'space_open', 'bid_due', 'files_link', 'contact_role', 'message', '_gotcha'])
     assert.ok(form.elements[name], name);
   assert.deepEqual([...form.elements.timeline.options].slice(1).map(o => o.value), ['ASAP', '1-3 months', '3-6 months', '6-12 months', 'Just exploring']);
   assert.equal(form.elements.source_page.value, '/commercial');

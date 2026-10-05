@@ -64,8 +64,8 @@
     {"@type": "Question", "name": "Do you pull the permit?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. As the licensed Florida general contractor we pull the permit, schedule the inspections and close out the job with the building department."}},
     {"@type": "Question", "name": "Can you work while our business stays open?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We plan the phases around your hours and keep the work areas separated, so your team and customers can keep using the rest of the building."}},
     {"@type": "Question", "name": "Do we need plans before we call?", "acceptedAnswer": {"@type": "Answer", "text": "No. If you have plans, we bid from them. If you do not, we walk the space with you and help you put together the design and engineering the permit needs."}},
-    {"@type": "Question", "name": "Can you send our vendor paperwork?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We send a certificate of insurance naming your company, our W9 and our Florida general contractor license, CGC 1537163."}},
-    {"@type": "Question", "name": "Where do you work?", "acceptedAnswer": {"@type": "Answer", "text": "Orlando and Central Florida, from our office on Millenia Boulevard. Recent commercial jobs include Apopka, Altamonte Springs, Clermont, Winter Haven and Leesburg."}}
+    {"@type": "Question", "name": "Can you send our vendor paperwork?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We send a certificate of insurance for general liability and workers comp naming your company, our W9 and our Florida general contractor license, CGC 1537163."}},
+    {"@type": "Question", "name": "Where do you work?", "acceptedAnswer": {"@type": "Answer", "text": "Orlando and Central Florida, from our office on Millenia Boulevard: Orange, Seminole, Osceola, Lake, Polk, Volusia, Brevard, Sumter and Marion counties. Recent commercial jobs include Apopka, Altamonte Springs, Clermont, Winter Haven and Leesburg."}}
   ]
 }
 </script>
@@ -146,6 +146,9 @@
 #commercial-form .form-field { display: flex; flex-direction: column; gap: 7px; }
 #commercial-form label { font-size: 13.5px; color: #3D3A36; }
 #commercial-form .req { color: #B35C00; }
+/* a5.css styles text, email, tel and number inputs; the bid due date gets the same box */
+#commercial-form input[type="date"] { width: 100%; min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--a5-line); border-radius: 10px; background: var(--a5-paper); color: var(--a5-ink); font: 16px/1.4 var(--a5-sans); }
+#commercial-form input[type="date"]:focus { outline: none; border-color: var(--a5-ink); background-color: var(--a5-white); box-shadow: 0 0 0 3px rgba(247, 127, 0, 0.25); }
 #commercial-form .form-more { border-top: 1px solid #ECE8E1; border-bottom: 1px solid #ECE8E1; }
 #commercial-form .form-more summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; font-weight: 700; font-size: 15px; color: var(--a5-ink); }
 #commercial-form .form-more summary::-webkit-details-marker { display: none; }
@@ -171,6 +174,7 @@
 .contact-line span { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a5-muted); }
 .contact-line a { font-size: 17px; font-weight: 700; color: var(--a5-ink); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .contact-line a:hover { text-decoration-color: var(--a5-orange); }
+.side-lang { margin: 0; font-size: 15px; font-weight: 700; color: var(--a5-ink); }
 @media (max-width: 1199px) { .contact-grid { grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; } }
 @media (max-width: 1023px) { .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
 @media (max-width: 899px) {
@@ -348,7 +352,7 @@
       <h2 class="a5-h2" id="vendor-title">Easy to set up as a <span class="a5-hl">vendor</span></h2>
       <p class="a5-p">Your company needs paperwork before our first visit, and one person who answers the phone. We keep both simple.</p>
       <ul class="a5-checks">
-        <li>Certificate of insurance naming your company</li>
+        <li>Certificate of insurance for general liability and workers comp, naming your company</li>
         <li>W9 and our Florida general contractor license, CGC #1537163</li>
         <li>One project manager as your single point of contact</li>
         <li>A written schedule and progress photos during the job</li>
@@ -387,7 +391,7 @@
               <input type="tel" id="cm-phone" name="phone" required autocomplete="tel" placeholder="(555) 555 5555">
             </div>
             <div class="form-field">
-              <label for="cm-email">Work email <span class="req" aria-hidden="true">*</span></label>
+              <label for="cm-email">Email <span class="req" aria-hidden="true">*</span></label>
               <input type="email" id="cm-email" name="email" required autocomplete="email" placeholder="you@company.com">
             </div>
           </div>
@@ -417,7 +421,8 @@
                 <option>Under $50K</option>
                 <option>$50K to $150K</option>
                 <option>$150K to $500K</option>
-                <option>Over $500K</option>
+                <option>$500K to $1M</option>
+                <option>Over $1M</option>
                 <option>Not sure yet</option>
               </select>
             </div>
@@ -444,6 +449,18 @@
               <select id="cm-plans" name="plans_status"><option value="">Select if known</option><option>Yes, ready for permit</option><option>Plans are in design</option><option>No plans yet</option></select>
             </div>
             <div class="form-field">
+              <label for="cm-files">Link to plans, photos or bid documents</label>
+              <input type="text" id="cm-files" name="files_link" inputmode="url" placeholder="Google Drive, Dropbox or other link" maxlength="500">
+            </div>
+            <div class="form-field">
+              <label for="cm-due">Bid due date</label>
+              <input type="date" id="cm-due" name="bid_due">
+            </div>
+            <div class="form-field">
+              <label for="cm-open">Will the space stay open during the work?</label>
+              <select id="cm-open" name="space_open"><option value="">Select if known</option><option>Yes, it stays open</option><option>No, it will be closed</option><option>Not sure yet</option></select>
+            </div>
+            <div class="form-field">
               <label for="cm-role">Your role</label>
               <select id="cm-role" name="contact_role"><option value="">Select if known</option><option>Business owner</option><option>Facility or operations manager</option><option>Property manager or landlord</option><option>Tenant</option><option>Other</option></select>
             </div>
@@ -453,13 +470,13 @@
             </div>
           </details>
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-          <input type="hidden" name="form_version" value="commercial-1">
+          <input type="hidden" name="form_version" value="commercial-2">
           <input type="hidden" name="source_page" id="hf-source" value="/commercial">
           <input type="hidden" name="utm_source" id="hf-utm-source" value="">
           <input type="hidden" name="utm_medium" id="hf-utm-medium" value="">
           <input type="hidden" name="utm_campaign" id="hf-utm-campaign" value="">
           <button type="submit" class="btn-primary" id="cm-submit">Request a bid</button>
-          <p class="form-note">Licensed Florida GC, CGC #1537163. We never sell your info. It goes to the BuilderK team and the services that run our forms and CRM.</p>
+          <p class="form-note">By sending this form, you agree BuilderK may call, text or email you about your project. Licensed Florida GC, CGC #1537163. We never sell your info. It goes to the BuilderK team and the services that run our forms and CRM.</p>
         </form>
       </div>
 
@@ -471,6 +488,7 @@
         <div class="side-card">
           <h3 class="side-title">Prefer to talk now?</h3>
           <div class="contact-lines"><div class="contact-line"><span>Call</span><a href="tel:2392304868">(239) 230 4868</a></div><div class="contact-line"><span>Email</span><a href="mailto:info@builderk.com">info@builderk.com</a></div><div class="contact-line"><span>Office</span><a href="https://maps.google.com/?q=4700+Millenia+Blvd+Ste+500+Orlando+FL+32839" target="_blank" rel="noopener">4700 Millenia Blvd, Ste&nbsp;500<br>Orlando, FL 32839</a></div></div>
+          <p class="side-lang">We speak English and Spanish. Hablamos español.</p>
         </div>
       </div>
     </div>
@@ -489,8 +507,8 @@
       <details><summary>Do you pull the permit?</summary><div class="a5-faq-a">Yes. As the licensed Florida general contractor we pull the permit, schedule the inspections and close out the job with the building department.</div></details>
       <details><summary>Can you work while our business stays open?</summary><div class="a5-faq-a">Yes. We plan the phases around your hours and keep the work areas separated, so your team and customers can keep using the rest of the building.</div></details>
       <details><summary>Do we need plans before we call?</summary><div class="a5-faq-a">No. If you have plans, we bid from them. If you do not, we walk the space with you and help you put together the design and engineering the permit needs.</div></details>
-      <details><summary>Can you send our vendor paperwork?</summary><div class="a5-faq-a">Yes. We send a certificate of insurance naming your company, our W9 and our Florida general contractor license, CGC #1537163.</div></details>
-      <details><summary>Where do you work?</summary><div class="a5-faq-a">Orlando and Central Florida, from our office on Millenia Boulevard. Recent commercial jobs include Apopka, Altamonte Springs, Clermont, Winter Haven and Leesburg.</div></details>
+      <details><summary>Can you send our vendor paperwork?</summary><div class="a5-faq-a">Yes. We send a certificate of insurance for general liability and workers comp naming your company, our W9 and our Florida general contractor license, CGC #1537163.</div></details>
+      <details><summary>Where do you work?</summary><div class="a5-faq-a">Orlando and Central Florida, from our office on Millenia Boulevard: Orange, Seminole, Osceola, Lake, Polk, Volusia, Brevard, Sumter and Marion counties. Recent commercial jobs include Apopka, Altamonte Springs, Clermont, Winter Haven and Leesburg.</div></details>
     </div>
   </div>
 </section>
