@@ -36,12 +36,14 @@
     call.addEventListener('click', track);
     bar.appendChild(call);
     if (!onContact) {
-      // Agents on the referral page go to the referral form, everyone else to the contact page.
+      // A page with its own form names it (form[data-call-bar-label]); agents on the referral page
+      // go to the referral form; everyone else goes to the contact page.
+      var own = document.querySelector('form[id][data-call-bar-label]');
       var referral = document.getElementById('referral-form');
       var talk = document.createElement('a');
-      talk.href = referral ? '#referral-form' : '/contact';
+      talk.href = own ? '#' + own.id : referral ? '#referral-form' : '/contact';
       talk.className = 'bk-talk';
-      talk.textContent = referral ? 'Submit a Referral' : 'Free consultation';
+      talk.textContent = own ? own.getAttribute('data-call-bar-label') : referral ? 'Submit a Referral' : 'Free consultation';
       bar.appendChild(talk);
     }
     document.body.appendChild(bar);

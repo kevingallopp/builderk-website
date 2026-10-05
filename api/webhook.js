@@ -41,6 +41,11 @@ export default async function handler(req, res) {
     if (data.form_version === '2' && data.form_type === 'website-contact' &&
         !String(data.project_location || data.zip_code || '').trim())
       return res.status(400).json({success: false, received: false, error: 'Please tell us where you plan to build.'});
+    // Commercial bid requests from /commercial: business contact, project type, site, budget and start.
+    if (data.form_type === 'website-commercial' && (!String(data.name || '').trim() ||
+        !/^\+?[\d\s().-]{8,24}$/.test(String(data.phone || '')) ||
+        !['company', 'project_type', 'project_location', 'budget', 'timeline'].every(key => String(data[key] || '').trim())))
+      return res.status(400).json({success: false, received: false, error: 'Please complete your contact and project details.'});
 
     // Build contact payload based on form type
     const contact = isReferral
@@ -104,6 +109,12 @@ export default async function handler(req, res) {
       existingContact
         ? fillMissingContactPhone(contactId, contact, GHL_HEADERS, noteData.note.id)
         : Promise.resolve('not_needed'),
+      existingContact && data.form_type === 'website-commercial'
+        ? addCommercialTags(contactId, contact.tags, GHL_HEADERS)
+        : Promise.resolve('not_needed'),
+      data.form_type === 'website-commercial'
+        ? sendCommercialAck(contactId, contact.firstName, GHL_HEADERS)
+        : Promise.resolve('not_needed'),
     ]);
 
     if (!pipelineStage) {
@@ -117,7 +128,9 @@ export default async function handler(req, res) {
       ? `${data.email || 'Unknown'} — Calculator Estimate ${data.estimate_total || ''}`.trim()
       : isReferral
         ? `${data.client_name || 'Unknown'} — Referral from ${data.referrer_name}`
-        : `${data.name || 'Unknown'} — Website Lead`;
+        : data.form_type === 'website-commercial'
+          ? `${String(data.company || data.name || 'Unknown').slice(0, 80)} — Commercial ${String(data.project_type || 'Lead').slice(0, 60)}`
+          : `${data.name || 'Unknown'} — Website Lead`;
 
     const opportunityPayload = {
       pipelineId: pipelineStage.pipelineId,
@@ -126,7 +139,7 @@ export default async function handler(req, res) {
       contactId,
       name: oppName,
       status: 'open',
-      source: isReferral ? 'Referral Program' : 'Website Form',
+      source: isReferral ? 'Referral Program' : data.form_type === 'website-commercial' ? 'Commercial Website Form' : 'Website Form',
       monetaryValue: estimateValue(data),
     };
 
@@ -155,6 +168,40 @@ export default async function handler(req, res) {
 }
 
 // --- Contact builders ---
+
+// One acknowledgment text per commercial bid request; home leads get theirs from GHL's N1 workflow, which commercial
+// leads never enter. Wording approved by Kevin on 5 Oct 2026: a call, never a site walk (the lead is qualified first).
+// Replays stop earlier at the submission check, so a request is never texted twice. A failure never blocks the receipt.
+const COMMERCIAL_ACK = 'thanks for your bid request to BuilderK. A member of our team will call you within 1 business day to learn about your project. Reply STOP to opt out.';
+async function sendCommercialAck(contactId, firstName, headers) {
+  const name = String(firstName || '').trim().slice(0, 40);
+  try {
+    const response = await ghlFetch('https://services.leadconnectorhq.com/conversations/messages', {
+      method: 'POST', headers: {...headers, Version: '2021-04-15'},
+      body: JSON.stringify({type: 'SMS', contactId, message: `Hi ${name || 'there'}, ${COMMERCIAL_ACK}`}),
+    }, 3000);
+    if (response.ok) return 'sent';
+    console.error('Lead delivery: commercial text not sent', {contactId, status: response.status});
+  } catch (error) {
+    console.error('Lead delivery: commercial text not sent', {contactId});
+  }
+  return 'not_sent';
+}
+
+// A duplicate contact keeps everything it has; a commercial request still adds its routing tags
+// (never website-lead) so the team sees it as commercial. A failure here never blocks the receipt.
+async function addCommercialTags(contactId, tags, headers) {
+  try {
+    const response = await ghlFetch(`https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}/tags`, {
+      method: 'POST', headers, body: JSON.stringify({tags}),
+    }, 2000);
+    if (response.ok) return 'added';
+    console.error('Lead delivery: commercial tags not confirmed', {contactId, status: response.status});
+  } catch (error) {
+    console.error('Lead delivery: commercial tags not confirmed', {contactId});
+  }
+  return 'pending';
+}
 
 async function fillMissingContactPhone(contactId, submitted, headers, noteId) {
   if (!submitted.phone) return 'not_needed';
@@ -195,15 +242,17 @@ async function fillMissingContactPhone(contactId, submitted, headers, noteId) {
 function buildWebsiteContact(data, locationId) {
   // Calculator estimates arrive with email only; use the email handle as a stand-in name
   const fallbackName = data.email ? data.email.split('@')[0] : '';
+  const commercial = data.form_type === 'website-commercial';
   return {
     firstName: extractFirstName(data.name || fallbackName),
     lastName: extractLastName(data.name || ''),
     email: data.email || '',
     phone: formatPhone(data.phone || ''),
     locationId,
+    ...(commercial && data.company ? {companyName: String(data.company).slice(0, 120)} : {}),
     // The construction site is not necessarily the buyer's home address.
     // Project location is retained in the request note and dedicated website fields.
-    source: data.form_type === 'calculator-estimate' ? 'Cost Calculator' : 'Website Form',
+    source: commercial ? 'Commercial Website Form' : data.form_type === 'calculator-estimate' ? 'Cost Calculator' : 'Website Form',
     tags: buildTags(data),
   };
 }
@@ -278,6 +327,17 @@ function estimateValue(data) {
     if (n) return n;
   }
   if (!data.budget) return 0;
+  if (data.form_type === 'website-commercial') {
+    // Midpoints of the commercial form's ranges; "Not sure yet" stays 0 until qualified.
+    const commercial = {
+      'Under $50K': 35000,
+      '$50K to $150K': 100000,
+      '$150K to $500K': 300000,
+      '$500K to $1M': 750000,
+      'Over $1M': 1250000,
+    };
+    return commercial[String(data.budget)] || 0;
+  }
   const map = {
     '$200K - $400K': 300000,
     '$400K - $700K': 550000,
@@ -303,10 +363,26 @@ function formatPhone(phone) {
   return phone;
 }
 
+// Commercial bid requests never carry website-lead or the home timeline tags: in GHL the
+// "N1 Website Form Speed to Lead" workflow texts every contact tagged website-lead about
+// building a custom home and starts the home buyer follow up. Commercial leads get their own tags.
+function buildCommercialTags(data) {
+  const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+  const tags = ['commercial-lead'];
+  if (data.project_type) tags.push('commercial-' + slug(data.project_type));
+  if (data.budget) tags.push('commercial-budget-' + slug(data.budget));
+  if (data.timeline) tags.push('commercial-start-' + slug(data.timeline));
+  if (data.source_page) tags.push('src-' + slug(data.source_page));
+  if (data.utm_source) tags.push('utm-' + slug(data.utm_source));
+  if (data.utm_campaign) tags.push('camp-' + slug(data.utm_campaign));
+  return tags;
+}
+
 function buildTags(data) {
+  if (data.form_type === 'website-commercial') return buildCommercialTags(data);
   const tags = ['website-lead'];
 
-  // Budget tag
+  // Budget tag (home forms)
   if (data.budget) {
     const budgetMap = {
       '$200K - $400K': '200k-400k',
@@ -402,9 +478,10 @@ async function saveWebsiteFields(contactId, submitted, data, delivery, headers) 
           result[field] = data[prefix + '_' + field];
       return JSON.stringify(result);
     };
+    // The budget field holds the home form's ranges; commercial ranges stay in the tag and note.
     const values = {submission_id:data.submission_id,delivery_status:delivery,
       project_location:data.project_location || data.zip_code,lot_ownership:data.lot_ownership,
-      budget:data.budget,budget_basis:data.budget_basis,financing_status:data.financing_status,
+      budget:data.form_type === 'website-commercial' ? '' : data.budget,budget_basis:data.budget_basis,financing_status:data.financing_status,
       timeline:data.timeline,home_size:data.home_size,qualification_status:'Awaiting review'};
     if (data.first_source) Object.assign(values, {first_touch:touch('first'),first_source:data.first_source,first_campaign:data.first_campaign});
     if (data.last_source) Object.assign(values, {last_touch:touch('last'),last_source:data.last_source,last_campaign:data.last_campaign});
@@ -434,7 +511,7 @@ async function saveWebsiteFields(contactId, submitted, data, delivery, headers) 
 }
 
 function buildLeadNote(data) {
-  const fields = ['submission_id','form_type','name','email','phone','message','project_notes',
+  const fields = ['submission_id','form_type','name','company','email','phone','contact_role','project_type','space_size','plans_status','space_open','bid_due','files_link','message','project_notes',
     'budget','budget_basis','financing_status','home_size','timeline','zip_code','project_location','lot_ownership','source_page','city_interest','plan_interest',
     'calc_sqft','calc_beds','calc_baths','calc_tier','calc_garage','calc_garage_sqft','calc_covered_exterior_sqft',
     'calc_complexity','calc_extras','estimate_total','estimate_range','pricing_market','pricing_updated',
