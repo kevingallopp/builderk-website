@@ -41,6 +41,11 @@ export default async function handler(req, res) {
     if (data.form_version === '2' && data.form_type === 'website-contact' &&
         !String(data.project_location || data.zip_code || '').trim())
       return res.status(400).json({success: false, received: false, error: 'Please tell us where you plan to build.'});
+    // Commercial bid requests from /commercial: business contact, project type, site, budget and start.
+    if (data.form_type === 'website-commercial' && (!String(data.name || '').trim() ||
+        !/^\+?[\d\s().-]{8,24}$/.test(String(data.phone || '')) ||
+        !['company', 'project_type', 'project_location', 'budget', 'timeline'].every(key => String(data[key] || '').trim())))
+      return res.status(400).json({success: false, received: false, error: 'Please complete your contact and project details.'});
 
     // Build contact payload based on form type
     const contact = isReferral
@@ -117,7 +122,9 @@ export default async function handler(req, res) {
       ? `${data.email || 'Unknown'} — Calculator Estimate ${data.estimate_total || ''}`.trim()
       : isReferral
         ? `${data.client_name || 'Unknown'} — Referral from ${data.referrer_name}`
-        : `${data.name || 'Unknown'} — Website Lead`;
+        : data.form_type === 'website-commercial'
+          ? `${String(data.company || data.name || 'Unknown').slice(0, 80)} — Commercial ${String(data.project_type || 'Lead').slice(0, 60)}`
+          : `${data.name || 'Unknown'} — Website Lead`;
 
     const opportunityPayload = {
       pipelineId: pipelineStage.pipelineId,
@@ -278,6 +285,16 @@ function estimateValue(data) {
     if (n) return n;
   }
   if (!data.budget) return 0;
+  if (data.form_type === 'website-commercial') {
+    // Midpoints of the commercial form's ranges; "Not sure yet" stays 0 until qualified.
+    const commercial = {
+      'Under $50K': 35000,
+      '$50K to $150K': 100000,
+      '$150K to $500K': 300000,
+      'Over $500K': 750000,
+    };
+    return commercial[String(data.budget)] || 0;
+  }
   const map = {
     '$200K - $400K': 300000,
     '$400K - $700K': 550000,
@@ -305,9 +322,17 @@ function formatPhone(phone) {
 
 function buildTags(data) {
   const tags = ['website-lead'];
+  const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
 
-  // Budget tag
-  if (data.budget) {
+  // Commercial bid requests: their own tags so the team can route them apart from home leads
+  if (data.form_type === 'website-commercial') {
+    tags.push('commercial-lead');
+    if (data.project_type) tags.push('commercial-' + slug(data.project_type));
+    if (data.budget) tags.push('commercial-budget-' + slug(data.budget));
+  }
+
+  // Budget tag (home forms)
+  if (data.budget && data.form_type !== 'website-commercial') {
     const budgetMap = {
       '$200K - $400K': '200k-400k',
       '$400K - $700K': '400k-700k',
@@ -402,9 +427,10 @@ async function saveWebsiteFields(contactId, submitted, data, delivery, headers) 
           result[field] = data[prefix + '_' + field];
       return JSON.stringify(result);
     };
+    // The budget field holds the home form's ranges; commercial ranges stay in the tag and note.
     const values = {submission_id:data.submission_id,delivery_status:delivery,
       project_location:data.project_location || data.zip_code,lot_ownership:data.lot_ownership,
-      budget:data.budget,budget_basis:data.budget_basis,financing_status:data.financing_status,
+      budget:data.form_type === 'website-commercial' ? '' : data.budget,budget_basis:data.budget_basis,financing_status:data.financing_status,
       timeline:data.timeline,home_size:data.home_size,qualification_status:'Awaiting review'};
     if (data.first_source) Object.assign(values, {first_touch:touch('first'),first_source:data.first_source,first_campaign:data.first_campaign});
     if (data.last_source) Object.assign(values, {last_touch:touch('last'),last_source:data.last_source,last_campaign:data.last_campaign});
@@ -434,7 +460,7 @@ async function saveWebsiteFields(contactId, submitted, data, delivery, headers) 
 }
 
 function buildLeadNote(data) {
-  const fields = ['submission_id','form_type','name','email','phone','message','project_notes',
+  const fields = ['submission_id','form_type','name','company','email','phone','contact_role','project_type','space_size','plans_status','message','project_notes',
     'budget','budget_basis','financing_status','home_size','timeline','zip_code','project_location','lot_ownership','source_page','city_interest','plan_interest',
     'calc_sqft','calc_beds','calc_baths','calc_tier','calc_garage','calc_garage_sqft','calc_covered_exterior_sqft',
     'calc_complexity','calc_extras','estimate_total','estimate_range','pricing_market','pricing_updated',
