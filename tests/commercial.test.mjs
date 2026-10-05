@@ -114,3 +114,20 @@ test('commercial page copy keeps the site rules', () => {
     assert.ok(v.getAttribute('aria-label') && v.getAttribute('poster'), 'video label and poster');
   }
 });
+
+test('commercial page leads with the client and keeps past work in one section', () => {
+  const html = read('commercial.html');
+  const doc = new JSDOM(html).window.document;
+  // Kevin, 5 Oct 2026: no "storefront", no door photo with the paper sign
+  assert.ok(!/storefront/i.test(html), 'no storefront wording');
+  assert.ok(!html.includes('clermont-sign'), 'no paper sign photo');
+  // the client's needs come right after the hero, past jobs live only in Recent commercial jobs
+  const sections = [...doc.querySelectorAll('main > section')].map(s => s.id || s.className);
+  assert.equal(sections[1], 'needs');
+  assert.equal(doc.querySelectorAll('#needs .need').length, 6);
+  const jobs = doc.getElementById('projects');
+  assert.equal(jobs.querySelectorAll('.job').length, 4);
+  assert.equal(doc.querySelectorAll('video').length, jobs.querySelectorAll('video').length, 'videos only in the jobs section');
+  jobs.remove();
+  assert.ok(!/Apopka|Clermont|Altamonte|Miami/.test(doc.body.textContent), 'job cities only in the jobs section');
+});
