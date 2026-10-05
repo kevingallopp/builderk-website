@@ -109,6 +109,9 @@ export default async function handler(req, res) {
       existingContact
         ? fillMissingContactPhone(contactId, contact, GHL_HEADERS, noteData.note.id)
         : Promise.resolve('not_needed'),
+      existingContact && data.form_type === 'website-commercial'
+        ? addCommercialTags(contactId, contact.tags, GHL_HEADERS)
+        : Promise.resolve('not_needed'),
     ]);
 
     if (!pipelineStage) {
@@ -133,7 +136,7 @@ export default async function handler(req, res) {
       contactId,
       name: oppName,
       status: 'open',
-      source: isReferral ? 'Referral Program' : 'Website Form',
+      source: isReferral ? 'Referral Program' : data.form_type === 'website-commercial' ? 'Commercial Website Form' : 'Website Form',
       monetaryValue: estimateValue(data),
     };
 
@@ -162,6 +165,21 @@ export default async function handler(req, res) {
 }
 
 // --- Contact builders ---
+
+// A duplicate contact keeps everything it has; a commercial request still adds its routing tags
+// (never website-lead) so the team sees it as commercial. A failure here never blocks the receipt.
+async function addCommercialTags(contactId, tags, headers) {
+  try {
+    const response = await ghlFetch(`https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}/tags`, {
+      method: 'POST', headers, body: JSON.stringify({tags}),
+    }, 2000);
+    if (response.ok) return 'added';
+    console.error('Lead delivery: commercial tags not confirmed', {contactId, status: response.status});
+  } catch (error) {
+    console.error('Lead delivery: commercial tags not confirmed', {contactId});
+  }
+  return 'pending';
+}
 
 async function fillMissingContactPhone(contactId, submitted, headers, noteId) {
   if (!submitted.phone) return 'not_needed';
@@ -202,15 +220,17 @@ async function fillMissingContactPhone(contactId, submitted, headers, noteId) {
 function buildWebsiteContact(data, locationId) {
   // Calculator estimates arrive with email only; use the email handle as a stand-in name
   const fallbackName = data.email ? data.email.split('@')[0] : '';
+  const commercial = data.form_type === 'website-commercial';
   return {
     firstName: extractFirstName(data.name || fallbackName),
     lastName: extractLastName(data.name || ''),
     email: data.email || '',
     phone: formatPhone(data.phone || ''),
     locationId,
+    ...(commercial && data.company ? {companyName: String(data.company).slice(0, 120)} : {}),
     // The construction site is not necessarily the buyer's home address.
     // Project location is retained in the request note and dedicated website fields.
-    source: data.form_type === 'calculator-estimate' ? 'Cost Calculator' : 'Website Form',
+    source: commercial ? 'Commercial Website Form' : data.form_type === 'calculator-estimate' ? 'Cost Calculator' : 'Website Form',
     tags: buildTags(data),
   };
 }
@@ -321,19 +341,27 @@ function formatPhone(phone) {
   return phone;
 }
 
-function buildTags(data) {
-  const tags = ['website-lead'];
+// Commercial bid requests never carry website-lead or the home timeline tags: in GHL the
+// "N1 Website Form Speed to Lead" workflow texts every contact tagged website-lead about
+// building a custom home and starts the home buyer follow up. Commercial leads get their own tags.
+function buildCommercialTags(data) {
   const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+  const tags = ['commercial-lead'];
+  if (data.project_type) tags.push('commercial-' + slug(data.project_type));
+  if (data.budget) tags.push('commercial-budget-' + slug(data.budget));
+  if (data.timeline) tags.push('commercial-start-' + slug(data.timeline));
+  if (data.source_page) tags.push('src-' + slug(data.source_page));
+  if (data.utm_source) tags.push('utm-' + slug(data.utm_source));
+  if (data.utm_campaign) tags.push('camp-' + slug(data.utm_campaign));
+  return tags;
+}
 
-  // Commercial bid requests: their own tags so the team can route them apart from home leads
-  if (data.form_type === 'website-commercial') {
-    tags.push('commercial-lead');
-    if (data.project_type) tags.push('commercial-' + slug(data.project_type));
-    if (data.budget) tags.push('commercial-budget-' + slug(data.budget));
-  }
+function buildTags(data) {
+  if (data.form_type === 'website-commercial') return buildCommercialTags(data);
+  const tags = ['website-lead'];
 
   // Budget tag (home forms)
-  if (data.budget && data.form_type !== 'website-commercial') {
+  if (data.budget) {
     const budgetMap = {
       '$200K - $400K': '200k-400k',
       '$400K - $700K': '400k-700k',

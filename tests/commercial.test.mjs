@@ -15,17 +15,19 @@ const request = {
 };
 
 // The real handler with every upstream call intercepted. No live credentials or leads.
-async function webhook(body) {
+async function webhook(body, {existing = false} = {}) {
   const calls = [];
-  let stored = {id: 'c1', locationId: 'test-location', email: 'qa@example.test', customFields: []};
+  let stored = {id: 'c1', locationId: 'test-location', email: 'qa@example.test', phone: '+14075550123', customFields: []};
   const reply = (json, status = 200) => ({ok: status < 400, status, json: async () => json});
   const sandbox = {process: {env: {GHL_PIT_TOKEN: 'test-only', GHL_LOCATION_ID: 'test-location'}},
     console: {log() {}, error() {}}, AbortSignal,
     fetch: async (url, options = {}) => {
       const method = options.method || 'GET', payload = JSON.parse(options.body || 'null');
       calls.push({url, method, payload});
-      if (url.endsWith('/contacts/')) return reply({contact: {id: 'c1'}}, 201);
+      if (url.endsWith('/contacts/')) return existing ? reply({meta: {contactId: 'c1'}}, 400) : reply({contact: {id: 'c1'}}, 201);
+      if (url.endsWith('/notes') && method === 'GET') return reply({notes: []});
       if (url.endsWith('/notes')) return reply({note: {id: 'note-1'}}, 201);
+      if (url.endsWith('/tags')) return reply({tags: payload.tags}, 201);
       if (url.includes('/pipelines?')) return reply({pipelines: [{id: 'p1', name: 'Builderk', stages: [{id: 's1', name: 'Lead Generation'}]}]});
       if (url.endsWith('/opportunities/')) return reply({opportunity: {id: 'o1'}}, 201);
       if (method === 'PUT') {
@@ -45,16 +47,50 @@ test('commercial request is tagged, named and valued as commercial, with every d
   const {res, calls} = await webhook(request);
   assert.equal(res.code, 200); assert.equal(res.body.received, true); assert.equal(res.body.opportunity, true);
   const contact = calls.find(x => x.url.endsWith('/contacts/')).payload;
-  for (const tag of ['website-lead', 'commercial-lead', 'commercial-office-build-out', 'commercial-budget-50k-to-150k', 'within-3-months', 'src-commercial'])
+  for (const tag of ['commercial-lead', 'commercial-office-build-out', 'commercial-budget-50k-to-150k', 'commercial-start-1-3-months', 'src-commercial'])
     assert.ok(contact.tags.includes(tag), tag);
-  assert.ok(!contact.tags.some(t => /^(owns-lot|still-looking-lot|lot-under-contract)$/.test(t)));
+  assert.equal(contact.source, 'Commercial Website Form');
+  assert.equal(contact.companyName, 'Example Logistics');
   const opp = calls.find(x => x.url.endsWith('/opportunities/')).payload;
   assert.equal(opp.name, 'Example Logistics — Commercial Office build out');
+  assert.equal(opp.source, 'Commercial Website Form');
   assert.equal(opp.monetaryValue, 100000);
   const note = calls.find(x => x.url.endsWith('/notes')).payload.body;
   for (const line of ['company: Example Logistics', 'project_type: Office build out', 'space_size: 1,500 to 5,000 sq ft',
     'plans_status: No plans yet', 'space_open: Yes, it stays open', 'bid_due: 2026-11-02', 'files_link: https://drive.example.test/plans', 'contact_role: Facility or operations manager', 'project_location: Orlando, FL', 'budget: $50K to $150K'])
     assert.ok(note.includes(line), line);
+});
+
+// GHL texts every contact tagged website-lead about building a custom home (N1 Speed to Lead) and starts
+// the home buyer follow up; timeline and lot tags belong to the home flows too.
+const HOME_TAGS = /^(website-lead|new-lead|homepage-lead|ready-to-start|within-3-months|within-6-months|within-1-year|just-exploring|owns-lot|still-looking-lot|lot-under-contract)$/;
+
+test('commercial leads never get the home buyer tags, new or existing contact', async () => {
+  for (const timeline of ['ASAP', '1-3 months', '3-6 months', '6-12 months', 'Just exploring']) {
+    const {calls} = await webhook({...request, timeline, utm_source: 'google', utm_campaign: '24328051357'});
+    const tags = calls.find(x => x.url.endsWith('/contacts/')).payload.tags;
+    assert.ok(!tags.some(t => HOME_TAGS.test(t)), `${timeline}: ${tags}`);
+    assert.ok(tags.includes('utm-google') && tags.includes('camp-24328051357'), 'ad attribution kept');
+  }
+  // An existing contact keeps its record; the request still adds the commercial tags, never website-lead
+  const {res, calls} = await webhook(request, {existing: true});
+  assert.equal(res.body.received, true); assert.equal(res.body.opportunity, true);
+  const added = calls.find(x => x.url.endsWith('/contacts/c1/tags'));
+  assert.ok(added && added.method === 'POST', 'commercial tags added to the existing contact');
+  assert.ok(added.payload.tags.includes('commercial-lead') && !added.payload.tags.some(t => HOME_TAGS.test(t)));
+});
+
+test('home leads keep website-lead, so the home follow up is unchanged', async () => {
+  const home = {form_type: 'website-contact', name: 'Home Buyer', email: 'home@example.test', phone: '(407) 555 0100',
+    budget: '$400K - $700K', timeline: '1-3 months', lot_ownership: 'Yes', zip_code: '32839', source_page: '/'};
+  const {res, calls} = await webhook(home);
+  assert.equal(res.body.received, true);
+  const contact = calls.find(x => x.url.endsWith('/contacts/')).payload;
+  for (const tag of ['website-lead', '400k-700k', 'within-3-months', 'owns-lot']) assert.ok(contact.tags.includes(tag), tag);
+  assert.ok(!contact.tags.includes('commercial-lead'));
+  assert.equal(contact.source, 'Website Form');
+  assert.equal(contact.companyName, undefined);
+  assert.equal(calls.find(x => x.url.endsWith('/opportunities/')).payload.source, 'Website Form');
 });
 
 test('commercial budgets never go into the home budget field', async () => {
