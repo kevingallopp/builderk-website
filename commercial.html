@@ -65,7 +65,7 @@
     {"@type": "Question", "name": "Can you work while our business stays open?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We plan the phases around your hours and keep the work areas separated, so your team and customers can keep using the rest of the building."}},
     {"@type": "Question", "name": "Do we need plans before we call?", "acceptedAnswer": {"@type": "Answer", "text": "No. If you have plans, we bid from them. If you do not, we walk the space with you and help you put together the design and engineering the permit needs."}},
     {"@type": "Question", "name": "Can you send our vendor paperwork?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We send a certificate of insurance naming your company, our W9 and our Florida general contractor license, CGC 1537163."}},
-    {"@type": "Question", "name": "Where do you work?", "acceptedAnswer": {"@type": "Answer", "text": "Orlando and Central Florida, from our office on Millenia Boulevard. Recent commercial jobs include Clermont, Leesburg and Winter Haven."}}
+    {"@type": "Question", "name": "Where do you work?", "acceptedAnswer": {"@type": "Answer", "text": "Orlando and Central Florida, from our office on Millenia Boulevard. Recent commercial jobs include Apopka, Altamonte Springs, Clermont, Winter Haven and Leesburg."}}
   ]
 }
 </script>
@@ -98,13 +98,23 @@
 /* recent projects */
 .proj { padding: 0; overflow: hidden; gap: 0; }
 .proj-photo { aspect-ratio: 4 / 3; border-radius: 0; }
-.proj-body { padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 12px; }
+.proj-body { padding: 22px 22px 26px; display: flex; flex-direction: column; gap: 12px; }
+.proj .a5-h3 { font-size: 24px; }
 .proj-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .proj-city { margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--a5-muted); }
 .proj .a5-checks { gap: 9px; }
 .proj .a5-checks li { font-size: 15.5px; }
 .proj-more { margin: 28px 0 0; font-size: 16px; line-height: 1.6; color: var(--a5-body); max-width: 60em; }
 @media (max-width: 899px) { .proj-body { padding: 20px 18px 22px; } .proj-more { margin-top: 20px; font-size: 15px; } }
+
+/* walkthrough videos under the strip */
+.walk { display: grid; grid-template-columns: minmax(0, 1fr) 260px 260px; gap: 24px; align-items: center; margin-top: 40px; }
+.walk-text { display: flex; flex-direction: column; gap: 12px; }
+.vid { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.vid figcaption { font-size: 14px; font-weight: 700; color: var(--a5-ink); }
+.vid-frame { aspect-ratio: 9 / 16; background: #1B1A18; }
+@media (max-width: 1023px) { .walk { grid-template-columns: repeat(2, minmax(0, 1fr)); } .walk-text { grid-column: 1 / -1; } }
+@media (max-width: 899px) { .walk { gap: 12px; margin-top: 28px; } .vid figcaption { font-size: 13px; } }
 
 /* how it works: the home page steps with the tape measure */
 .steps { list-style: none; margin: 0 0 30px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
@@ -205,7 +215,7 @@
 
 <main id="main">
 <section class="a5-hero com-hero" aria-labelledby="com-title">
-  <div class="a5-hero-photo" style="--pos:50% 58%"><img src="/images/commercial/office-glass-hero.webp" alt="Glass office with a standing desk in an office build out by BuilderK in Clermont, Florida" width="1200" height="1500" fetchpriority="high" decoding="async"></div>
+  <div class="a5-hero-photo" style="--pos:50% 42%"><img src="/images/commercial/miami-soffit-hero.webp" alt="Commercial interior under construction with curved wood soffits, cove lighting and pendant lights in Miami Beach" width="1200" height="1500" fetchpriority="high" decoding="async"></div>
   <div class="a5-hero-inner">
     <div class="a5-hero-body">
       <div class="a5-hero-label">BuilderK Commercial</div>
@@ -226,15 +236,23 @@
       <div class="a5-head-text">
         <div class="a5-label">Real projects</div>
         <h2 class="a5-h2" id="work-title">Real <span class="a5-hl">commercial</span> work</h2>
-        <p class="a5-p">Photos from our own jobs, from glass offices in Clermont to a boba tea shop in Winter Haven.</p>
+        <p class="a5-p">Photos and video from our own jobs in Apopka, Altamonte Springs, Clermont and Miami Beach.</p>
       </div>
       <a class="a5-btn a5-btn-outline" href="#projects">See the projects</a>
     </div>
     <div class="strip">
-      <figure class="a5-figure"><div class="a5-photo strip-photo"><img src="/images/commercial/office-glass-rooms.webp" alt="Frameless glass offices beside a hallway with an exit sign, under a drop ceiling" width="600" height="800" loading="lazy" decoding="async"></div><figcaption>Glass offices, Clermont</figcaption></figure>
-      <figure class="a5-figure"><div class="a5-photo strip-photo"><img src="/images/commercial/boba-room.webp" alt="Long boba tea shop dining room with slat wood wall panels, seating and a black drop ceiling" width="600" height="800" loading="lazy" decoding="async"></div><figcaption>Boba tea shop, Winter Haven</figcaption></figure>
-      <figure class="a5-figure"><div class="a5-photo strip-photo"><img src="/images/commercial/office-restroom.webp" alt="Accessible restroom with steel grab bars and a tile floor, seen through the doorway" width="600" height="800" loading="lazy" decoding="async"></div><figcaption>ADA restroom, Clermont</figcaption></figure>
-      <figure class="a5-figure"><div class="a5-photo strip-photo"><img src="/images/commercial/boba-counter.webp" alt="Boba tea shop service counter with slat wood panels and a quartz top" width="600" height="800" loading="lazy" decoding="async"></div><figcaption>Service counter, Winter Haven</figcaption></figure>
+      <figure class="a5-figure"><div class="a5-photo strip-photo"><img src="/images/commercial/smoothie-dining.webp" alt="Dining area with yellow booths and round tables in a smoothie shop build out" width="480" height="640" loading="lazy" decoding="async"></div><figcaption>Smoothie shop, Apopka</figcaption></figure>
+      <figure class="a5-figure"><div class="a5-photo strip-photo"><img src="/images/commercial/altamonte-tile.webp" alt="Floor to ceiling white tile wall going up in a retail build out" width="600" height="800" loading="lazy" decoding="async"></div><figcaption>Tile wall, Altamonte Springs</figcaption></figure>
+      <figure class="a5-figure"><div class="a5-photo strip-photo"><img src="/images/commercial/smoothie-restroom.webp" alt="Accessible restroom with red tile walls and steel grab bars" width="480" height="640" loading="lazy" decoding="async"></div><figcaption>Accessible restroom, Apopka</figcaption></figure>
+      <figure class="a5-figure"><div class="a5-photo strip-photo"><img src="/images/commercial/clermont-breakroom.webp" alt="Office break room with white cabinets, a sink and plank flooring" width="600" height="800" loading="lazy" decoding="async"></div><figcaption>Break room, Clermont</figcaption></figure>
+    </div>
+    <div class="walk">
+      <div class="walk-text">
+        <h3 class="a5-h3">Walk through two finished jobs</h3>
+        <p class="a5-p">A smoothie shop in Apopka, from the dining room to the back of house, and an office build out in Clermont with glass offices, a break room and accessible restrooms. Filmed by our team.</p>
+      </div>
+      <figure class="vid"><div class="a5-photo vid-frame"><video data-a5-lazy muted loop playsinline preload="none" poster="/images/commercial/smoothie-poster.webp" aria-label="Walkthrough of a finished smoothie shop build out in Apopka"><source data-src="/videos/commercial/smoothie-shop-build-out.mp4" type="video/mp4"></video></div><figcaption>Smoothie shop, Apopka</figcaption></figure>
+      <figure class="vid"><div class="a5-photo vid-frame"><video data-a5-lazy muted loop playsinline preload="none" poster="/images/commercial/clermont-poster.webp" aria-label="Walkthrough of a finished office build out in Clermont"><source data-src="/videos/commercial/clermont-office-walkthrough.mp4" type="video/mp4"></video></div><figcaption>Office build out, Clermont</figcaption></figure>
     </div>
   </div>
 </section>
@@ -267,33 +285,41 @@
         <h2 class="a5-h2" id="projects-title">Recent <span class="a5-hl">commercial</span> jobs</h2>
       </div>
     </div>
-    <div class="a5-grid a5-cols-3 a5-cols-md-2">
+    <div class="a5-grid a5-cols-4">
       <article class="a5-card proj">
-        <div class="a5-photo proj-photo"><img src="/images/commercial/office-glass-card.webp" alt="Office build out with two frameless glass offices and an exit sign" width="900" height="675" loading="lazy" decoding="async"></div>
+        <div class="a5-photo proj-photo"><img src="/images/commercial/smoothie-line-card.webp" alt="Smoothie shop service line with blenders, coolers and menu boards" width="480" height="360" loading="lazy" decoding="async"></div>
         <div class="proj-body">
-          <div class="proj-top"><p class="proj-city">Clermont, FL</p><span class="a5-tag">Completed</span></div>
+          <div class="proj-top"><p class="proj-city">Apopka, FL</p><span class="a5-tag">2024</span></div>
+          <h3 class="a5-h3">Smoothie shop</h3>
+          <ul class="a5-checks"><li>Dining area, service line and back of house</li><li>Accessible restroom with tile and grab bars</li><li>Plumbing, ceilings, lighting and finishes</li></ul>
+        </div>
+      </article>
+      <article class="a5-card proj">
+        <div class="a5-photo proj-photo"><img src="/images/commercial/clermont-glass-card.webp" alt="Frameless glass offices with a standing desk in an office build out" width="900" height="675" loading="lazy" decoding="async"></div>
+        <div class="proj-body">
+          <div class="proj-top"><p class="proj-city">Clermont, FL</p><span class="a5-tag">2025</span></div>
           <h3 class="a5-h3">Office build out</h3>
-          <ul class="a5-checks"><li>Open office with frameless glass offices</li><li>Accessible restrooms, drop ceilings and plank flooring</li><li>City permit through the certificate of occupancy</li></ul>
+          <ul class="a5-checks"><li>Open office with frameless glass offices</li><li>Break room, accessible restrooms and drop ceilings</li><li>City permit through the certificate of occupancy</li></ul>
         </div>
       </article>
       <article class="a5-card proj">
-        <div class="a5-photo proj-photo"><img src="/images/commercial/boba-counter-card.webp" alt="Boba tea shop service counter with slat wood panels and LED lighting" width="900" height="675" loading="lazy" decoding="async"></div>
+        <div class="a5-photo proj-photo"><img src="/images/commercial/altamonte-framing-card.webp" alt="Metal stud framing, insulation and drywall under an open ceiling with ductwork" width="900" height="675" loading="lazy" decoding="async"></div>
         <div class="proj-body">
-          <div class="proj-top"><p class="proj-city">Winter Haven, FL</p><span class="a5-tag">Completed</span></div>
-          <h3 class="a5-h3">Boba tea shop</h3>
-          <ul class="a5-checks"><li>About 1,200 sq ft interior build out</li><li>Service counter with slat panels and LED lighting</li><li>Food service sinks, new ceiling, lighting and seating area</li></ul>
+          <div class="proj-top"><p class="proj-city">Altamonte Springs, FL</p><span class="a5-tag">2024</span></div>
+          <h3 class="a5-h3">Retail build out</h3>
+          <ul class="a5-checks"><li>Metal stud framing, insulation and drywall</li><li>Floor to ceiling tile walls</li><li>Open ceiling with exposed ductwork</li></ul>
         </div>
       </article>
       <article class="a5-card proj">
-        <div class="a5-photo proj-photo"><img src="/images/commercial/leesburg-interceptors-card.webp" alt="Two grease interceptors set in place with a rebar mat before the concrete pour" width="900" height="675" loading="lazy" decoding="async"></div>
+        <div class="a5-photo proj-photo"><img src="/images/commercial/miami-interior-card.webp" alt="Large commercial interior with service counters and curved soffits during construction" width="900" height="675" loading="lazy" decoding="async"></div>
         <div class="proj-body">
-          <div class="proj-top"><p class="proj-city">Leesburg, FL</p><span class="a5-tag a5-tag-accent">In progress</span></div>
-          <h3 class="a5-h3">Downtown restaurant</h3>
-          <ul class="a5-checks"><li>Structural framing repairs and a new flat roof</li><li>Grease interceptors and an accessible ramp</li><li>New interior walls, ceilings and finishes</li></ul>
+          <div class="proj-top"><p class="proj-city">Miami Beach, FL</p><span class="a5-tag">2021</span></div>
+          <h3 class="a5-h3">Commercial interior</h3>
+          <ul class="a5-checks"><li>Curved soffits with wood and cove lighting</li><li>Service counters and cement board walls</li><li>Linear diffusers and recessed lighting</li></ul>
         </div>
       </article>
     </div>
-    <p class="proj-more">Our leadership has also managed commercial office and retail build outs across Florida in earlier roles. You can read about that experience on our <a class="a5-link" href="/about">About page</a>.</p>
+    <p class="proj-more">Also recently: a boba tea shop in Winter Haven and a downtown restaurant in Leesburg, now in progress. Our leadership has also managed commercial office and retail build outs across Florida in earlier roles. You can read about that experience on our <a class="a5-link" href="/about">About page</a>.</p>
   </div>
 </section>
 
@@ -329,7 +355,7 @@
         <li>Work phased around your hours when the building stays open</li>
       </ul>
     </div>
-    <div class="a5-photo vendor-photo"><img src="/images/commercial/office-exit-hall.webp" alt="Glass office next to an exit hallway with a push bar door in an office build out" width="600" height="800" loading="lazy" decoding="async"></div>
+    <div class="a5-photo vendor-photo"><img src="/images/commercial/clermont-sign.webp" alt="BuilderK We are working here sign on the glass door of an office build out in Clermont" width="600" height="800" loading="lazy" decoding="async"></div>
   </div>
 </section>
 
@@ -464,7 +490,7 @@
       <details><summary>Can you work while our business stays open?</summary><div class="a5-faq-a">Yes. We plan the phases around your hours and keep the work areas separated, so your team and customers can keep using the rest of the building.</div></details>
       <details><summary>Do we need plans before we call?</summary><div class="a5-faq-a">No. If you have plans, we bid from them. If you do not, we walk the space with you and help you put together the design and engineering the permit needs.</div></details>
       <details><summary>Can you send our vendor paperwork?</summary><div class="a5-faq-a">Yes. We send a certificate of insurance naming your company, our W9 and our Florida general contractor license, CGC #1537163.</div></details>
-      <details><summary>Where do you work?</summary><div class="a5-faq-a">Orlando and Central Florida, from our office on Millenia Boulevard. Recent commercial jobs include Clermont, Leesburg and Winter Haven.</div></details>
+      <details><summary>Where do you work?</summary><div class="a5-faq-a">Orlando and Central Florida, from our office on Millenia Boulevard. Recent commercial jobs include Apopka, Altamonte Springs, Clermont, Winter Haven and Leesburg.</div></details>
     </div>
   </div>
 </section>

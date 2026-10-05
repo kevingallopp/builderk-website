@@ -99,8 +99,12 @@ test('commercial page form matches what the CRM requires and the call bar points
 test('commercial page copy keeps the site rules', () => {
   const html = read('commercial.html');
   const text = new JSDOM(html).window.document.body.textContent;
-  for (const banned of [/Talk to a Builder/i, /architect/i, /\bAI\b/, /per sq(uare)? f(oo)?t/i, /\$\d+\s*\/\s*sq/i, /CSX|TDSI|Inter-?Rail|Paramount/i])
+  for (const banned of [/Talk to a Builder/i, /architect/i, /\bAI\b/, /per sq(uare)? f(oo)?t/i, /\$\d+\s*\/\s*sq/i, /CSX|TDSI|Inter-?Rail|Paramount|Smoothie King|\bM(U|\u00dc)V\b|Cathcart|T\.?Land|Pinsa/i])
     assert.ok(!banned.test(text), String(banned));
   assert.ok(!/[–—]/.test(text), 'no dashes in visible copy');
   for (const img of new JSDOM(html).window.document.querySelectorAll('img')) assert.ok(img.getAttribute('alt'), img.src);
+  for (const v of new JSDOM(html).window.document.querySelectorAll('video')) {
+    assert.ok(v.hasAttribute('muted') && v.hasAttribute('playsinline') && v.getAttribute('preload') === 'none', 'quiet lazy video');
+    assert.ok(v.getAttribute('aria-label') && v.getAttribute('poster'), 'video label and poster');
+  }
 });
