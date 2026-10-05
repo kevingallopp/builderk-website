@@ -15,7 +15,7 @@ const request = {
 };
 
 // The real handler with every upstream call intercepted. No live credentials or leads.
-async function webhook(body, {existing = false} = {}) {
+async function webhook(body, {existing = false, smsStatus = 201} = {}) {
   const calls = [];
   let stored = {id: 'c1', locationId: 'test-location', email: 'qa@example.test', phone: '+14075550123', customFields: []};
   const reply = (json, status = 200) => ({ok: status < 400, status, json: async () => json});
@@ -28,6 +28,7 @@ async function webhook(body, {existing = false} = {}) {
       if (url.endsWith('/notes') && method === 'GET') return reply({notes: []});
       if (url.endsWith('/notes')) return reply({note: {id: 'note-1'}}, 201);
       if (url.endsWith('/tags')) return reply({tags: payload.tags}, 201);
+      if (url.endsWith('/conversations/messages')) return reply({messageId: 'm1'}, smsStatus);
       if (url.includes('/pipelines?')) return reply({pipelines: [{id: 'p1', name: 'Builderk', stages: [{id: 's1', name: 'Lead Generation'}]}]});
       if (url.endsWith('/opportunities/')) return reply({opportunity: {id: 'o1'}}, 201);
       if (method === 'PUT') {
@@ -80,6 +81,19 @@ test('commercial leads never get the home buyer tags, new or existing contact', 
   assert.ok(added.payload.tags.includes('commercial-lead') && !added.payload.tags.some(t => HOME_TAGS.test(t)));
 });
 
+test('a commercial request gets one approved text: a call, never a site walk; a failed text never blocks the receipt', async () => {
+  const {calls} = await webhook(request);
+  const texts = calls.filter(x => x.url.endsWith('/conversations/messages'));
+  assert.equal(texts.length, 1);
+  assert.equal(texts[0].payload.type, 'SMS'); assert.equal(texts[0].payload.contactId, 'c1');
+  assert.equal(texts[0].payload.message, 'Hi Test, thanks for your bid request to BuilderK. A member of our team will call you within 1 business day to learn about your project. Reply STOP to opt out.');
+  assert.ok(!/site walk|visit/i.test(texts[0].payload.message));
+  const failed = await webhook(request, {smsStatus: 401});
+  assert.equal(failed.res.body.received, true); assert.equal(failed.res.body.opportunity, true);
+  const existing = await webhook(request, {existing: true});
+  assert.equal(existing.calls.filter(x => x.url.endsWith('/conversations/messages')).length, 1, 'existing contact texted once');
+});
+
 test('home leads keep website-lead, so the home follow up is unchanged', async () => {
   const home = {form_type: 'website-contact', name: 'Home Buyer', email: 'home@example.test', phone: '(407) 555 0100',
     budget: '$400K - $700K', timeline: '1-3 months', lot_ownership: 'Yes', zip_code: '32839', source_page: '/'};
@@ -91,6 +105,7 @@ test('home leads keep website-lead, so the home follow up is unchanged', async (
   assert.equal(contact.source, 'Website Form');
   assert.equal(contact.companyName, undefined);
   assert.equal(calls.find(x => x.url.endsWith('/opportunities/')).payload.source, 'Website Form');
+  assert.ok(!calls.some(x => x.url.endsWith('/conversations/messages')), 'home leads are texted by GHL, not the webhook');
 });
 
 test('commercial budgets never go into the home budget field', async () => {

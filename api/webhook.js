@@ -112,6 +112,9 @@ export default async function handler(req, res) {
       existingContact && data.form_type === 'website-commercial'
         ? addCommercialTags(contactId, contact.tags, GHL_HEADERS)
         : Promise.resolve('not_needed'),
+      data.form_type === 'website-commercial'
+        ? sendCommercialAck(contactId, contact.firstName, GHL_HEADERS)
+        : Promise.resolve('not_needed'),
     ]);
 
     if (!pipelineStage) {
@@ -165,6 +168,25 @@ export default async function handler(req, res) {
 }
 
 // --- Contact builders ---
+
+// One acknowledgment text per commercial bid request; home leads get theirs from GHL's N1 workflow, which commercial
+// leads never enter. Wording approved by Kevin on 5 Oct 2026: a call, never a site walk (the lead is qualified first).
+// Replays stop earlier at the submission check, so a request is never texted twice. A failure never blocks the receipt.
+const COMMERCIAL_ACK = 'thanks for your bid request to BuilderK. A member of our team will call you within 1 business day to learn about your project. Reply STOP to opt out.';
+async function sendCommercialAck(contactId, firstName, headers) {
+  const name = String(firstName || '').trim().slice(0, 40);
+  try {
+    const response = await ghlFetch('https://services.leadconnectorhq.com/conversations/messages', {
+      method: 'POST', headers: {...headers, Version: '2021-04-15'},
+      body: JSON.stringify({type: 'SMS', contactId, message: `Hi ${name || 'there'}, ${COMMERCIAL_ACK}`}),
+    }, 3000);
+    if (response.ok) return 'sent';
+    console.error('Lead delivery: commercial text not sent', {contactId, status: response.status});
+  } catch (error) {
+    console.error('Lead delivery: commercial text not sent', {contactId});
+  }
+  return 'not_sent';
+}
 
 // A duplicate contact keeps everything it has; a commercial request still adds its routing tags
 // (never website-lead) so the team sees it as commercial. A failure here never blocks the receipt.
