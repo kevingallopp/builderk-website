@@ -125,8 +125,10 @@ input, textarea { caret-color: var(--a5-orange); }
 .a5-header-phone { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: var(--a5-on-dark); text-decoration: none; white-space: nowrap; }
 .a5-header-cta { height: 48px; padding: 0 22px; display: flex; align-items: center; border-radius: 10px; background: var(--a5-orange); color: #0C0B0A; font-family: var(--a5-cond); font-weight: 800; font-size: 19px; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
 .a5-header-call, .a5-menu-btn { display: none; }
-/* the full menu needs about 1,000 px; the phone number only shows on wide screens */
+/* the full menu (six links) needs about 1,000 px; the phone number only shows on wide screens */
 @media (max-width: 1319px) { .a5-nav { gap: 24px; } .a5-header-phone { display: none; } }
+@media (max-width: 1399px) { .a5-header-phone { display: none; } }
+@media (min-width: 1024px) and (max-width: 1179px) { .a5-nav { gap: 16px; font-size: 14px; } .a5-header-cta { padding: 0 16px; font-size: 17px; } }
 @media (max-width: 1023px) {
   .a5-header-bar { height: 64px; padding: 0 max(10px, calc(var(--a5-gutter) - 6px)) 0 var(--a5-gutter); }
   .a5-logo img { width: 113px; height: 18px; }
