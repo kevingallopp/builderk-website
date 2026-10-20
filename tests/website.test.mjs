@@ -87,9 +87,10 @@ test('Miami and Tampa label baseline and match canonical tiers',()=>{
 
 // Handler tests run in an isolated VM with mocked upstream APIs, never real credentials or leads.
 async function webhook(body,scenario='success'){
-  const calls=[];const sandbox={process:{env:{GHL_PIT_TOKEN:'test-only',GHL_LOCATION_ID:'test-location'}},console:{log(){},error(){}},AbortSignal,
+  const calls=[],logs=[];const sandbox={process:{env:{GHL_PIT_TOKEN:'test-only',GHL_LOCATION_ID:'test-location'}},console:{log(){},error(...args){logs.push(args);}},AbortSignal,
     fetch:async(url,options)=>{calls.push({url,payload:JSON.parse(options.body||'null')});
       if(scenario==='network')throw Error('unavailable');
+      if(scenario==='continued-note-failure'&&url.endsWith('/notes')&&calls.filter(x=>x.url.endsWith('/notes')).length>1)return {ok:false,status:403,json:async()=>({})};
       let response=url.endsWith('/notes')?{note:{id:'note-1'}}:url.includes('/pipelines?')?{pipelines:[{id:'p1',name:'Builderk',stages:[{id:'s1',name:'Lead Generation'}]}]}:url.endsWith('/opportunities/')?{opportunity:{id:'o1'}}:{contact:{id:'c1'}};
       if(scenario==='duplicate'&&url.endsWith('/contacts/'))return {ok:false,status:400,json:async()=>({meta:{contactId:'c1'}})};
       if(scenario==='note-failure'&&url.endsWith('/notes'))return {ok:false,status:403,json:async()=>({})};
@@ -100,8 +101,44 @@ async function webhook(body,scenario='success'){
     }};
   vm.createContext(sandbox);vm.runInContext(read('api/webhook.js').replace('export default async function handler','async function handler')+'\nthis.handler=handler;',sandbox);
   const res={code:200,setHeader(){},status(code){this.code=code;return this;},json(body){this.body=body;return this;}};
-  await sandbox.handler({method:'POST',body},res);return {res,calls};
+  await sandbox.handler({method:'POST',body},res);return {res,calls,logs};
 }
+// A 6,900 character request (Samantha Hershowitz, 19 Oct 2026) lost its last 2,900 characters at a 4,000 cap.
+const longRequest=Array.from({length:120},(_,i)=>`- requirement ${i+1}: covered arena, catio, barn wired to the security system`).join('\n')+'\n\nPlease text! I work nights.';
+const notesOf=calls=>calls.filter(x=>x.url.endsWith('/notes')).map(x=>x.payload.body);
+test('a request longer than one note continues in the next note without losing text',async()=>{
+  assert.ok(longRequest.length>8000&&longRequest.length<12000);
+  const submission_id='52a5ab24-b7e9-478f-98fd-5092ad501074';
+  const {res,calls}=await webhook({email:'qa@example.test',name:'Test Visitor',submission_id,message:longRequest,budget:'$700K to $1M',timeline:'1-3 months'});
+  assert.equal(res.body.received,true);assert.equal(res.body.opportunity,true);
+  const notes=notesOf(calls);assert.equal(notes.length,3);
+  assert.match(notes[0],/^BuilderK website request\n/);assert.match(notes[0],/budget: \$700K to \$1M/);assert.match(notes[0],/timeline: 1-3 months/);
+  assert.match(notes[0],/\(message continues in the next notes\)/);
+  const parts=[notes[0].split('message: ')[1].split('\n(message continues')[0]];
+  for(const [i,note] of notes.slice(1).entries()){
+    assert.match(note,new RegExp(`^BuilderK website request, continued\\nsubmission_id: ${submission_id}\\nmessage \\(part ${i+2} of 3\\): `));
+    parts.push(note.split(`message (part ${i+2} of 3): `)[1]);
+  }
+  assert.equal(parts.join(''),longRequest);assert.ok(parts.every(part=>part.length<=4000));
+  assert.ok(parts.slice(0,-1).every(part=>/\n$/.test(part)),'parts end at a line break');
+  assert.ok(notes[2].endsWith('Please text! I work nights.'));
+});
+test('text with no spaces is still split into whole parts',async()=>{
+  const {calls}=await webhook({email:'qa@example.test',message:'x'.repeat(9000)});
+  const notes=notesOf(calls);assert.equal(notes.length,3);
+  assert.equal(notes[1].split('message (part 2 of 3): ')[1].length,4000);assert.equal(notes[2].split('message (part 3 of 3): ')[1].length,1000);
+  assert.ok(!notes[1].includes('submission_id'),'no invalid submission id is written');
+});
+test('a short request stays in a single note',async()=>{
+  const {calls}=await webhook({email:'qa@example.test',message:'y'.repeat(4000)});
+  const notes=notesOf(calls);assert.equal(notes.length,1);assert.ok(!notes[0].includes('continues in the next note'));
+});
+test('a failed continuation keeps the receipt and is logged for review',async()=>{
+  const {res,calls,logs}=await webhook({email:'qa@example.test',message:longRequest},'continued-note-failure');
+  assert.equal(res.body.received,true);assert.equal(res.body.opportunity,true);
+  assert.equal(notesOf(calls).length,2,'stops after the first failed part');
+  assert.deepEqual(JSON.parse(JSON.stringify(logs.find(x=>x[0]==='Lead delivery: long request text needs review')?.[1])),{contactId:'c1',savedParts:1,totalParts:3});
+});
 for(const scenario of ['success','duplicate','missing-stage','opp-network'])test('CRM '+scenario+' preserves context in contact note',async()=>{
   const {res,calls}=await webhook({email:'qa@example.test',name:'Test Visitor',message:'Keep this note',plan_interest:'floor-plan-1977-sq-ft',calc_sqft:1977,calc_baths:2.5,estimate_range:'$400,000 to $450,000',budget:'$400K to $700K'},scenario);
   assert.equal(res.body.received,true);const note=calls.find(x=>x.url.endsWith('/notes'));assert.match(note.payload.body,/calc_baths: 2.5/);assert.match(note.payload.body,/Keep this note/);

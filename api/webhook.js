@@ -91,8 +91,9 @@ export default async function handler(req, res) {
     }
     // Preserve every request, including an existing contact's latest plan and project notes.
     // Contact creation alone is not a receipt for a calculator estimate.
+    const [leadNote, ...continuedNotes] = buildLeadNotes(data, submissionId);
     const noteResponse = await ghlFetch(`https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}/notes`, {
-      method: 'POST', headers: GHL_HEADERS, body: JSON.stringify({body: buildLeadNote(data)})
+      method: 'POST', headers: GHL_HEADERS, body: JSON.stringify({body: leadNote})
     });
     const noteData = await noteResponse.json();
     if (!noteResponse.ok || !noteData.note?.id) {
@@ -106,6 +107,7 @@ export default async function handler(req, res) {
     // The optional update runs alongside pipeline lookup to bound delivery latency.
     const [pipelineStage] = await Promise.all([
       findLeadGenStage(GHL_LOCATION, GHL_HEADERS),
+      saveContinuedNotes(contactId, continuedNotes, GHL_HEADERS),
       existingContact
         ? fillMissingContactPhone(contactId, contact, GHL_HEADERS, noteData.note.id)
         : Promise.resolve('not_needed'),
@@ -510,7 +512,41 @@ async function saveWebsiteFields(contactId, submitted, data, delivery, headers) 
   }
 }
 
-function buildLeadNote(data) {
+// GHL already holds request notes with 4,000 characters per field. A longer field continues in
+// follow up notes of the same size, so nothing the visitor wrote is cut (Hershowitz, 19 Oct 2026).
+const NOTE_FIELD_LIMIT = 4000;
+
+function splitNoteText(text, limit = NOTE_FIELD_LIMIT) {
+  const parts = [];
+  while (text.length > limit) {
+    // End each part at a line break (else a space) near the limit so words stay whole; parts join back exactly.
+    const lineBreak = text.lastIndexOf('\n', limit - 1) + 1, space = text.lastIndexOf(' ', limit - 1) + 1;
+    let end = lineBreak > limit * 0.75 ? lineBreak : space > limit * 0.75 ? space : limit;
+    if (/[\uD800-\uDBFF]/.test(text[end - 1])) end -= 1;
+    parts.push(text.slice(0, end));
+    text = text.slice(end);
+  }
+  parts.push(text);
+  return parts;
+}
+
+async function saveContinuedNotes(contactId, notes, headers) {
+  for (const [index, body] of notes.entries()) {
+    try {
+      const response = await ghlFetch(`https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}/notes`, {
+        method: 'POST', headers, body: JSON.stringify({body})
+      });
+      const saved = await response.json();
+      if (!response.ok || !saved.note?.id) throw Error('continued_note_not_confirmed');
+    } catch (error) {
+      console.error('Lead delivery: long request text needs review', {contactId, savedParts: index + 1, totalParts: notes.length + 1});
+      return false;
+    }
+  }
+  return true;
+}
+
+function buildLeadNotes(data, submissionId) {
   const fields = ['submission_id','form_type','name','company','email','phone','contact_role','project_type','space_size','plans_status','space_open','bid_due','files_link','message','project_notes',
     'budget','budget_basis','financing_status','home_size','timeline','zip_code','project_location','lot_ownership','source_page','city_interest','plan_interest',
     'calc_sqft','calc_beds','calc_baths','calc_tier','calc_garage','calc_garage_sqft','calc_covered_exterior_sqft',
@@ -523,8 +559,16 @@ function buildLeadNote(data) {
     'client_name','client_email','client_phone','ad_measurement_consent',
     'bk_campaign_id','bk_adgroup_id','bk_ad_id','bk_match_type','bk_network',
     ...['first','last'].flatMap(prefix => ['gclid','wbraid','gbraid','bk_campaign_id','bk_adgroup_id','bk_ad_id','bk_match_type','bk_network'].map(field => prefix + '_' + field))];
-  return ['BuilderK website request', 'Planning estimates are not quotes.', ...fields
+  const continued = [];
+  const lines = fields
     .filter(key => data[key] !== undefined && data[key] !== '' &&
       (!/_(gclid|wbraid|gbraid)$/.test(key) || data.ad_measurement_consent === 'granted'))
-    .map(key => `${key}: ${String(data[key]).slice(0, 4000)}`)].join('\n');
+    .map(key => {
+      const parts = splitNoteText(String(data[key]));
+      parts.slice(1).forEach((part, index) => continued.push(['BuilderK website request, continued',
+        ...(submissionId ? ['submission_id: ' + submissionId] : []),
+        `${key} (part ${index + 2} of ${parts.length}): ${part}`].join('\n')));
+      return `${key}: ${parts[0]}` + (parts.length > 1 ? `\n(${key} continues in the next note${parts.length > 2 ? 's' : ''})` : '');
+    });
+  return [['BuilderK website request', 'Planning estimates are not quotes.', ...lines].join('\n'), ...continued];
 }
