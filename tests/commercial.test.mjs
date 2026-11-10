@@ -174,6 +174,8 @@ test('commercial page leads with the client and keeps past work in one section',
   assert.ok(!/storefront/i.test(html), 'no storefront wording');
   assert.ok(!html.includes('clermont-sign'), 'no paper sign photo');
   assert.ok(!/site walk|walk the space|site visit|first visit/i.test(html), 'no site walk promise');
+  // Kevin, 6 Oct 2026: no FAQ block on this page
+  assert.ok(!/faq/i.test(html), 'no FAQ section or FAQ structured data');
   // the client's needs come right after the hero, past jobs live only in Recent commercial jobs
   const sections = [...doc.querySelectorAll('main > section')].map(s => s.id || s.className);
   assert.equal(sections[1], 'needs');
