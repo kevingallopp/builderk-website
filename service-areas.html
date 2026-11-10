@@ -27,6 +27,79 @@
 <meta property="og:image" content="https://www.builderk.com/images/hero-house.png">
 <meta property="og:site_name" content="BuilderK">
 <meta name="twitter:card" content="summary_large_image">
+<!-- Schema.org: HomeBuilder. The cities mirror the area cards on this page (tests/faq.test.mjs checks it). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeBuilder",
+  "name": "BuilderK",
+  "legalName": "Builders Knowledge Development Inc.",
+  "description": "BuilderK builds custom homes on your lot across Florida: Orlando, Tampa, Jacksonville, Miami, Cape Coral, Fort Myers, Melbourne, Ocala, and surrounding areas.",
+  "url": "https://www.builderk.com/service-areas",
+  "telephone": "+1 239 230 4868",
+  "email": "info@builderk.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4700 Millenia Blvd, Ste 500",
+    "addressLocality": "Orlando",
+    "addressRegion": "FL",
+    "postalCode": "32839",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    {
+      "@type": "State",
+      "name": "Florida"
+    },
+    {
+      "@type": "City",
+      "name": "Orlando",
+      "containedIn": "Florida"
+    },
+    {
+      "@type": "City",
+      "name": "Tampa",
+      "containedIn": "Florida"
+    },
+    {
+      "@type": "City",
+      "name": "Jacksonville",
+      "containedIn": "Florida"
+    },
+    {
+      "@type": "City",
+      "name": "Miami",
+      "containedIn": "Florida"
+    },
+    {
+      "@type": "City",
+      "name": "Cape Coral",
+      "containedIn": "Florida"
+    },
+    {
+      "@type": "City",
+      "name": "Fort Myers",
+      "containedIn": "Florida"
+    },
+    {
+      "@type": "City",
+      "name": "Melbourne",
+      "containedIn": "Florida"
+    },
+    {
+      "@type": "City",
+      "name": "Ocala",
+      "containedIn": "Florida"
+    }
+  ],
+  "image": "https://www.builderk.com/images/hero-house.png",
+  "priceRange": "$$$$",
+  "sameAs": [
+    "https://www.facebook.com/builderk",
+    "https://www.instagram.com/builderkinc"
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
@@ -90,6 +163,7 @@
 .area-card p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--a5-body); }
 .area-link { margin-top: auto; padding-top: 6px; font-size: 15px; font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .area-card:hover .area-link { text-decoration-color: var(--a5-orange); }
+.areas-faq { margin: 40px 0 0; font-size: 17px; line-height: 1.6; color: var(--a5-body); }
 .areas-more { padding-block: 72px 80px; }
 .more-card { padding: 36px 40px; border-radius: 16px; background: var(--a5-white); border: 1px solid var(--a5-line); display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; }
 .more-text { display: flex; flex-direction: column; gap: 10px; }
@@ -100,6 +174,7 @@
 @media (max-width: 899px) {
   .hero-areas .a5-h1 { font-size: clamp(42px, 13.3vw, 52px); }
   .areas-list { padding-block: 40px 44px; }
+  .areas-faq { margin-top: 24px; font-size: 16px; }
   .area-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .area-card { padding: 20px 18px 18px; border-radius: 14px; gap: 8px; }
   .area-card .card-title { font-size: 30px; }
@@ -194,6 +269,7 @@
       <a class="area-card" href="/melbourne"><h2 class="card-title">Melbourne</h2><p>The Space Coast, from Viera to the beachside communities.</p><span class="area-link">Melbourne details</span></a>
       <a class="area-card" href="/ocala"><h2 class="card-title">Ocala</h2><p>Acreage and homesites across Marion County and horse country.</p><span class="area-link">Ocala details</span></a>
     </div>
+    <p class="areas-faq">Questions about cost, timeline, permits or financing? <a class="a5-link" href="/faq">Read the Florida custom home FAQ</a></p>
   </div>
 </section>
 
@@ -227,6 +303,7 @@
         <a href="/interior-gallery">Interior gallery</a>
         <a href="/floor-plans">Floor plans</a>
         <a href="/blog">Blog</a>
+        <a href="/faq">FAQ</a>
         <a href="/referral-program">Referral program</a>
       </div>
       <div class="a5-footer-col">
